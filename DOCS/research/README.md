@@ -15,12 +15,13 @@ Compiled 2026-11-14 by cc-daniel. Each topic file has a `.verification.md` besid
 9. **Agents (Nemotron).** Typed, tested tools only; no model-written code or numbers. The Index Scout logs each candidate with its expected sign before scoring.
 10. **Limits.** Earth Engine allows 150 EECU-hours a month (pilot 200 fields first). HLS runs two to three weeks behind (use it for the 2025 replay only). Sentinel-1 revisits every 12 days per track outside California and north-central Iowa.
 
-Still open: which year and states the labeled fields cover, how many there are, and how "silage-like" was assigned.
+Closed 2026-11-14 by the USDA rep Q&A ([`usda_reps_qa.md`](usda_reps_qa.md), read it first): the organizers supplied no labeled fields, only state totals. The deliverable is acres of corn for grain and acres for silage, for the US and each state, before January.
 
 ## Index
 
 **Corrections that override the headlines below**
 
+- The USDA reps' answers override every assumption below about organizer-labeled fields: truth is state totals only, both error directions cost the same, and a signal with a consistent, explained bias on data NASS does not use is wanted even if it is less accurate (`usda_reps_qa.md`). Decisions 3 and 8 apply to proxy labels only.
 - The Lin et al. 2025 rule did not fairly beat a random forest: the rule was scored in-sample on 381 points, the forest on a 30% hold-out.
 - Public US field-level declarations do exist: Kern, Stanislaus and Yolo county permit polygons (`gap_us_field_labels_california.md`).
 - FSA's county file does split corn by intended use (2.89M silage acres for 2026). It is wider than RMA's but covers only 47% of the silage NASS later reports, and it never beat "same as last year" (`gap_fsa_ratio_baseline_2026.md`).
