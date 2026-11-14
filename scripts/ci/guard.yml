@@ -1,0 +1,26 @@
+# Not active at this path. To switch the check on, copy this file to .github/workflows/guard.yml
+# with the GitHub web editor or a token that has the workflow scope.
+name: guard
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Repository invariants
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then base="HEAD^1"; else base="$BEFORE_SHA"; fi
+          git cat-file -e "${base}^{commit}" 2>/dev/null || base="HEAD~1"
+          bash scripts/guard.sh "$base" HEAD

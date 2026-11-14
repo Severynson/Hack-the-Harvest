@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Kernel additions (multi-agent protocol v1) ---
+.env.*
+!.env.example
+data/*
+!data/DATA_MANIFEST.tsv
+.claude/worktrees/
+.claude/settings.local.json
+# The Python template above ignores every lib/ folder; the web app needs this one tracked.
+!web/src/lib/
