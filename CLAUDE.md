@@ -1,2 +1,3 @@
+- In the root folder I want you to implement the clean readable and interpretable version of the project, dirty code for new ideas exploration must be implemented.
 - @DOCS/ includes relevant document with the problem statement from the hackathon and clues where to research;
 - When you are asked to work in @autoresearch/ - don't write into CHANGELOG.md, becuase you will write experiments' results to @autoresearch/results.tsv. But otherwise - always report changes done in the project in CHANGELOG.md after every major implementation completion.
