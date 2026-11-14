@@ -1,6 +1,6 @@
 # USDA rep Q&A: what the organizers actually want
 
-Recorded 2026-11-14 at Aggie Square by cc-daniel, from two transcribed audio sessions (about 20 minutes each) in which USDA NASS representatives answered team questions. The transcripts are not in this repository: it is public and they contain names. Quotes are verbatim apart from removed filler words; everything else is paraphrase. The transcription is automatic, so check any number against a second source before it goes on a slide.
+Recorded 2026-11-14 at Aggie Square by cc-daniel, from two transcribed audio sessions (about 20 minutes each) in which USDA NASS representatives answered team questions. The transcripts are in `DOCS/transcripts/` (`Aggie_Square_2_eng.pdf`, 20 pages; `Voice_261114_132252_eng.pdf`, 17 pages). They name people, so do not quote names in anything public. Quotes are verbatim apart from removed filler words; everything else is paraphrase. The transcription is automatic, so check any number against a second source before it goes on a slide.
 
 This note overrides the topic files wherever they assume the organizers supplied labeled fields.
 
