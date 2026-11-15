@@ -7,3 +7,4 @@ d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore s
 451b9a2	0.640000	0.7552	discard	single rule on post-harvest residue: median NDTI 0-30 d after 50% drop
 09a8a12	0.571429	0.7031	discard	drop band 80/20 -> 70/30 of amplitude
 f8bb82b	0.818182	0.8594	discard	drop band 80/20 -> 90/10 of amplitude
+ccc9af7	0.800000	0.8333	discard	drop clock on absolute NDVI 0.7 -> 0.35 instead of amplitude fractions
