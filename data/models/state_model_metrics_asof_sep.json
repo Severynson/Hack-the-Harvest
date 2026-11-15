@@ -56,6 +56,7 @@
   "silage": 0.0445,
   "grain": 0.0128
  },
+ "sampled_states_silage_errors_pct": {},
  "caveats": [
   "RMA loss files are today's vintage, not the vintage of each past November",
   "2025 is excluded from fitting, selection and this backtest"
