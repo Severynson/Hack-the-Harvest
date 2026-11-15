@@ -5,3 +5,7 @@ data/nass/corn_acres_state.csv	212953	27c12b71a7a2ffa9951ce73c7bef37068f05ad7c40
 data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
 data/nass/baselines.csv	4647	08102a80fc4607e2905f22eb4c36b4cc7ecdd7388dda8b6b8d8ac57b34789bc4	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
 data/labels/quebec_maize_2023.parquet	27617652	88498acc77c48829c2df74fd865000ce4a5850f3f7f3eab4f781ce32a031b3ce	http://www.fadq.qc.ca/documents/donnees/base-de-donnees-des-parcelles-et-productions-agricoles-declarees/	cc-varun	2026-11-15T00:59Z
+data/s2_series/barc/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:07Z
+data/s2_series/barc/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:14Z
+data/s2_series/barc/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:17Z
+data/labels/barc_2021_2023.parquet	96297	b283f871ad79bc6a9ead15f891e47fdf1b56e849f4f5809b24f2a03258264d7b	https://doi.org/10.5281/zenodo.8087301	cc-varun	2026-11-15T01:24Z
