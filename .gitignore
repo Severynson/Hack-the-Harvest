@@ -232,3 +232,6 @@ __marimo__/
 /workspace/
 .keeboh/
 .Trash-*/
+
+# Raw downloads over the 30 MB file limit (GitHub refuses files over 100 MB); listed in data/DATA_MANIFEST.tsv
+data/raw/

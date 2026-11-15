@@ -9,9 +9,6 @@ data/s2_series/barc/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4
 data/s2_series/barc/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:14Z
 data/s2_series/barc/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:17Z
 data/labels/barc_2021_2023.parquet	96297	b283f871ad79bc6a9ead15f891e47fdf1b56e849f4f5809b24f2a03258264d7b	https://doi.org/10.5281/zenodo.8087301	cc-varun	2026-11-15T01:35Z
-data/panel/state_year.csv	58098	b97a430ae2249f04dea19ab230058c7ce5c625e793828b431bb061bee7fb427b	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T01:35Z
-data/models/state_model_backtest.csv	849	c2563ac52a46f81d6d7b7abac2cf57f97fe476e0c2028b2064417e06f52288b4	derived: kernelag.state_model	cc-varun	2026-11-15T01:35Z
-data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T01:35Z
 data/s2_series/barc_2021_2023/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
 data/s2_series/barc_2021_2023/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
 data/s2_series/barc_2021_2023/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
@@ -215,3 +212,7 @@ data/models/field_model_report.csv	340	c5be8d12f6839bd1f912ca31eb478d596bf580321
 data/models/field_model_by_year.csv	266	d4bca9ec5a5bdc2e5b8638deca3a09323f2dc609090b682d52055bb5cdeffc4b	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
 data/models/field_model_coefficients.csv	135	a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
 data/models/field_model_maryland_predictions.csv	1469	b4e2ec3fcd3e2fb0a3d29d80c677345c5676383d39f185cd5714162508b4be10	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
+data/panel/state_year.csv	58098	b97a430ae2249f04dea19ab230058c7ce5c625e793828b431bb061bee7fb427b	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T02:51Z
+data/models/state_model_backtest.csv	1728	bf42b04c50112f33b51847837d046d016922db1546d4e6281f04cd08b09b7766	derived: kernelag.state_model	cc-varun	2026-11-15T02:51Z
+data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T02:51Z
+data/raw/quebec/BDPPAD_V03_2023.zip	172750925	9258447ac941b23efc78bf582c8555f66d1eb0a732c5949fa2f169697c139f82	https://www.fadq.qc.ca/fileadmin/geo4tb/BDPPAD/BDPPAD_V03_2023.zip	cc-varun (local only, over the size limit)	2026-11-15T03:00Z

@@ -1,0 +1,8 @@
+feature,weight_per_std
+reversion,-0.1075
+d_planted,0.0394
+d_not_grain,0.0045
+d_cows,0.025
+d_cattle,0.0076
+yield_shock,-0.0375
+d_price,0.0191

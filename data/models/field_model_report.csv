@@ -1,0 +1,4 @@
+check,n_grain,n_silage,TP,FP,FN,TN,silage_precision,silage_recall,grain_precision,grain_recall,false_positive_rate,accuracy
+quebec_held_out_blocks,180,138,97,53,41,127,0.647,0.703,0.756,0.706,0.294,0.704
+maryland_always_grain,32,12,0,0,12,32,,0.0,0.727,1.0,0.0,0.727
+maryland_from_quebec,32,12,10,5,2,27,0.667,0.833,0.931,0.844,0.156,0.841
