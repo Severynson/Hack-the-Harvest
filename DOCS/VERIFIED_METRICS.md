@@ -1,6 +1,6 @@
 # Verified metrics and baselines
 
-Generated 2026-11-15T04:07Z by `python -m kernelag.report`.
+Generated 2026-11-15T07:50Z by `python -m kernelag.report`.
 
 State WAPE = summed absolute state acreage error / summed actual acreage. National error is absolute total error.
 Current-vintage inputs make these pseudo real-time replays, not archived-vintage operational tests.
@@ -9,9 +9,10 @@ Current-vintage inputs make these pseudo real-time replays, not archived-vintage
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
 | silage | same_as_last_year | 2017–2024 | all_states | 48 | 14.53 | 4.08 | `data/models/state_model_backtest.csv` |
 | silage | reversion_only | 2017–2024 | all_states | 48 | 13.12 | 3.90 | `data/models/state_model_backtest.csv` |
+| silage | smoothed_chopping | 2017–2024 | all_states | 48 | 12.80 | 3.34 | `data/models/state_model_backtest.csv` |
 | grain | same_as_last_year | 2017–2024 | all_states | 41 | 7.35 | 4.12 | `data/models/state_model_backtest.csv` |
 | grain | nass_latest | 2017–2024 | all_states | 41 | 1.66 | 0.82 | `data/models/state_model_backtest.csv` |
-| silage | model | 2025 | all_states | 48 | 14.14 | 3.06 | `data/models/state_score_2025.json` |
+| silage | model | 2025 | all_states | 48 | 13.12 | 2.19 | `data/models/state_score_2025.json` |
 | silage | same_as_last_year | 2025 | all_states | 48 | 13.96 | 0.32 | `data/models/state_score_2025.json` |
 | grain | model | 2025 | all_states | 41 | 1.64 | 0.99 | `data/models/state_score_2025.json` |
 | grain | same_as_last_year | 2025 | all_states | 41 | 9.23 | 8.69 | `data/models/state_score_2025.json` |

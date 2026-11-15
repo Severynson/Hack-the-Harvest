@@ -1,18 +1,18 @@
 {
- "built_utc": "2026-11-15T04:07Z",
+ "built_utc": "2026-11-15T07:50Z",
  "forecast_year": 2026,
  "us_forecast": {
-  "silage": 6314600.0,
-  "silage_lo80": 5964800.0,
-  "silage_hi80": 6685000.0,
-  "silage_lo90": 5869200.0,
-  "silage_hi90": 6793900.0,
+  "silage": 6259300.0,
+  "silage_lo80": 5948900.0,
+  "silage_hi80": 6586000.0,
+  "silage_lo90": 5863700.0,
+  "silage_hi90": 6681700.0,
   "grain": 88506000.0,
   "grain_lo80": 87265300.0,
   "grain_hi80": 89764300.0,
   "grain_lo90": 86916800.0,
   "grain_hi90": 90124300.0,
-  "silage_method": "reversion_only",
+  "silage_method": "smoothed_chopping",
   "grain_method": "sum"
  },
  "forecast_scope": {
@@ -31,8 +31,43 @@
    2023,
    2024
   ],
-  "selected_silage_set": "reversion_only",
+  "selected_silage_set": "smoothed_chopping",
+  "best_ridge_set": "reversion_only",
   "selection_tolerance_points": 0.3,
+  "smoothed_chopping_params_by_year": {
+   "2017": {
+    "alpha": 0.5,
+    "gamma": 0.05
+   },
+   "2018": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2019": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2020": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2021": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2022": {
+    "alpha": 0.4,
+    "gamma": 0.05
+   },
+   "2023": {
+    "alpha": 0.45,
+    "gamma": 0.05
+   },
+   "2024": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   }
+  },
   "mean_errors_pct": {
    "grain.nass_latest": {
     "state_error_pct": 1.66,
@@ -58,6 +93,10 @@
     "state_error_pct": 14.53,
     "abs_total_error_pct": 4.08
    },
+   "silage.smoothed_chopping": {
+    "state_error_pct": 12.8,
+    "abs_total_error_pct": 3.34
+   },
    "silage.stress": {
     "state_error_pct": 13.82,
     "abs_total_error_pct": 3.12
@@ -74,7 +113,7 @@
    }
   },
   "us_log_error_rms": {
-   "silage": 0.0445,
+   "silage": 0.0397,
    "grain": 0.011
   },
   "sampled_states_silage_errors_pct": {},
@@ -95,8 +134,43 @@
    2023,
    2024
   ],
-  "selected_silage_set": "reversion_only",
+  "selected_silage_set": "smoothed_chopping",
+  "best_ridge_set": "reversion_only",
   "selection_tolerance_points": 0.3,
+  "smoothed_chopping_params_by_year": {
+   "2017": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2018": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2019": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2020": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2021": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2022": {
+    "alpha": 0.4,
+    "gamma": 0.07
+   },
+   "2023": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2024": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   }
+  },
   "mean_errors_pct": {
    "grain.nass_latest": {
     "state_error_pct": 2.52,
@@ -122,6 +196,10 @@
     "state_error_pct": 14.53,
     "abs_total_error_pct": 4.08
    },
+   "silage.smoothed_chopping": {
+    "state_error_pct": 12.79,
+    "abs_total_error_pct": 3.51
+   },
    "silage.stress": {
     "state_error_pct": 13.79,
     "abs_total_error_pct": 3.46
@@ -129,7 +207,7 @@
   },
   "interval_coverage": {
    "silage": {
-    "80": 0.789,
+    "80": 0.786,
     "90": 0.88
    },
    "grain": {
@@ -138,7 +216,7 @@
    }
   },
   "us_log_error_rms": {
-   "silage": 0.0445,
+   "silage": 0.0415,
    "grain": 0.0128
   },
   "sampled_states_silage_errors_pct": {},
@@ -151,8 +229,8 @@
   "silage": {
    "model": {
     "n_states": 48,
-    "state_error_pct": 14.14,
-    "total_error_pct": 3.06
+    "state_error_pct": 13.12,
+    "total_error_pct": 2.19
    },
    "same_as_last_year": {
     "n_states": 48,
@@ -335,13 +413,13 @@
  },
  "satellite_aggregate_present": false,
  "source_sha256": {
-  "state_forecast_2026.csv": "48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a515a514b74538c81a13d2a779a",
-  "state_model_metrics.json": "ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b",
-  "state_model_metrics_asof_sep.json": "57f4933c3969946b7d4a479191b2bbd1311558d918130bc7a9fb27c2504adb95",
-  "state_score_2025.json": "ff033c61e7f188acd2e12c5953dd5143c31a54fe130966205d74509db01c8def",
+  "state_forecast_2026.csv": "c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9",
+  "state_model_metrics.json": "32cd6da35e8a75c4f2a11baafb8f163097fa6c1a15eac8b4457f7d055794b0ad",
+  "state_model_metrics_asof_sep.json": "d9958c9fe1732a64430fb66bba2e92b67f21f9493f90760b4546b730d063ce00",
+  "state_score_2025.json": "512101f8721e424617fbf393ca952c00ec6cad4b05dc0f1e0c5e7ea938b61423",
   "field_eval.json": "78b3842750847084eace3997b11361a4ef5773e4bbeae3fc043458e529d768a6",
-  "state_model_backtest.csv": "af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38",
-  "state_model_bias.csv": "9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a",
+  "state_model_backtest.csv": "68fc07c676872213311276b5547bf8331d2ff10a29fae51e128dac3db21a4698",
+  "state_model_bias.csv": "3e6b4ca768f3c2f0548c8c644f4f404dadba39676e8ca2bbdf669433a0dc3b0d",
   "field_earliness.csv": "2a9e15f897f2fd49396ced600e56cdfed82d3786c34a89cd667fb3c939ab96e4",
   "field_model_coefficients.csv": "a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3"
  }

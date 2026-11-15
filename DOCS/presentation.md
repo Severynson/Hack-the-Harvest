@@ -1,14 +1,14 @@
 # Kernel: five-minute presentation
 
-Generated from `data/models/metrics.json` at 2026-11-15T04:07Z. Open `report/index.html` offline.
+Generated from `data/models/metrics.json` at 2026-11-15T07:50Z. Open `report/index.html` offline.
 The talk follows the seven sections from top to bottom. Acreage error is WAPE unless stated otherwise.
 
 ## 0:00–0:40 — The answer (mission)
 
 USDA needs corn acreage by harvest use before January. Silage is cut green and wet; grain usually dries first.
 Kernel combines a state acreage forecast with a separate satellite test of that physical signal.
-Our November forecast is 6.31 million silage acres, with an 80% interval of
-5.96 to 6.68 million.
+Our November forecast is 6.26 million silage acres, with an 80% interval of
+5.95 to 6.59 million.
 Grain is 88.51 million acres, primarily NASS's own in-season figures.
 These totals sum the states shown; missing grain states are excluded.
 
@@ -16,17 +16,18 @@ These totals sum the states shown; missing grain states are excluded.
 
 Scroll the state table. Each silage forecast has an interval and change from last year.
 The state model uses public acreage history and tests additional season context against persistence.
-The selected model is `reversion_only`; it adjusts unusual prior-year silage acreage toward its historical level.
+The selected model is `smoothed_chopping`: a smoothed state level (most yearly swings reverse the next year)
+plus drought chopping, i.e. grain corn cut for silage when NASS's November yield forecast falls over 10% below trend.
 Do not present the satellite classifier as the source of these acreage totals.
 
 ## 1:05–2:00 — Can you trust it (technical quality)
 
 We predict each historical year using earlier outcomes, then select the feature set on the historical validation years.
-Mean silage state error is 13.12%, versus
+Mean silage state error is 12.80%, versus
 14.53% when copying last year.
-The separate 2025 score is 14.14%, versus
+The separate 2025 score is 13.12%, versus
 13.96% for persistence.
-For the 2025 national total, signed error is 3.06%, versus
+For the 2025 national total, signed error is 2.19%, versus
 0.32%.
 That is a modest validation gain and no held-out silage win. We do not claim otherwise.
 The grain advantage comes largely from NASS inputs, not a new satellite discovery.

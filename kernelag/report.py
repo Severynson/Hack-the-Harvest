@@ -41,7 +41,8 @@ FEATURE_WORDS = {
     "ndti_post": "Residue left after the cut",
 }
 PREDICTOR_WORDS = {
-    "same_as_last_year": "Last year", "reversion_only": "Kernel", "nass_latest": "Kernel",
+    "same_as_last_year": "Last year", "smoothed_chopping": "Kernel", "reversion_only": "Ridge (reversion)",
+    "nass_latest": "Kernel",
     "reversion_plus_satellite": "Kernel + satellite", "satellite_ratio": "Satellite ratio",
 }
 
@@ -112,7 +113,7 @@ def comparison_rows(metrics: dict, backtest: pd.DataFrame) -> pd.DataFrame:
     rows = []
     if not backtest.empty:
         selected = dig(metrics, "state_model", "selected_silage_set")
-        keep = {"same_as_last_year", selected, "nass_latest", "reversion_plus_satellite", "satellite_ratio"}
+        keep = {"same_as_last_year", selected, "nass_latest", "reversion_only", "reversion_plus_satellite", "satellite_ratio"}
         for (scope, series, predictor), part in backtest[backtest["predictor"].isin(keep)].groupby(
                 ["scope", "series", "predictor"], sort=False):
             rows.append({"evaluation": "historical validation", "years": f"{part['year'].min()}–{part['year'].max()}",
@@ -586,7 +587,8 @@ These totals sum the states shown; missing grain states are excluded.
 
 Scroll the state table. Each silage forecast has an interval and change from last year.
 The state model uses public acreage history and tests additional season context against persistence.
-The selected model is `{selected}`; it adjusts unusual prior-year silage acreage toward its historical level.
+The selected model is `{selected}`: a smoothed state level (most yearly swings reverse the next year)
+plus drought chopping, i.e. grain corn cut for silage when NASS's November yield forecast falls over 10% below trend.
 Do not present the satellite classifier as the source of these acreage totals.
 
 ## 1:05–2:00 — Can you trust it (technical quality)

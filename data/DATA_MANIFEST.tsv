@@ -219,23 +219,23 @@ data/Quickstats Data/corn_grain_yield_state_2000_2026.csv	1165160	1286561f13a5d8
 data/Quickstats Data/corn_planted_acres_state_2000_2026.csv	827724	9da839ba616c7e22fcfd54b921f3e2ffe68a0a5452ee154e31628b24fd7cab4c	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, statisticcat_desc=AREA PLANTED, unit_desc=ACRES; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/corn_silage_harvested_acres_state_2000_2026.csv	312476	9c1ed1bdcf073f7a951bcf659fb444f7882983f6080e0ce68796491c7d55f744	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, util_practice_desc=SILAGE, statisticcat_desc=AREA HARVESTED, unit_desc=ACRES; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/milk_cow_inventory_state_2000_2026.csv	1454155	ed9bb3cb6161792ed4a48bb738be01e8f523cdf48ea037b1e5885b02661b6a1c	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CATTLE, class_desc=COWS, MILK, statisticcat_desc=INVENTORY; state, survey)	cc-daniel	2026-11-15T03:26Z
-data/models/state_score_2025.csv	7628	1beae9271e202f01bdc509889f40506e899ab635cd13913123beea939d0f5c62	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
-data/models/state_score_2025.json	474	ff033c61e7f188acd2e12c5953dd5143c31a54fe130966205d74509db01c8def	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
 data/geography/md_counties.geojson	1808069	966ac6730b223bf7e0b441a9a24b8c738f838e223d5dd3d1aa99a16664384154	https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE%3D%2724%27&outFields=GEOID%2CNAME&outSR=4326&f=geojson&geometryPrecision=5	unknown	2026-11-15T03:36Z
 data/nass/reports/crop0926.txt	187566	9a549c8d8a9379510064c4cd1b8054ecad67badf2cc9a5bc941b4d0774a58cb2	https://release.nass.usda.gov/reports/crop0926.txt	codex-manraj	2026-11-15T03:43Z
 data/nass/reports/crop1126.txt	161866	a4f1108bdbf19c4ab3d5ec499fb725dd397e6e231f25a5f5c28f61c765de572b	https://release.nass.usda.gov/reports/crop1126.txt	codex-manraj	2026-11-15T03:43Z
-data/models/state_model_backtest.csv	2850	af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38	derived: kernelag.state_model	codex-manraj	2026-11-15T03:46Z
-data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	codex-manraj	2026-11-15T03:46Z
-data/models/state_model_bias.csv	997	9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a	derived: kernelag.state_model	codex-manraj	2026-11-15T03:46Z
-data/models/state_model_metrics.json	1240	ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b	derived: kernelag.state_model	codex-manraj	2026-11-15T03:46Z
-data/models/state_forecast_2026.csv	6175	48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a515a514b74538c81a13d2a779a	derived: kernelag.state_model	codex-manraj	2026-11-15T03:46Z
 data/models/field_eval.json	3189	78b3842750847084eace3997b11361a4ef5773e4bbeae3fc043458e529d768a6	derived: kernelag.evaluate	codex-manraj	2026-11-15T03:52Z
 data/models/field_earliness.csv	780	2a9e15f897f2fd49396ced600e56cdfed82d3786c34a89cd667fb3c939ab96e4	derived: kernelag.evaluate	codex-manraj	2026-11-15T03:52Z
 data/models/field_explorer.json	389446	028a10ddf06dbe9bfc43646150989edc1abc7e3809b360f0fb0223c1666d8c9f	derived: kernelag.explorer; BARC public research sample	codex-manraj	2026-11-15T04:01Z
-data/models/state_model_backtest_asof_sep.csv	2853	6696ff0fb7277ab753e0d7fc69a0d8ca83768044b7b3b7c33bf83c204e7d3801	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
-data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
-data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a7a866312a5846501933aa66ece3494	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
-data/models/state_model_metrics_asof_sep.json	1239	57f4933c3969946b7d4a479191b2bbd1311558d918130bc7a9fb27c2504adb95	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
 data/fsa/index.html	105571	70d2ab3cec184c2d5cfe9baf9a0d3e3b0d71005b8af8b3203879e76217ab80b0	https://www.fsa.usda.gov/tools/informational/freedom-information-act-foia/electronic-reading-room/frequently-requested/crop-acreage-data	codex-manraj	2026-11-15T04:06Z
-data/models/metrics.json	7932	830571ae2b73e1887ec25f4470eb15220a1acaffedb796a593a1ac8ef164062a	derived: kernelag.report	codex-manraj	2026-11-15T04:07Z
-data/models/verified_metrics.csv	1281	315dd0ee7b1de9f787bbfa6c753194a8dc119ef1c968318a979cd19791c80668	derived: kernelag.report; comparison table	codex-manraj	2026-11-15T04:07Z
+data/models/state_model_backtest.csv	3292	68fc07c676872213311276b5547bf8331d2ff10a29fae51e128dac3db21a4698	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_model_bias.csv	1033	3e6b4ca768f3c2f0548c8c644f4f404dadba39676e8ca2bbdf669433a0dc3b0d	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_model_metrics.json	1831	32cd6da35e8a75c4f2a11baafb8f163097fa6c1a15eac8b4457f7d055794b0ad	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_forecast_2026.csv	6323	c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_score_2025.csv	7768	9783f57e208a91f1f5936fa60047d01484836ef525d57bc19fb301ae0f5cb245	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_score_2025.json	474	512101f8721e424617fbf393ca952c00ec6cad4b05dc0f1e0c5e7ea938b61423	derived: kernelag.state_model	unknown	2026-11-15T07:49Z
+data/models/state_model_backtest_asof_sep.csv	3293	c46e9a4d6609c2dffc8c3131016e653fff8631a799e0ad3852c948ef0b599aef	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
+data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
+data/models/state_model_bias_asof_sep.csv	1033	f64e50d7d5a347c282851bab8bbea3fd9f7c4f61808abc9e6361b3f45abdbe7a	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
+data/models/state_model_metrics_asof_sep.json	1831	d9958c9fe1732a64430fb66bba2e92b67f21f9493f90760b4546b730d063ce00	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
+data/models/metrics.json	9196	3fe35d00b88700f57139dd4b85ee4a46e7fa8e1667ecf389c5888adcfc8bf028	derived: kernelag.report	unknown	2026-11-15T07:50Z
+data/models/verified_metrics.csv	1437	47eb00e40b683fa80279b78f5ad0920b8a046e4de3430d350b9a781658841fa0	derived: kernelag.report; comparison table	unknown	2026-11-15T07:50Z
