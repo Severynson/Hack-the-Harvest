@@ -29,3 +29,4 @@ fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.
 782ce7f	0.828839	0.9565	discard	[multi] smoothing 15 -> 10 days: barc 0.9565 q2b 0.9231 b2q 0.7148 qloco 0.7210
 68377e5	0.832265	1.0000	discard	[multi] smoothing 15 -> 20 days: barc 1.0000 q2b 0.9231 b2q 0.7181 qloco 0.6879
 2f999bf	0.836595	1.0000	discard	[multi] winter green needs absolute NDVI > 0.6 (real cover crop): barc 1.0000 q2b 0.9091 b2q 0.7186 qloco 0.7186
+83b0ee5	0.859322	1.0000	keep	[multi] winter green as fixed physical rule NDVI>0.65 (not learned): barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
