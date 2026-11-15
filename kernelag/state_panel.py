@@ -14,6 +14,8 @@ Columns ("as of" = the latest figure NASS had published by mid-November of that 
     silage_yield                   final tons per acre
     milk_cows, cattle              head on 1 January of that year
     corn_price_sep                 price received in September, dollars per bushel
+    sat_share, share_se            satellite silage-like share of sampled corn acres and its standard
+                                   error (``kernelag.state_signal``; sampled states, 2019 on)
 
 Output: ``data/panel/state_year.csv``
 
@@ -89,6 +91,10 @@ def main() -> None:
     data = data_dir()
     acres = pd.read_csv(data / "nass" / "corn_acres_state.csv")
     panel = build_panel(acres, data / QUICKSTATS_DIR)
+    satellite = data / "panel" / "state_satellite.csv"   # from kernelag.state_signal, if it has been run
+    if satellite.exists():
+        signal = pd.read_csv(satellite)[["state", "year", "sat_share", "share_se", "assessable_share"]]
+        panel = panel.merge(signal, on=["state", "year"], how="left")
     target = data / "panel" / "state_year.csv"
     target.parent.mkdir(parents=True, exist_ok=True)
     panel.to_csv(target, index=False, lineterminator="\n")

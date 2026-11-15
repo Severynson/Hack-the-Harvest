@@ -46,5 +46,20 @@ def test_backtest_excludes_the_scoring_year_and_learns_reversion():
     results = state_model.backtest(table)
 
     assert results["year"].max() <= state_model.LAST_BASELINE_YEAR
+    assert set(results["scope"]) == {"all_states"}            # no satellite values in this panel
     mean_error = results.groupby("predictor")["state_error_pct"].mean()
     assert mean_error["reversion_only"] < mean_error["same_as_last_year"]
+
+
+def test_satellite_change_is_used_when_it_tracks_the_truth():
+    years = list(range(2010, 2025))
+    rng = np.random.default_rng(3)
+    panel = _panel(years, {y: 1.0 for y in years})
+    # Each state's silage wanders at random; the satellite share follows it with a constant bias.
+    panel["silage"] = panel["silage"] * np.exp(rng.normal(0, 0.15, len(panel)))
+    panel["sat_share"] = 0.10 + 0.4 * panel["silage"] / 1000.0
+    table = state_model.add_changes(panel)
+    results = state_model.backtest(table)
+    sampled = results[results["scope"] == "sampled_states"].groupby("predictor")["state_error_pct"].mean()
+    assert sampled["reversion_plus_satellite"] < sampled["same_as_last_year"]
+    assert sampled["reversion_plus_satellite"] < sampled["reversion_only"]

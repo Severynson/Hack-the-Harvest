@@ -12,6 +12,12 @@ are public by mid-November of the same year (``kernelag.state_panel``):
     d_cattle       change in all cattle on 1 January
     yield_shock    NASS's latest grain-yield forecast against the state's previous three-year mean
     d_price        change in the September corn price
+    d_sat          change in the satellite silage-like share on the state's fixed sample areas
+                   (in log-odds; ``kernelag.state_signal``; sampled states only, 2020 on)
+
+"satellite_ratio" is the same idea with nothing fitted: last year's acres times this year's
+satellite share over last year's, times the change in planted acres. Results are reported for all
+states and for the sampled states alone; a state without a satellite value is read as "no change".
 
 It is one pooled ridge regression for all states, weighted by silage acres, with a missing
 change read as "no change". Each year is predicted by a model fitted on earlier years only.
@@ -36,6 +42,7 @@ FEATURE_SETS = {
     "reversion_only": ["reversion"],
     "nass_acres": ["reversion", "d_planted", "d_not_grain"],
     "all_public": FEATURES,
+    "reversion_plus_satellite": ["reversion", "d_sat"],
 }
 MIN_FIT_YEARS = 3
 RIDGE_PENALTY = 1.0
@@ -65,6 +72,12 @@ def add_changes(panel: pd.DataFrame) -> pd.DataFrame:
     table["d_cattle"] = np.log(table["cattle"] / last("cattle"))
     table["yield_shock"] = np.log(table["grain_yield_asof"] / mean_of_last_three("grain_yield"))
     table["d_price"] = np.log(table["corn_price_sep"] / last("corn_price_sep"))
+    if "sat_share" not in table:
+        table["sat_share"] = np.nan
+    logit = np.log(table["sat_share"] / (1 - table["sat_share"]))
+    logit_last = last("sat_share").pipe(lambda s: np.log(s / (1 - s)))
+    table["d_sat"] = logit - logit_last
+    table["sat_ratio"] = table["sat_share"] / last("sat_share")
     return table.replace([np.inf, -np.inf], np.nan)
 
 
@@ -97,18 +110,31 @@ def state_error(predicted: pd.Series, actual: pd.Series) -> dict:
 
 
 def backtest(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEAR) -> pd.DataFrame:
-    """Expanding window: each year scored by models fitted on earlier years only, beside same-as-last-year."""
+    """Expanding window: each year scored by models fitted on earlier years only, beside same-as-last-year.
+
+    Every predictor is scored twice: on all states, and on the states that have a satellite value
+    that year (``scope`` column).
+    """
     usable = table[(table["year"] <= last_year) & table["target"].notna() & table["reversion"].notna()]
     years = sorted(usable["year"].unique())
     results = []
     for year in years[MIN_FIT_YEARS:]:
         fit_rows, score_rows = usable[usable["year"] < year], usable[usable["year"] == year]
-        results.append({"year": year, "predictor": "same_as_last_year",
-                        **state_error(score_rows["silage_last"], score_rows["silage"])})
+        predictions = {"same_as_last_year": score_rows["silage_last"]}
         for name, features in FEATURE_SETS.items():
             predict = fit_ridge(fit_rows, features)
-            predicted = score_rows["silage_last"] * np.exp(predict(score_rows))
-            results.append({"year": year, "predictor": name, **state_error(predicted, score_rows["silage"])})
+            predictions[name] = score_rows["silage_last"] * np.exp(predict(score_rows))
+        # Nothing fitted: last year's acres moved by the satellite share and by planted acres.
+        ratio = (score_rows["sat_ratio"] * np.exp(score_rows["d_planted"])).fillna(1.0)
+        predictions["satellite_ratio"] = score_rows["silage_last"] * ratio
+
+        sampled = score_rows["d_sat"].notna()
+        for scope, rows in [("all_states", score_rows.index), ("sampled_states", score_rows.index[sampled])]:
+            if len(rows) == 0:
+                continue
+            for name, predicted in predictions.items():
+                results.append({"year": year, "scope": scope, "predictor": name,
+                                **state_error(predicted.loc[rows], score_rows.loc[rows, "silage"])})
     return pd.DataFrame(results)
 
 
@@ -127,12 +153,14 @@ def main() -> None:
         frame.to_csv(out / f"{name}.csv", index=False, lineterminator="\n")
         record_in_manifest(out / f"{name}.csv", "derived: kernelag.state_model")
 
-    pd.set_option("display.width", 200)
-    print(results.pivot(index="year", columns="predictor", values="state_error_pct").to_string())
-    print("mean state error:")
-    print(results.groupby("predictor")["state_error_pct"].mean().round(2).to_string())
-    print("mean absolute error of the US total:")
-    print(results.groupby("predictor")["total_error_pct"].apply(lambda s: s.abs().mean()).round(2).to_string())
+    pd.set_option("display.width", 220)
+    for scope, part in results.groupby("scope"):
+        print(f"== {scope}: state error by year (%), states scored: "
+              f"{part.groupby('year')['n_states'].first().to_dict()}")
+        print(part.pivot(index="year", columns="predictor", values="state_error_pct").to_string())
+        print("mean state error:", part.groupby("predictor")["state_error_pct"].mean().round(2).to_dict())
+        print("mean absolute error of the total:",
+              part.groupby("predictor")["total_error_pct"].apply(lambda s: s.abs().mean()).round(2).to_dict())
     print(weights.to_string(index=False))
 
 
