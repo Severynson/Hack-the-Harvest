@@ -13,3 +13,4 @@ be6ba92	0.869565	0.9010	keep	OR rule: fast drop_days OR late Nov-Dec regreen (gr
 41c4f4b	0.800000	0.8698	discard	OR rule + despike obs >0.1 below both neighbours
 696b10f	0.727273	0.8021	discard	min clear-pixel share 0.6 -> 0.8
 511daf9	0.909091	0.9167	keep	min clear-pixel share 0.6 -> 0.4
+f9dd43f	0.800000	0.8333	discard	min clear-pixel share 0.4 -> 0.2
