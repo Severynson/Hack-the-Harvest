@@ -70,3 +70,20 @@ status: `keep`, `discard` or `crash` (crash rows get 0.000000 / 0.0000). Append 
 6. Log the row (the commit hash is the experiment commit, even if discarded), then commit the ledger on its own and push the branch.
 
 A run takes seconds. Don't stop to ask whether to continue; the human ends the run.
+
+## Run 2: cross-region scoreboard (`multi_eval.py`)
+
+BARC leave-one-year-out reached F1 1.00, so it can no longer show progress. Run 2 keeps it and adds three cross-region tests on the Quebec 2023 parcels (`quebec_check.py` builds that data). Each test scores one dataset, never a mix:
+
+- `barc_loyo`: the frozen BARC metric above
+- `q2b`: fit on Quebec, test on BARC
+- `b2q`: fit on BARC, test on Quebec
+- `q_loco`: Quebec, leave one cell out
+
+`multi_score` is the mean of the four silage F1s, and higher is better. `multi_eval.py` is frozen by `multi_eval.sha256`.
+
+Goal: rules that hold across regions (calendars, snow, rotations) without losing BARC.
+
+`train.py` exposes `fit(ts, lab) -> params` and `predict(ts, keys, params)`. Keys may carry `group` (region-year); a rule may compare a field with the other fields of its group, never with their labels.
+
+Run 2 ledger rows use `val_f1` = multi_score and `balanced_acc` = barc_loyo F1. The description starts with `[multi]` and lists all four scores.

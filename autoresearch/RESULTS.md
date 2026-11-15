@@ -118,3 +118,35 @@ The winter-green cut-off learned in Quebec (NDVI > 0.25) comes from snow-covered
 - **Clouds.** A haze dip the SCL mask misses can stretch the drop clock (BARC field 291, 2021). The 40% clear-pixel threshold was tuned for this.
 - **Timing.** The drop clock is known by late September. Winter green needs data through December.
 - **Not yet covered:** other states and calendars (Texas cuts silage in early August), and other years in Quebec.
+
+## Run 2: rules that travel between regions (`multi_eval.py`)
+
+Winter green was changed from a learned cut-off to a fixed physical rule (Nov–Dec NDVI > 0.65). The learned Quebec cut-off (0.25) came from snow-covered fields and flagged 30 of 32 BARC grain fields. Fixed, the rule never fires in Quebec and keeps its job in Maryland. Floors from 0.60 to 0.70 give identical results, but 0.65 was chosen knowing that BARC grain tops out at 0.59.
+
+| Test (one dataset each) | Before run 2 | After run 2 |
+|---|---|---|
+| BARC, leave one year out | 1.000 | 1.000 |
+| Quebec → BARC | 0.444 | **1.000** (12/12 silage, 0 false alarms, accuracy 1.000) |
+| BARC → Quebec | 0.719 | 0.719 |
+| Quebec, leave one cell out | 0.742 | 0.719 |
+| multi_score | 0.726 | **0.859** |
+
+Tried and dropped:
+- Region-relative harvest date, region-relative peak date, and a robust z-score for winter green.
+- Smoothing 10 or 20 days instead of 15.
+- A 75/25 drop band. It raised Quebec to 0.74 but cost a BARC field. That's within noise, and it loses the official 1.00.
+
+A logistic regression on 8 greenness and residue signals scores 0.55–0.58 in Quebec, below the drop clock alone (0.72). The roughly 55 Quebec silage parcels still missed dry down like grain; telling them apart needs new information, not more rules.
+
+## VLM caveman (Nemotron reads the pictures), `vlm_caveman.py`
+
+For each of the 44 BARC field-years: up to 20 clear true-colour Sentinel-2 pictures from June to November (797 in all), cut to the field with a yellow outline and laid out as one dated sheet. `nvidia/nemotron-3.5-super-vl-120b-a12b` labeled every date 0 / 1 / 2 (no crop yet / crop standing / harvested), with reasoning off. All 44 calls answered, 6–15 s each. The caveman rules then used the labels: harvest day, harvest day relative to that year's median, and days from the last "standing" picture to the first "harvested" one.
+
+| Rule on Nemotron labels (BARC, leave one year out) | Silage F1 | Accuracy | TP / FP / FN / TN |
+|---|---|---|---|
+| harvest day < cut | 0.320 | 0.614 | 4 / 9 / 8 / 23 |
+| harvest day relative to the year < cut | 0.333 | 0.455 | 6 / 18 / 6 / 14 |
+| days from standing to harvested < cut | 0.286 | 0.318 | 6 / 24 / 6 / 8 |
+| (NDVI caveman, for comparison) | 1.000 | 1.000 | 12 / 0 / 0 / 32 |
+
+**Why it fails:** Nemotron's "harvested" date is close to the NDVI bare-soil date for grain (median 6 days later) but a median 17.5 days late for silage. At 10 m a field is about 25 × 25 pixels, and fresh silage stubble looks like drying corn. The early cut, which is the whole signal, gets lost. The labels are cached in `~/.cache/autoresearch-silage/vlm/`.

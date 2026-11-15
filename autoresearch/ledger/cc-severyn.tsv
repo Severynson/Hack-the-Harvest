@@ -20,3 +20,17 @@ f9dd43f	0.800000	0.8333	discard	min clear-pixel share 0.4 -> 0.2
 2663faf	1.000000	1.0000	keep	simplify: drop summer peak window, use season-wide NDVI max
 449a901	0.909091	0.9167	discard	simplify (ablation): drop rule only, regreen rule off
 9d7545d	0.956522	0.9583	discard	simplify: amplitude low = season-wide NDVI min (no spring window)
+fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.719 qloco 0.742
+73e4382	0.839789	1.0000	keep	[multi] winter green relative to region-year median: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.7112
+82d4b24	0.831518	1.0000	discard	[multi] add rule: harvest day relative to region-year median: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.6782
+6457f0e	0.846520	1.0000	keep	[multi] secondary rules need >=70% precision on fields they add, else off: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.7382
+420ed1e	0.846520	1.0000	discard	[multi] add gated rule: harvest day relative to region-year median: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.7382
+75ccc24	0.834974	0.9565	discard	[multi] winter green as robust z-score within region-year: barc 0.9565 q2b 0.9091 b2q 0.7298 qloco 0.7445
+782ce7f	0.828839	0.9565	discard	[multi] smoothing 15 -> 10 days: barc 0.9565 q2b 0.9231 b2q 0.7148 qloco 0.7210
+68377e5	0.832265	1.0000	discard	[multi] smoothing 15 -> 20 days: barc 1.0000 q2b 0.9231 b2q 0.7181 qloco 0.6879
+2f999bf	0.836595	1.0000	discard	[multi] winter green needs absolute NDVI > 0.6 (real cover crop): barc 1.0000 q2b 0.9091 b2q 0.7186 qloco 0.7186
+83b0ee5	0.859322	1.0000	keep	[multi] winter green as fixed physical rule NDVI>0.65 (not learned): barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
+bb55587	0.859322	1.0000	discard	[multi] gated rule: peak date relative to region-year median: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
+26f61be	0.859322	1.0000	keep	[multi] simplify: drop unused relative-winter feature and precision gate: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
+8ac6bf3	0.860137	0.9565	keep	[multi] drop band 80/20 -> 75/25: barc 0.9565 q2b 1.0000 b2q 0.7440 qloco 0.7400
+257c72e	0.859322	1.0000	keep	[multi] correction: 8ac6bf3 reverted by hand (noise-level gain, loses official BARC 1.00); back to 80/20
