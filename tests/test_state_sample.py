@@ -50,3 +50,15 @@ def test_choose_sample_writes_corn_field_years_for_the_chosen_areas(tmp_path, mo
         assert source.loc[row.field_id, f"CDL{row.year}"] in state_sample.CORN_CODES
     centre = table.geometry.representative_point()             # every field sits inside its area
     assert (state_sample.cell_of(centre.x, centre.y) == table["cell"]).all()
+
+
+def test_state_share_weights_each_area_by_one_over_its_size():
+    from kernelag.state_signal import jackknife_se, share
+
+    areas = pd.DataFrame({
+        "cell_size_acres": [1000.0, 4000.0],     # the second area was four times as likely to be drawn
+        "corn_acres": [1000.0, 4000.0],
+        "silage_like_acres": [500.0, 400.0],     # 50% and 10% silage-like
+    })
+    assert share(areas) == 0.30                  # the plain mean of the two area shares
+    assert round(jackknife_se(areas), 3) == 0.2  # half the gap between them, for two areas
