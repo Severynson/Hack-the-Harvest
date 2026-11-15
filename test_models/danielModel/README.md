@@ -38,8 +38,17 @@ python3 -I test_models/danielModel/us_acres.py        # backtest 2010-2025, writ
 - And silage is always harvest earlier than grains. So if we observe that in the region with ~the same temperature portion of farms harvest ~over 60 days, but rest of the farms harvest ~over 60 days (let's say we take +- 15-10 days around the textbook date when grain/silage was supposed to be harvest in a rarticular region if it is silage VS grain). And we can iteratively, with ablation study change parameters of our heuristic, and evaluate its accuracy on the known labels for Maryland fields.
 - We won't spot the exact moment when corn was planted from satelite images. But we can spot when it begins to grow. Especially if we pull data NDTI and NDVI for historical period with certain frequency for the time of the year which is potentially a season between planting and harvesting the corn. And we can see how these values (NDTI and NDVI) are going to grow steadily until dropping at one moment after the harvest. And the moment when a steady growth of these numbers begin - with noise (ups and downs), but still steadily growing over time - we can capture this moment as a proxy for the moment it was planted (e.g. 15 days after it was planted). So this way we could extract estimated date of planting and almost accurate date of harvest. This way we can get a period during which corn was growing, and based on it estimate did is grow as long as typical silage for a region with its weather and climate, or or a typical grain based on heuristic rules you must find by doing ablation study.
 
+# severynModel - VLM-powered caveman
+
+The same as the basic version of the caveman mode, but instead of drawing the cutting point based on NDTI and NDVI, we are going to draw it based on labels:
+
+- No-signs-of-planting: 0;
+- Growing: 1;
+- Harvest: 2;
+  And we want to produce labels based on the Nemotron VLM model, which will output labels based on its analisys of satelite images during the day (plain satelite images for particular coordinates of the field, not NDTI and NDVI values for these same coordinates). Why do I want to implement this? because we need to use Nemotron in the hackathon. And this way we could use it as a tool which can dynamically produce data as we state coordinates of the field.
+
 # severynModel - smartman
 
 - We only have BARC_Corn.2021-2023.gpkg data with labels silage VS grain for a particular field on a particular year provided by the hackathon organizers. But we can and should add more open source data.
 - We want to try the time series model which will primarily track:
-  weather in the region
+  weather in the region,
