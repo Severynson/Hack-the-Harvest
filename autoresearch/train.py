@@ -23,7 +23,7 @@ t0 = time.time()
 # Hyperparameters
 # ---------------------------------------------------------------------------
 
-MIN_VALID_FRAC = 0.6       # scene kept for a field if >= this share of its pixels are clear
+MIN_VALID_FRAC = 0.4       # scene kept for a field if >= this share of its pixels are clear
 SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolated NDVI
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 GREENUP_FRAC = 0.5         # green-up = first day NDVI regains this share of (peak - spring low)
