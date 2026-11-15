@@ -22,6 +22,7 @@ The organizers' starter kit is tracked separately at `jupyter/workspace/`.
 - **Quick Stats.** One row per published number, in the layout of the organizers' file. Keep `source_desc = SURVEY`
   and `domain_desc = TOTAL` for the plain yearly figures; the 2015 to 2025 files also carry census breakdowns by farm
   size and type. The 2000 to 2026 files are state level and survey only, and add a `week_ending` column.
+  Corn silage harvest progress starts in 2014 and covers 25 states; corn progress and condition cover 45 states.
 - **Drought.** `None`, `D0` to `D4` are percent of area. The classes are cumulative: `D1` is the share in D1 or worse.
 - **Weather.** Built from NOAA's daily county averages of high, low and rain. Temperatures in degrees C, rain in mm.
   `gdd_c` is corn heat units with a 10 C base and a 30 C cap (50 F and 86 F). `hot_days` counts highs of 32 C or more,
