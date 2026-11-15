@@ -12,6 +12,9 @@ Outputs (under ``data/nass/``):
 ``series`` is planted, grain or silage. ``period`` is ``final`` or the month of an
 in-season NASS report (mar, jun, aug, sep, oct, nov).
 
+The kit has no state rows for the census years 2012, 2017 and 2022. With
+``NASS_QUICKSTATS_API_KEY`` in ``.env`` those years are fetched from the Quick Stats API.
+
 Run: ``python -m kernelag.nass``            (baselines stop at 2024; 2025 is the scoring year)
 """
 
@@ -21,10 +24,12 @@ import argparse
 
 import pandas as pd
 
-from kernelag.paths import data_dir, kit_dir, record_in_manifest
+from kernelag.paths import data_dir, kit_dir, record_in_manifest, secret
 
 KIT_FILE = "02_QuickStats/corn_grain_silage_acres_2012_2025.csv"
 SOURCE_URL = "https://quickstats.nass.usda.gov/"
+API_URL = "https://quickstats.nass.usda.gov/api/api_GET/"
+API_KEY_NAME = "NASS_QUICKSTATS_API_KEY"   # free key by email form; kept in .env
 
 # The three plain totals. Irrigated, non-irrigated and organic sub-rows are left out.
 SERIES = {
@@ -51,6 +56,66 @@ LAST_BASELINE_YEAR = 2024
 def load_kit() -> pd.DataFrame:
     """The organizers' file as text columns, exactly as NASS published the values."""
     return pd.read_csv(kit_dir() / KIT_FILE, dtype=str, keep_default_na=False)
+
+
+def years_without_state_rows(raw: pd.DataFrame) -> list[int]:
+    """Years where the kit has no state survey rows (it holds county rows only in census years)."""
+    survey = raw[(raw["aggregation_level"] == "STATE") & (raw["source"] == "SURVEY")]
+    have = set(survey["year"].astype(int))
+    years = raw["year"].astype(int)
+    return [year for year in range(years.min(), years.max() + 1) if year not in have]
+
+
+def fetch_state_survey(years: list[int], key: str) -> pd.DataFrame:
+    """State survey rows for the three plain series, straight from the Quick Stats API.
+
+    Returned with the kit's column names so it can be stacked under the kit file.
+    """
+    import requests
+
+    kit_names = {
+        "year": "year", "agg_level_desc": "aggregation_level", "state_name": "state_name",
+        "state_ansi": "state_ansi", "short_desc": "short_description",
+        "reference_period_desc": "reference_period", "Value": "value",
+        "source_desc": "source", "domain_desc": "domain",
+    }
+    rows = []
+    for year in years:
+        for item in SERIES:
+            params = {
+                "key": key, "format": "JSON", "source_desc": "SURVEY", "commodity_desc": "CORN",
+                "agg_level_desc": "STATE", "year": year, "short_desc": item,
+            }
+            response = requests.get(API_URL, params=params, timeout=60)
+            if response.status_code != 200:   # never echo the URL: it carries the key
+                raise RuntimeError(f"Quick Stats returned HTTP {response.status_code} for {year}, {item}")
+            rows.extend(response.json().get("data", []))
+    fetched = pd.DataFrame(rows).astype(str).rename(columns=kit_names)
+    return fetched[list(kit_names.values())] if len(fetched) else fetched
+
+
+def load_with_missing_years(force: bool = False) -> pd.DataFrame:
+    """The kit file, plus state rows for the years it lacks when an API key is available.
+
+    The fetched rows are cached in ``data/nass/quickstats_state_fill.csv``.
+    """
+    raw = load_kit()
+    missing = years_without_state_rows(raw)
+    cache = data_dir() / "nass" / "quickstats_state_fill.csv"
+    if cache.exists() and not force:
+        fill = pd.read_csv(cache, dtype=str, keep_default_na=False)
+    else:
+        key = secret(API_KEY_NAME)
+        if not missing or not key:
+            if missing:
+                print(f"no {API_KEY_NAME} set: state rows for {missing} stay missing")
+            return raw
+        fill = fetch_state_survey(missing, key)
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        fill.to_csv(cache, index=False, lineterminator="\n")
+        record_in_manifest(cache, SOURCE_URL + "api")
+        print(f"fetched {len(fill)} state rows for {missing}")
+    return pd.concat([raw, fill], ignore_index=True).fillna("")
 
 
 def _plain_totals(raw: pd.DataFrame, level: str) -> pd.DataFrame:
@@ -163,7 +228,7 @@ def main() -> None:
         print("outputs exist; use --force to rebuild")
         return
 
-    raw = load_kit()
+    raw = load_with_missing_years(force=args.force)
     state = tidy_state(raw)
     tables = {
         "corn_acres_state": state,

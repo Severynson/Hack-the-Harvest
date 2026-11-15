@@ -33,6 +33,8 @@ CLEAR_SCL = [4, 5, 6, 7]      # vegetation, bare soil, water, unclassified
 RESOLUTION_M = 20             # native for B8A, B11 and B12
 INNER_BUFFER_M = 20           # shrink fields by one pixel so roads and tree lines do not mix in
 CELL_KM = 10
+DATES_PER_BATCH = 12          # dates fetched together; about 30 MB of memory per batch
+READ_THREADS = 32             # remote reads are waiting, not computing, so many threads help
 
 
 def _s2_offset(item) -> int:
@@ -55,7 +57,7 @@ def assign_cells(fields, cell_km: int = CELL_KM):
 def cell_series(fields_utm, year: int) -> pd.DataFrame:
     """Series for all fields of one cell in one year. ``fields_utm`` needs ``field_id`` and a UTM CRS."""
     import planetary_computer
-    from odc.stac import load
+    from odc.stac import configure_rio, load
     from pystac_client import Client
     from rasterio.features import rasterize
 
@@ -69,8 +71,9 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
     if not items:
         return pd.DataFrame()
 
+    configure_rio(cloud_defaults=True)  # skip directory listings on every remote file open
     cube = load(items, bands=BANDS, bbox=bbox, crs=fields_utm.crs, resolution=RESOLUTION_M,
-                groupby="solar_day", chunks={})  # lazy: one date is read at a time
+                groupby="solar_day", chunks={})  # lazy: nothing is read yet
 
     # Field numbers burned onto the cube grid. Field ids can be strings, so use positions.
     gbox = cube.odc.geobox
@@ -84,35 +87,45 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
 
     offsets = {str(item.datetime.date()): _s2_offset(item) for item in items}
     rows = []
-    for t in cube.time.values:
-        day = str(pd.Timestamp(t).date())
-        offset = offsets.get(day, 0)
-        scene = cube.sel(time=t).compute()
-        raw = {b: scene[b].values.astype("float32").ravel()[in_field] for b in BANDS[:-1]}
-        nodata = np.any([raw[b] == 0 for b in raw], axis=0)
-        refl = {b: np.clip((raw[b] - offset) / 10000.0, 0, None) for b in raw}
-        clear = np.isin(scene["SCL"].values.ravel()[in_field], CLEAR_SCL) & ~nodata
-        if not clear.any():
-            continue
-
-        with np.errstate(invalid="ignore", divide="ignore"):
-            pixels = pd.DataFrame({
-                "zone": zones[in_field],
-                "clear": clear,
-                "ndvi": (refl["B08"] - refl["B04"]) / (refl["B08"] + refl["B04"]),
-                "ndmi": (refl["B8A"] - refl["B11"]) / (refl["B8A"] + refl["B11"]),
-                "ndti": (refl["B11"] - refl["B12"]) / (refl["B11"] + refl["B12"]),
-            })
-        valid = pixels.groupby("zone")["clear"].mean().rename("valid_frac")
-        median = pixels[pixels["clear"]].groupby("zone")[["ndvi", "ndmi", "ndti"]].median()
-        out = pd.concat([valid, median], axis=1).dropna(subset=["ndvi"]).reset_index()
-        out["field_id"] = field_ids[out["zone"].to_numpy() - 1]
-        out["date"], out["year"], out["s2_offset"] = pd.Timestamp(day), year, offset
-        rows.append(out.drop(columns="zone"))
+    times = cube.time.values
+    for start in range(0, len(times), DATES_PER_BATCH):
+        # Reads are slow and independent, so fetch a batch of dates at once on many threads.
+        batch = cube.isel(time=slice(start, start + DATES_PER_BATCH)).compute(
+            scheduler="threads", num_workers=READ_THREADS)
+        for t in batch.time.values:
+            rows.append(_field_medians(batch.sel(time=t), zones, in_field, field_ids,
+                                       pd.Timestamp(t), year, offsets))
+    rows = [r for r in rows if r is not None]
     if not rows:
         return pd.DataFrame()
     columns = ["field_id", "date", "year", "valid_frac", "ndvi", "ndmi", "ndti", "s2_offset"]
     return pd.concat(rows, ignore_index=True)[columns].round({"valid_frac": 3, "ndvi": 4, "ndmi": 4, "ndti": 4})
+
+
+def _field_medians(scene, zones, in_field, field_ids, date, year, offsets):
+    """Field medians of the three indices for one date, or None if no field pixel was clear."""
+    offset = offsets.get(str(date.date()), 0)
+    raw = {b: scene[b].values.astype("float32").ravel()[in_field] for b in BANDS[:-1]}
+    nodata = np.any([raw[b] == 0 for b in raw], axis=0)
+    refl = {b: np.clip((raw[b] - offset) / 10000.0, 0, None) for b in raw}
+    clear = np.isin(scene["SCL"].values.ravel()[in_field], CLEAR_SCL) & ~nodata
+    if not clear.any():
+        return None
+
+    with np.errstate(invalid="ignore", divide="ignore"):
+        pixels = pd.DataFrame({
+            "zone": zones[in_field],
+            "clear": clear,
+            "ndvi": (refl["B08"] - refl["B04"]) / (refl["B08"] + refl["B04"]),
+            "ndmi": (refl["B8A"] - refl["B11"]) / (refl["B8A"] + refl["B11"]),
+            "ndti": (refl["B11"] - refl["B12"]) / (refl["B11"] + refl["B12"]),
+        })
+    valid = pixels.groupby("zone")["clear"].mean().rename("valid_frac")
+    median = pixels[pixels["clear"]].groupby("zone")[["ndvi", "ndmi", "ndti"]].median()
+    out = pd.concat([valid, median], axis=1).dropna(subset=["ndvi"]).reset_index()
+    out["field_id"] = field_ids[out["zone"].to_numpy() - 1]
+    out["date"], out["year"], out["s2_offset"] = date, year, offset
+    return out.drop(columns="zone")
 
 
 def series_for_fields(fields, name: str, cells: list[str] | None = None, force: bool = False) -> pd.DataFrame:
