@@ -9,3 +9,4 @@ d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore s
 f8bb82b	0.818182	0.8594	discard	drop band 80/20 -> 90/10 of amplitude
 ccc9af7	0.800000	0.8333	discard	drop clock on absolute NDVI 0.7 -> 0.35 instead of amplitude fractions
 ec57c26	0.727273	0.8021	discard	single rule on late-season regreen: median NDVI DOY 300-355
+be6ba92	0.869565	0.9010	keep	OR rule: fast drop_days OR late Nov-Dec regreen (greedy thresholds)
