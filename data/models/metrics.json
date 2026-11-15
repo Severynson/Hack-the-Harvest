@@ -1,0 +1,239 @@
+{
+ "built_utc": "2026-11-15T03:11Z",
+ "forecast_year": 2026,
+ "us_forecast": {
+  "silage": 6314600.0,
+  "silage_lo80": 5964800.0,
+  "silage_hi80": 6685000.0,
+  "silage_lo90": 5869200.0,
+  "silage_hi90": 6793900.0,
+  "grain": 88506000.0,
+  "grain_lo80": 87265300.0,
+  "grain_hi80": 89764300.0,
+  "grain_lo90": 86916800.0,
+  "grain_hi90": 90124300.0,
+  "silage_method": "reversion_only",
+  "grain_method": "sum"
+ },
+ "state_model": {
+  "asof": "nov",
+  "backtest_years": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "selected_silage_set": "reversion_only",
+  "selection_tolerance_points": 0.3,
+  "mean_errors_pct": {
+   "grain.nass_latest": {
+    "state_error_pct": 1.66,
+    "abs_total_error_pct": 0.82
+   },
+   "grain.same_as_last_year": {
+    "state_error_pct": 7.35,
+    "abs_total_error_pct": 4.12
+   },
+   "silage.all_public": {
+    "state_error_pct": 14.53,
+    "abs_total_error_pct": 4.92
+   },
+   "silage.nass_acres": {
+    "state_error_pct": 13.04,
+    "abs_total_error_pct": 3.87
+   },
+   "silage.reversion_only": {
+    "state_error_pct": 13.12,
+    "abs_total_error_pct": 3.9
+   },
+   "silage.same_as_last_year": {
+    "state_error_pct": 14.53,
+    "abs_total_error_pct": 4.08
+   },
+   "silage.stress": {
+    "state_error_pct": 13.82,
+    "abs_total_error_pct": 3.12
+   }
+  },
+  "interval_coverage": {
+   "silage": {
+    "80": 0.789,
+    "90": 0.88
+   },
+   "grain": {
+    "80": 0.793,
+    "90": 0.881
+   }
+  },
+  "us_log_error_rms": {
+   "silage": 0.0445,
+   "grain": 0.011
+  },
+  "sampled_states_silage_errors_pct": {},
+  "caveats": [
+   "RMA loss files are today's vintage, not the vintage of each past November",
+   "2025 is excluded from fitting, selection and this backtest"
+  ]
+ },
+ "state_model_asof_sep": {
+  "asof": "sep",
+  "backtest_years": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "selected_silage_set": "reversion_only",
+  "selection_tolerance_points": 0.3,
+  "mean_errors_pct": {
+   "grain.nass_latest": {
+    "state_error_pct": 2.52,
+    "abs_total_error_pct": 1.05
+   },
+   "grain.same_as_last_year": {
+    "state_error_pct": 7.35,
+    "abs_total_error_pct": 4.12
+   },
+   "silage.all_public": {
+    "state_error_pct": 13.52,
+    "abs_total_error_pct": 3.67
+   },
+   "silage.nass_acres": {
+    "state_error_pct": 13.1,
+    "abs_total_error_pct": 3.82
+   },
+   "silage.reversion_only": {
+    "state_error_pct": 13.12,
+    "abs_total_error_pct": 3.9
+   },
+   "silage.same_as_last_year": {
+    "state_error_pct": 14.53,
+    "abs_total_error_pct": 4.08
+   },
+   "silage.stress": {
+    "state_error_pct": 13.79,
+    "abs_total_error_pct": 3.46
+   }
+  },
+  "interval_coverage": {
+   "silage": {
+    "80": 0.789,
+    "90": 0.88
+   },
+   "grain": {
+    "80": 0.79,
+    "90": 0.884
+   }
+  },
+  "us_log_error_rms": {
+   "silage": 0.0445,
+   "grain": 0.0128
+  },
+  "sampled_states_silage_errors_pct": {},
+  "caveats": [
+   "RMA loss files are today's vintage, not the vintage of each past November",
+   "2025 is excluded from fitting, selection and this backtest"
+  ]
+ },
+ "score_2025": {
+  "silage": {
+   "model": {
+    "n_states": 48,
+    "state_error_pct": 14.14,
+    "total_error_pct": 3.06
+   },
+   "same_as_last_year": {
+    "n_states": 48,
+    "state_error_pct": 13.96,
+    "total_error_pct": 0.32
+   },
+   "inside_80": 0.812
+  },
+  "grain": {
+   "model": {
+    "n_states": 41,
+    "state_error_pct": 1.64,
+    "total_error_pct": -0.99
+   },
+   "same_as_last_year": {
+    "n_states": 41,
+    "state_error_pct": 9.23,
+    "total_error_pct": -8.69
+   },
+   "inside_80": 0.707
+  }
+ },
+ "field_eval": {
+  "train": {
+   "region": "Quebec declared parcels",
+   "field_years": 318,
+   "silage": 138
+  },
+  "test": {
+   "region": "Maryland (organizer labels)",
+   "field_years": 44,
+   "silage": 12,
+   "not_assessable": 0
+  },
+  "rates": {
+   "n_grain": 32,
+   "n_silage": 12,
+   "TP": 10,
+   "FP": 5,
+   "FN": 2,
+   "TN": 27,
+   "silage_precision": 0.667,
+   "silage_recall": 0.833,
+   "grain_precision": 0.931,
+   "grain_recall": 0.844,
+   "false_positive_rate": 0.156,
+   "accuracy": 0.841
+  },
+  "always_grain": {
+   "n_grain": 32,
+   "n_silage": 12,
+   "TP": 0,
+   "FP": 0,
+   "FN": 12,
+   "TN": 32,
+   "silage_precision": NaN,
+   "silage_recall": 0.0,
+   "grain_precision": 0.727,
+   "grain_recall": 1.0,
+   "false_positive_rate": 0.0,
+   "accuracy": 0.727
+  },
+  "intervals_90": {
+   "silage_precision": [
+    0.455,
+    0.857
+   ],
+   "silage_recall": [
+    0.636,
+    1.0
+   ],
+   "false_positive_rate": [
+    0.061,
+    0.276
+   ],
+   "accuracy": [
+    0.75,
+    0.932
+   ]
+  },
+  "response_seconds_per_field": 0.0147,
+  "fit_seconds": 0.799,
+  "caveats": [
+   "44 test field-years on one farm: intervals are wide",
+   "response time excludes the imagery download"
+  ]
+ }
+}

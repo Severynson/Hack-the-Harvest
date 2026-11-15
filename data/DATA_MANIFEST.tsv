@@ -227,3 +227,4 @@ data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a
 data/models/state_model_metrics_asof_sep.json	1239	57f4933c3969946b7d4a479191b2bbd1311558d918130bc7a9fb27c2504adb95	derived: kernelag.state_model	cc-manraj	2026-11-15T03:07Z
 data/models/field_eval.json	1114	80d3494323374cc3e0ce32a9358dc25c146349cef099990cc5ea29165c963cb3	derived: kernelag.evaluate	unknown	2026-11-15T03:08Z
 data/models/field_earliness.csv	435	b820f44628ecd7fc96ab82f41025457d0d770589508c1565e465d12feb86b779	derived: kernelag.evaluate	unknown	2026-11-15T03:08Z
+data/models/metrics.json	4774	9923260d97a6929cb3a7648fb8fffbc7b155d8e51b8822e6a81cddd81b760a00	derived: kernelag.report	unknown	2026-11-15T03:11Z
