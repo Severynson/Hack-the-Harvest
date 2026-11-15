@@ -1,5 +1,6 @@
 # T-codex-manraj-accuracy
 Paths: test_models/accuracy/, tests/test_accuracy.py, tests/test_evaluate.py, tests/test_report.py, kernelag/evaluate.py, kernelag/report.py, DOCS/DECISIONS.md, DOCS/methodology.md, DOCS/VERIFIED_METRICS.md, DOCS/presentation.md, CHANGELOG.md, report/, data/models/, data/panel/, data/DATA_MANIFEST.tsv, data/fsa/, data/nass/reports/
+Satellite cutoff validation: kernelag/state_signal.py, tests/test_state_signal.py
 Done when: the current model/tests are rerun, bounded public-data improvements are logged with strictly earlier-year fitting, satellite availability is audited with a repository handoff, field balanced accuracy/F1 and intervals are reproduced, a source-backed comparison table and methodology accompany the verified offline report and five-minute presentation, and work is delivered under the team protocol.
 Status: claimed by codex-manraj
 
