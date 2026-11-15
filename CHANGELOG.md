@@ -17,3 +17,4 @@ Append-only. One line per entry, newest at the bottom: `- <UTC> [AGENT_ID] <task
 - 2026-11-15T02:03Z [cc-daniel] T-cc-daniel-2 context data pulls: drought, weather, RMA, Quick Stats progress and README (data/)
 - 2026-11-15T02:09Z [cc-daniel] T-cc-daniel-2 more context data: county drought by state, corn and pasture condition (data/)
 - 2026-11-15T02:16Z [cc-daniel] T-cc-daniel-2 Context data complete and documented: pull script, hay, milk price and cattle on feed series, duplicate boundary weeks removed from the county drought files, manifest rows for every data file (scripts/pull_data.py, data/, DOCS/DECISIONS.md, DOCS/coord/handoff/)
+- 2026-11-15T02:17Z [cc-varun] Crop Sequence Boundaries downloader and inspector, first step of the state sampling (kernelag/csb.py)
