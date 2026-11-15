@@ -4,3 +4,4 @@
 - 2026-11-15T07:42Z claim T-cc-manraj-noise-floor ttl=90m
 - 2026-11-15T07:42Z result: silage state error is mostly target noise (lag-1 autocorr of state changes -0.40, floor about 10% vs 13% achieved; survey vs census gap 15.6%/32.1%). Smoothed level + drought chopping: US silage error 3.44% vs LAD 5.12% (gain 1.67, SE 0.76, 2012-2024); state error unchanged. Not promoted to kernelag (vs reversion_only on 2017-24: gains 0.33/0.57, under 2 SE).
 - 2026-11-15T07:51Z promoted smoothed_chopping into kernelag.state_model at the user's request (2026 US silage 6.26M, 80% 5.95-6.59M; 2025 held-out state 13.12%, US +2.19%)
+- 2026-11-15T08:01Z claim T-cc-manraj-deliverable ttl=90m
