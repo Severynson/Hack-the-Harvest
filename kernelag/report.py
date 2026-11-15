@@ -71,11 +71,12 @@ def gather(models: Path) -> dict:
         "state_model_asof_sep": read_json(models / "state_model_metrics_asof_sep.json"),
         "score_2025": read_json(models / "state_score_2025.json"),
         "field_eval": read_json(models / "field_eval.json"),
+        "deliverable": read_json(models / "deliverable_summary.json"),
         "satellite_aggregate_present": (models.parent / "panel" / "state_satellite.csv").exists(),
         "source_sha256": {name: hashlib.sha256((models / name).read_bytes()).hexdigest() for name in
                           [f"state_forecast_{FORECAST_YEAR}.csv", "state_model_metrics.json",
                            "state_model_metrics_asof_sep.json", "state_score_2025.json", "field_eval.json",
-                           "state_model_backtest.csv", "state_model_bias.csv", "field_earliness.csv",
+                           "state_model_backtest.csv", "state_model_bias.csv", "field_earliness.csv", "deliverable_summary.json",
                            "field_model_coefficients.csv"] if (models / name).is_file()},
     }
 
@@ -321,7 +322,11 @@ def answer(metrics: dict) -> str:
         for name in ("silage", "grain"))
     return section("The answer", f"US acres, November forecast. Built {esc(metrics['built_utc'])}.",
                    f'<div class="tiles two">{tiles}</div><p class="muted">'
-                   'Silage is a historical acreage model. Grain uses NASS’s in-season forecast where available. '
+                   'Silage is our model: a smoothed state level plus drought chopping. '
+                   'Grain is NASS’s own November forecast where published, so its accuracy is NASS’s, not ours; '
+                   'without it, our planted × last-share grain number was off '
+                   f'{number(dig(metrics, "deliverable", "grain_without_nass_forecast", "backtest_2017_2024", "state_wape_pct"), 2, "%")} '
+                   'by state in 2017–2024. '
                    'Satellite acreage improvement is unproven; the field test is separate evidence. '
                    f'Totals sum the states shown: {number(dig(metrics, "forecast_scope", "silage"), 0)} silage, '
                    f'{number(dig(metrics, "forecast_scope", "grain"), 0)} grain; missing states are excluded.</p>')
@@ -569,6 +574,7 @@ def presentation_notes(metrics: dict) -> str:
     baseline = errors.get("silage.same_as_last_year", {})
     field = metrics["field_eval"]
     score = metrics["score_2025"]
+    own_grain = dig(metrics, "deliverable", "grain_without_nass_forecast", "backtest_2017_2024") or {}
     return f'''# Kernel: five-minute presentation
 
 Generated from `data/models/metrics.json` at {metrics["built_utc"]}. Open `report/index.html` offline.
@@ -580,7 +586,11 @@ USDA needs corn acreage by harvest use before January. Silage is cut green and w
 Kernel combines a state acreage forecast with a separate satellite test of that physical signal.
 Our November forecast is {acres(us.get("silage"))} million silage acres, with an 80% interval of
 {acres(us.get("silage_lo80"))} to {acres(us.get("silage_hi80"))} million.
-Grain is {acres(us.get("grain"))} million acres, primarily NASS's own in-season figures.
+Grain is {acres(us.get("grain"))} million acres. That number is NASS's own November harvested-for-grain
+forecast in every state where NASS publishes one, so its accuracy is NASS's, not ours. Say so first.
+Without that forecast, our own grain number (in-season planted acres × last year's grain share) was off by
+{number(own_grain.get("state_wape_pct"), 2, "%")} by state and {number(own_grain.get("us_error_pct"), 2, "%")} on the US total in 2017–2024.
+Our skill claim is silage, where NASS publishes nothing in season.
 These totals sum the states shown; missing grain states are excluded.
 
 ## 0:40–1:05 — States (usefulness)
@@ -601,7 +611,7 @@ The separate 2025 score is {number(dig(score, "silage", "model", "state_error_pc
 For the 2025 national total, signed error is {number(dig(score, "silage", "model", "total_error_pct"), 2)}%, versus
 {number(dig(score, "silage", "same_as_last_year", "total_error_pct"), 2)}%.
 That is a modest validation gain and no held-out silage win. We do not claim otherwise.
-The grain advantage comes largely from NASS inputs, not a new satellite discovery.
+The grain advantage is NASS's own forecast, not a new satellite discovery or our method.
 
 ## 2:00–2:30 — Bias (technical maturity)
 

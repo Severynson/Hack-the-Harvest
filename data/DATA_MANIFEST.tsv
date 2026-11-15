@@ -237,8 +237,8 @@ data/models/state_model_backtest_asof_sep.csv	3293	c46e9a4d6609c2dffc8c3131016e6
 data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
 data/models/state_model_bias_asof_sep.csv	1033	f64e50d7d5a347c282851bab8bbea3fd9f7c4f61808abc9e6361b3f45abdbe7a	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
 data/models/state_model_metrics_asof_sep.json	1831	d9958c9fe1732a64430fb66bba2e92b67f21f9493f90760b4546b730d063ce00	derived: kernelag.state_model	unknown	2026-11-15T07:50Z
-data/models/metrics.json	9196	3fe35d00b88700f57139dd4b85ee4a46e7fa8e1667ecf389c5888adcfc8bf028	derived: kernelag.report	unknown	2026-11-15T07:50Z
-data/models/verified_metrics.csv	1437	47eb00e40b683fa80279b78f5ad0920b8a046e4de3430d350b9a781658841fa0	derived: kernelag.report; comparison table	unknown	2026-11-15T07:50Z
-data/models/deliverable_2026.csv	6323	c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9	derived: kernelag.deliverable	unknown	2026-11-15T08:05Z
-data/models/deliverable_comparison.csv	63811	a6304166cce264a53759cb6cf84eb8fe30ce91e47137422e9c364523fa44cb42	derived: kernelag.deliverable	unknown	2026-11-15T08:05Z
-data/models/deliverable_summary.json	5195	8cae729b6e36065a7fe5ec6254d61d5652665480aa991cd182f325cb1b52e331	derived: kernelag.deliverable	unknown	2026-11-15T08:05Z
+data/models/deliverable_2026.csv	6323	c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9	derived: kernelag.deliverable	unknown	2026-11-15T08:15Z
+data/models/deliverable_comparison.csv	99743	fa042397d8adcbd62284f89c7aa54698ebe03465a641cfc516a677faecf31419	derived: kernelag.deliverable	unknown	2026-11-15T08:15Z
+data/models/deliverable_summary.json	7763	a913d40da0c3f2352c443060a68e34cafff0f4cfce223d2283eb62266d39c248	derived: kernelag.deliverable	unknown	2026-11-15T08:15Z
+data/models/metrics.json	17395	8494460397ba184e5ba1341cc0fc2a1ed0beac113eae39e0d7f67d2a0cb92b34	derived: kernelag.report	unknown	2026-11-15T08:15Z
+data/models/verified_metrics.csv	1437	47eb00e40b683fa80279b78f5ad0920b8a046e4de3430d350b9a781658841fa0	derived: kernelag.report; comparison table	unknown	2026-11-15T08:15Z

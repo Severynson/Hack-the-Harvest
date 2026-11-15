@@ -1,6 +1,6 @@
 # Verified metrics and baselines
 
-Generated 2026-11-15T07:50Z by `python -m kernelag.report`.
+Generated 2026-11-15T08:15Z by `python -m kernelag.report`.
 
 State WAPE = summed absolute state acreage error / summed actual acreage. National error is absolute total error.
 Current-vintage inputs make these pseudo real-time replays, not archived-vintage operational tests.

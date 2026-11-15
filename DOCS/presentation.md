@@ -1,6 +1,6 @@
 # Kernel: five-minute presentation
 
-Generated from `data/models/metrics.json` at 2026-11-15T07:50Z. Open `report/index.html` offline.
+Generated from `data/models/metrics.json` at 2026-11-15T08:15Z. Open `report/index.html` offline.
 The talk follows the seven sections from top to bottom. Acreage error is WAPE unless stated otherwise.
 
 ## 0:00–0:40 — The answer (mission)
@@ -9,7 +9,11 @@ USDA needs corn acreage by harvest use before January. Silage is cut green and w
 Kernel combines a state acreage forecast with a separate satellite test of that physical signal.
 Our November forecast is 6.26 million silage acres, with an 80% interval of
 5.95 to 6.59 million.
-Grain is 88.51 million acres, primarily NASS's own in-season figures.
+Grain is 88.51 million acres. That number is NASS's own November harvested-for-grain
+forecast in every state where NASS publishes one, so its accuracy is NASS's, not ours. Say so first.
+Without that forecast, our own grain number (in-season planted acres × last year's grain share) was off by
+2.35% by state and 1.05% on the US total in 2017–2024.
+Our skill claim is silage, where NASS publishes nothing in season.
 These totals sum the states shown; missing grain states are excluded.
 
 ## 0:40–1:05 — States (usefulness)
@@ -30,7 +34,7 @@ The separate 2025 score is 13.12%, versus
 For the 2025 national total, signed error is 2.19%, versus
 0.32%.
 That is a modest validation gain and no held-out silage win. We do not claim otherwise.
-The grain advantage comes largely from NASS inputs, not a new satellite discovery.
+The grain advantage is NASS's own forecast, not a new satellite discovery or our method.
 
 ## 2:00–2:30 — Bias (technical maturity)
 

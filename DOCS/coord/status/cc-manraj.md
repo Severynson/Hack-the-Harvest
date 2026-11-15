@@ -7,3 +7,4 @@
 - 2026-11-15T08:01Z claim T-cc-manraj-deliverable ttl=90m
 - 2026-11-15T08:05Z result: deliverable vs NASS final (organizer CSV; 2017/2022 from pipeline NASS copy, 979 shared rows identical): silage 2017-24 state 12.80% US 3.34% (last year 14.53/4.08), 2025 13.12/2.19; grain 2017-24 1.66/0.82, 2025 1.64/0.99
 - 2026-11-15T08:14Z claim T-cc-manraj-grain-anchor ttl=90m
+- 2026-11-15T08:15Z result: grain without NASS's grain forecast (planted asof x last grain share), 2017-24: state 2.35% US 1.05% (NASS-anchored 1.66/0.82); 2025: 1.63/0.69. Presentation now leads with 'grain is NASS's forecast'.

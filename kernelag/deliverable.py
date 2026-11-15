@@ -13,7 +13,7 @@ Every past-year number uses only what was public by mid-November of that year. E
 parameters come from earlier years only (``kernelag.state_model``, ``kernelag.silage_level``).
 2017-2024 is the backtest that also chose the method; 2025 was scored once, after the method was fixed.
 Grain is NASS's own November harvested-for-grain forecast where it exists, so the grain number is not an
-independent estimate. The truth is the organizer CSV, read here independently of the pipeline's copy.
+independent estimate; ``grain_without_nass_forecast`` scores a grain number of our own beside it. The truth is the organizer CSV, read here independently of the pipeline's copy.
 
 Run: ``python -m kernelag.deliverable``
 """
@@ -33,6 +33,7 @@ from kernelag.state_panel import QUICKSTATS_DIR, load_panel
 ORGANIZER_CSV = Path("02_QuickStats/corn_grain_silage_acres_2012_2025.csv")   # under kernelag.paths.kit_dir()
 YEARS = range(2017, 2026)
 FORECAST_YEAR = 2026
+NO_NASS_GRAIN = "grain_without_nass_forecast"
 
 
 def organizer_truth(path: Path) -> pd.DataFrame:
@@ -64,8 +65,13 @@ def our_numbers(table: pd.DataFrame, history: dict, years: range) -> pd.DataFram
         rows = table[table["year"] == year].set_index("state")
         silage = state_model.predict_silage_by(table, year, state_model.SMOOTHED, history)
         grain = state_model.predict_grain(table, year)
-        for series, predicted in [("silage", silage), ("grain", grain["grain"])]:
-            part = pd.DataFrame({"predicted": predicted, "last": rows[f"{series}_last"].reindex(predicted.index)})
+        # The delivered grain number is NASS's November forecast. To show skill of our own, the same
+        # states are also scored without it: in-season planted acres x last year's grain share.
+        own = (rows["planted_asof"] * rows["grain_last"] / rows["planted_last"]).fillna(rows["grain_last"])
+        own = own.reindex(grain.index)
+        for series, predicted in [("silage", silage), ("grain", grain["grain"]), (NO_NASS_GRAIN, own)]:
+            last = rows[f"{'grain' if series == NO_NASS_GRAIN else series}_last"].reindex(predicted.index)
+            part = pd.DataFrame({"predicted": predicted, "last": last})
             if series == "grain":
                 part["grain_method"] = grain["grain_method"]
             parts.append(part.rename_axis("state").reset_index().assign(year=year, series=series))
@@ -74,6 +80,7 @@ def our_numbers(table: pd.DataFrame, history: dict, years: range) -> pd.DataFram
 
 def compare(ours: pd.DataFrame, truth: pd.DataFrame) -> pd.DataFrame:
     """State rows plus one US row per year and series (US = sum of states with both numbers)."""
+    truth = pd.concat([truth, truth[truth["series"] == "grain"].assign(series=NO_NASS_GRAIN)], ignore_index=True)
     both = ours.merge(truth, on=["year", "state", "series"], how="inner")
     us = both.groupby(["year", "series"], as_index=False).agg(
         predicted=("predicted", "sum"), last=("last", "sum"), actual=("actual", "sum"),
@@ -137,7 +144,10 @@ def main() -> None:
          " 2017 and 2022 (Census years, no state survey rows in that CSV) from the pipeline's NASS Quick"
          " Stats copy, marked in truth_source."),
         "2017-2024 also chose the method; 2025 was scored once after it was fixed.",
-        "Grain uses NASS's own November forecast where published; it is not independent of NASS.",
+        ("Delivered grain IS NASS's own November harvested-for-grain forecast where published (every scored"
+         " state, 2017-2025), so its error is NASS's forecast error, not our skill. The organizer CSV holds the"
+         " same forecasts. grain_without_nass_forecast scores our own number instead: in-season planted acres"
+         " x last year's grain share. Our skill claim is silage."),
         "Silage has no NASS in-season figure; the baseline is last year's acres.",
         "Current-vintage inputs: a replay, not archived real-time runs.",
     ]
@@ -159,7 +169,7 @@ def main() -> None:
     print(f"{FORECAST_YEAR} US: grain {us['grain'] / 1e6:.2f}M acres (80% {us['grain_lo80'] / 1e6:.2f}-"
           f"{us['grain_hi80'] / 1e6:.2f}), silage {us['silage'] / 1e6:.2f}M (80% {us['silage_lo80'] / 1e6:.2f}-"
           f"{us['silage_hi80'] / 1e6:.2f})")
-    for series in ["silage", "grain"]:
+    for series in ["silage", "grain", NO_NASS_GRAIN]:
         print(f"\n{series}: ours vs NASS final (organizer CSV)")
         print(pd.DataFrame(summary[series]["by_year"]).T.to_string())
         for name in ["backtest_2017_2024", "held_out_2025"]:
