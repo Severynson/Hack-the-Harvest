@@ -49,7 +49,12 @@ def secret(name: str) -> str:
 
 
 def record_in_manifest(path: Path, source_url: str) -> None:
-    """Add or refresh one row of ``data/DATA_MANIFEST.tsv`` (path, bytes, sha256, source, agent, UTC)."""
+    """Add or refresh one row of ``data/DATA_MANIFEST.tsv`` (path, bytes, sha256, source, agent, UTC).
+
+    Skipped when ``KERNEL_NO_MANIFEST`` is set: parallel pulls must not rewrite one file at once.
+    """
+    if os.environ.get("KERNEL_NO_MANIFEST"):
+        return
     manifest = data_dir() / "DATA_MANIFEST.tsv"
     header = "path\tbytes\tsha256\tsource_url\tmade_by\tutc"
     try:

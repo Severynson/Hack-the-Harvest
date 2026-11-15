@@ -46,8 +46,13 @@ def _s2_offset(item) -> int:
 
 
 def assign_cells(fields, cell_km: int = CELL_KM):
-    """Add a ``cell`` id (square grid in the fields' local UTM zone) and return fields in that zone."""
+    """Add a ``cell`` id (square grid in the fields' local UTM zone) and return fields in that zone.
+
+    A ``cell`` column that is already there (set by a sampler) is kept as it is.
+    """
     utm = fields.to_crs(fields.estimate_utm_crs())
+    if "cell" in fields.columns:
+        return utm
     centre = utm.geometry.representative_point()
     size = cell_km * 1000
     utm["cell"] = (centre.x // size).astype(int).astype(str) + "_" + (centre.y // size).astype(int).astype(str)
