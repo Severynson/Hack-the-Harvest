@@ -31,3 +31,4 @@ fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.
 2f999bf	0.836595	1.0000	discard	[multi] winter green needs absolute NDVI > 0.6 (real cover crop): barc 1.0000 q2b 0.9091 b2q 0.7186 qloco 0.7186
 83b0ee5	0.859322	1.0000	keep	[multi] winter green as fixed physical rule NDVI>0.65 (not learned): barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
 bb55587	0.859322	1.0000	discard	[multi] gated rule: peak date relative to region-year median: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
+26f61be	0.859322	1.0000	keep	[multi] simplify: drop unused relative-winter feature and precision gate: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
