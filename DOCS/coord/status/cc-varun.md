@@ -14,3 +14,4 @@
 - 2026-11-15T02:44Z Keeboh: national field boundaries downloaded and inspected (15,973,095 fields, layer national1825). Delivered the state sampler. Next: Varun runs the sample and the series pull on Keeboh; I write kernelag.state_signal and the backtest with the satellite change
 - 2026-11-15T02:49Z Keeboh: state sample chosen on the real file (15 states, 150 areas, 47,948 fields, 148,900 field-years, 82 s). Delivered kernelag.state_signal. Next: series pull on Keeboh, then the backtest with the satellite change
 - 2026-11-15T02:58Z Keeboh: first pull layout was too slow (26 of about 1,050 area-years, one process per state). Reworked to one process per area. Next: restart the pull on Keeboh and measure the rate
+- 2026-11-15T03:18Z Keeboh hardware: one NVIDIA B200 (183 GB), 1.5 TB RAM, 256 cores, no torch installed, NVIDIA key present, Hugging Face reachable. Next: Nemotron smoke test in a separate environment under /tmp, then the fine-tune script
