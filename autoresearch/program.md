@@ -1,114 +1,72 @@
-# autoresearch
+# autoresearch: silage vs grain (BARC fields)
 
-This is an experiment to have the LLM do its own research.
+An LLM runs its own experiments on a fixed evaluation harness, keeps what helps, and throws away what doesn't.
+
+## Task
+
+For each labeled BARC corn field-year (Maryland, 2021-2023; 44 labels: 32 Grain, 12 Silage), predict whether it was **chopped for silage (1)** or **harvested for grain (0)**, using Sentinel-2 time series.
+
+Research direction for the current run (`autoresearch/cc-severyn`): **the caveman model**, a few hand-made rules on season timing:
+- green-up date (the steady NDVI rise after the spring low) stands in for planting,
+- harvest date = when NDVI collapses after the peak,
+- season length = harvest - green-up; silage is cut green, weeks before grain.
+Explore the rules and their parameters through ablations: what to detect, how to detect it, how to set the cut. Other timing signals are fair game (NDTI/BSI after harvest, how sharp the drop is, comparison with the other fields that year), as long as the model stays a few readable rules rather than a black box.
 
 ## Setup
 
-To set up a new experiment, work with the user to:
+1. Branch: `autoresearch/<AGENT_ID>` (team protocol in the root `CLAUDE.md`).
+2. Read `README.md`, `prepare.py` (fixed: data, cache, `evaluate`), and `train.py` (the file you edit).
+3. Data: `~/.cache/autoresearch-silage/` must hold `s2_field_timeseries.parquet` and `labels.parquet`. If it doesn't, run `uv run prepare.py`.
+4. `results.tsv` (untracked) and `ledger/<AGENT_ID>.tsv` (tracked) each start with the header row only.
 
-1. **Agree on a run tag**: propose a tag based on today's date (e.g. `mar5`). The branch `autoresearch/<tag>` must not already exist — this is a fresh run.
-2. **Create the branch**: `git checkout -b autoresearch/<tag>` from current master.
-3. **Read the in-scope files**: The repo is small. Read these files for full context:
-   - `README.md` — repository context.
-   - `prepare.py` — fixed constants, data prep, tokenizer, dataloader, evaluation. Do not modify.
-   - `train.py` — the file you modify. Model architecture, optimizer, training loop.
-4. **Verify data exists**: Check that `~/.cache/autoresearch/` contains data shards and a tokenizer. If not, tell the human to run `uv run prepare.py`.
-5. **Initialize results.tsv**: Create `results.tsv` with just the header row. The baseline will be recorded after the first run.
-6. **Confirm and go**: Confirm setup looks good.
+## Rules
 
-Once you get confirmation, kick off the experimentation.
+**You CAN:** edit `train.py`: features, smoothing, detection logic, rules, thresholds, how thresholds are fitted.
 
-## Experimentation
+**You CANNOT:**
+- Modify `prepare.py` or the evaluation. `autoresearch/prepare.sha256` freezes it.
+- Add dependencies beyond `pyproject.toml`.
+- Use the held-out year's labels. `evaluate` never hands them over; don't hard-code knowledge of them (for example, OBJECTIDs known to be silage).
 
-Each experiment runs on a single GPU. The training script runs for a **fixed time budget of 5 minutes** (wall clock training time, excluding startup/compilation). You launch it simply as: `uv run train.py`.
+**Metric:** `val_f1` = silage F1 pooled over leave-one-year-out predictions on all 44 field-years. **Higher is better.** Always predicting grain scores 0 (accuracy 0.727).
 
-**What you CAN do:**
-- Modify `train.py` — this is the only file you edit. Everything is fair game: model architecture, optimizer, hyperparameters, training loop, batch size, model size, etc.
+**Overfitting warning:** 12 positives. Each one flipped moves F1 by ~0.04–0.08, so treat gains under ~0.04 as noise unless the code also gets simpler. Prefer rules with a physical reason over tuned constants. Every constant you add costs complexity.
 
-**What you CANNOT do:**
-- Modify `prepare.py`. It is read-only. It contains the fixed evaluation, data loading, tokenizer, and training constants (time budget, sequence length, etc).
-- Install new packages or add dependencies. You can only use what's already in `pyproject.toml`.
-- Modify the evaluation harness. The `evaluate_bpb` function in `prepare.py` is the ground truth metric.
+**Simplicity criterion:** all else equal, simpler wins. A rule that is equal or better with less code is kept.
 
-**The goal is simple: get the lowest val_bpb.** Since the time budget is fixed, you don't need to worry about training time — it's always 5 minutes. Everything is fair game: change the architecture, the optimizer, the hyperparameters, the batch size, the model size. The only constraint is that the code runs without crashing and finishes within the time budget.
-
-**VRAM** is a soft constraint. Some increase is acceptable for meaningful val_bpb gains, but it should not blow up dramatically.
-
-**Simplicity criterion**: All else being equal, simpler is better. A small improvement that adds ugly complexity is not worth it. Conversely, removing something and getting equal or better results is a great outcome — that's a simplification win. When evaluating whether to keep a change, weigh the complexity cost against the improvement magnitude. A 0.001 val_bpb improvement that adds 20 lines of hacky code? Probably not worth it. A 0.001 val_bpb improvement from deleting code? Definitely keep. An improvement of ~0 but much simpler code? Keep.
-
-**The first run**: Your very first run should always be to establish the baseline, so you will run the training script as is.
-
-## Output format
-
-Once the script finishes it prints a summary like this:
+## Output
 
 ```
 ---
-val_bpb:          0.997900
-training_seconds: 300.1
-total_seconds:    325.9
-peak_vram_mb:     45060.2
-mfu_percent:      39.80
-total_tokens_M:   499.6
-num_steps:        953
-num_params_M:     50.3
-depth:            8
+val_f1:           0.700000
+precision:        ...
+recall:           ...
+balanced_acc:     ...
+accuracy:         ...
+confusion:        tp=.. fp=.. fn=.. tn=..
+per_year_f1:      2021=... 2022=... 2023=...
+total_seconds:    3.2
 ```
 
-Note that the script is configured to always stop after 5 minutes, so depending on the computing platform of this computer the numbers might look different. You can extract the key metric from the log file:
+`grep "^val_f1:" run.log`
+
+## Logging
+
+Tab-separated, 5 columns:
 
 ```
-grep "^val_bpb:" run.log
+commit	val_f1	balanced_acc	status	description
 ```
 
-## Logging results
+status: `keep`, `discard` or `crash` (crash rows get 0.000000 / 0.0000). Append each row to `results.tsv` and to `ledger/<AGENT_ID>.tsv`; commit and push the ledger (team protocol).
 
-When an experiment is done, log it to `results.tsv` (tab-separated, NOT comma-separated — commas break in descriptions).
+## Loop
 
-The TSV has a header row and 5 columns:
+1. Edit `train.py` with one idea.
+2. `git commit`
+3. `uv run train.py > run.log 2>&1`
+4. `grep "^val_f1:\|^balanced_acc:" run.log`; if empty, `tail -n 40 run.log`.
+5. Improved → keep the commit. Equal or worse → `git reset --hard HEAD~1`.
+6. Log the row (the commit hash is the experiment commit, even if discarded), then commit the ledger on its own and push the branch.
 
-```
-commit	val_bpb	memory_gb	status	description
-```
-
-1. git commit hash (short, 7 chars)
-2. val_bpb achieved (e.g. 1.234567) — use 0.000000 for crashes
-3. peak memory in GB, round to .1f (e.g. 12.3 — divide peak_vram_mb by 1024) — use 0.0 for crashes
-4. status: `keep`, `discard`, or `crash`
-5. short text description of what this experiment tried
-
-Example:
-
-```
-commit	val_bpb	memory_gb	status	description
-a1b2c3d	0.997900	44.0	keep	baseline
-b2c3d4e	0.993200	44.2	keep	increase LR to 0.04
-c3d4e5f	1.005000	44.0	discard	switch to GeLU activation
-d4e5f6g	0.000000	0.0	crash	double model width (OOM)
-```
-
-## The experiment loop
-
-The experiment runs on a dedicated branch (e.g. `autoresearch/mar5` or `autoresearch/mar5-gpu0`).
-
-LOOP FOREVER:
-
-1. Look at the git state: the current branch/commit we're on
-2. Tune `train.py` with an experimental idea by directly hacking the code.
-3. git commit
-4. Run the experiment: `uv run train.py > run.log 2>&1` (redirect everything — do NOT use tee or let output flood your context)
-5. Read out the results: `grep "^val_bpb:\|^peak_vram_mb:" run.log`
-6. If the grep output is empty, the run crashed. Run `tail -n 50 run.log` to read the Python stack trace and attempt a fix. If you can't get things to work after more than a few attempts, give up.
-7. Record the results in the tsv (NOTE: do not commit the results.tsv file, leave it untracked by git)
-8. If val_bpb improved (lower), you "advance" the branch, keeping the git commit
-9. If val_bpb is equal or worse, you git reset back to where you started
-
-The idea is that you are a completely autonomous researcher trying things out. If they work, keep. If they don't, discard. And you're advancing the branch so that you can iterate. If you feel like you're getting stuck in some way, you can rewind but you should probably do this very very sparingly (if ever).
-
-**Timeout**: Each experiment should take ~5 minutes total (+ a few seconds for startup and eval overhead). If a run exceeds 10 minutes, kill it and treat it as a failure (discard and revert).
-
-**Crashes**: If a run crashes (OOM, or a bug, or etc.), use your judgment: If it's something dumb and easy to fix (e.g. a typo, a missing import), fix it and re-run. If the idea itself is fundamentally broken, just skip it, log "crash" as the status in the tsv, and move on.
-
-**NEVER STOP**: Once the experiment loop has begun (after the initial setup), do NOT pause to ask the human if you should continue. Do NOT ask "should I keep going?" or "is this a good stopping point?". The human might be asleep, or gone from a computer and expects you to continue working *indefinitely* until you are manually stopped. You are autonomous. If you run out of ideas, think harder — read papers referenced in the code, re-read the in-scope files for new angles, try combining previous near-misses, try more radical architectural changes. The loop runs until the human interrupts you, period.
-
-As an example use case, a user might leave you running while they sleep. If each experiment takes you ~5 minutes then you can run approx 12/hour, for a total of about 100 over the duration of the average human sleep. The user then wakes up to experimental results, all completed by you while they slept!
+A run takes seconds. Don't stop to ask whether to continue; the human ends the run.
