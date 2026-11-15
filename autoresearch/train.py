@@ -2,13 +2,15 @@
 Caveman model: silage vs grain from how the corn leaves the field.
 
 Started from Severyn's idea (test_models/danielModel/README.md): season length = harvest - green-up.
-Ablations showed season length is weak (grain senesces at the same date silage is cut). Two timing
-rules survived:
-  1. Drop speed: silage is chopped green, so NDVI collapses within ~2 weeks; grain dries down over 3-4.
-  2. Re-greening: after an early silage cut a cover crop is sown and is green by Nov-Dec.
-A field-year is silage if it drops fast OR re-greens. Both thresholds are learned from training years.
+Ablations showed season length is weak (grain senesces at the same date silage is cut). Rules that survived:
+  1. Drop clock (learned cut-off): after the season's greenest day, NDVI falls from 80% to 20% of its range
+     in < ~17.5 days. Silage is chopped green; grain dries down over 3-4 weeks. The cut-off comes out the same
+     in Maryland and Quebec. A spring forage cereal peak makes the clock read 1-5 days, so it fires there too.
+  2. Winter green (fixed physical rule, not learned): Nov-Dec NDVI > 0.65 = a dense cover crop sown after an
+     early cut. Fixed so it transfers: under snow (Quebec) it simply never fires; 0.60-0.70 give the same result.
+A field-year is silage if any rule fires.
 
-This is the only file the autoresearch loop edits. Run: uv run train.py
+Run 1 metric: uv run train.py (BARC leave-one-year-out). Run 2 metric: uv run multi_eval.py (cross-region).
 """
 
 import time
