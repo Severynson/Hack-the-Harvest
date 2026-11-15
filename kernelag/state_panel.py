@@ -122,7 +122,9 @@ def load_panel(asof: str = "nov") -> pd.DataFrame:
     """The panel built from the files under ``data/`` (``kernelag.nass`` must have run)."""
     data = data_dir()
     acres = pd.read_csv(data / "nass" / "corn_acres_state.csv")
-    satellite_file = data / "panel" / "state_satellite.csv"   # from kernelag.state_signal, if it has been run
+    # A full-season aggregate must never enter an earlier replay.
+    satellite_name = "state_satellite.csv" if asof == "nov" else f"state_satellite_asof_{asof}.csv"
+    satellite_file = data / "panel" / satellite_name
     satellite = pd.read_csv(satellite_file) if satellite_file.exists() else None
     return build_panel(acres, data / QUICKSTATS_DIR, build_context(data, asof), asof, satellite)
 

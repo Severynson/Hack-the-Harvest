@@ -21,3 +21,19 @@ def test_bootstrap_interval_brackets_the_point_rate():
     assert low <= 0.8 <= high and low < high
     low, high = intervals["false_positive_rate"]
     assert low <= 0.1 <= high
+
+
+def test_earliness_keeps_fields_with_no_early_observations():
+    labels = pd.DataFrame({"field_id": ["1", "2"], "year": [2021, 2021],
+                           "label": ["silage", "grain"]})
+    series = pd.DataFrame({"field_id": ["1"], "year": [2021],
+                           "date": pd.to_datetime(["2021-10-10"]),
+                           "ndvi": [0.8], "ndmi": [0.3], "ndti": [0.1], "valid_frac": [1.]})
+    class NoEvidenceModel:
+        def predict_proba(self, _):
+            raise AssertionError("no assessable fields should reach the model")
+    result = evaluate.earliness(NoEvidenceModel(), labels, series, ["09-01", "11-01"])
+    assert result["field_years"].tolist() == [2, 2]
+    assert result["not_assessable"].tolist() == [2, 2]
+    assert result["FN"].tolist() == [1, 1]
+    assert result["TN"].tolist() == [1, 1]

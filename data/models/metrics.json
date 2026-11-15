@@ -1,5 +1,5 @@
 {
- "built_utc": "2026-11-15T03:11Z",
+ "built_utc": "2026-11-15T03:39Z",
  "forecast_year": 2026,
  "us_forecast": {
   "silage": 6314600.0,
@@ -14,6 +14,10 @@
   "grain_hi90": 90124300.0,
   "silage_method": "reversion_only",
   "grain_method": "sum"
+ },
+ "forecast_scope": {
+  "silage": 48,
+  "grain": 41
  },
  "state_model": {
   "asof": "nov",
@@ -175,11 +179,15 @@
   "train": {
    "region": "Quebec declared parcels",
    "field_years": 318,
+   "years": [
+    2023
+   ],
    "silage": 138
   },
   "test": {
-   "region": "Maryland (organizer labels)",
+   "region": "Maryland research-farm proxy labels",
    "field_years": 44,
+   "unique_fields": 34,
    "silage": 12,
    "not_assessable": 0
   },
@@ -213,7 +221,7 @@
   },
   "intervals_90": {
    "silage_precision": [
-    0.455,
+    0.462,
     0.857
    ],
    "silage_recall": [
@@ -221,18 +229,21 @@
     1.0
    ],
    "false_positive_rate": [
-    0.061,
-    0.276
+    0.059,
+    0.28
    ],
    "accuracy": [
-    0.75,
-    0.932
+    0.744,
+    0.929
    ]
   },
-  "response_seconds_per_field": 0.0147,
-  "fit_seconds": 0.799,
+  "interval_method": "percentile bootstrap by field ID, keeping repeated years together",
+  "response_seconds_per_field": 0.0196,
+  "fit_seconds": 1.64,
   "caveats": [
-   "44 test field-years on one farm: intervals are wide",
+   "test field-years cover one farm: field-cluster intervals do not capture regional transfer uncertainty",
+   "unassessable fields count as grain for scoring only; no observed harvest is implied",
+   "early drops are provisional; feature availability does not confirm harvest",
    "response time excludes the imagery download"
   ]
  }
