@@ -9,3 +9,4 @@
 - 2026-11-15T00:49Z delivered: T-cc-varun-4 official statistics and baselines. Known gap: the kit has no state rows for 2012, 2017, 2022. Next: Quebec labeled parcels and Sentinel-2 series
 - 2026-11-15T00:50Z claim T-cc-varun-5 ttl=90m
 - 2026-11-15T01:36Z delivered: T-cc-varun-5. Next: run kernelag.field_model (train Quebec, test Maryland) once the Quebec cell and the 2021 and 2022 Maryland series finish pulling
+- 2026-11-15T01:55Z result (run on Keeboh by Varun, files in /workspace/data/models/): field model trained on one Quebec cell (318 parcels, 2023), tested on the 44 Maryland field-years it never saw: silage precision 0.667 (10 of 15), recall 0.833 (10 of 12), accuracy 0.841 against 0.727 for always grain. Quebec held-out blocks: accuracy 0.704. Maryland series pull took 58 s for 6 cell-years on Keeboh. Next: more Quebec cells for training, then state sampling
