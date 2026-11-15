@@ -33,3 +33,4 @@ fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.
 bb55587	0.859322	1.0000	discard	[multi] gated rule: peak date relative to region-year median: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
 26f61be	0.859322	1.0000	keep	[multi] simplify: drop unused relative-winter feature and precision gate: barc 1.0000 q2b 1.0000 b2q 0.7186 qloco 0.7186
 8ac6bf3	0.860137	0.9565	keep	[multi] drop band 80/20 -> 75/25: barc 0.9565 q2b 1.0000 b2q 0.7440 qloco 0.7400
+257c72e	0.859322	1.0000	keep	[multi] correction: 8ac6bf3 reverted by hand (noise-level gain, loses official BARC 1.00); back to 80/20
