@@ -20,3 +20,4 @@ f9dd43f	0.800000	0.8333	discard	min clear-pixel share 0.4 -> 0.2
 2663faf	1.000000	1.0000	keep	simplify: drop summer peak window, use season-wide NDVI max
 449a901	0.909091	0.9167	discard	simplify (ablation): drop rule only, regreen rule off
 9d7545d	0.956522	0.9583	discard	simplify: amplitude low = season-wide NDVI min (no spring window)
+fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.719 qloco 0.742
