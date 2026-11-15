@@ -18,3 +18,4 @@
 - 2026-11-15T14:32Z claim T-cc-daniel-8 ttl=90m
 - 2026-11-15T14:56Z delivered: T-cc-daniel-8 (6fd5d64, 3abc65f, 065a7d5, 5492520). All candidate series, FSA update and test_models experiments on main; 7 cache files over 30 MB in test_models/variations/sat_full stay local (manifest rows say local only)
 - 2026-11-15T14:58Z claim T-cc-daniel-board ttl=90m
+- 2026-11-15T15:00Z delivered: T-cc-daniel-board board export on main; cc-raz must add catalog entries and the headline flag (handoff 20261115T1454Z) for the KPI tiles to show A-G9 and B-S6

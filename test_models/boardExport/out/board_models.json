@@ -1,0 +1,296 @@
+{
+ "A-G1": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "Acres certified to FSA for grain x last year's NASS/FSA grain ratio.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-G2": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "FSA all-corn planted x last year's NASS grain / FSA planted.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-G3": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "Like A-G1 with the median NASS/FSA ratio of the last three years. Selected Tier A grain.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-G4": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "weather",
+   "insurance"
+  ],
+  "description": "A-G1 corrected by drought and insured losses.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-G5": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "Ratio against last year's FSA file from the same point in the season.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-G9": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "Headline grain. A-G3's state split, scaled to one national FSA x NASS/FSA ratio total. Passes the 2 SE rule vs A-G3 (not 3 SE). Ties NASS's November forecast (1.69% vs 1.66% state, 2017-24).",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S1": {
+  "signals": [
+   "NASS history"
+  ],
+  "description": "Last year's acres pulled toward the 3-year average.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S2": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "FSA's silage change where FSA captures >= 75% of silage; A-S1 elsewhere.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S3": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "(FSA planted - our grain) x last year's silage share of non-grain, blended with A-S1. Selected by the pre-registered rule.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S4": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "weather",
+   "insurance"
+  ],
+  "description": "A-S1 adjusted by drought, insured losses and FSA changes.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S5": {
+  "signals": [
+   "FSA",
+   "NASS history"
+  ],
+  "description": "Change in FSA's silage share applied to last year.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S6": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "weather",
+   "insurance"
+  ],
+  "description": "A-S2 in high-coverage states, A-S4 elsewhere.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "A-S7": {
+  "signals": [
+   "NASS history",
+   "weather"
+  ],
+  "description": "Drought scenario, not the headline. Smoothed state level (EWMA in logs) + drought chopping: gamma x max(0, D2+ share - 0.10) x last year's grain acres. Tier A twin of smoothed_chopping; scored post hoc.",
+  "method": "rule (no fitting)",
+  "tier": "A"
+ },
+ "B-S6": {
+  "signals": [
+   "NASS history",
+   "NASS current year",
+   "weather"
+  ],
+  "description": "Headline silage. Smoothed state level (EWMA in logs) + drought chopping from NASS's in-season yield shortfall x last year's final grain acres. Uses NASS's yield forecast, never its acreage forecast. Ties the Tier C smoothed_chopping model.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-G0": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "NASS planted x last year's grain share.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-G1": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "NASS planted x this year's FSA grain share x last year's correction.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-G2": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "insurance"
+  ],
+  "description": "Ridge on FSA share change, yield shock, drought, condition, losses.",
+  "method": "ridge regression",
+  "tier": "B"
+ },
+ "B-G3": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "insurance"
+  ],
+  "description": "Monotone boosted trees on the B-G2 inputs.",
+  "method": "gradient boosting",
+  "tier": "B"
+ },
+ "B-G4": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "economy"
+  ],
+  "description": "Daniel's GBT without NASS's grain forecast (reference).",
+  "method": "gradient boosting",
+  "tier": "B"
+ },
+ "B-G5": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "B-G1 with the median correction of the last three years.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-G6": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "insurance"
+  ],
+  "description": "B-G1 corrected by stress signals.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-G7": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "Geometric mean of B-G5 and A-G3. Selected Tier B grain.",
+  "method": "ensemble",
+  "tier": "B"
+ },
+ "B-S0": {
+  "signals": [
+   "NASS history"
+  ],
+  "description": "Reversion, same as A-S1.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-S1": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "Reversion + planted change and FSA non-grain share change.",
+  "method": "ridge regression",
+  "tier": "B"
+ },
+ "B-S2": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "insurance"
+  ],
+  "description": "Reversion + yield shock, drought, condition, insured losses.",
+  "method": "ridge regression",
+  "tier": "B"
+ },
+ "B-S3": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "economy"
+  ],
+  "description": "Reversion + milk-cow change and FSA silage change.",
+  "method": "ridge regression",
+  "tier": "B"
+ },
+ "B-S4": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year",
+   "weather",
+   "economy",
+   "insurance"
+  ],
+  "description": "Monotone boosted trees on the B-S2 and B-S3 inputs.",
+  "method": "gradient boosting",
+  "tier": "B"
+ },
+ "B-S5": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "NASS planted - Tier B grain, x last year's silage share.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ },
+ "B-S5b": {
+  "signals": [
+   "FSA",
+   "NASS history",
+   "NASS current year"
+  ],
+  "description": "B-S5 with FSA-scaled planted where NASS has only March figures. Selected Tier B silage.",
+  "method": "rule (no fitting)",
+  "tier": "B"
+ }
+}
