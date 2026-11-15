@@ -137,3 +137,16 @@ Tried and dropped:
 - A 75/25 drop band. It raised Quebec to 0.74 but cost a BARC field. That's within noise, and it loses the official 1.00.
 
 A logistic regression on 8 greenness and residue signals scores 0.55–0.58 in Quebec, below the drop clock alone (0.72). The roughly 55 Quebec silage parcels still missed dry down like grain; telling them apart needs new information, not more rules.
+
+## VLM caveman (Nemotron reads the pictures), `vlm_caveman.py`
+
+For each of the 44 BARC field-years: up to 20 clear true-colour Sentinel-2 pictures from June to November (797 in all), cut to the field with a yellow outline and laid out as one dated sheet. `nvidia/nemotron-3.5-super-vl-120b-a12b` labeled every date 0 / 1 / 2 (no crop yet / crop standing / harvested), with reasoning off. All 44 calls answered, 6–15 s each. The caveman rules then used the labels: harvest day, harvest day relative to that year's median, and days from the last "standing" picture to the first "harvested" one.
+
+| Rule on Nemotron labels (BARC, leave one year out) | Silage F1 | Accuracy | TP / FP / FN / TN |
+|---|---|---|---|
+| harvest day < cut | 0.320 | 0.614 | 4 / 9 / 8 / 23 |
+| harvest day relative to the year < cut | 0.333 | 0.455 | 6 / 18 / 6 / 14 |
+| days from standing to harvested < cut | 0.286 | 0.318 | 6 / 24 / 6 / 8 |
+| (NDVI caveman, for comparison) | 1.000 | 1.000 | 12 / 0 / 0 / 32 |
+
+**Why it fails:** Nemotron's "harvested" date is close to the NDVI bare-soil date for grain (median 6 days later) but a median 17.5 days late for silage. At 10 m a field is about 25 × 25 pixels, and fresh silage stubble looks like drying corn. The early cut, which is the whole signal, gets lost. The labels are cached in `~/.cache/autoresearch-silage/vlm/`.
