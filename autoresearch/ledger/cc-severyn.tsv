@@ -1,3 +1,4 @@
 commit	val_f1	balanced_acc	status	description
 c4d67f2	0.500000	0.6406	keep	baseline caveman: season_len = harvest(50% drop) - greenup(50% rise), 1 threshold
 d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore spring cover crop)
+09192d5	0.818182	0.8594	keep	rule on drop_days (80%->20% amplitude after summer peak) instead of season length
