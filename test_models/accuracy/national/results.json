@@ -1,0 +1,224 @@
+{
+  "target": "national silage acreage absolute percentage error <= 2%",
+  "states": 48,
+  "candidates": [
+    "persistence",
+    "mean3",
+    "dairy_divided_by_yield",
+    "dairy_half_yield",
+    "non_grain_other3",
+    "non_grain_other5",
+    "ridge_base",
+    "ridge_weather",
+    "ridge_non_grain",
+    "signed_weather",
+    "ensemble_base_weather",
+    "ensemble_physical"
+  ],
+  "selected_on_2012_2020": "ridge_weather",
+  "selection_rule": "minimum development-year mean absolute US error; fixed slate order breaks ties",
+  "minimum_earlier_fit_years": 8,
+  "maximum_outcome_year_read": 2024,
+  "development_years": [
+    2012,
+    2020
+  ],
+  "later_validation_years": [
+    2021,
+    2024
+  ],
+  "results": {
+    "development": {
+      "persistence": {
+        "years": 9,
+        "mean_abs_error_pct": 6.35230226,
+        "max_abs_error_pct": 20.00269578,
+        "years_at_or_below_2pct": 4,
+        "mean_signed_error_pct": -0.63799822
+      },
+      "mean3": {
+        "years": 9,
+        "mean_abs_error_pct": 5.37221755,
+        "max_abs_error_pct": 23.1387878,
+        "years_at_or_below_2pct": 3,
+        "mean_signed_error_pct": -2.04372799
+      },
+      "dairy_divided_by_yield": {
+        "years": 9,
+        "mean_abs_error_pct": 6.09318024,
+        "max_abs_error_pct": 14.58819313,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -4.44289388
+      },
+      "dairy_half_yield": {
+        "years": 9,
+        "mean_abs_error_pct": 5.93933269,
+        "max_abs_error_pct": 13.48568625,
+        "years_at_or_below_2pct": 2,
+        "mean_signed_error_pct": -2.52574587
+      },
+      "non_grain_other3": {
+        "years": 9,
+        "mean_abs_error_pct": 6.19635264,
+        "max_abs_error_pct": 13.37138164,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -1.30477021
+      },
+      "non_grain_other5": {
+        "years": 9,
+        "mean_abs_error_pct": 7.42772846,
+        "max_abs_error_pct": 11.52218087,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -1.39077054
+      },
+      "ridge_base": {
+        "years": 9,
+        "mean_abs_error_pct": 5.71182426,
+        "max_abs_error_pct": 18.49099609,
+        "years_at_or_below_2pct": 4,
+        "mean_signed_error_pct": -1.6402697
+      },
+      "ridge_weather": {
+        "years": 9,
+        "mean_abs_error_pct": 4.67512651,
+        "max_abs_error_pct": 13.36113851,
+        "years_at_or_below_2pct": 4,
+        "mean_signed_error_pct": -2.01370426
+      },
+      "ridge_non_grain": {
+        "years": 9,
+        "mean_abs_error_pct": 4.95543341,
+        "max_abs_error_pct": 18.80127687,
+        "years_at_or_below_2pct": 3,
+        "mean_signed_error_pct": -2.29579768
+      },
+      "signed_weather": {
+        "years": 9,
+        "mean_abs_error_pct": 5.114317,
+        "max_abs_error_pct": 13.79568289,
+        "years_at_or_below_2pct": 2,
+        "mean_signed_error_pct": -2.48500148
+      },
+      "ensemble_base_weather": {
+        "years": 9,
+        "mean_abs_error_pct": 4.9866493,
+        "max_abs_error_pct": 15.9260673,
+        "years_at_or_below_2pct": 4,
+        "mean_signed_error_pct": -1.82698698
+      },
+      "ensemble_physical": {
+        "years": 9,
+        "mean_abs_error_pct": 4.8919779,
+        "max_abs_error_pct": 9.45271069,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -1.48950477
+      }
+    },
+    "later_validation": {
+      "persistence": {
+        "years": 4,
+        "mean_abs_error_pct": 4.41414889,
+        "max_abs_error_pct": 6.0362173,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": 1.49486703
+      },
+      "mean3": {
+        "years": 4,
+        "mean_abs_error_pct": 3.51768253,
+        "max_abs_error_pct": 6.13286075,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": 0.78436668
+      },
+      "dairy_divided_by_yield": {
+        "years": 4,
+        "mean_abs_error_pct": 3.38957404,
+        "max_abs_error_pct": 5.05969433,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -0.18300983
+      },
+      "dairy_half_yield": {
+        "years": 4,
+        "mean_abs_error_pct": 3.55764115,
+        "max_abs_error_pct": 5.79877367,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": 0.65825432
+      },
+      "non_grain_other3": {
+        "years": 4,
+        "mean_abs_error_pct": 5.75335448,
+        "max_abs_error_pct": 11.12163082,
+        "years_at_or_below_2pct": 2,
+        "mean_signed_error_pct": -5.7063835
+      },
+      "non_grain_other5": {
+        "years": 4,
+        "mean_abs_error_pct": 5.80398324,
+        "max_abs_error_pct": 9.68416122,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": -3.57803486
+      },
+      "ridge_base": {
+        "years": 4,
+        "mean_abs_error_pct": 3.90316291,
+        "max_abs_error_pct": 5.58071621,
+        "years_at_or_below_2pct": 1,
+        "mean_signed_error_pct": 1.92228686
+      },
+      "ridge_weather": {
+        "years": 4,
+        "mean_abs_error_pct": 4.34715309,
+        "max_abs_error_pct": 5.36524143,
+        "years_at_or_below_2pct": 0,
+        "mean_signed_error_pct": 2.17656503
+      },
+      "ridge_non_grain": {
+        "years": 4,
+        "mean_abs_error_pct": 2.74902997,
+        "max_abs_error_pct": 5.58470212,
+        "years_at_or_below_2pct": 2,
+        "mean_signed_error_pct": 0.63137453
+      },
+      "signed_weather": {
+        "years": 4,
+        "mean_abs_error_pct": 4.6906299,
+        "max_abs_error_pct": 6.35796065,
+        "years_at_or_below_2pct": 0,
+        "mean_signed_error_pct": 2.06505642
+      },
+      "ensemble_base_weather": {
+        "years": 4,
+        "mean_abs_error_pct": 4.125158,
+        "max_abs_error_pct": 5.35138367,
+        "years_at_or_below_2pct": 0,
+        "mean_signed_error_pct": 2.04942594
+      },
+      "ensemble_physical": {
+        "years": 4,
+        "mean_abs_error_pct": 2.47913237,
+        "max_abs_error_pct": 7.32710617,
+        "years_at_or_below_2pct": 3,
+        "mean_signed_error_pct": -1.18442071
+      }
+    }
+  },
+  "caveats": [
+    "All evaluations are retrospective: the team previously inspected outcomes through 2024",
+    "The later 2021\u20132024 partition is excluded from this slate's candidate selection, not globally untouched",
+    "No 2025 or later truth is used for fitting, tuning or selection",
+    "Historical planted_asof may contain final-vintage stand-ins before 2018; not a fully vintage-correct replay",
+    "The current November panel may include later revisions to historical contextual data",
+    "Grain yield is a proxy for silage biomass yield; dairy inventory omits beef and feed substitutes",
+    "Other/abandoned acres are inferred from prior final planted, grain and silage totals",
+    "Pre-2012 grain residual uses last year's grain share of current planted acres; observed grain-asof is absent",
+    "Context averages use prior silage-acre weights over available states; feature coverage is exported",
+    "Full national outcome scope stays 48 states for every year and candidate",
+    "A mean error below 2% would not imply every year or state is within 2%"
+  ],
+  "source_sha256": "b9e57b34ec0a23da9cdd73eb82f8c58bd7423b794bbc1be7ad3d27dc3eb98a6d",
+  "source": "test_models/model/out/panel_nov.csv",
+  "versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "scipy": "1.17.1"
+  }
+}

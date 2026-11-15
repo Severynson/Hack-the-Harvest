@@ -1,0 +1,224 @@
+{
+  "signature": {
+    "source_sha256": "0f068020547687e498c4cf14dd4771ff42f126300edf3db0525ff9458e29f450",
+    "code_sha256": "fa415dd096ee09767c0a68095e7a2dbd6dbea81a259a613d1eee6b3b37ef83e5",
+    "incumbent_metrics_sha256": "cadcd23c44df43ed8378602af201afb0e71c5d127432dfcf8e19df7e17d96b1a",
+    "incumbent_backtest_sha256": "685fca103cd6f0b89f6d59e769eade169c14cef99c761651fb642bcd9e6ebfd1",
+    "versions": {
+      "python": "3.11.18",
+      "numpy": "2.4.6",
+      "pandas": "3.1.1",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.1",
+      "xgboost": "3.2.0"
+    }
+  },
+  "slate": {
+    "same_as_last_year": {
+      "kind": "persistence",
+      "features": []
+    },
+    "ridge_reversion": {
+      "kind": "ridge",
+      "features": [
+        "reversion"
+      ],
+      "alpha": 100.0
+    },
+    "ridge_core": {
+      "kind": "ridge",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock"
+      ],
+      "alpha": 100.0
+    },
+    "ridge_context": {
+      "kind": "ridge",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock",
+        "d_cows",
+        "d_drought",
+        "d_poor",
+        "d_pasture",
+        "d_hay_stocks",
+        "d_hay_price",
+        "d_milk_price",
+        "rain_anomaly",
+        "gdd_anomaly",
+        "hot_days",
+        "early_freeze",
+        "late_planting",
+        "maturity",
+        "drought_level",
+        "poor_level",
+        "log_last_acres",
+        "last_silage_share",
+        "cow_density",
+        "calendar_year"
+      ],
+      "alpha": 100.0
+    },
+    "lad_core": {
+      "kind": "lad",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock"
+      ],
+      "alpha": 0.001
+    },
+    "huber_context": {
+      "kind": "huber",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock",
+        "d_cows",
+        "d_drought",
+        "d_poor",
+        "d_pasture",
+        "d_hay_stocks",
+        "d_hay_price",
+        "d_milk_price",
+        "rain_anomaly",
+        "gdd_anomaly",
+        "hot_days",
+        "early_freeze",
+        "late_planting",
+        "maturity",
+        "drought_level",
+        "poor_level",
+        "log_last_acres",
+        "last_silage_share",
+        "cow_density",
+        "calendar_year"
+      ],
+      "alpha": 1.0,
+      "epsilon": 1.35
+    },
+    "ridge_partial_pool": {
+      "kind": "partial_pool",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock"
+      ],
+      "alpha": 100.0,
+      "shrink_years": 10
+    },
+    "state_trend": {
+      "kind": "trend",
+      "features": [
+        "reversion"
+      ],
+      "alpha": 100.0,
+      "lookback": 5,
+      "trend_weight": 0.25
+    },
+    "xgb_depth2": {
+      "kind": "xgb",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock",
+        "d_cows",
+        "d_drought",
+        "d_poor",
+        "d_pasture",
+        "d_hay_stocks",
+        "d_hay_price",
+        "d_milk_price",
+        "rain_anomaly",
+        "gdd_anomaly",
+        "hot_days",
+        "early_freeze",
+        "late_planting",
+        "maturity",
+        "drought_level",
+        "poor_level",
+        "log_last_acres",
+        "last_silage_share",
+        "cow_density",
+        "calendar_year"
+      ],
+      "max_depth": 2,
+      "n_estimators": 120,
+      "min_child_weight": 30
+    },
+    "xgb_depth3": {
+      "kind": "xgb",
+      "features": [
+        "reversion",
+        "d_planted",
+        "d_not_grain",
+        "yield_shock",
+        "d_cows",
+        "d_drought",
+        "d_poor",
+        "d_pasture",
+        "d_hay_stocks",
+        "d_hay_price",
+        "d_milk_price",
+        "rain_anomaly",
+        "gdd_anomaly",
+        "hot_days",
+        "early_freeze",
+        "late_planting",
+        "maturity",
+        "drought_level",
+        "poor_level",
+        "log_last_acres",
+        "last_silage_share",
+        "cow_density",
+        "calendar_year"
+      ],
+      "max_depth": 3,
+      "n_estimators": 160,
+      "min_child_weight": 40
+    },
+    "fixed_ensemble": {
+      "kind": "ensemble",
+      "members": [
+        "ridge_core",
+        "lad_core",
+        "xgb_depth2"
+      ],
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    }
+  },
+  "development_winner": "lad_core",
+  "development_years": [
+    2012,
+    2020
+  ],
+  "reserve_years": [
+    2021,
+    2024
+  ],
+  "caveats": [
+    "Retrospective replay: historical outcomes have already been inspected by the team; reserve is not pristine.",
+    "Fixed 11-candidate slate; 2012\u20132020 development chooses the displayed development winner; 2021\u20132024 is summarized separately.",
+    "No 2025+ outcomes are fitted, scored, or used in selection. Reserve outcomes enter training only in later forecast years.",
+    "Current-year final silage, final grain and final yield are never predictors; earlier calendar-year final values supply lags.",
+    "The source panel substitutes revised final planted acres before 2018 where historical in-season acres are absent; this is not a vintage-exact replay.",
+    "Other source files and lagged finals are current revised vintages. This compares model methods on an existing panel, not historical publication snapshots.",
+    "Every available outcome state is retained. A missing lag uses the most recent earlier observed silage; if no earlier value exists, it uses zero and is flagged.",
+    "No state satellite feature is present in this source panel. These experiments model silage only and make no grain improvement claim.",
+    "Candidate hyperparameters are fixed; no search, reserve-driven retuning, or selection on national total error."
+  ],
+  "metric_definition": "State WAPE = 100 * sum_state(abs(predicted-actual)) / sum_state(actual); US error uses signed sum before taking absolute value."
+}

@@ -37,11 +37,40 @@ from kernelag.field_model import (
 )
 from kernelag.paths import data_dir, record_in_manifest
 
-RATES = ["silage_precision", "silage_recall", "false_positive_rate", "accuracy"]
+RATES = ["silage_precision", "silage_recall", "false_positive_rate", "accuracy", "balanced_accuracy", "silage_f1"]
 ASOF_DATES = ["09-01", "09-15", "10-01", "10-15", "11-01", "11-15", "12-31"]   # month-day
 BOOTSTRAP_DRAWS = 2000
 INTERVAL = (0.05, 0.95)
 TIMING_REPEATS = 5
+
+
+def extended_scores(truth: np.ndarray, call: np.ndarray) -> dict:
+    """Binary benchmark scores, with both class recalls weighted equally for balanced accuracy."""
+    result = scores(truth, call)
+    tp, fp, fn, tn = (result[key] for key in ["TP", "FP", "FN", "TN"])
+    result["silage_f1"] = round(2 * tp / (2 * tp + fp + fn), 3) if 2 * tp + fp + fn else float("nan")
+    result["balanced_accuracy"] = (round((tp / (tp + fn) + tn / (tn + fp)) / 2, 3)
+                                   if tp + fn and tn + fp else float("nan"))
+    return result
+
+
+def selective_summary(truth: np.ndarray, probability: np.ndarray) -> dict:
+    """Product decisions abstain on missing evidence or a fixed, untuned 40–60 score band."""
+    finite = np.isfinite(probability)
+    ambiguous = finite & (probability >= 0.4) & (probability <= 0.6)
+    decisive = finite & ~ambiguous
+    call = (probability[decisive] > 0.6).astype(int)
+    names = np.full(len(truth), "not assessable", dtype=object)
+    names[ambiguous] = "uncertain"
+    names[decisive] = np.where(call == 1, "silage-like", "grain-like")
+    selected = extended_scores(truth[decisive], call)
+    return {"policy": "Missing evidence abstains; uncalibrated scores 40–60 abstain; band not tuned on Maryland",
+            "counts": {name: int((names == name).sum()) for name in
+                       ["silage-like", "grain-like", "uncertain", "not assessable"]},
+            "coverage": round(float(decisive.mean()), 3) if len(truth) else None,
+            "rates_on_decisive_fields": selected,
+            "complete_roster_silage_recall": round(selected["TP"] / int(truth.sum()), 3) if truth.sum() else None,
+            "calls": names.tolist()}
 
 
 def bootstrap_intervals(truth: np.ndarray, call: np.ndarray, draws: int = BOOTSTRAP_DRAWS,
@@ -49,11 +78,13 @@ def bootstrap_intervals(truth: np.ndarray, call: np.ndarray, draws: int = BOOTST
     """90% intervals; when groups are provided, resample whole fields across their years."""
     rng = np.random.default_rng(seed)
     samples = {rate: [] for rate in RATES}
+    if not len(truth):
+        return {rate: [None, None] for rate in RATES}
     clusters = None if groups is None else [np.flatnonzero(groups == g) for g in np.unique(groups)]
     for _ in range(draws):
         rows = (rng.integers(0, len(truth), len(truth)) if clusters is None else
                 np.concatenate([clusters[i] for i in rng.integers(0, len(clusters), len(clusters))]))
-        result = scores(truth[rows], call[rows])
+        result = extended_scores(truth[rows], call[rows])
         for rate in RATES:
             if result[rate] == result[rate]:
                 samples[rate].append(result[rate])
@@ -91,11 +122,17 @@ def earliness(model, labels: pd.DataFrame, series: pd.DataFrame, dates: list[str
     rows = []
     for month_day in dates:
         table = evaluation_table(labels, cut_off(series, month_day))
-        _, call = predict_silage(model, table)
-        result = scores(table["is_silage"].to_numpy(), call)
+        probability, call = predict_silage(model, table)
+        truth = table["is_silage"].to_numpy()
+        result = extended_scores(truth, call)
+        operational = selective_summary(truth, probability)
         rows.append({"asof": month_day, "field_years": len(table),
                      "assessable_share": round(float(table["assessable"].mean()), 3),
                      "not_assessable": int((~table["assessable"]).sum()),
+                     "uncertain": operational["counts"]["uncertain"],
+                     "decisive_share": operational["coverage"],
+                     "selective_precision": operational["rates_on_decisive_fields"]["silage_precision"],
+                     "selective_roster_recall": operational["complete_roster_silage_recall"],
                      **{key: result[key] for key in ["TP", "FP", "FN", "TN", *RATES]}})
     return pd.DataFrame(rows)
 
@@ -131,7 +168,7 @@ def main() -> None:
     test_series = load_series(data / args.test_series)
     test = evaluation_table(test_labels, test_series)
     truth = test["is_silage"].to_numpy()
-    _, call = predict_silage(model, test)
+    probability, call = predict_silage(model, test)
 
     by_date = earliness(model, test_labels, test_series)
     result = {
@@ -141,8 +178,10 @@ def main() -> None:
         "test": {"region": "Maryland research-farm proxy labels", "field_years": len(test),
                  "unique_fields": test["field_id"].nunique(),
                  "silage": int(truth.sum()), "not_assessable": int((~test["assessable"]).sum())},
-        "rates": scores(truth, call),
-        "always_grain": scores(truth, np.zeros(len(test), int)),
+        "rates": extended_scores(truth, call),
+        "scoring_policy": "Legacy binary benchmark only: unassessable rows count as grain; product decisions abstain",
+        "selective": selective_summary(truth, probability),
+        "always_grain": extended_scores(truth, np.zeros(len(test), int)),
         "intervals_90": bootstrap_intervals(truth, call, groups=test["field_id"].to_numpy()),
         "interval_method": "percentile bootstrap by field ID, keeping repeated years together",
         "response_seconds_per_field": round(response_time(model, test_labels, test_series), 4),

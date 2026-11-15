@@ -1,6 +1,6 @@
 # Kernel: five-minute presentation
 
-Generated from `data/models/metrics.json` at 2026-11-15T03:39Z. Open `report/index.html` offline.
+Generated from `data/models/metrics.json` at 2026-11-15T03:54Z. Open `report/index.html` offline.
 The talk follows the seven sections from top to bottom. Acreage error is WAPE unless stated otherwise.
 
 ## 0:00–0:40 — The answer (mission)
@@ -48,6 +48,10 @@ An early state replay requires its own dated satellite aggregate; it cannot reus
 
 ## 3:05–4:10 — The field signal (innovation and evidence)
 
+Open `report/fields.html`, choose one real field, and show its NDVI/NDMI curves and provisional cut bracket.
+Explain that these satellite features feed the field classifier. Without the state sample aggregate,
+they do not yet drive the headline acreage forecast. Return to the acreage report.
+
 The six features describe drop size, speed, fade time, greenness and moisture before the cut, and residue after it.
 We fit on 318 Quebec parcels and test on
 44 Maryland research-farm field-years from
@@ -56,8 +60,10 @@ Silage precision is 0.667, recall
 0.833, false positive rate
 0.156. The confusion matrix is
 TP=10, FP=5, FN=2, TN=27.
+Balanced accuracy is 0.839; silage F1 is
+0.741. Operational calls can abstain; scores are not calibrated probabilities.
 Confidence intervals resample whole fields, keeping their repeated years together.
-Feature extraction plus prediction takes 0.0196 seconds per field
+Feature extraction plus prediction takes 0.0145 seconds per field
 on this machine; imagery downloading is excluded.
 
 ## 4:10–5:00 — Limits and next steps (feasibility)
