@@ -29,7 +29,8 @@ SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolat
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
-RULES = ["drop_days", "late_rel_neg"]  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
+RULES = ["drop_days", "late_rel_neg"]
+MIN_RULE_PRECISION = 0.7   # a secondary rule may only use cut-offs where >= 70% of the fields it adds are silage  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
 
 # ---------------------------------------------------------------------------
 # Features
@@ -105,7 +106,13 @@ def fit_threshold(x, y, already=None):
     cands = np.unique(xf[np.isfinite(xf)])
     cands = (cands[:-1] + cands[1:]) / 2 if len(cands) > 1 else cands
     cands = np.concatenate([[-np.inf], cands])
-    scores = np.array([f1(y, (already | (xf < c)).astype(int)) for c in cands])
+    def score(c):
+        new = ~already & (xf < c)
+        if already.any() and new.any() and y[new].mean() < MIN_RULE_PRECISION:
+            return -1.0  # this cut adds mostly grain: not allowed
+        return f1(y, (already | (xf < c)).astype(int))
+
+    scores = np.array([score(c) for c in cands])
     best = np.flatnonzero(scores == scores.max())
     return float(np.median(cands[best])) if 0 not in best else -np.inf
 
