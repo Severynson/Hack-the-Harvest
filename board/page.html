@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kernel · model board</title>
+<style>
+:root{--bg:#0e1116;--panel:#151a22;--line:#262d38;--text:#e6e9ee;--muted:#8b95a5;--accent:#e0b04a;--warn:#c98a4b;--focus:#5fa8d3;
+--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--s7:#9085e9;--s8:#e66767;
+--sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:13px/1.5 var(--sans)}
+header{display:flex;align-items:baseline;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header h1{font-size:20px;margin:0;font-weight:600}header .muted{font-size:12px}
+nav{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--line)}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:12px;font:inherit;cursor:pointer}
+nav button[aria-selected=true]{color:var(--text);border-color:var(--accent)}
+button:focus-visible,select:focus-visible,input:focus-visible,tr:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+main{padding:20px 24px;max-width:1400px;margin:0 auto}section[hidden]{display:none}
+h2{font-size:15px;margin:0 0 8px;font-weight:600}.muted{color:var(--muted)}.note{color:var(--muted);font-size:12px;max-width:900px}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--muted);padding:6px 12px;font:inherit;cursor:pointer}.seg button[aria-pressed=true]{background:var(--line);color:var(--text)}
+.chip{border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:none;color:var(--muted);font:inherit;font-size:12px;cursor:pointer}
+.chip[aria-pressed=true]{color:var(--text);border-color:var(--muted)}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 6px;margin:1px 2px 1px 0;font-size:11px;color:var(--muted);white-space:nowrap}
+input,select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
+button.act{background:var(--accent);color:#111;border:0;border-radius:6px;padding:6px 12px;font:inherit;font-weight:600;cursor:pointer}
+button.ghost{background:none;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+table{border-collapse:collapse;width:100%}th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px;cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:0;background:var(--bg)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr{cursor:pointer}tbody tr:hover{background:var(--panel)}tr.sel td:first-child{box-shadow:inset 2px 0 var(--accent)}
+.best{color:var(--accent);font-weight:600}.mono{font-family:var(--mono)}
+.callout{border-left:2px solid var(--warn);padding:4px 12px;margin:0 0 12px;color:var(--muted);font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:16px}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--panel);border-left:1px solid var(--line);padding:20px;overflow:auto;box-shadow:-8px 0 24px rgba(0,0,0,.4)}
+.drawer[hidden]{display:none}.x{float:right}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 10px;font-size:12px}.legend span{display:inline-flex;align-items:center;gap:6px}
+svg text{fill:var(--muted);font:11px var(--mono)}svg .grid{stroke:var(--line)}svg .zero{stroke:var(--muted)}
+.tip{position:fixed;pointer-events:none;background:#0b0d11;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12px;z-index:10}
+.tip[hidden]{display:none}.tip td{border:0;padding:1px 6px}
+.check{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;overflow:auto;font:12px/1.5 var(--mono)}
+.scroll{max-height:70vh;overflow:auto;border:1px solid var(--line);border-radius:6px}
+</style></head><body>
+<header><h1>Kernel · model board</h1><span class="muted" id="summary">Loading…</span><span style="flex:1"></span>
+<button class="ghost" id="refresh" title="Reread every model folder">Refresh</button></header>
+<nav role="tablist" id="tabs"></nav>
+<main>
+<div id="problems"></div>
+
+<section id="leader">
+ <div class="bar">
+  <span class="seg" id="target"></span>
+  <label>Years <select id="y0"></select> to <select id="y1"></select></label>
+  <span id="fams"></span>
+  <select id="src" aria-label="Folder"></select>
+  <input id="q" placeholder="Search models" aria-label="Search models">
+ </div>
+ <p class="note">Lower is better. <b>State error</b>: share of acres put in the wrong state, averaged over the test years in range. <b>US error</b>: average size of the miss on the US total. Models are tested on different years, so compare rows with similar "years" counts, or narrow the year range. Tick boxes to compare models.</p>
+ <div class="scroll"><table id="lb"><thead></thead><tbody></tbody></table></div>
+</section>
+
+<section id="compare" hidden>
+ <div id="cmp-empty" class="note">Tick models on the Leaderboard to compare them here (up to 8).</div>
+ <div id="cmp-body" hidden>
+  <div class="bar"><button class="ghost" id="clear">Clear selection</button></div>
+  <div class="legend" id="legend"></div>
+  <div class="card"><h2>State error by year (%)</h2><div id="ch-state"></div></div>
+  <div class="card"><h2>US total error by year (%, signed)</h2><div id="ch-us"></div></div>
+  <div class="scroll"><table id="cmp-table"></table></div>
+ </div>
+</section>
+
+<section id="forecast" hidden>
+ <div class="bar"><span class="seg" id="ftarget"></span></div>
+ <div class="card"><h2>US total, 2026 forecast (thousand acres, 80% range where the model gives one)</h2><div id="ch-us-fc"></div></div>
+ <p class="note">A US total marked "sum" adds the model's state rows; otherwise it is the model's own US row.</p>
+ <div class="scroll"><table id="fc-table"></table></div>
+</section>
+
+<section id="field" hidden>
+ <div class="bar"><select id="feval" aria-label="Evaluated on"></select></div>
+ <p class="note">Field models label one field at a time as silage or grain from its satellite greenness series. Each folder scores on its own set of labeled fields, so only compare rows with the same "evaluated on".</p>
+ <div class="scroll"><table id="field-table"><thead></thead><tbody></tbody></table></div>
+</section>
+
+<section id="add" hidden>
+ <h2>Put a new model on the board</h2>
+ <p class="note">Any folder in the repo that holds a <span class="mono">board_backtest.csv</span> and/or <span class="mono">board_forecast.csv</span> shows up after a refresh. The easiest way to write them is one call at the end of your script:</p>
+<pre>from board.publish import publish
+
+publish("test_models/myModel/out",
+        predictions=preds,   # columns: model, target, year, state, actual, predicted
+        forecast=fc_2026,    # columns: model, target, state, predicted[, lo80, hi80]   ("US" row allowed)
+        cards={"ridge_weather": {
+            "signals": ["weather", "NASS history"],      # from: satellite, weather, economy, NASS history
+            "features": ["reversion", "d_drought", "rain_anom"],
+            "description": "Ridge on last year's change plus drought and rain."}})</pre>
+ <p class="note"><span class="mono">target</span> is <span class="mono">silage</span> or <span class="mono">grain</span>. One folder can hold many models: one row per model name. If you already have per-year errors, pass <span class="mono">backtest=</span> with columns <span class="mono">model, target, year, state_error_pct, us_error_pct</span> instead of <span class="mono">predictions=</span>. A field-level classifier writes <span class="mono">board_field.csv</span> with <span class="mono">model, evaluated_on, n_fields, silage_precision, silage_recall, silage_f1, accuracy</span>.</p>
+ <p class="note">The folders read today are listed in <span class="mono">board/sources.py</span>. Models still running are fine: the board reads whatever is on disk when you press Refresh.</p>
+</section>
+</main>
+<aside class="drawer" id="drawer" hidden aria-label="Model details"></aside>
+<div class="tip" id="tip" hidden></div>
+<script>
+const $=s=>document.querySelector(s),el=(t,p={},...k)=>{const e=Object.assign(document.createElement(t),p);k.flat().forEach(c=>c!=null&&e.append(c));return e};
+const SLOTS=["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"],SHAPES=["circle","square","triangle","diamond","circle","square","triangle","diamond"];
+const nf1=new Intl.NumberFormat("en-US",{maximumFractionDigits:1,minimumFractionDigits:1}),nf0=new Intl.NumberFormat("en-US",{maximumFractionDigits:0});
+const pct=v=>v==null||Number.isNaN(v)?"—":nf1.format(v),kac=v=>v==null?"—":nf0.format(v/1000),dash="—";
+let D,BT={},MODELS={},S={tab:"leader",target:"silage",ftarget:"silage",y0:null,y1:null,fams:new Set(),src:"",q:"",sort:"state",dir:1,sel:new Map(),feval:"",fsort:"silage_f1",fdir:-1};
+const TABS=[["leader","Leaderboard"],["compare","Compare"],["forecast","2026 forecast"],["field","Field models (satellite)"],["add","Add a model"]];
+TABS.forEach(([id,label])=>{const b=el("button",{textContent:label,role:"tab",id:"tab-"+id});b.onclick=()=>{S.tab=id;draw()};$("#tabs").append(b)});
+function seg(box,key,opts){box.replaceChildren(...opts.map(([v,l])=>{const b=el("button",{textContent:l});b.setAttribute("aria-pressed",S[key]==v);b.onclick=()=>{S[key]=v;draw()};return b}))}
+const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+
+function stats(id){const rows=(BT[id]||[]).filter(r=>r.year>=S.y0&&r.year<=S.y1);
+ const st=rows.map(r=>r.state_error_pct).filter(v=>v!=null),us=rows.map(r=>r.us_error_pct).filter(v=>v!=null);
+ let worst=null;rows.forEach(r=>{if(r.state_error_pct!=null&&(!worst||r.state_error_pct>worst.state_error_pct))worst=r});
+ return{years:rows.length,state:mean(st),us:mean(us.map(Math.abs)),bias:mean(us),worst,first:rows[0]?.year,last:rows.at(-1)?.year}}
+
+function leader(){
+ seg($("#target"),"target",[["silage","Silage"],["grain","Grain"]]);
+ const fams=$("#fams");fams.replaceChildren(...D.families.map(f=>{const b=el("button",{className:"chip",textContent:f});b.setAttribute("aria-pressed",S.fams.has(f));
+  b.onclick=()=>{S.fams.has(f)?S.fams.delete(f):S.fams.add(f);draw()};return b}));
+ const q=S.q.toLowerCase();
+ let rows=Object.values(MODELS).filter(m=>m.target==S.target&&m.has_backtest&&(!S.src||m.source==S.src)
+  &&(!S.fams.size||m.signals.some(f=>S.fams.has(f)))&&(!q||(m.model+" "+m.source+" "+(m.owner||"")+" "+m.features.join(" ")).toLowerCase().includes(q)))
+  .map(m=>({m,s:stats(m.model_id)})).filter(r=>r.s.years>0);
+ const key={state:r=>r.s.state,us:r=>r.s.us,years:r=>r.s.years,model:r=>r.m.model,source:r=>r.m.source,worst:r=>r.s.worst?.state_error_pct}[S.sort]||(r=>r.s.state);
+ rows.sort((a,b)=>{const x=key(a),y=key(b);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return-1;return(typeof x=="string"?x.localeCompare(y):x-y)*S.dir});
+ const bestState=Math.min(...rows.map(r=>r.s.state??Infinity)),bestUs=Math.min(...rows.map(r=>r.s.us??Infinity));
+ const head=[["","",""],["#","",""],["model","Model",""],["source","Folder",""],["","Owner",""],["","Signals",""],["","Method",""],["years","Years","n"],["state","State error %","n"],["us","US error %","n"],["worst","Worst year","n"],["","2026","n"]];
+ $("#lb thead").replaceChildren(el("tr",{},head.map(([k,l,c])=>{const th=el("th",{textContent:l+(S.sort==k&&k?(S.dir>0?" ↑":" ↓"):""),className:c});
+  if(k&&k!="#")th.onclick=()=>{S.dir=S.sort==k?-S.dir:1;S.sort=k;draw()};return th})));
+ $("#lb tbody").replaceChildren(...rows.map((r,i)=>{const m=r.m,s=r.s,id=m.model_id;
+  const cb=el("input",{type:"checkbox",className:"check",checked:S.sel.has(id),title:"Compare"});cb.setAttribute("aria-label","Compare "+m.model);
+  cb.onclick=e=>{e.stopPropagation();toggle(id)};
+  const tr=el("tr",{className:S.sel.has(id)?"sel":"",tabIndex:0},el("td",{},cb),el("td",{className:"n muted",textContent:i+1}),
+   el("td",{},el("b",{textContent:m.model}),m.description?el("div",{className:"note",textContent:m.description}):null),
+   el("td",{className:"muted",textContent:m.source}),el("td",{className:"muted",textContent:m.owner||dash}),
+   el("td",{},m.signals.map(f=>el("span",{className:"tag",textContent:f}))),el("td",{className:"muted",textContent:m.method}),
+   el("td",{className:"n",textContent:`${s.years} (${s.first}–${String(s.last).slice(2)})`}),
+   el("td",{className:"n"+(s.state===bestState?" best":""),textContent:pct(s.state)}),
+   el("td",{className:"n"+(s.us===bestUs?" best":""),textContent:pct(s.us)}),
+   el("td",{className:"n muted",textContent:s.worst?`${pct(s.worst.state_error_pct)} (${s.worst.year})`:dash}),
+   el("td",{className:"n",textContent:m.has_forecast?"✓":""}));
+  tr.onclick=()=>details(id);tr.onkeydown=e=>{if(e.key=="Enter")details(id)};return tr}));
+ if(!rows.length)$("#lb tbody").append(el("tr",{},el("td",{colSpan:12,className:"muted",textContent:"No models match these filters."})));
+}
+
+function toggle(id){if(S.sel.has(id))S.sel.delete(id);else{if(S.sel.size>=8){alert("Compare holds up to 8 models. Untick one first.");return}
+ const used=new Set(S.sel.values());S.sel.set(id,SLOTS.findIndex((_,i)=>!used.has(i)))}draw()}
+
+function details(id){const m=MODELS[id],d=$("#drawer"),rows=BT[id]||[];
+ const close=el("button",{className:"ghost x",textContent:"Close"});close.onclick=()=>{d.hidden=true};
+ const cmp=el("button",{className:"act",textContent:S.sel.has(id)?"Remove from compare":"Add to compare"});cmp.onclick=()=>{toggle(id);details(id)};
+ d.replaceChildren(...[close,el("h2",{textContent:m.model}),el("p",{className:"muted",textContent:`${m.target} · ${m.folder} · ${m.owner||"owner unknown"} · ${m.method}`}),
+  m.description?el("p",{textContent:m.description}):null,
+  el("p",{},m.signals.map(f=>el("span",{className:"tag",textContent:f}))),
+  el("p",{className:"note",textContent:m.features.length?"Inputs: "+m.features.join(", "):"Inputs not recorded in the folder."}),cmp,
+  rows.length?el("table",{style:"margin-top:16px"},el("tr",{},["Year","States","State error %","US error %"].map((t,i)=>el("th",{textContent:t,className:i?"n":""}))),
+   rows.map(r=>el("tr",{},el("td",{textContent:r.year}),el("td",{className:"n",textContent:r.n_states??dash}),el("td",{className:"n",textContent:pct(r.state_error_pct)}),el("td",{className:"n",textContent:pct(r.us_error_pct)})))):el("p",{className:"note",textContent:"No backtest on disk yet."}),
+  rows.length?el("p",{className:"note",textContent:"Source of these numbers: "+rows[0].metric+"."}):null].filter(Boolean));
+ d.hidden=false;close.focus()}
+
+// --- line chart with crosshair tooltip
+function lineChart(box,series,field,{signed=false}={}){
+ const W=Math.max(box.clientWidth||900,320),H=260,L=44,R=16,T=10,B=26;
+ const pts=series.flatMap(s=>s.rows.filter(r=>r[field]!=null));
+ if(!pts.length){box.replaceChildren(el("p",{className:"note",textContent:"None of the selected models has this number."}));return}
+ const years=[...new Set(pts.map(r=>r.year))].sort((a,b)=>a-b),x0=years[0],x1=years.at(-1);
+ let lo=Math.min(...pts.map(r=>r[field])),hi=Math.max(...pts.map(r=>r[field]));if(!signed)lo=0;if(signed){const m=Math.max(Math.abs(lo),Math.abs(hi));lo=-m;hi=m}
+ const pad=(hi-lo)*0.08||1;hi+=pad;if(signed)lo-=pad;
+ const X=y=>L+(x1==x0?0.5:(y-x0)/(x1-x0))*(W-L-R),Y=v=>T+(1-(v-lo)/(hi-lo))*(H-T-B),ns="http://www.w3.org/2000/svg";
+ const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width","100%");svg.setAttribute("role","img");
+ const add=(t,a,txt)=>{const n=document.createElementNS(ns,t);for(const k in a)n.setAttribute(k,a[k]);if(txt!=null)n.textContent=txt;svg.append(n);return n};
+ const step=(hi-lo)/4;for(let i=0;i<=4;i++){const v=lo+i*step;add("line",{x1:L,x2:W-R,y1:Y(v),y2:Y(v),class:"grid"});add("text",{x:L-6,y:Y(v)+4,"text-anchor":"end"},nf1.format(v))}
+ if(signed)add("line",{x1:L,x2:W-R,y1:Y(0),y2:Y(0),class:"zero"});
+ const every=Math.ceil(years.length/12);years.forEach((y,i)=>{if(i%every==0)add("text",{x:X(y),y:H-8,"text-anchor":"middle"},y)});
+ series.forEach(s=>{const rs=s.rows.filter(r=>r[field]!=null);if(!rs.length)return;const c=`var(${SLOTS[s.slot]})`;
+  add("path",{d:rs.map((r,i)=>(i?"L":"M")+X(r.year)+","+Y(r[field])).join(""),fill:"none",stroke:c,"stroke-width":2});
+  rs.forEach(r=>marker(add,SHAPES[s.slot],X(r.year),Y(r[field]),c))});
+ const cross=add("line",{y1:T,y2:H-B,stroke:"var(--muted)","stroke-dasharray":"3 3",visibility:"hidden"});
+ const hit=add("rect",{x:L,y:T,width:W-L-R,height:H-T-B,fill:"transparent"});
+ hit.addEventListener("mousemove",e=>{const b=svg.getBoundingClientRect(),px=(e.clientX-b.left)*W/b.width;
+  const yr=years.reduce((a,y)=>Math.abs(X(y)-px)<Math.abs(X(a)-px)?y:a,years[0]);cross.setAttribute("x1",X(yr));cross.setAttribute("x2",X(yr));cross.setAttribute("visibility","visible");
+  const t=$("#tip");t.replaceChildren(el("b",{textContent:yr}),el("table",{},series.map(s=>{const r=s.rows.find(r=>r.year==yr);
+   return el("tr",{},el("td",{},swatch(s.slot)),el("td",{textContent:s.label}),el("td",{className:"n",textContent:r?pct(r[field]):dash}))})));
+  t.hidden=false;t.style.left=Math.min(e.clientX+14,innerWidth-320)+"px";t.style.top=e.clientY+14+"px"});
+ hit.addEventListener("mouseleave",()=>{cross.setAttribute("visibility","hidden");$("#tip").hidden=true});
+ box.replaceChildren(svg)}
+function marker(add,shape,x,y,c){const r=4.5,a={fill:c,stroke:"var(--panel)","stroke-width":2};
+ if(shape=="circle")add("circle",{cx:x,cy:y,r,...a});else if(shape=="square")add("rect",{x:x-r,y:y-r,width:2*r,height:2*r,rx:1,...a});
+ else if(shape=="triangle")add("path",{d:`M${x},${y-r-1}L${x+r+1},${y+r}L${x-r-1},${y+r}Z`,...a});else add("path",{d:`M${x},${y-r-1}L${x+r+1},${y}L${x},${y+r+1}L${x-r-1},${y}Z`,...a})}
+function swatch(slot){const ns="http://www.w3.org/2000/svg",s=document.createElementNS(ns,"svg");s.setAttribute("width",22);s.setAttribute("height",12);
+ const add=(t,a)=>{const n=document.createElementNS(ns,t);for(const k in a)n.setAttribute(k,a[k]);s.append(n)};
+ add("line",{x1:0,x2:22,y1:6,y2:6,stroke:`var(${SLOTS[slot]})`,"stroke-width":2});marker(add,SHAPES[slot],11,6,`var(${SLOTS[slot]})`);return s}
+
+function compare(){const ids=[...S.sel.keys()].filter(id=>MODELS[id]);$("#cmp-empty").hidden=ids.length>0;$("#cmp-body").hidden=!ids.length;if(!ids.length)return;
+ const series=ids.map(id=>({id,slot:S.sel.get(id),label:`${MODELS[id].model} (${MODELS[id].source}, ${MODELS[id].target})`,rows:BT[id]||[]}));
+ $("#legend").replaceChildren(...series.map(s=>el("span",{},swatch(s.slot),s.label)));
+ lineChart($("#ch-state"),series,"state_error_pct");lineChart($("#ch-us"),series,"us_error_pct",{signed:true});
+ const years=[...new Set(series.flatMap(s=>s.rows.map(r=>r.year)))].sort();
+ $("#cmp-table").replaceChildren(...[el("tr",{},el("th",{textContent:"Model"}),years.map(y=>el("th",{className:"n",textContent:y})),el("th",{className:"n",textContent:"Mean"})),
+  series.map(s=>el("tr",{},el("td",{},swatch(s.slot)," ",s.label),years.map(y=>{const r=s.rows.find(r=>r.year==y);return el("td",{className:"n",textContent:r?pct(r.state_error_pct):dash})}),
+   el("td",{className:"n",textContent:pct(mean(s.rows.map(r=>r.state_error_pct).filter(v=>v!=null)))}))),
+  el("tr",{},el("td",{colSpan:years.length+2,className:"note",textContent:"Table shows state error %. Hover the charts for US error."}))].flat())}
+
+function forecast(){seg($("#ftarget"),"ftarget",[["silage","Silage"],["grain","Grain"]]);
+ const ms=Object.values(MODELS).filter(m=>m.target==S.ftarget&&m.has_forecast);
+ const by={};D.forecast.forEach(r=>{if(r.target==S.ftarget)(by[r.model_id]??={})[r.state]=r});
+ const us=ms.map(m=>{const rows=by[m.model_id]||{},own=rows.US,states=Object.values(rows).filter(r=>r.state!="US");
+  return own?{m,v:own.predicted,lo:own.lo80,hi:own.hi80,how:"own"}:{m,v:states.reduce((a,r)=>a+(r.predicted||0),0),lo:null,hi:null,how:`sum of ${states.length}`}});
+ // dot + range chart, one row per model
+ const box=$("#ch-us-fc"),W=Math.max(box.clientWidth||900,320),rowH=32,L=320,R=24,H=us.length*rowH+40,ns="http://www.w3.org/2000/svg";
+ if(!us.length){box.replaceChildren(el("p",{className:"note",textContent:"No model has a 2026 forecast for this target yet."}))}else{
+ const vals=us.flatMap(u=>[u.v,u.lo,u.hi]).filter(v=>v!=null),lo=Math.min(...vals),hi=Math.max(...vals),pad=(hi-lo)*0.1||hi*0.02;
+ const X=v=>L+(v-(lo-pad))/((hi+pad)-(lo-pad))*(W-L-R);const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width","100%");
+ const add=(t,a,txt)=>{const n=document.createElementNS(ns,t);for(const k in a)n.setAttribute(k,a[k]);if(txt!=null)n.textContent=txt;svg.append(n);return n};
+ for(let i=0;i<=4;i++){const v=lo-pad+i*((hi+pad)-(lo-pad))/4;add("line",{x1:X(v),x2:X(v),y1:4,y2:H-22,class:"grid"});add("text",{x:X(v),y:H-6,"text-anchor":"middle"},kac(v)+"k")}
+ us.forEach((u,i)=>{const y=26+i*rowH;add("text",{x:L-10,y:y+4,"text-anchor":"end"},`${u.m.model} (${u.m.source})`);
+  if(u.lo!=null&&u.hi!=null)add("line",{x1:X(u.lo),x2:X(u.hi),y1:y,y2:y,stroke:"var(--s1)","stroke-width":2,"stroke-linecap":"round"});
+  const c=add("circle",{cx:X(u.v),cy:y,r:5,fill:"var(--s1)",stroke:"var(--panel)","stroke-width":2});
+  add("text",{x:X(u.v),y:y-9,"text-anchor":"middle"},kac(u.v));
+  const hit=add("rect",{x:0,y:y-rowH/2,width:W,height:rowH,fill:"transparent"});
+  hit.addEventListener("mousemove",e=>{const t=$("#tip");t.replaceChildren(el("b",{textContent:u.m.model}),el("div",{textContent:`${kac(u.v)}k acres (${u.how=="own"?"model's US row":u.how+" states"})`}),
+   u.lo!=null?el("div",{className:"muted",textContent:`80% range ${kac(u.lo)}k to ${kac(u.hi)}k`}):el("div",{className:"muted",textContent:"No US range given"}));
+   t.hidden=false;t.style.left=Math.min(e.clientX+14,innerWidth-320)+"px";t.style.top=e.clientY+14+"px"});hit.addEventListener("mouseleave",()=>$("#tip").hidden=true)});
+ box.replaceChildren(svg)}
+ const states=[...new Set(D.forecast.filter(r=>r.target==S.ftarget&&r.state!="US").map(r=>r.state))].sort();
+ $("#fc-table").replaceChildren(...[el("tr",{},el("th",{textContent:"State"}),ms.map(m=>el("th",{className:"n",textContent:m.model,title:m.source}))),
+  el("tr",{},el("td",{},el("b",{textContent:"US"})),us.map(u=>el("td",{className:"n"},el("b",{textContent:kac(u.v)+"k"}),el("div",{className:"note",textContent:u.how=="own"?"own":u.how})))),
+  states.map(st=>el("tr",{},el("td",{textContent:st}),ms.map(m=>{const r=(by[m.model_id]||{})[st];return el("td",{className:"n",title:r&&r.lo80!=null?`80%: ${kac(r.lo80)}k to ${kac(r.hi80)}k`:"",textContent:r?kac(r.predicted)+"k":dash})})))].flat())}
+
+function field(){const count={};D.field.forEach(r=>count[r.evaluated_on]=(count[r.evaluated_on]||0)+1);const evals=Object.keys(count).sort((a,b)=>count[b]-count[a]);if(!S.feval&&evals.length)S.feval=evals[0];
+ $("#feval").replaceChildren(...evals.map(v=>el("option",{value:v,textContent:`Evaluated on: ${v} (${count[v]})`,selected:v==S.feval})));
+ const cols=[["source","Folder"],["model","Model"],["n_fields","Fields","n"],["silage_precision","Silage precision","n"],["silage_recall","Silage recall","n"],["silage_f1","Silage F1","n"],["accuracy","Accuracy","n"],["status","Status"],["note","Note"]];
+ const rows=D.field.filter(r=>r.evaluated_on==S.feval).sort((a,b)=>{const x=a[S.fsort],y=b[S.fsort];if(x==null)return 1;if(y==null)return-1;return(typeof x=="string"?x.localeCompare(y):x-y)*S.fdir});
+ $("#field-table thead").replaceChildren(el("tr",{},cols.map(([k,l,c])=>{const th=el("th",{textContent:l+(S.fsort==k?(S.fdir>0?" ↑":" ↓"):""),className:c||""});th.onclick=()=>{S.fdir=S.fsort==k?-S.fdir:-1;S.fsort=k;draw()};return th})));
+ const f3=v=>v==null?dash:Number(v).toFixed(3);
+ $("#field-table tbody").replaceChildren(...rows.map(r=>el("tr",{},cols.map(([k,,c])=>el("td",{className:c||(k=="note"?"note":""),textContent:c?(k=="n_fields"?(r[k]??dash):f3(r[k])):(r[k]||"")})))))}
+
+function draw(){TABS.forEach(([id])=>{$("#"+id).hidden=S.tab!=id;$("#tab-"+id).setAttribute("aria-selected",S.tab==id)});
+ $("#tab-compare").textContent=`Compare (${S.sel.size})`;
+ if(S.tab=="leader")leader();if(S.tab=="compare")compare();if(S.tab=="forecast")forecast();if(S.tab=="field")field()}
+
+async function load(){$("#summary").textContent="Reading model folders…";
+ const r=await fetch("/api/board");D=await r.json();BT={};MODELS={};
+ D.models.forEach(m=>MODELS[m.model_id]=m);D.backtest.forEach(r=>(BT[r.model_id]??=[]).push(r));
+ const years=[...new Set(D.backtest.map(r=>r.year))].sort((a,b)=>a-b);
+ if(S.y0==null){S.y0=years[0];S.y1=years.at(-1)}
+ [["#y0","y0"],["#y1","y1"]].forEach(([s,k])=>{$(s).replaceChildren(...years.map(y=>el("option",{value:y,textContent:y,selected:y==S[k]})));$(s).onchange=e=>{S[k]=+e.target.value;draw()}});
+ const srcs=[...new Set(D.models.map(m=>m.source))].sort();$("#src").replaceChildren(el("option",{value:"",textContent:"All folders"}),...srcs.map(s=>el("option",{value:s,textContent:s,selected:s==S.src})));
+ const owners=new Set(D.models.map(m=>m.owner).filter(Boolean));
+ $("#summary").textContent=`${D.models.length} models from ${srcs.length} folders, ${owners.size} people · ${D.field.length} field-model runs · read ${D.read_at}`;
+ $("#problems").replaceChildren(...D.problems.map(p=>el("div",{className:"callout",textContent:"Could not read: "+p})));draw()}
+$("#src").onchange=e=>{S.src=e.target.value;draw()};$("#q").oninput=e=>{S.q=e.target.value;draw()};
+$("#feval").onchange=e=>{S.feval=e.target.value;draw()};$("#clear").onclick=()=>{S.sel.clear();draw()};
+$("#refresh").onclick=load;addEventListener("keydown",e=>{if(e.key=="Escape")$("#drawer").hidden=true});
+addEventListener("resize",()=>{if(S.tab=="compare"||S.tab=="forecast")draw()});
+load().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Could not load the board: "+e.message})));
+</script></body></html>
