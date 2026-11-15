@@ -51,3 +51,22 @@ def test_text_ids_in_labels_match_numeric_ids_in_series():
     labels = pd.DataFrame({"field_id": ["101", "102"], "year": 2023, "label": ["silage", "grain"]})
     table = evidence_table(labels, series)
     assert table["field_id"].tolist() == ["101", "102"] and table["assessable"].all()
+
+
+def test_held_out_year_calls_never_fit_on_the_scored_year():
+    from kernelag.field_model import held_out_year_calls
+
+    # 2022 and 2023 follow the usual pattern; in 2024 the labels are swapped. A model that saw
+    # 2024 while scoring it would get 2024 right; one fitted on the other years gets it wrong.
+    parts, labels = [], []
+    for year, flip in [(2022, False), (2023, False), (2024, True)]:
+        for i in range(4):
+            cliff_id, fade_id = f"{year}c{i}", f"{year}f{i}"
+            parts += [CLIFF.assign(field_id=cliff_id, year=year), FADE.assign(field_id=fade_id, year=year)]
+            labels += [{"field_id": cliff_id, "year": year, "label": "grain" if flip else "silage"},
+                       {"field_id": fade_id, "year": year, "label": "silage" if flip else "grain"}]
+    table = evidence_table(pd.DataFrame(labels), pd.concat(parts))
+    call = held_out_year_calls(table)
+    truth = table["is_silage"].to_numpy()
+    in_2024 = (table["year"] == 2024).to_numpy()
+    assert (call[in_2024] != truth[in_2024]).all()

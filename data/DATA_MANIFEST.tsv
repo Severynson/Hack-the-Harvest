@@ -208,11 +208,11 @@ data/weather/county_season/county_season_2025.csv	201870	f822e38abced30fa272d4f6
 data/weather/county_season/county_season_2026.csv	188798	8ae1d0fd769afeda3e52bedd67f7a2dd433d4afe96f4ae2f260177be539b6977	https://www.ncei.noaa.gov/data/nclimgrid-daily/access/averages/2026/ (tmax, tmin, prcp; *-cty-scaled.csv; reduced by scripts/pull_data.py)	cc-daniel	2026-11-15T02:16Z
 data/s2_series/quebec_maize_2023/79_515_2023.csv	259223	f62ceaac75657cea1ae2de43cf46d4179f18f8cece9414a7df96975b08a0c4f9	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:55Z
 data/s2_series/barc_2021_2023/34_432_2021.csv	3197	744977e1cf7169a6a61cd3b1bf6dc684387bdae24b032993cddeb0fedad1db46	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:55Z
-data/models/field_model_report.csv	340	c5be8d12f6839bd1f912ca31eb478d596bf580321e10981589769ff5bfb9bf32	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
-data/models/field_model_by_year.csv	266	d4bca9ec5a5bdc2e5b8638deca3a09323f2dc609090b682d52055bb5cdeffc4b	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
-data/models/field_model_coefficients.csv	135	a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
-data/models/field_model_maryland_predictions.csv	1469	b4e2ec3fcd3e2fb0a3d29d80c677345c5676383d39f185cd5714162508b4be10	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
 data/raw/quebec/BDPPAD_V03_2023.zip	172750925	9258447ac941b23efc78bf582c8555f66d1eb0a732c5949fa2f169697c139f82	https://www.fadq.qc.ca/fileadmin/geo4tb/BDPPAD/BDPPAD_V03_2023.zip	cc-varun (local only, over the size limit)	2026-11-15T03:00Z
 data/panel/state_year.csv	66187	6f643e841e348de1c3050afd2b952af31cf5b806616fdcc714d74177cf2050d9	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T03:08Z
 data/models/state_model_backtest.csv	2341	d3d19edcb7112b6792bd35f4e0a00236c16effac346dba2d4519b4f71a553fb2	derived: kernelag.state_model	cc-varun	2026-11-15T03:08Z
 data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T03:08Z
+data/models/field_model_report.csv	340	c5be8d12f6839bd1f912ca31eb478d596bf580321e10981589769ff5bfb9bf32	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
+data/models/field_model_by_year.csv	266	d4bca9ec5a5bdc2e5b8638deca3a09323f2dc609090b682d52055bb5cdeffc4b	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
+data/models/field_model_coefficients.csv	135	a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
+data/models/field_model_maryland_predictions.csv	1469	b4e2ec3fcd3e2fb0a3d29d80c677345c5676383d39f185cd5714162508b4be10	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z

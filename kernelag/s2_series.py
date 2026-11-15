@@ -166,6 +166,25 @@ def densest_cells(fields, n: int, by: str = "label", value: str = "silage") -> l
     return counts.head(n).index.tolist()
 
 
+def pull_cells_in_parallel(fields_path: str, cells: list[str], workers: int) -> None:
+    """One process per cell, ``workers`` at a time. Finished cell-years are kept, so it resumes."""
+    import subprocess
+    import sys
+    from concurrent.futures import ThreadPoolExecutor
+
+    environment = {**os.environ, "KERNEL_NO_MANIFEST": "1", "KERNEL_READ_THREADS": "16"}
+
+    def run(cell: str) -> str:
+        done = subprocess.run([sys.executable, "-m", "kernelag.s2_series", "--fields", fields_path,
+                               f"--only-cells={cell}"], capture_output=True, text=True, env=environment)
+        lines = [line for line in done.stdout.splitlines() if line.startswith("cell ")]
+        return "\n".join(lines) if done.returncode == 0 else f"cell {cell}: FAILED\n{done.stderr[-400:]}"
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for text in pool.map(run, cells):
+            print(text, flush=True)
+
+
 def main() -> None:
     import geopandas as gpd
 
@@ -175,6 +194,7 @@ def main() -> None:
                         help="how many cells to pull, densest in silage first; 0 means every cell")
     parser.add_argument("--only-cells", default="",
                         help="comma-separated cell ids to pull, written as --only-cells=ID,ID; overrides --cells")
+    parser.add_argument("--parallel", type=int, default=1, help="cells pulled at the same time")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
@@ -183,6 +203,9 @@ def main() -> None:
         chosen = args.only_cells.split(",")
     else:
         chosen = densest_cells(fields, args.cells) if args.cells > 0 else None
+    if args.parallel > 1:
+        cells = chosen if chosen is not None else sorted(assign_cells(fields)["cell"].unique())
+        pull_cells_in_parallel(args.fields, cells, args.parallel)
     table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force)
     print(f"{len(table)} field-dates for {table['field_id'].nunique() if len(table) else 0} fields")
 

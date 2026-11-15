@@ -35,20 +35,14 @@ import numpy as np
 import pandas as pd
 
 from kernelag.features import build_features
-from kernelag.field_model import (DECISION_THRESHOLD, MODEL_FEATURES, evidence_table, load_series,
-                                  make_model)
+from kernelag.field_model import DECISION_THRESHOLD, MODEL_FEATURES, load_series, load_training, make_model
 from kernelag.paths import data_dir, record_in_manifest
 
-TRAIN_LABELS = "labels/quebec_maize_2023.parquet"
-TRAIN_SERIES = "s2_series/quebec_maize_2023"
 
 
 def fit_field_model():
-    """The field model fitted on every assessable Quebec parcel that has a series."""
-    import geopandas as gpd
-
-    data = data_dir()
-    train = evidence_table(gpd.read_parquet(data / TRAIN_LABELS), load_series(data / TRAIN_SERIES))
+    """The field model fitted on every assessable Quebec parcel that has a series, all label years."""
+    train, _ = load_training(data_dir())
     train = train[train["assessable"]]
     return make_model().fit(train[MODEL_FEATURES], train["is_silage"]), len(train)
 
