@@ -16,3 +16,4 @@
 - 2026-11-15T08:54Z claim T-cc-daniel-5 ttl=90m
 - 2026-11-15T09:11Z delivered: T-cc-daniel-5 (1d63424) and T-cc-daniel-6 data (370f3af..f9ced79)
 - 2026-11-15T14:32Z claim T-cc-daniel-8 ttl=90m
+- 2026-11-15T14:56Z delivered: T-cc-daniel-8 (6fd5d64, 3abc65f, 065a7d5, 5492520). All candidate series, FSA update and test_models experiments on main; 7 cache files over 30 MB in test_models/variations/sat_full stay local (manifest rows say local only)
