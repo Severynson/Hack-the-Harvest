@@ -94,7 +94,7 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
             scheduler="threads", num_workers=READ_THREADS)
         for t in batch.time.values:
             rows.append(_field_medians(batch.sel(time=t), zones, in_field, field_ids,
-                                       pd.Timestamp(t), year, offsets))
+                                       pd.Timestamp(t).normalize(), year, offsets))
     rows = [r for r in rows if r is not None]
     if not rows:
         return pd.DataFrame()
@@ -161,12 +161,13 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--fields", required=True, help="GeoParquet with field_id, year, label, geometry")
-    parser.add_argument("--cells", type=int, default=1, help="how many cells to pull, densest in silage first")
+    parser.add_argument("--cells", type=int, default=1,
+                        help="how many cells to pull, densest in silage first; 0 means every cell")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
     fields = gpd.read_parquet(args.fields)
-    chosen = densest_cells(fields, args.cells)
+    chosen = densest_cells(fields, args.cells) if args.cells > 0 else None
     table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force)
     print(f"{len(table)} field-dates for {table['field_id'].nunique() if len(table) else 0} fields")
 
