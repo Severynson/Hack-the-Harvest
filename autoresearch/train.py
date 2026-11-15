@@ -28,7 +28,7 @@ MIN_VALID_FRAC = 0.4       # scene kept for a field if >= this share of its pixe
 SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolated NDVI
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
-DROP_HI, DROP_LO = 0.75, 0.25  # drop duration = days from (low + 0.75 amp) to (low + 0.25 amp) after the peak
+DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
 RULES = ["drop_days"]       # learned rules: silage if feature < cut-off
 FIXED_RULES = {"late_ndvi_neg": -0.65}  # physical rule, not learned: Nov-Dec NDVI > 0.65 = dense green cover crop after an early cut
 
