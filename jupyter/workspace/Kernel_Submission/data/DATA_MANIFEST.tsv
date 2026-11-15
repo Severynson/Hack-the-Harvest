@@ -1,0 +1,4 @@
+path	bytes	sha256	source_url	made_by	utc
+data/models/deliverable_2026.csv	6323	c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9	derived: kernelag.deliverable	unknown	2026-11-15T08:34Z
+data/models/deliverable_comparison.csv	99743	fa042397d8adcbd62284f89c7aa54698ebe03465a641cfc516a677faecf31419	derived: kernelag.deliverable	unknown	2026-11-15T08:34Z
+data/models/deliverable_summary.json	7763	a913d40da0c3f2352c443060a68e34cafff0f4cfce223d2283eb62266d39c248	derived: kernelag.deliverable	unknown	2026-11-15T08:34Z

@@ -15,11 +15,13 @@ parameters come from earlier years only (``kernelag.state_model``, ``kernelag.si
 Grain is NASS's own November harvested-for-grain forecast where it exists, so the grain number is not an
 independent estimate; ``grain_without_nass_forecast`` scores a grain number of our own beside it. The truth is the organizer CSV, read here independently of the pipeline's copy.
 
-Run: ``python -m kernelag.deliverable``
+Run: ``python -m kernelag.deliverable [--lean]`` (``--lean`` needs only the small input files listed in
+``scripts/build_submission.sh``; the numbers are identical).
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -28,7 +30,7 @@ import pandas as pd
 
 from kernelag import silage_level, state_model
 from kernelag.paths import data_dir, kit_dir, record_in_manifest
-from kernelag.state_panel import QUICKSTATS_DIR, load_panel
+from kernelag.state_panel import QUICKSTATS_DIR, build_panel, load_panel
 
 ORGANIZER_CSV = Path("02_QuickStats/corn_grain_silage_acres_2012_2025.csv")   # under kernelag.paths.kit_dir()
 YEARS = range(2017, 2026)
@@ -127,9 +129,20 @@ def deliverable_table(forecast: pd.DataFrame) -> pd.DataFrame:
     return forecast[keep + ["silage_method", "grain_method"]]
 
 
-def main() -> None:
+def build_table(lean: bool) -> pd.DataFrame:
+    """The state-year table. ``lean`` skips the season context (weather, drought, RMA): the delivered
+    methods do not use it, so the numbers are the same with a much smaller set of input files."""
+    if not lean:
+        return state_model.add_changes(load_panel("nov"))
+    acres = pd.read_csv(data_dir() / "nass" / "corn_acres_state.csv")
+    return state_model.add_changes(build_panel(acres, data_dir() / QUICKSTATS_DIR, context=None))
+
+
+def run(lean: bool = False) -> dict:
+    """Build every deliverable table; returns them and writes them under ``data/models/``."""
     models = data_dir() / "models"
-    table = state_model.add_changes(load_panel("nov"))
+    models.mkdir(parents=True, exist_ok=True)
+    table = build_table(lean)
     history = silage_level.load_history(data_dir() / QUICKSTATS_DIR, "nov")
     organizer = organizer_truth(kit_dir() / ORGANIZER_CSV)
     nass_acres = pd.read_csv(data_dir() / "nass" / "corn_acres_state.csv")
@@ -151,7 +164,8 @@ def main() -> None:
         "Silage has no NASS in-season figure; the baseline is last year's acres.",
         "Current-vintage inputs: a replay, not archived real-time runs.",
     ]
-    forecast = pd.read_csv(models / f"state_forecast_{FORECAST_YEAR}.csv")
+    held_out = state_model.backtest_predictions(table, history=history)
+    forecast = state_model.forecast(table, FORECAST_YEAR, state_model.SMOOTHED, held_out, history)
     outputs = {
         models / f"deliverable_{FORECAST_YEAR}.csv": deliverable_table(forecast),
         models / "deliverable_comparison.csv": comparison.round({"predicted": -2, "last": -2, "error_pct": 2,
@@ -164,6 +178,15 @@ def main() -> None:
     summary_path.write_text(json.dumps(summary, indent=1) + "\n", encoding="utf-8")
     record_in_manifest(summary_path, "derived: kernelag.deliverable")
 
+    return {"forecast": forecast, "deliverable": deliverable_table(forecast), "comparison": comparison,
+            "summary": summary}
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--lean", action="store_true", help="skip season context inputs (same numbers)")
+    result = run(parser.parse_args().lean)
+    forecast, summary = result["forecast"], result["summary"]
     print("truth check:", summary["truth_check"])
     us = forecast[forecast["state"].str.startswith("US")].iloc[0]
     print(f"{FORECAST_YEAR} US: grain {us['grain'] / 1e6:.2f}M acres (80% {us['grain_lo80'] / 1e6:.2f}-"
