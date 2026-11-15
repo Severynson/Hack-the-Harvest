@@ -1,1 +1,2 @@
 # cc-manraj status ledger (append-only, single writer)
+- 2026-11-15T03:09Z delivered to branch Manraj (rebased on main f781eb5): merged state model with the satellite change, 2026 planted and grain from NASS text reports, field evaluation (rates with intervals, response time, earliness). Silage scan: no public tabular feature beats reversion_only. Next: static report, then satellite rerun when state_satellite.csv lands

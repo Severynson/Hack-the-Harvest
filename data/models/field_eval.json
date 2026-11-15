@@ -1,0 +1,65 @@
+{
+ "train": {
+  "region": "Quebec declared parcels",
+  "field_years": 318,
+  "silage": 138
+ },
+ "test": {
+  "region": "Maryland (organizer labels)",
+  "field_years": 44,
+  "silage": 12,
+  "not_assessable": 0
+ },
+ "rates": {
+  "n_grain": 32,
+  "n_silage": 12,
+  "TP": 10,
+  "FP": 5,
+  "FN": 2,
+  "TN": 27,
+  "silage_precision": 0.667,
+  "silage_recall": 0.833,
+  "grain_precision": 0.931,
+  "grain_recall": 0.844,
+  "false_positive_rate": 0.156,
+  "accuracy": 0.841
+ },
+ "always_grain": {
+  "n_grain": 32,
+  "n_silage": 12,
+  "TP": 0,
+  "FP": 0,
+  "FN": 12,
+  "TN": 32,
+  "silage_precision": NaN,
+  "silage_recall": 0.0,
+  "grain_precision": 0.727,
+  "grain_recall": 1.0,
+  "false_positive_rate": 0.0,
+  "accuracy": 0.727
+ },
+ "intervals_90": {
+  "silage_precision": [
+   0.455,
+   0.857
+  ],
+  "silage_recall": [
+   0.636,
+   1.0
+  ],
+  "false_positive_rate": [
+   0.061,
+   0.276
+  ],
+  "accuracy": [
+   0.75,
+   0.932
+  ]
+ },
+ "response_seconds_per_field": 0.0147,
+ "fit_seconds": 0.799,
+ "caveats": [
+  "44 test field-years on one farm: intervals are wide",
+  "response time excludes the imagery download"
+ ]
+}
