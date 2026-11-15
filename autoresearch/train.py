@@ -29,7 +29,7 @@ SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolat
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
-RULES = ["drop_days", "late_ndvi_neg"]  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
+RULES = ["drop_days", "late_rel_neg"]  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
 
 # ---------------------------------------------------------------------------
 # Features
@@ -78,7 +78,10 @@ def featurize(ts: pd.DataFrame, keys: pd.DataFrame) -> pd.DataFrame:
         g = groups.get((oid, yr))
         f = season_features(g) if g is not None else {}
         rows.append({"OBJECTID": oid, "year": yr, "group": gr, **f})
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    # winter green relative to the region-year: snow makes every field dull, cover crops stand out
+    out["late_rel_neg"] = out["late_ndvi_neg"] - out.groupby("group")["late_ndvi_neg"].transform("median")
+    return out
 
 
 # ---------------------------------------------------------------------------
