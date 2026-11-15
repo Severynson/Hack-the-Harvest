@@ -1,0 +1,73 @@
+{
+ "tier_a_b_vs_monthly_harness": {
+  "A": {
+   "rows": 1872,
+   "missing": 0,
+   "max_abs_diff_acres": 0.04999451269486599,
+   "truth_max_abs_diff": 0.0
+  },
+  "B": {
+   "rows": 1872,
+   "missing": 0,
+   "max_abs_diff_acres": 0.049980741256149486,
+   "truth_max_abs_diff": 0.0
+  },
+  "s0_persistence": {
+   "rows": 1872,
+   "missing": 0,
+   "max_abs_diff_acres": 0.0,
+   "truth_max_abs_diff": 0.0
+  },
+  "s1_reversion_only": {
+   "rows": 1872,
+   "missing": 0,
+   "max_abs_diff_acres": 0.049980741256149486,
+   "truth_max_abs_diff": 0.0
+  }
+ },
+ "sc_nov": {
+  "mean_wape_2012_2024": 13.227571362192606,
+  "documented_2012_2024": [
+   13.23,
+   3.44
+  ],
+  "mean_abs_us_2012_2024": 3.447345957484922,
+  "mean_wape_2017_2024": 12.799966282612242,
+  "mean_abs_us_2017_2024": 3.336915286545649,
+  "documented_2017_2024": [
+   12.8,
+   3.34
+  ],
+  "max_abs_diff_vs_stored_state_model_backtest_2017_2024": {
+   "state_wape": 0.0,
+   "us_error": 0.0
+  },
+  "max_abs_diff_vs_noise_floor_by_year_2012_2024": {
+   "state_wape": 0.031199653747529865,
+   "abs_us": 0.05729985666933102
+  }
+ },
+ "sc_2026_nov_vs_data_models_state_forecast_2026": {
+  "states_compared": 48,
+  "max_abs_diff_acres_after_rounding": 0.0,
+  "sum_48_mine": 6259400.0,
+  "sum_stored_states_shown": 6259400.0
+ },
+ "A_2026_nov_vs_folder": {
+  "column": "s3_fsa_residual",
+  "states_compared": 48,
+  "max_abs_diff_acres_after_rounding": 0.0
+ },
+ "B_2026_nov_vs_folder": {
+  "column": "silage",
+  "states_compared": 48,
+  "max_abs_diff_acres_after_rounding": 0.0
+ },
+ "sc_variants_chopped_nonnegative": true,
+ "sc_l_has_no_chopping": true,
+ "sc_pred_minus_base_plus_chopped_max_abs_acres": {
+  "sep": 0.0,
+  "oct": 0.0,
+  "nov": 0.0
+ }
+}

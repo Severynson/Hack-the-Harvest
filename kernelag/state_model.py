@@ -25,8 +25,11 @@ has a sign we expected before fitting (``EXPECTED_SIGN``); the weights table sho
 Grain. NASS's own latest harvested-for-grain forecast where it publishes one (33 states); elsewhere
 the latest planted acres times last year's grain share of planted; failing that, last year's acres.
 
-Which silage feature set is used is decided by a rule fixed in advance, on years up to 2024 only:
-the smallest set whose mean state error is within ``SELECTION_TOLERANCE`` points of the best.
+The delivered silage forecast is ``smoothed_chopping`` (``kernelag.silage_level``): a smoothed state
+level plus drought chopping, two parameters chosen on earlier years only. It was promoted on
+2026-11-15 from ``test_models/accuracy/noise_floor`` (2012-2024 replay; 2025 not read), see
+``DOCS/DECISIONS.md``. The ridge feature sets stay in the backtest for comparison; among them the
+rule fixed in advance still picks the smallest set within ``SELECTION_TOLERANCE`` points of the best.
 
 Intervals come from the backtest's own errors: quantiles of log(actual / predicted), pooled within
 three state size classes. The US interval uses the spread of the backtest's US-total errors.
@@ -48,10 +51,11 @@ import json
 import numpy as np
 import pandas as pd
 
+from kernelag import silage_level
 from kernelag.context import ASOF_MONTH
 from kernelag.nass import LAST_BASELINE_YEAR
 from kernelag.paths import data_dir, record_in_manifest
-from kernelag.state_panel import load_panel
+from kernelag.state_panel import QUICKSTATS_DIR, load_panel
 
 # +1: we expect more silage when the feature rises; -1: less.
 EXPECTED_SIGN = {
@@ -72,6 +76,7 @@ MIN_FIT_YEARS = 3
 RIDGE_PENALTY = 1.0
 SELECTION_TOLERANCE = 0.3          # points of mean state error
 SCORING_YEAR = LAST_BASELINE_YEAR + 1
+SMOOTHED = "smoothed_chopping"      # the delivered silage method (kernelag.silage_level)
 INTERVALS = {"80": (0.10, 0.90), "90": (0.05, 0.95)}
 Z = {"80": 1.2816, "90": 1.6449}   # normal quantiles, used for the US total only
 SIZE_CLASSES = 3
@@ -172,6 +177,14 @@ def predict_silage(table: pd.DataFrame, year: int, features: list[str]) -> pd.Se
     return pd.Series(rows["silage_last"].to_numpy() * np.exp(change), index=rows["state"].to_numpy())
 
 
+def predict_silage_by(table: pd.DataFrame, year: int, method: str, history: dict | None = None) -> pd.Series:
+    """Silage acres for ``year`` from a ridge feature set or from ``SMOOTHED`` (needs ``history``)."""
+    if method != SMOOTHED:
+        return predict_silage(table, year, FEATURE_SETS[method])
+    states = table.loc[table["year"] == year, "state"]
+    return silage_level.predict(history, year)[0].reindex(states.to_numpy()).dropna()
+
+
 def predict_grain(table: pd.DataFrame, year: int) -> pd.DataFrame:
     """Grain acres for ``year`` per state and the method used (no fitting involved)."""
     rows = table[table["year"] == year].set_index("state")
@@ -194,7 +207,8 @@ def state_error(predicted: pd.Series, actual: pd.Series) -> dict:
     }
 
 
-def backtest_predictions(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEAR) -> pd.DataFrame:
+def backtest_predictions(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEAR,
+                         history: dict | None = None) -> pd.DataFrame:
     """Every held-out prediction: year, state, series, predictor, predicted, actual, last.
 
     Expanding window: each year is predicted from earlier years only, after ``MIN_FIT_YEARS`` years.
@@ -207,6 +221,8 @@ def backtest_predictions(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEA
         truth = table[table["year"] == year].set_index("state")
         silage = {"same_as_last_year": predict_silage(usable, year, [])}
         silage.update({name: predict_silage(usable, year, features) for name, features in feature_sets.items()})
+        if history is not None:
+            silage[SMOOTHED] = predict_silage_by(table, year, SMOOTHED, history)
         if len(feature_sets) == len(FEATURE_SETS):   # satellite shares exist
             # Nothing fitted: last year's acres moved by the satellite share and by planted acres.
             ratio = (truth["sat_ratio"] * np.exp(truth["d_planted"].fillna(0.0))).fillna(1.0)
@@ -222,12 +238,12 @@ def backtest_predictions(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEA
     return pd.concat(parts, ignore_index=True)[columns] if parts else pd.DataFrame(columns=columns)
 
 
-def backtest(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEAR) -> pd.DataFrame:
+def backtest(table: pd.DataFrame, last_year: int = LAST_BASELINE_YEAR, history: dict | None = None) -> pd.DataFrame:
     """State error and US-total error per year, series and predictor.
 
     Scored twice (``scope``): on all states, and on the states with a satellite change that year.
     """
-    held_out = backtest_predictions(table, last_year)
+    held_out = backtest_predictions(table, last_year, history)
     scopes = {"all_states": held_out, "sampled_states": held_out[held_out["sampled"].astype(bool)]}
     rows = [
         {"scope": scope, "year": year, "series": series, "predictor": name,
@@ -311,9 +327,12 @@ def us_log_error_rms(held_out: pd.DataFrame) -> float:
 
 # --- forecast ------------------------------------------------------------------------------------
 
-def forecast(table: pd.DataFrame, year: int, feature_set: str, held_out: pd.DataFrame) -> pd.DataFrame:
-    """State and US acres for ``year`` with intervals; fitted on years before ``year`` only."""
-    silage = predict_silage(table, year, FEATURE_SETS[feature_set])
+def forecast(table: pd.DataFrame, year: int, feature_set: str, held_out: pd.DataFrame,
+             history: dict | None = None) -> pd.DataFrame:
+    """State and US acres for ``year`` with intervals; fitted on years before ``year`` only.
+
+    ``feature_set`` is a ridge feature set or ``SMOOTHED``."""
+    silage = predict_silage_by(table, year, feature_set, history)
     if silage.empty:
         raise ValueError(f"no state has silage acres for {year - 1}; cannot forecast {year}")
     rows = table[table["year"] == year].set_index("state")
@@ -374,11 +393,13 @@ def main() -> None:
     args = parser.parse_args()
 
     table = add_changes(load_panel(args.asof))
-    held_out = backtest_predictions(table)
-    all_scopes = backtest(table)
+    history = silage_level.load_history(data_dir() / QUICKSTATS_DIR, args.asof)
+    held_out = backtest_predictions(table, history=history)
+    all_scopes = backtest(table, history=history)
     results = all_scopes[all_scopes["scope"] == "all_states"]
     sampled = all_scopes[(all_scopes["scope"] == "sampled_states") & (all_scopes["series"] == "silage")]
-    feature_set = select_feature_set(results)
+    ridge_set = select_feature_set(results)
+    feature_set = SMOOTHED
     chosen = {"silage": feature_set, "grain": "nass_latest"}
     chosen_rows = {s: held_out[(held_out["series"] == s) & (held_out["predictor"] == n)] for s, n in chosen.items()}
 
@@ -387,14 +408,17 @@ def main() -> None:
     weights = pd.DataFrame([
         {"feature": name, "weight_per_std": value, "expected_sign": EXPECTED_SIGN[name],
          "sign_ok": bool(value == 0 or np.sign(value) == EXPECTED_SIGN[name]),
-         "in_selected_set": name in FEATURE_SETS[feature_set]}
+         "in_selected_set": name in FEATURE_SETS[ridge_set]}
         for name, value in fitted.items()
     ])
     mean_error = results.groupby(["series", "predictor"])[["state_error_pct", "total_error_pct"]].agg(
         state_error_pct=("state_error_pct", "mean"), abs_total_error_pct=("total_error_pct", lambda s: s.abs().mean()))
     metrics = {
         "asof": args.asof, "backtest_years": sorted(int(y) for y in results["year"].unique()),
-        "selected_silage_set": feature_set, "selection_tolerance_points": SELECTION_TOLERANCE,
+        "selected_silage_set": feature_set, "best_ridge_set": ridge_set,
+        "selection_tolerance_points": SELECTION_TOLERANCE,
+        "smoothed_chopping_params_by_year": {
+            int(y): silage_level.predict(history, int(y))[1] for y in sorted(results["year"].unique())},
         "mean_errors_pct": {f"{s}.{p}": row.round(2).to_dict() for (s, p), row in mean_error.iterrows()},
         "interval_coverage": {s: interval_coverage(rows) for s, rows in chosen_rows.items()},
         "us_log_error_rms": {s: round(us_log_error_rms(rows), 4) for s, rows in chosen_rows.items()},
@@ -421,7 +445,7 @@ def main() -> None:
         print(f"\n{series}: state error %, by year")
         print(part.pivot(index="year", columns="predictor", values="state_error_pct").to_string())
         print(mean_error.loc[series].round(2).to_string())
-    print(f"\nselected silage set: {feature_set}")
+    print(f"\nsilage method: {feature_set}; best ridge set: {ridge_set}")
     print(weights.to_string(index=False))
     print("interval coverage (target 0.80 and 0.90):", metrics["interval_coverage"])
     print(frames["state_model_bias"].pivot_table(index=["by", "group"], columns="series", values="signed_error_pct").to_string())
@@ -430,7 +454,7 @@ def main() -> None:
         target = out / f"state_forecast_{args.forecast}{suffix}.csv"
         if args.forecast <= SCORING_YEAR:
             parser.error(f"--forecast is for years after {SCORING_YEAR}; use --score-2025 for the scoring year")
-        result = forecast(table, args.forecast, feature_set, held_out)
+        result = forecast(table, args.forecast, feature_set, held_out, history)
         result.to_csv(target, index=False, lineterminator="\n")
         record_in_manifest(target, "derived: kernelag.state_model")
         print(f"\nforecast {args.forecast} -> {target}")
@@ -443,7 +467,7 @@ def main() -> None:
         target = out / f"state_score_{SCORING_YEAR}{suffix}.csv"
         if target.exists():
             parser.error(f"{target} exists: the scoring year is scored once. Delete it by hand to redo.")
-        compared, summary = score(forecast(table, SCORING_YEAR, feature_set, held_out), table, SCORING_YEAR)
+        compared, summary = score(forecast(table, SCORING_YEAR, feature_set, held_out, history), table, SCORING_YEAR)
         compared.to_csv(target, index=False, lineterminator="\n")
         record_in_manifest(target, "derived: kernelag.state_model")
         summary_file = out / f"state_score_{SCORING_YEAR}{suffix}.json"

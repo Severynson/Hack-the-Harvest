@@ -1,0 +1,112 @@
+{
+  "G0_truth": {
+    "monthly_vs_finals_max_abs_diff": 0.0,
+    "monthly_vs_finals_rows": 384,
+    "monthly_vs_combos_max_abs_diff": 0.0,
+    "monthly_vs_combos_rows": 384,
+    "monthly_states_per_cell_min": 48,
+    "monthly_states_per_cell_max": 48,
+    "states15_present_every_cell": true,
+    "truth_2025_states": 48,
+    "pass": true
+  },
+  "G1_tierA_regen": {
+    "rows": 6912,
+    "missing": 0,
+    "max_abs_diff_acres": 0.04999451269486599,
+    "by_base": {
+      "AS3": 0.04999451269486599,
+      "REV": 0.04993416772049386,
+      "PER": 0.0
+    },
+    "pass": true
+  },
+  "G2_SC_regen": {
+    "rows": 3888,
+    "missing": 0,
+    "max_abs_diff_acres": 0.049990864004939795,
+    "by_base": {
+      "SC": 0.04998587373643204,
+      "SCA": 0.049990864004939795,
+      "SCB": 0.04995445816894062
+    },
+    "pass": true
+  },
+  "G2_construction": {
+    "SC_jul_equals_SCB_jul_max_abs": 0.0,
+    "SC_dec_equals_nov_max_abs": 0.0,
+    "SCB_dec_equals_nov_max_abs": 0.0,
+    "SCA_dec_equals_nov_max_abs": 0.0
+  },
+  "counts": [
+    {
+      "base": "AS3",
+      "source": "monthly harness",
+      "rows": 2304
+    },
+    {
+      "base": "AS3",
+      "source": "regenerated (G1)",
+      "rows": 288
+    },
+    {
+      "base": "AS3",
+      "source": "silage_combos",
+      "rows": 144
+    },
+    {
+      "base": "PER",
+      "source": "monthly harness",
+      "rows": 2304
+    },
+    {
+      "base": "PER",
+      "source": "regenerated (G1)",
+      "rows": 288
+    },
+    {
+      "base": "REV",
+      "source": "monthly harness",
+      "rows": 2304
+    },
+    {
+      "base": "REV",
+      "source": "regenerated (G1)",
+      "rows": 288
+    },
+    {
+      "base": "SC",
+      "source": "regenerated (G2)",
+      "rows": 1440
+    },
+    {
+      "base": "SC",
+      "source": "silage_combos",
+      "rows": 1296
+    },
+    {
+      "base": "SCA",
+      "source": "regenerated (G2)",
+      "rows": 1440
+    },
+    {
+      "base": "SCA",
+      "source": "silage_combos",
+      "rows": 1296
+    },
+    {
+      "base": "SCB",
+      "source": "regenerated (G2)",
+      "rows": 1440
+    },
+    {
+      "base": "SCB",
+      "source": "silage_combos",
+      "rows": 1152
+    }
+  ],
+  "timing_s": {
+    "tier_a": 20.9,
+    "sc_variants": 28.8
+  }
+}

@@ -1,0 +1,26 @@
+{
+ "label": "INFORMATION ONLY: computed once after selection; not used for any choice",
+ "candidate": "s3_fsa_residual",
+ "asof": "2025-11-15",
+ "fsa_files": [
+  {
+   "year": 2025,
+   "asof": "2025-11-15",
+   "current_zip": "AwCPYHfbDXJx.zip",
+   "current_data_as_of": "2025-09-02",
+   "current_published": "2025-09-12",
+   "current_vintage": "sep",
+   "prior_final_zip": "FnNg0ix5oKdi.zip",
+   "prior_final_data_as_of": "2025-01-02",
+   "prior_final_published": "2025-01-07",
+   "prior_final_vintage": "final",
+   "asof_key": "nov"
+  }
+ ],
+ "n_states": 48,
+ "state_wape_pct": 14.315925913864872,
+ "us_error_pct": 4.039104576679946,
+ "persistence_state_wape_pct": 13.96476482948117,
+ "persistence_us_error_pct": 0.32325844512687896,
+ "inside_80_share": 0.8125
+}

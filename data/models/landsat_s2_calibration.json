@@ -1,0 +1,56 @@
+{
+  "method": "per index: Theil-Sen line (scipy.stats.theilslopes, intercept median(y - slope*x)) of y = Sentinel-2 on x = Landsat only with pairs from >= 5 dates and every leave-one-date-out slope within 0.05 of the full slope (fitted on a seeded subsample of at most 2000 pairs); otherwise offset only (slope 1, intercept median(S2 - Landsat)); identity below 30 pairs",
+  "window_days": 1,
+  "min_valid": 0.8,
+  "fitted_on": [
+    "quebec_maize_2023",
+    "qc_regions_2023"
+  ],
+  "indices": {
+    "ndvi": {
+      "mode": "line",
+      "slope": 1.0764852365706152,
+      "intercept": -0.06586435432230509,
+      "n_pairs": 26433,
+      "n_dates": 37,
+      "x_min": 0.1011,
+      "x_p05": 0.1942,
+      "x_p95": 0.8975,
+      "x_max": 0.9386,
+      "lodo_slope_min": 1.0614817688130334,
+      "lodo_slope_max": 1.0869025450031038,
+      "residual_mad": 0.020975168979010972,
+      "calibrated": true
+    },
+    "ndmi": {
+      "mode": "line",
+      "slope": 1.0236156351791532,
+      "intercept": -0.021443566775244297,
+      "n_pairs": 26433,
+      "n_dates": 37,
+      "x_min": -0.2861,
+      "x_p05": -0.1457,
+      "x_p95": 0.5025,
+      "x_max": 0.6268,
+      "lodo_slope_min": 1.0184604667363286,
+      "lodo_slope_max": 1.026882618133244,
+      "residual_mad": 0.011982654723126953,
+      "calibrated": true
+    },
+    "ndti": {
+      "mode": "line",
+      "slope": 0.9991508632889896,
+      "intercept": -0.022170563260684988,
+      "n_pairs": 26433,
+      "n_dates": 37,
+      "x_min": -0.0072,
+      "x_p05": 0.0415,
+      "x_p95": 0.447,
+      "x_max": 0.4903,
+      "lodo_slope_min": 0.9889705882352939,
+      "lodo_slope_max": 1.003858616342117,
+      "residual_mad": 0.010026294933484323,
+      "calibrated": true
+    }
+  }
+}

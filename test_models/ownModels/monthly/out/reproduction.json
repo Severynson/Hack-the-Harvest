@@ -1,0 +1,316 @@
+{
+ "asof_patch": {
+  "kernelag.context.ASOF_MONTH": {
+   "aug": 8,
+   "sep": 9,
+   "oct": 10,
+   "nov": 11,
+   "jul": 7,
+   "dec": 12
+  },
+  "module_ASOF": {
+   "grain_a": {
+    "jul": [
+     7,
+     15
+    ],
+    "aug": [
+     8,
+     15
+    ],
+    "sep": [
+     9,
+     15
+    ],
+    "oct": [
+     10,
+     15
+    ],
+    "nov": [
+     11,
+     15
+    ],
+    "dec": [
+     12,
+     15
+    ]
+   },
+   "silage_a": {
+    "jul": [
+     7,
+     15
+    ],
+    "aug": [
+     8,
+     15
+    ],
+    "sep": [
+     9,
+     15
+    ],
+    "oct": [
+     10,
+     15
+    ],
+    "nov": [
+     11,
+     15
+    ],
+    "dec": [
+     12,
+     15
+    ]
+   },
+   "grain_b": {
+    "jul": [
+     7,
+     15
+    ],
+    "aug": [
+     8,
+     15
+    ],
+    "sep": [
+     9,
+     15
+    ],
+    "oct": [
+     10,
+     15
+    ],
+    "nov": [
+     11,
+     15
+    ],
+    "dec": [
+     12,
+     15
+    ]
+   },
+   "silage_b": {
+    "jul": [
+     7,
+     15
+    ],
+    "aug": [
+     8,
+     15
+    ],
+    "sep": [
+     9,
+     15
+    ],
+    "oct": [
+     10,
+     15
+    ],
+    "nov": [
+     11,
+     15
+    ],
+    "dec": [
+     12,
+     15
+    ]
+   }
+  }
+ },
+ "june_acreage_grain_parse": {
+  "2012": {
+   "report": "Acre-06-29-2012.txt (released 2012-06-29)",
+   "n_states_parsed": 41,
+   "us_line": 88851000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2013": {
+   "report": "Acre-06-28-2013.txt (released 2013-06-28)",
+   "n_states_parsed": 41,
+   "us_line": 89135000.0,
+   "sum_of_states_minus_us_line": 0.0
+  },
+  "2014": {
+   "report": "Acre-06-30-2014.txt (released 2014-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 83839000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2015": {
+   "report": "Acre-06-30-2015.txt (released 2015-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 81101000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2016": {
+   "report": "Acre-06-30-2016.txt (released 2016-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 86550000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2017": {
+   "report": "Acre-06-30-2017.txt (released 2017-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 83496000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2018": {
+   "report": "Acre-06-29-2018.txt (released 2018-06-29)",
+   "n_states_parsed": 41,
+   "us_line": 81770000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2019": {
+   "report": "acrg0619.txt (released 2019-06-28)",
+   "n_states_parsed": 41,
+   "us_line": 83595000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2020": {
+   "report": "acrg0620.txt (released 2020-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 84023000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2021": {
+   "report": "acrg0621.txt (released 2021-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 84495000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2022": {
+   "report": "acrg0622.txt (released 2022-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 81940000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2023": {
+   "report": "acrg0623.txt (released 2023-06-30)",
+   "n_states_parsed": 41,
+   "us_line": 86322000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  },
+  "2024": {
+   "report": "acrg0624.txt (released 2024-06-28)",
+   "n_states_parsed": 41,
+   "us_line": 83438000.0,
+   "sum_of_states_minus_us_line": 0.0,
+   "n_states_stored": 41,
+   "max_abs_diff_acres": 0.0,
+   "states_missing_either": 0
+  }
+ },
+ "report_reversion_only_H13_vs_stored_backtest": {
+  "s1_incumbent_H13": {
+   "exact_to_2dp": true,
+   "mean_state_wape_mine": 13.1225,
+   "mean_state_wape_stored": 13.1225
+  },
+  "s0_persistence_H13": {
+   "exact_to_2dp": true,
+   "mean_state_wape_mine": 14.5319,
+   "mean_state_wape_stored": 14.5337
+  }
+ },
+ "nass_benchmark_vs_grain_folder_table": {
+  "max_abs_diff_acres_years_other_than_2013": 0.0,
+  "year_2013_by_date": [
+   {
+    "asof": "jul",
+    "year": 2013,
+    "max_abs_diff_acres": 791000.0,
+    "states_differing": "ALABAMA,ARIZONA,ARKANSAS,CALIFORNIA,COLORADO,DELAWARE,FLORIDA,GEORGIA,IDAHO,ILLINOIS,INDIANA,IOWA,KANSAS,KENTUCKY,LOUISIANA,MARYLAND,MICHIGAN,MINNESOTA,MISSISSIPPI,MISSOURI,MONTANA,NEBRASKA,NEW JERSEY,NEW MEXICO,NEW YORK,NORTH CAROLINA,NORTH DAKOTA,OHIO,OKLAHOMA,OREGON,PENNSYLVANIA,SOUTH CAROLINA,SOUTH DAKOTA,TENNESSEE,TEXAS,UTAH,VIRGINIA,WASHINGTON,WEST VIRGINIA,WISCONSIN,WYOMING",
+    "state_wape_pct_with_june_2013": 3.6267593555984954,
+    "state_wape_pct_grain_folder_table": 5.2823241421446845
+   },
+   {
+    "asof": "aug",
+    "year": 2013,
+    "max_abs_diff_acres": 17333.333333333336,
+    "states_differing": "ARIZONA,FLORIDA,IDAHO,MONTANA,NEW MEXICO,OREGON,UTAH,WEST VIRGINIA,WYOMING",
+    "state_wape_pct_with_june_2013": 3.6267593555984954,
+    "state_wape_pct_grain_folder_table": 3.6593031744819817
+   },
+   {
+    "asof": "sep",
+    "year": 2013,
+    "max_abs_diff_acres": 17333.333333333336,
+    "states_differing": "ARIZONA,FLORIDA,IDAHO,MONTANA,NEW MEXICO,OREGON,UTAH,WEST VIRGINIA,WYOMING",
+    "state_wape_pct_with_june_2013": 3.6267593555984954,
+    "state_wape_pct_grain_folder_table": 3.6593031744819817
+   },
+   {
+    "asof": "oct",
+    "year": 2013,
+    "max_abs_diff_acres": 17333.333333333336,
+    "states_differing": "ARIZONA,FLORIDA,IDAHO,MONTANA,NEW MEXICO,OREGON,UTAH,WEST VIRGINIA,WYOMING",
+    "state_wape_pct_with_june_2013": 3.6267593555984954,
+    "state_wape_pct_grain_folder_table": 3.6593031744819817
+   },
+   {
+    "asof": "nov",
+    "year": 2013,
+    "max_abs_diff_acres": 17333.333333333336,
+    "states_differing": "ARIZONA,FLORIDA,IDAHO,MONTANA,NEW MEXICO,OREGON,UTAH,WEST VIRGINIA,WYOMING",
+    "state_wape_pct_with_june_2013": 1.6087170281611232,
+    "state_wape_pct_grain_folder_table": 1.6412608470446104
+   },
+   {
+    "asof": "dec",
+    "year": 2013,
+    "max_abs_diff_acres": 17333.333333333336,
+    "states_differing": "ARIZONA,FLORIDA,IDAHO,MONTANA,NEW MEXICO,OREGON,UTAH,WEST VIRGINIA,WYOMING",
+    "state_wape_pct_with_june_2013": 1.6087170281611232,
+    "state_wape_pct_grain_folder_table": 1.6412608470446104
+   }
+  ],
+  "note": "the grain folder's table has no June 2013 grain forecast: there, 15 Jul 2013 is planted x share for every state, and at later dates the 9 states without a Crop Production forecast are planted x share instead of their June Acreage grain forecast (as in 2012 and 2014-2024)"
+ },
+ "tierB_c0_equals_tierA_s1_max_abs_diff_acres": 0.0,
+ "nass_latest_nov_2017_2024": {
+  "expected_incumbent_rounded_per_year": [
+   1.66,
+   0.82
+  ],
+  "reproduced_rounded_per_year": [
+   1.66,
+   0.82
+  ],
+  "unrounded": [
+   1.6574192286834444,
+   0.8197900330620305
+  ]
+ },
+ "nass_latest_dec_equals_nov_max_abs_diff_pts": 0.0
+}

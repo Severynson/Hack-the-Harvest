@@ -10,8 +10,43 @@
   2023,
   2024
  ],
- "selected_silage_set": "reversion_only",
+ "selected_silage_set": "smoothed_chopping",
+ "best_ridge_set": "reversion_only",
  "selection_tolerance_points": 0.3,
+ "smoothed_chopping_params_by_year": {
+  "2017": {
+   "alpha": 0.5,
+   "gamma": 0.05
+  },
+  "2018": {
+   "alpha": 0.5,
+   "gamma": 0.04
+  },
+  "2019": {
+   "alpha": 0.45,
+   "gamma": 0.04
+  },
+  "2020": {
+   "alpha": 0.45,
+   "gamma": 0.04
+  },
+  "2021": {
+   "alpha": 0.45,
+   "gamma": 0.04
+  },
+  "2022": {
+   "alpha": 0.4,
+   "gamma": 0.05
+  },
+  "2023": {
+   "alpha": 0.45,
+   "gamma": 0.05
+  },
+  "2024": {
+   "alpha": 0.45,
+   "gamma": 0.04
+  }
+ },
  "mean_errors_pct": {
   "grain.nass_latest": {
    "state_error_pct": 1.66,
@@ -37,6 +72,10 @@
    "state_error_pct": 14.53,
    "abs_total_error_pct": 4.08
   },
+  "silage.smoothed_chopping": {
+   "state_error_pct": 12.8,
+   "abs_total_error_pct": 3.34
+  },
   "silage.stress": {
    "state_error_pct": 13.82,
    "abs_total_error_pct": 3.12
@@ -53,7 +92,7 @@
   }
  },
  "us_log_error_rms": {
-  "silage": 0.0445,
+  "silage": 0.0397,
   "grain": 0.011
  },
  "sampled_states_silage_errors_pct": {},

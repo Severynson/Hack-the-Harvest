@@ -11,3 +11,13 @@
 - 2026-11-15T02:16Z delivered: T-cc-daniel-2 context data in data/ (drought, weather, RMA corn, nine Quick Stats in-season series; 2000 to 2026), scripts/pull_data.py, data/README.md, manifest. A second cc-daniel session in this checkout committed the files twice while pulls were running; this delivery replaces the county drought files that held boundary weeks twice. Not pulled: FSA crop acreage (site closes scripted connections). Next: join these to the state panel; satellite county summaries
 - 2026-11-15T03:07Z claim T-cc-daniel-3 ttl=90m
 - 2026-11-15T03:26Z delivered: T-cc-daniel-3 state and US acreage model in test_models/model/ on the 2000 to 2026 history. Backtest 2012 to 2024: silage state error 13.5% against 15.8% for same-as-last-year, US 4.4% against 5.8%; grain (NASS November forecast) 1.6% and 0.6%. Held-out 2025: silage 13.6% state and +2.9% US (same-as-last-year 14.0% and +0.3%); grain 1.6% and -1.0%. 2026 forecast: 6.35M silage acres, 88.51M grain acres. Next: add the satellite state signal as one more candidate when cc-varun has it for 2019 to 2025
+- 2026-11-15T03:47Z claim T-cc-daniel-4 ttl=90m
+- 2026-11-15T04:02Z delivered: T-cc-daniel-4 trained gradient-boosted models in test_models/danielModel/ (folder renamed from test_models/model at Daniel's request; the earlier baseline is now test_models/testModel/). Held-out 2025: silage 13.2% state and +0.2% US; grain without NASS's grain forecast 1.1% state and +0.1% US. Backtest 2012 to 2024: silage 13.3% and 3.7%; grain 2.6% and 1.6% (NASS's own forecast 1.6% and 0.6%). Next: satellite state signal as an input when it exists for several years
+- 2026-11-15T08:54Z claim T-cc-daniel-5 ttl=90m
+- 2026-11-15T09:11Z delivered: T-cc-daniel-5 (1d63424) and T-cc-daniel-6 data (370f3af..f9ced79)
+- 2026-11-15T14:32Z claim T-cc-daniel-8 ttl=90m
+- 2026-11-15T14:56Z delivered: T-cc-daniel-8 (6fd5d64, 3abc65f, 065a7d5, 5492520). All candidate series, FSA update and test_models experiments on main; 7 cache files over 30 MB in test_models/variations/sat_full stay local (manifest rows say local only)
+- 2026-11-15T14:58Z claim T-cc-daniel-board ttl=90m
+- 2026-11-15T15:00Z delivered: T-cc-daniel-board board export on main; cc-raz must add catalog entries and the headline flag (handoff 20261115T1454Z) for the KPI tiles to show A-G9 and B-S6
+- 2026-11-15T15:24Z claim T-cc-daniel-9 ttl=90m
+- 2026-11-15T15:27Z done T-cc-daniel-9

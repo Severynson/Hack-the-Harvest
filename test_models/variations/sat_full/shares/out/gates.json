@@ -1,0 +1,83 @@
+{
+ "G1_K0": {
+  "observed": {
+   "n": 3128,
+   "TP": 877,
+   "FP": 345,
+   "FN": 390,
+   "TN": 1516
+  },
+  "expected": {
+   "n": 3128,
+   "TP": 877,
+   "FP": 345,
+   "FN": 390,
+   "TN": 1516
+  },
+  "reproduced": true
+ },
+ "G2_K1": {
+  "observed": {
+   "2019": 2566,
+   "2020": 2325,
+   "2021": 2598,
+   "2022": 2839,
+   "2023": 3128,
+   "2024": 2938,
+   "2025": 2826,
+   "2026": 2806
+  },
+  "expected": {
+   "2019": 2566,
+   "2020": 2325,
+   "2021": 2598,
+   "2022": 2839,
+   "2023": 3128,
+   "2024": 2938,
+   "2026": 2806
+  },
+  "reproduced": true,
+  "assessable_fit_rows": 21975,
+  "digests": {
+   "2019": "fe6c2638cf9db5ec",
+   "2020": "44d63d3ceb740daf",
+   "2021": "a0d24128332840ec",
+   "2022": "153f45d7950be2c6",
+   "2023": "1353c6acebd2048e",
+   "2024": "619b67ee04f93c59",
+   "2025": "45e9d862f0b9960a",
+   "2026": "ff7464cfd12f11e6"
+  }
+ },
+ "G0_sample_counts": {
+  "cell_years": 3300,
+  "mismatched": 0,
+  "reproduced": true,
+  "field_years": 1083954
+ },
+ "G3_state_table": {
+  "rows_compared": 1485,
+  "max_abs_difference": 0.0,
+  "reproduced": true
+ },
+ "earlier_share_check": {
+  "sep": {
+   "n": 105,
+   "pearson": 0.9991602421718137,
+   "median_abs_diff": 4.399999999998849e-05,
+   "max_abs_diff": 0.022201
+  },
+  "oct": {
+   "n": 105,
+   "pearson": 0.9998991049782087,
+   "median_abs_diff": 4.400000000001625e-05,
+   "max_abs_diff": 0.01138100000000003
+  },
+  "nov": {
+   "n": 105,
+   "pearson": 0.999814448939448,
+   "median_abs_diff": 4.300000000001525e-05,
+   "max_abs_diff": 0.02063100000000001
+  }
+ }
+}

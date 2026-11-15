@@ -1,0 +1,313 @@
+model,tier,crop,asof,year,n_states,state_wape_pct,us_error_pct,fallback,fsa_file,detail
+ph1_g9_on_g11,A (post hoc),grain,jul,2012,41,6.849424827,-3.990156241,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2013,41,5.527034907,-0.1097632087,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2014,41,6.724316263,5.18966637,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2015,41,4.010996495,2.963357398,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2016,41,7.189791119,-6.910822152,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2017,41,5.986728391,4.852960729,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2018,41,3.678744348,1.926843992,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2019,41,9.80355842,0.2197775061,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2020,41,8.530084705,-1.432431117,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2021,41,6.970395821,-3.318115499,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2022,41,8.074455244,7.982974398,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,jul,2024,41,6.731209209,4.166365629,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2013,41,4.953795068,-4.871826848,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2014,41,4.832275086,-4.770684803,False,aug 2014-08-01 (published 2014-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2015,41,2.214131991,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2016,41,1.308756902,-0.8368023547,False,aug 2016-08-01 (published 2016-08-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2017,41,1.03452702,-0.01386372689,False,aug 2017-08-01 (published 2017-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2018,41,1.467732881,0.2600651685,False,aug 2018-08-01 (published 2018-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2019,41,1.8898757,0.5683766757,False,aug 2019-08-01 (published 2019-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2020,41,6.648116475,-6.547803059,False,aug 2020-07-31 (published 2020-08-08),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2021,41,1.774227822,-0.6489284625,False,aug 2021-08-02 (published 2021-08-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2022,41,8.074455244,7.982974398,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,aug,2024,41,6.731209209,4.166365629,True,,post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2013,41,4.953795068,-4.871826848,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2014,41,3.572841361,-3.239971552,False,sep 2014-09-01 (published 2014-09-13),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2015,41,2.216145519,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2016,41,1.254392473,-0.2961230675,False,sep 2016-09-01 (published 2016-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2017,41,1.016097994,0.4094635905,False,sep 2017-08-31 (published 2017-09-12),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2018,41,1.560334086,0.6076038943,False,sep 2018-09-06 (published 2018-09-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2019,41,1.943517713,1.501123312,False,sep 2019-09-04 (published 2019-09-12),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2020,41,1.457847526,0.3494438485,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2021,41,1.23071415,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2022,41,2.994351421,2.477060841,False,sep 2022-09-02 (published 2022-09-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2023,41,1.545310697,0.2733346639,False,sep 2023-09-01 (published 2023-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,sep,2024,41,1.477287396,-0.5990638691,False,sep 2024-09-03 (published 2024-09-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2012,41,3.484528088,1.771153413,False,oct 2012-10-02 (published 2012-10-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2013,41,2.666227206,-2.203733446,False,sep 2013-09-01 (published 2013-09-18),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2014,41,3.361259851,-2.905396821,False,oct 2014-10-01 (published 2014-10-15),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2015,41,1.035392779,-0.1179493201,False,oct 2015-10-01 (published 2015-10-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2016,41,1.22333634,-0.2312871955,False,oct 2016-10-03 (published 2016-10-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2017,41,1.026082601,0.4490751038,False,oct 2017-10-02 (published 2017-10-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2018,41,1.639582599,0.6994610143,False,oct 2018-10-01 (published 2018-10-12),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2019,41,1.998414641,1.600180927,False,oct 2019-10-01 (published 2019-10-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2020,41,1.482641161,0.3494438485,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2021,41,1.122149586,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2022,41,3.027146958,2.514971957,False,oct 2022-10-03 (published 2022-10-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2023,41,1.62144556,0.3061992129,False,oct 2023-10-02 (published 2023-10-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,oct,2024,41,1.450182572,-0.5423458308,False,oct 2024-10-01 (published 2024-10-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2013,41,2.409056795,-1.392146552,False,nov 2013-11-01 (published 2013-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2014,41,2.813381477,-2.23457757,False,nov 2014-11-01 (published 2014-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2015,41,1.030911928,0.1187770918,False,nov 2015-11-02 (published 2015-11-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2016,41,1.200434847,-0.1967298172,False,nov 2016-11-01 (published 2016-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2017,41,1.03946413,0.4677986501,False,nov 2017-11-01 (published 2017-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2018,41,1.660776192,0.740578656,False,nov 2018-11-01 (published 2018-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2019,41,2.037300726,1.674039902,False,nov 2019-11-01 (published 2019-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2020,41,1.478128978,1.177478062,False,nov 2020-11-02 (published 2020-11-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2021,41,1.086995291,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2022,41,3.042710991,2.523525152,False,nov 2022-11-01 (published 2022-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2023,41,1.615579758,0.3117780133,False,nov 2023-11-01 (published 2023-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,nov,2024,41,1.428300034,-0.5356367963,False,nov 2024-11-01 (published 2024-11-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2013,41,2.425868835,-1.316351507,False,dec 2013-12-01 (published 2013-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2014,41,2.44200024,-1.783928535,False,dec 2014-12-01 (published 2014-12-13),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2015,41,1.022849976,0.179040974,False,dec 2015-12-01 (published 2015-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2016,41,1.194635388,-0.1890752035,False,dec 2016-12-02 (published 2016-12-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2017,41,1.047583353,0.4957498143,False,dec 2017-12-01 (published 2017-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2018,41,1.677778569,0.7999842271,False,dec 2018-12-03 (published 2018-12-11),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2019,41,2.06274637,1.7121329,False,dec 2019-12-02 (published 2019-12-10),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2020,41,1.515098373,1.271798386,False,dec 2020-12-01 (published 2020-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2021,41,1.033994713,0.3565997127,False,dec 2021-12-01 (published 2021-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2022,41,3.052801947,2.530784243,False,dec 2022-12-01 (published 2022-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2023,41,1.610950397,0.3166795674,False,dec 2023-12-01 (published 2023-12-09),post hoc
+ph1_g9_on_g11,A (post hoc),grain,dec,2024,41,1.41813733,-0.5303505136,False,dec 2024-12-02 (published 2024-12-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2012,41,6.849424827,-3.990156241,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2013,41,5.527034907,-0.1097632087,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2014,41,6.724316263,5.18966637,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2015,41,4.010996495,2.963357398,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2016,41,7.189791119,-6.910822152,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2017,41,5.986728391,4.852960729,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2018,41,3.678744348,1.926843992,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2019,41,9.80355842,0.2197775061,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2020,41,8.530084705,-1.432431117,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2021,41,6.970395821,-3.318115499,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2022,41,8.074455244,7.982974398,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,jul,2024,41,6.731209209,4.166365629,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2013,41,4.088957611,-3.984062323,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2014,41,3.973842685,-2.720341899,False,aug 2014-08-01 (published 2014-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2015,41,1.744501773,-0.02359502838,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2016,41,2.216817458,1.474424882,False,aug 2016-08-01 (published 2016-08-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2017,41,2.059640425,1.712499266,False,aug 2017-08-01 (published 2017-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2018,41,1.968157237,0.9355094993,False,aug 2018-08-01 (published 2018-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2019,41,2.030940192,1.06030568,False,aug 2019-08-01 (published 2019-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2020,41,6.393947593,-6.023758855,False,aug 2020-07-31 (published 2020-08-08),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2021,41,1.294723209,0.5110665083,False,aug 2021-08-02 (published 2021-08-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2022,41,8.074455244,7.982974398,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,aug,2024,41,6.731209209,4.166365629,True,,post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2013,41,4.088957611,-3.984062323,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2014,41,3.336929474,-2.467422091,False,sep 2014-09-01 (published 2014-09-13),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2015,41,1.744501773,-0.02359502838,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2016,41,1.491406168,0.4471734673,False,sep 2016-09-01 (published 2016-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2017,41,1.224781655,0.887218687,False,sep 2017-08-31 (published 2017-09-12),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2018,41,1.702951452,0.7314895973,False,sep 2018-09-06 (published 2018-09-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2019,41,1.975523962,1.594700878,False,sep 2019-09-04 (published 2019-09-12),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2020,41,1.579904829,0.474864983,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2021,41,1.178174925,0.4433354078,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2022,41,3.281844924,2.650411751,False,sep 2022-09-02 (published 2022-09-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2023,41,1.571001605,0.3814786039,False,sep 2023-09-01 (published 2023-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,sep,2024,41,1.179635052,-0.551048802,False,sep 2024-09-03 (published 2024-09-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2012,41,3.484528088,1.771153413,False,oct 2012-10-02 (published 2012-10-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2013,41,2.666227206,-2.203733446,False,sep 2013-09-01 (published 2013-09-18),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2014,41,3.361259851,-2.905396821,False,oct 2014-10-01 (published 2014-10-15),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2015,41,1.063102436,-0.1179493201,False,oct 2015-10-01 (published 2015-10-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2016,41,1.206129499,-0.2312871955,False,oct 2016-10-03 (published 2016-10-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2017,41,1.035810505,0.4490751038,False,oct 2017-10-02 (published 2017-10-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2018,41,1.687286679,0.6994610143,False,oct 2018-10-01 (published 2018-10-12),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2019,41,1.982279119,1.600180927,False,oct 2019-10-01 (published 2019-10-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2020,41,1.579904829,0.474864983,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2021,41,1.178174925,0.4433354078,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2022,41,3.230341812,2.514971957,False,oct 2022-10-03 (published 2022-10-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2023,41,1.583552495,0.3061992129,False,oct 2023-10-02 (published 2023-10-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,oct,2024,41,1.162362622,-0.5423458308,False,oct 2024-10-01 (published 2024-10-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2013,41,2.409056795,-1.392146552,False,nov 2013-11-01 (published 2013-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2014,41,2.813381477,-2.23457757,False,nov 2014-11-01 (published 2014-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2015,41,1.115260209,0.1187770918,False,nov 2015-11-02 (published 2015-11-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2016,41,1.199143317,-0.1967298172,False,nov 2016-11-01 (published 2016-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2017,41,1.047831659,0.4677986501,False,nov 2017-11-01 (published 2017-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2018,41,1.701810881,0.740578656,False,nov 2018-11-01 (published 2018-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2019,41,2.029536342,1.674039902,False,nov 2019-11-01 (published 2019-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2020,41,1.521814911,1.177478062,False,nov 2020-11-02 (published 2020-11-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2021,41,1.178174925,0.4433354078,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2022,41,3.237306173,2.523525152,False,nov 2022-11-01 (published 2022-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2023,41,1.584981262,0.3117780133,False,nov 2023-11-01 (published 2023-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,nov,2024,41,1.159897718,-0.5356367963,False,nov 2024-11-01 (published 2024-11-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2013,41,2.425868835,-1.316351507,False,dec 2013-12-01 (published 2013-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2014,41,2.44200024,-1.783928535,False,dec 2014-12-01 (published 2014-12-13),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2015,41,1.146595505,0.179040974,False,dec 2015-12-01 (published 2015-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2016,41,1.198192816,-0.1890752035,False,dec 2016-12-02 (published 2016-12-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2017,41,1.05443182,0.4957498143,False,dec 2017-12-01 (published 2017-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2018,41,1.710107801,0.7999842271,False,dec 2018-12-03 (published 2018-12-11),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2019,41,2.053833211,1.7121329,False,dec 2019-12-02 (published 2019-12-10),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2020,41,1.551593235,1.271798386,False,dec 2020-12-01 (published 2020-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2021,41,1.163698978,0.3565997127,False,dec 2021-12-01 (published 2021-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2022,41,3.244373089,2.530784243,False,dec 2022-12-01 (published 2022-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2023,41,1.585921797,0.3166795674,False,dec 2023-12-01 (published 2023-12-09),post hoc
+ph2_g9_on_g8,A (post hoc),grain,dec,2024,41,1.1591494,-0.5303505136,False,dec 2024-12-02 (published 2024-12-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2012,41,6.849424827,-3.990156241,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2013,41,5.527034907,-0.1097632087,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2014,41,6.724316263,5.18966637,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2015,41,4.010996495,2.963357398,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2016,41,7.189791119,-6.910822152,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2017,41,5.986728391,4.852960729,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2018,41,3.678744348,1.926843992,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2019,41,9.80355842,0.2197775061,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2020,41,8.530084705,-1.432431117,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2021,41,6.970395821,-3.318115499,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2022,41,8.074455244,7.982974398,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,jul,2024,41,6.731209209,4.166365629,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2012,41,3.52898486,1.83215503,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2013,41,4.191432384,-3.874750204,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2014,41,5.02997846,-4.982190975,False,aug 2014-08-01 (published 2014-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2015,41,2.354740755,-1.83086892,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2016,41,1.278545135,-0.6867600491,False,aug 2016-08-01 (published 2016-08-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2017,41,1.095937117,-0.1090412468,False,aug 2017-08-01 (published 2017-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2018,41,1.695828583,0.3434610411,False,aug 2018-08-01 (published 2018-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2019,41,1.999498397,0.7663466897,False,aug 2019-08-01 (published 2019-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2020,41,6.731545873,-6.474273901,False,aug 2020-07-31 (published 2020-08-08),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2021,41,1.238277988,-0.4128107931,False,aug 2021-08-02 (published 2021-08-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2022,41,8.074455244,7.982974398,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,aug,2024,41,6.731209209,4.166365629,True,,post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2012,41,3.52898486,1.83215503,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2013,41,4.191432384,-3.874750204,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2014,41,3.741082583,-3.45540214,False,sep 2014-09-01 (published 2014-09-13),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2015,41,2.354740755,-1.83086892,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2016,41,1.193986752,-0.130884906,False,sep 2016-09-01 (published 2016-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2017,41,1.027822849,0.3359737536,False,sep 2017-08-31 (published 2017-09-12),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2018,41,1.682940073,0.6895376689,False,sep 2018-09-06 (published 2018-09-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2019,41,2.065526811,1.702983211,False,sep 2019-09-04 (published 2019-09-12),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2020,41,1.597561349,0.3847865215,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2022,41,3.248531475,2.637469541,False,sep 2022-09-02 (published 2022-09-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2023,41,1.577310137,0.008103541676,False,sep 2023-09-01 (published 2023-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,sep,2024,41,1.560724417,-1.135404882,False,sep 2024-09-03 (published 2024-09-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2012,41,3.440652432,2.704672272,False,oct 2012-10-02 (published 2012-10-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2013,41,2.082334973,-1.183617459,False,sep 2013-09-01 (published 2013-09-18),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2014,41,3.510729894,-3.113639988,False,oct 2014-10-01 (published 2014-10-15),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2015,41,1.063092012,-0.1171712104,False,oct 2015-10-01 (published 2015-10-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2016,41,1.183418803,-0.06529298882,False,oct 2016-10-03 (published 2016-10-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2017,41,1.038431144,0.382708909,False,oct 2017-10-02 (published 2017-10-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2018,41,1.744056923,0.7808408681,False,oct 2018-10-01 (published 2018-10-12),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2019,41,2.12597248,1.802643902,False,oct 2019-10-01 (published 2019-10-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2020,41,1.597561349,0.3847865215,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2022,41,3.27555267,2.676397344,False,oct 2022-10-03 (published 2022-10-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2023,41,1.559238452,0.04180328908,False,oct 2023-10-02 (published 2023-10-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,oct,2024,41,1.509269987,-1.077291048,False,oct 2024-10-01 (published 2024-10-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2012,41,3.435539727,2.765747357,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2013,41,1.830173466,-0.3592555189,False,nov 2013-11-01 (published 2013-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2014,41,2.914151539,-2.443644349,False,nov 2014-11-01 (published 2014-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2015,41,1.115518311,0.1195419785,False,nov 2015-11-02 (published 2015-11-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2016,41,1.190306686,-0.02933889116,False,nov 2016-11-01 (published 2016-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2017,41,1.049602529,0.4035775309,False,nov 2017-11-01 (published 2017-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2018,41,1.761670365,0.822883096,False,nov 2018-11-01 (published 2018-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2019,41,2.176425061,1.878324104,False,nov 2019-11-01 (published 2019-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2020,41,1.550950881,1.216043476,False,nov 2020-11-02 (published 2020-11-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2022,41,3.283619561,2.685074079,False,nov 2022-11-01 (published 2022-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2023,41,1.558232138,0.04746864813,False,nov 2023-11-01 (published 2023-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,nov,2024,41,1.505192266,-1.070681774,False,nov 2024-11-01 (published 2024-11-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2012,41,3.435539727,2.765747357,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2013,41,1.858781407,-0.2824689291,False,dec 2013-12-01 (published 2013-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2014,41,2.513867884,-1.994727627,False,dec 2014-12-01 (published 2014-12-13),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2015,41,1.147253719,0.1809909514,False,dec 2015-12-01 (published 2015-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2016,41,1.190134216,-0.02161400649,False,dec 2016-12-02 (published 2016-12-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2017,41,1.055130323,0.4313557158,False,dec 2017-12-01 (published 2017-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2018,41,1.776781116,0.8831931452,False,dec 2018-12-03 (published 2018-12-11),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2019,41,2.201698556,1.917784035,False,dec 2019-12-02 (published 2019-12-10),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2020,41,1.584561594,1.313436466,False,dec 2020-12-01 (published 2020-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2021,41,1.214080465,0.5782138445,False,dec 2021-12-01 (published 2021-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2022,41,3.291252048,2.69339503,False,dec 2022-12-01 (published 2022-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2023,41,1.556427066,0.05259664137,False,dec 2023-12-01 (published 2023-12-09),post hoc
+ph3_g3_hist0910,A (post hoc),grain,dec,2024,41,1.502579319,-1.065222768,False,dec 2024-12-02 (published 2024-12-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2012,41,6.849424827,-3.990156241,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2013,41,5.527034907,-0.1097632087,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2014,41,6.724316263,5.18966637,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2015,41,4.010996495,2.963357398,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2016,41,7.189791119,-6.910822152,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2017,41,5.986728391,4.852960729,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2018,41,3.678744348,1.926843992,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2019,41,9.80355842,0.2197775061,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2020,41,8.530084705,-1.432431117,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2021,41,6.970395821,-3.318115499,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2022,41,8.074455244,7.982974398,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,jul,2024,41,6.731209209,4.166365629,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2012,41,3.438329094,1.550705324,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2013,41,4.265750414,-3.996480623,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2014,41,4.832275086,-4.770684803,False,aug 2014-08-01 (published 2014-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2015,41,2.35465188,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2016,41,1.366688815,-0.8368023547,False,aug 2016-08-01 (published 2016-08-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2017,41,1.072729045,-0.01386372689,False,aug 2017-08-01 (published 2017-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2018,41,1.676815068,0.2600651685,False,aug 2018-08-01 (published 2018-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2019,41,1.940986093,0.5683766757,False,aug 2019-08-01 (published 2019-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2020,41,6.773724767,-6.547803059,False,aug 2020-07-31 (published 2020-08-08),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2021,41,1.359140259,-0.6489284625,False,aug 2021-08-02 (published 2021-08-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2022,41,8.074455244,7.982974398,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2023,41,9.047927311,-9.017871593,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,aug,2024,41,6.731209209,4.166365629,True,,post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2012,41,3.438329094,1.550705324,False,aug 2012-07-31 (published 2012-08-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2013,41,4.265750414,-3.996480623,False,aug 2013-08-01 (published 2013-08-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2014,41,3.572841361,-3.239971552,False,sep 2014-09-01 (published 2014-09-13),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2015,41,2.35465188,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2016,41,1.22190562,-0.2961230675,False,sep 2016-09-01 (published 2016-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2017,41,1.022704685,0.4094635905,False,sep 2017-08-31 (published 2017-09-12),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2018,41,1.64129808,0.6076038943,False,sep 2018-09-06 (published 2018-09-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2019,41,1.925875354,1.501123312,False,sep 2019-09-04 (published 2019-09-12),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2020,41,1.5948625,0.3494438485,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2022,41,3.209391544,2.477060841,False,sep 2022-09-02 (published 2022-09-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2023,41,1.582765318,0.2733346639,False,sep 2023-09-01 (published 2023-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,sep,2024,41,1.202523589,-0.5990638691,False,sep 2024-09-03 (published 2024-09-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2012,41,3.306069476,2.415098617,False,oct 2012-10-02 (published 2012-10-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2013,41,2.141594199,-1.303836077,False,sep 2013-09-01 (published 2013-09-18),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2014,41,3.361259851,-2.905396821,False,oct 2014-10-01 (published 2014-10-15),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2015,41,1.063102436,-0.1179493201,False,oct 2015-10-01 (published 2015-10-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2016,41,1.206129499,-0.2312871955,False,oct 2016-10-03 (published 2016-10-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2017,41,1.035810505,0.4490751038,False,oct 2017-10-02 (published 2017-10-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2018,41,1.687286679,0.6994610143,False,oct 2018-10-01 (published 2018-10-12),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2019,41,1.982279119,1.600180927,False,oct 2019-10-01 (published 2019-10-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2020,41,1.5948625,0.3494438485,False,sep 2020-09-01 (published 2020-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2022,41,3.230341812,2.514971957,False,oct 2022-10-03 (published 2022-10-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2023,41,1.583552495,0.3061992129,False,oct 2023-10-02 (published 2023-10-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,oct,2024,41,1.162362622,-0.5423458308,False,oct 2024-10-01 (published 2024-10-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2012,41,3.291827931,2.47482369,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2013,41,1.83146844,-0.4847811587,False,nov 2013-11-01 (published 2013-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2014,41,2.813381477,-2.23457757,False,nov 2014-11-01 (published 2014-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2015,41,1.115260209,0.1187770918,False,nov 2015-11-02 (published 2015-11-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2016,41,1.199143317,-0.1967298172,False,nov 2016-11-01 (published 2016-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2017,41,1.047831659,0.4677986501,False,nov 2017-11-01 (published 2017-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2018,41,1.701810881,0.740578656,False,nov 2018-11-01 (published 2018-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2019,41,2.029536342,1.674039902,False,nov 2019-11-01 (published 2019-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2020,41,1.521814911,1.177478062,False,nov 2020-11-02 (published 2020-11-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2022,41,3.237306173,2.523525152,False,nov 2022-11-01 (published 2022-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2023,41,1.584981262,0.3117780133,False,nov 2023-11-01 (published 2023-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,nov,2024,41,1.159897718,-0.5356367963,False,nov 2024-11-01 (published 2024-11-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2012,41,3.291827931,2.47482369,False,nov 2012-11-05 (published 2012-11-14),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2013,41,1.851538551,-0.408288666,False,dec 2013-12-01 (published 2013-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2014,41,2.44200024,-1.783928535,False,dec 2014-12-01 (published 2014-12-13),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2015,41,1.146595505,0.179040974,False,dec 2015-12-01 (published 2015-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2016,41,1.198192816,-0.1890752035,False,dec 2016-12-02 (published 2016-12-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2017,41,1.05443182,0.4957498143,False,dec 2017-12-01 (published 2017-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2018,41,1.710107801,0.7999842271,False,dec 2018-12-03 (published 2018-12-11),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2019,41,2.053833211,1.7121329,False,dec 2019-12-02 (published 2019-12-10),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2020,41,1.551593235,1.271798386,False,dec 2020-12-01 (published 2020-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2021,41,1.163698978,0.3565997127,False,dec 2021-12-01 (published 2021-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2022,41,3.244373089,2.530784243,False,dec 2022-12-01 (published 2022-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2023,41,1.585921797,0.3166795674,False,dec 2023-12-01 (published 2023-12-09),post hoc
+ph4_g9_hist0910,A (post hoc),grain,dec,2024,41,1.1591494,-0.5303505136,False,dec 2024-12-02 (published 2024-12-10),post hoc

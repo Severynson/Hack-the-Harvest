@@ -1,0 +1,673 @@
+model,tier,crop,asof,year,n_states,state_wape_pct,us_error_pct,fallback,fsa_file,detail
+g3_fsa_ratio_multi,A,grain,jul,2012,41,6.84942,-3.99016,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2013,41,5.52703,-0.109763,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2014,41,6.72432,5.18967,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2015,41,4.011,2.96336,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2016,41,7.18979,-6.91082,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2017,41,5.98673,4.85296,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2018,41,3.67874,1.92684,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2019,41,9.80356,0.219778,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2020,41,8.53008,-1.43243,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2021,41,6.9704,-3.31812,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2022,41,8.07446,7.98297,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2023,41,9.04793,-9.01787,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2024,41,6.73121,4.16637,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,aug,2012,41,3.58604,1.01148,False,aug 2012-07-31 (published 2012-08-05),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2013,41,4.90319,-4.81697,False,aug 2013-08-01 (published 2013-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2014,41,5.02998,-4.98219,False,aug 2014-08-01 (published 2014-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2015,41,2.35474,-1.83087,False,aug 2015-08-03 (published 2015-08-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2016,41,1.27855,-0.68676,False,aug 2016-08-01 (published 2016-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2017,41,1.09594,-0.109041,False,aug 2017-08-01 (published 2017-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2018,41,1.69583,0.343461,False,aug 2018-08-01 (published 2018-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2019,41,1.9995,0.766347,False,aug 2019-08-01 (published 2019-08-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2020,41,6.73155,-6.47427,False,aug 2020-07-31 (published 2020-08-05),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2021,41,1.23828,-0.412811,False,aug 2021-08-02 (published 2021-08-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2022,41,8.07446,7.98297,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,aug,2023,41,1.66433,-0.12795,False,aug 2023-08-09 (published 2023-08-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2024,41,6.73121,4.16637,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,sep,2012,41,3.58604,1.01148,False,aug 2012-07-31 (published 2012-08-05),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2013,41,2.6465,-2.15411,False,sep 2013-09-01 (published 2013-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2014,41,3.74108,-3.4554,False,sep 2014-09-01 (published 2014-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2015,41,1.31537,-0.626258,False,sep 2015-09-03 (published 2015-09-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2016,41,1.19399,-0.130885,False,sep 2016-09-01 (published 2016-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2017,41,1.02782,0.335974,False,sep 2017-08-31 (published 2017-09-05),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2018,41,1.68294,0.689538,False,sep 2018-09-06 (published 2018-09-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2019,41,2.06553,1.70298,False,sep 2019-09-04 (published 2019-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2020,41,1.59756,0.384787,False,sep 2020-09-01 (published 2020-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2021,41,1.23904,0.483146,False,sep 2021-09-01 (published 2021-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2022,41,3.24853,2.63747,False,sep 2022-09-02 (published 2022-09-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2023,41,1.57731,0.00810354,False,sep 2023-09-01 (published 2023-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2024,41,1.56072,-1.1354,False,sep 2024-09-03 (published 2024-09-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2012,41,3.53322,1.86293,False,oct 2012-10-02 (published 2012-10-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2013,41,2.44087,-1.44791,False,oct 2013-10-01 (published 2013-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2014,41,3.51073,-3.11364,False,oct 2014-10-01 (published 2014-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2015,41,1.06309,-0.117171,False,oct 2015-10-01 (published 2015-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2016,41,1.18342,-0.065293,False,oct 2016-10-03 (published 2016-10-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2017,41,1.03843,0.382709,False,oct 2017-10-02 (published 2017-10-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2018,41,1.74406,0.780841,False,oct 2018-10-01 (published 2018-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2019,41,2.12597,1.80264,False,oct 2019-10-01 (published 2019-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2020,41,1.59756,0.384787,False,sep 2020-09-01 (published 2020-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2021,41,1.23904,0.483146,False,sep 2021-09-01 (published 2021-09-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2022,41,3.27555,2.6764,False,oct 2022-10-03 (published 2022-10-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2023,41,1.55924,0.0418033,False,oct 2023-10-02 (published 2023-10-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2024,41,1.50927,-1.07729,False,oct 2024-10-01 (published 2024-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2012,41,3.51664,1.92249,False,nov 2012-11-05 (published 2012-11-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2013,41,2.40682,-1.33873,False,nov 2013-11-01 (published 2013-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2014,41,2.91415,-2.44364,False,nov 2014-11-01 (published 2014-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2015,41,1.06309,-0.117171,False,oct 2015-10-01 (published 2015-10-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2016,41,1.19031,-0.0293389,False,nov 2016-11-01 (published 2016-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2017,41,1.0496,0.403578,False,nov 2017-11-01 (published 2017-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2018,41,1.76167,0.822883,False,nov 2018-11-01 (published 2018-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2019,41,2.17643,1.87832,False,nov 2019-11-01 (published 2019-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2020,41,1.55095,1.21604,False,nov 2020-11-02 (published 2020-11-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2021,41,1.21489,0.57653,False,nov 2021-11-09 (published 2021-11-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2022,41,3.28362,2.68507,False,nov 2022-11-01 (published 2022-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2023,41,1.55823,0.0474686,False,nov 2023-11-01 (published 2023-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2024,41,1.50519,-1.07068,False,nov 2024-11-01 (published 2024-11-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2012,41,3.51664,1.92249,False,nov 2012-11-05 (published 2012-11-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2013,41,2.42363,-1.26261,False,dec 2013-12-01 (published 2013-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2014,41,2.51387,-1.99473,False,dec 2014-12-01 (published 2014-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2015,41,1.14725,0.180991,False,dec 2015-12-01 (published 2015-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2016,41,1.19013,-0.021614,False,dec 2016-12-02 (published 2016-12-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2017,41,1.05513,0.431356,False,dec 2017-12-01 (published 2017-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2018,41,1.77678,0.883193,False,dec 2018-12-03 (published 2018-12-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2019,41,2.2017,1.91778,False,dec 2019-12-02 (published 2019-12-07),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2020,41,1.58456,1.31344,False,dec 2020-12-01 (published 2020-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2021,41,1.21408,0.578214,False,dec 2021-12-01 (published 2021-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2022,41,3.29125,2.6934,False,dec 2022-12-01 (published 2022-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2023,41,1.55643,0.0525966,False,dec 2023-12-01 (published 2023-12-06),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2024,41,1.50258,-1.06522,False,dec 2024-12-02 (published 2024-12-07),states on the guard fallback: 0
+b7_blend_b5_fsa_level,B,grain,jul,2012,41,4.96742,-1.71365,True,,"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2013,41,4.11007,-0.118849,True,,"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2014,41,4.61533,3.02554,True,,"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2015,41,3.06361,2.01166,True,,"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2016,41,4.62324,-3.85418,True,,"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2017,41,4.15856,3.01152,True,,"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2018,41,2.80622,1.25173,True,,"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2019,41,7.77882,1.76178,True,,"NASS planted: acrg0619.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2020,41,6.08889,-0.120934,True,,"NASS planted: acrg0620.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2021,41,4.44246,-2.31854,True,,"NASS planted: acrg0621.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2022,41,6.2192,6.09385,True,,"NASS planted: acrg0622.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2023,41,6.3489,-6.10932,True,,"NASS planted: acrg0623.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2024,41,4.0726,2.31383,True,,"NASS planted: acrg0624.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,aug,2012,41,3.55234,1.02828,False,aug 2012-07-31 (published 2012-08-05),"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2013,41,3.10676,-2.08709,False,aug 2013-08-01 (published 2013-08-06),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2014,41,3.37737,-2.15022,False,aug 2014-08-01 (published 2014-08-06),"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2015,41,2.03267,-0.447045,False,aug 2015-08-03 (published 2015-08-08),"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2016,41,1.72164,-0.516882,False,aug 2016-08-01 (published 2016-08-06),"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2017,41,1.82329,0.367354,False,aug 2017-08-01 (published 2017-08-06),"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2018,41,1.92953,0.564389,False,aug 2018-08-01 (published 2018-08-06),"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2019,41,2.36637,1.50792,False,aug 2019-08-01 (published 2019-08-06),"NASS planted: crop0819.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2020,41,4.0196,-2.23201,False,aug 2020-07-31 (published 2020-08-05),"NASS planted: acrg0620.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2021,41,1.7123,-0.378562,False,aug 2021-08-02 (published 2021-08-07),"NASS planted: acrg0621.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2022,41,6.2192,6.09385,True,,"NASS planted: acrg0622.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,aug,2023,41,2.30955,-0.521752,False,aug 2023-08-09 (published 2023-08-14),"NASS planted: acrg0623.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2024,41,3.50179,1.83074,True,,"NASS planted: crop0824.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,sep,2012,41,3.55234,1.02828,False,aug 2012-07-31 (published 2012-08-05),"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2013,41,2.6626,-0.755153,False,sep 2013-09-01 (published 2013-09-06),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2014,41,3.01816,-1.3792,False,sep 2014-09-01 (published 2014-09-06),"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2015,41,1.67492,0.137429,False,sep 2015-09-03 (published 2015-09-08),"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2016,41,1.749,-0.243663,False,sep 2016-09-01 (published 2016-09-06),"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2017,41,1.9394,0.601067,False,sep 2017-08-31 (published 2017-09-05),"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2018,41,1.92534,0.733627,False,sep 2018-09-06 (published 2018-09-11),"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2019,41,2.44749,1.94492,False,sep 2019-09-04 (published 2019-09-09),"NASS planted: crop0819.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2020,41,2.9009,1.30423,False,sep 2020-09-01 (published 2020-09-06),"NASS planted: acrg0620.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2021,41,1.1914,0.429888,False,sep 2021-09-01 (published 2021-09-06),"NASS planted: crop0921.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2022,41,3.25184,2.63074,False,sep 2022-09-02 (published 2022-09-07),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2023,41,1.47951,0.0141587,False,sep 2023-09-01 (published 2023-09-06),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2024,41,1.48577,-1.00278,False,sep 2024-09-03 (published 2024-09-08),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2012,41,3.47745,1.74693,False,oct 2012-10-02 (published 2012-10-07),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2013,41,2.71943,-0.40175,False,oct 2013-10-01 (published 2013-10-06),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2014,41,2.67363,-1.61157,False,oct 2014-10-01 (published 2014-10-06),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2015,41,1.25612,0.144616,False,oct 2015-10-01 (published 2015-10-06),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2016,41,1.23983,-0.0105976,False,oct 2016-10-03 (published 2016-10-08),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2017,41,0.967165,0.425848,False,oct 2017-10-02 (published 2017-10-07),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2018,41,1.75928,0.808557,False,oct 2018-10-01 (published 2018-10-06),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2019,41,2.18007,1.87653,False,oct 2019-10-01 (published 2019-10-06),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2020,41,1.44534,0.78712,False,sep 2020-09-01 (published 2020-09-06),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2021,41,1.1914,0.429888,False,sep 2021-09-01 (published 2021-09-06),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2022,41,3.26324,2.64608,False,oct 2022-10-03 (published 2022-10-08),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2023,41,1.47788,0.0300155,False,oct 2023-10-02 (published 2023-10-07),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2024,41,1.4621,-0.972568,False,oct 2024-10-01 (published 2024-10-06),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2012,41,3.46502,1.76996,False,nov 2012-11-05 (published 2012-11-10),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2013,41,2.35968,-1.38928,False,nov 2013-11-01 (published 2013-11-06),"NASS planted: CropProd-11-08-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2014,41,2.44251,-1.27111,False,nov 2014-11-01 (published 2014-11-06),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2015,41,1.25612,0.144616,False,oct 2015-10-01 (published 2015-10-06),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2016,41,1.23086,0.0103804,False,nov 2016-11-01 (published 2016-11-06),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2017,41,0.975026,0.43827,False,nov 2017-11-01 (published 2017-11-06),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2018,41,1.76522,0.828069,False,nov 2018-11-01 (published 2018-11-06),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2019,41,2.20626,1.90994,False,nov 2019-11-01 (published 2019-11-06),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2020,41,1.53811,1.182,False,nov 2020-11-02 (published 2020-11-07),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2021,41,1.17924,0.47154,False,nov 2021-11-09 (published 2021-11-14),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2022,41,3.26705,2.6496,False,nov 2022-11-01 (published 2022-11-06),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2023,41,1.48022,0.0306525,False,nov 2023-11-01 (published 2023-11-06),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2024,41,1.46258,-0.970717,False,nov 2024-11-01 (published 2024-11-06),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2012,41,3.46502,1.76996,False,nov 2012-11-05 (published 2012-11-10),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2013,41,2.36873,-1.35384,False,dec 2013-12-01 (published 2013-12-06),"NASS planted: CropProd-11-08-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2014,41,2.29879,-1.0531,False,dec 2014-12-01 (published 2014-12-06),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2015,41,1.32756,0.291506,False,dec 2015-12-01 (published 2015-12-06),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2016,41,1.23106,0.0134858,False,dec 2016-12-02 (published 2016-12-07),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2017,41,0.976002,0.455848,False,dec 2017-12-01 (published 2017-12-06),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2018,41,1.77138,0.860366,False,dec 2018-12-03 (published 2018-12-08),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2019,41,2.21684,1.92789,False,dec 2019-12-02 (published 2019-12-07),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2020,41,1.55188,1.2264,False,dec 2020-12-01 (published 2020-12-06),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2021,41,1.17853,0.472388,False,dec 2021-12-01 (published 2021-12-06),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2022,41,3.27175,2.65455,False,dec 2022-12-01 (published 2022-12-06),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2023,41,1.48251,0.030896,False,dec 2023-12-01 (published 2023-12-06),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2024,41,1.46253,-0.968201,False,dec 2024-12-02 (published 2024-12-07),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2012,41,3.76123,1.70091,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2013,41,3.62676,1.914,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2014,41,2.65196,0.833474,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2015,41,2.55099,0.430944,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2016,41,2.30322,-0.228247,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2017,41,3.43394,0.922244,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2018,41,2.22376,0.74043,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2019,41,6.60567,3.21517,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2020,41,4.83765,2.25757,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2021,41,2.98748,-0.580082,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2022,41,5.49774,4.11029,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2023,41,3.3593,-0.212702,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2024,41,3.09708,0.472028,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2012,41,2.21599,-0.00457849,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2013,41,3.62676,1.914,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2014,41,2.65196,0.833474,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2015,41,2.55099,0.430944,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2016,41,2.30322,-0.228247,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2017,41,3.43394,0.922244,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2018,41,2.22376,0.74043,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2019,41,2.61017,1.26681,False,,aug (35 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2020,41,4.83765,2.25757,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2021,41,2.98748,-0.580082,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2022,41,5.37069,3.98323,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2023,41,3.3593,-0.212702,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2024,41,1.28844,-0.404595,False,,aug (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2012,41,2.21599,-0.00457849,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2013,41,3.62676,1.914,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2014,41,2.65196,0.833474,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2015,41,2.55099,0.430944,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2016,41,2.30322,-0.228247,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2017,41,3.43394,0.922244,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2018,41,2.22376,0.74043,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2019,41,2.61017,1.26681,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2020,41,4.16829,1.58821,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2021,41,1.61082,0.114134,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2022,41,3.61731,2.69996,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2023,41,1.25078,0.682034,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2024,41,1.28844,-0.404595,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2012,41,1.4056,0.407486,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2013,41,3.62676,1.914,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2014,41,1.88223,-0.0565271,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2015,41,1.50211,-0.110213,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2016,41,1.19081,0.0887629,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2017,41,0.904113,0.466561,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2018,41,1.55232,0.736734,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2019,41,1.80761,1.0174,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2020,41,1.22797,0.43691,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2021,41,1.61082,0.114134,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2022,41,3.61731,2.69996,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2023,41,1.25078,0.682034,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2024,41,1.28844,-0.404595,False,,oct (31 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2012,41,1.4056,0.407486,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2013,41,1.60872,-0.252684,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2014,41,1.88223,-0.0565271,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2015,41,1.50211,-0.110213,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2016,41,1.19081,0.0887629,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2017,41,0.904113,0.466561,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2018,41,1.55232,0.736734,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2019,41,1.80761,1.0174,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2020,41,1.22797,0.43691,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2021,41,1.61082,0.114134,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2022,41,3.61731,2.69996,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2023,41,1.25078,0.682034,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2024,41,1.28844,-0.404595,False,,nov (31 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2012,41,1.4056,0.407486,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2013,41,1.60872,-0.252684,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2014,41,1.88223,-0.0565271,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2015,41,1.50211,-0.110213,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2016,41,1.19081,0.0887629,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2017,41,0.904113,0.466561,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2018,41,1.55232,0.736734,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2019,41,1.80761,1.0174,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2020,41,1.22797,0.43691,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2021,41,1.61082,0.114134,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2022,41,3.61731,2.69996,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2023,41,1.25078,0.682034,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2024,41,1.28844,-0.404595,False,,nov (31 states with a NASS grain forecast)
+g0_persistence,benchmark: same as last year,grain,jul,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2024,41,6.73121,4.16637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2024,41,6.73121,4.16637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2024,41,6.73121,4.16637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2024,41,6.73121,4.16637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2024,41,6.73121,4.16637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2012,41,6.84942,-3.99016,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2013,41,5.52703,-0.109763,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2014,41,6.72432,5.18967,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2015,41,4.011,2.96336,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2016,41,7.18979,-6.91082,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2017,41,5.98673,4.85296,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2018,41,3.67874,1.92684,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2019,41,9.80356,0.219778,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2020,41,8.53008,-1.43243,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2021,41,6.9704,-3.31812,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2022,41,8.07446,7.98297,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2023,41,9.04793,-9.01787,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2024,41,6.73121,4.16637,False,,NASS final of last year
+s3_fsa_residual,A,silage,jul,2012,48,24.2088,-22.136,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2013,48,16.0462,2.06278,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2014,48,12.7316,-1.56773,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2015,48,13.1923,3.12788,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2016,48,13.1156,4.2858,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2017,48,12.171,-2.26861,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2018,48,17.879,3.16425,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2019,48,14.5818,-6.24507,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2020,48,9.58591,-3.3144,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2021,48,12.3082,-0.461825,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2022,48,15.4781,-6.58848,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2023,48,9.99209,2.40849,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,jul,2024,48,12.1092,5.35669,True,,shrink weight w = 0.00 (0 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,aug,2012,48,24.2088,-22.136,False,aug 2012-07-31 (published 2012-08-05),shrink weight w = 0.00 (0 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2013,48,16.0462,2.06278,False,aug 2013-08-01 (published 2013-08-06),shrink weight w = 0.00 (1 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2014,48,12.7316,-1.56773,False,aug 2014-08-01 (published 2014-08-06),shrink weight w = 0.00 (2 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2015,48,12.7159,2.49231,False,aug 2015-08-03 (published 2015-08-08),shrink weight w = 0.05 (3 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2016,48,12.9677,4.21075,False,aug 2016-08-01 (published 2016-08-06),shrink weight w = 0.15 (4 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2017,48,11.3486,-3.02055,False,aug 2017-08-01 (published 2017-08-06),shrink weight w = 0.20 (5 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2018,48,17.9713,2.89748,False,aug 2018-08-01 (published 2018-08-06),shrink weight w = 0.20 (6 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2019,48,14.8793,-8.12477,False,aug 2019-08-01 (published 2019-08-06),shrink weight w = 0.20 (7 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2020,48,11.0278,-5.5128,False,aug 2020-07-31 (published 2020-08-05),shrink weight w = 0.20 (8 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2021,48,12.0698,-0.659304,False,aug 2021-08-02 (published 2021-08-07),shrink weight w = 0.10 (9 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2022,48,15.4781,-6.58848,True,,shrink weight w = 0.10 (10 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,aug,2023,48,9.75496,3.22065,False,aug 2023-08-09 (published 2023-08-14),shrink weight w = 0.10 (10 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,aug,2024,48,12.1092,5.35669,True,,shrink weight w = 0.15 (11 training years); states with an FSA residual: 0
+s3_fsa_residual,A,silage,sep,2012,48,24.2088,-22.136,False,aug 2012-07-31 (published 2012-08-05),shrink weight w = 0.00 (0 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2013,48,16.0462,2.06278,False,sep 2013-09-01 (published 2013-09-06),shrink weight w = 0.00 (1 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2014,48,12.7316,-1.56773,False,sep 2014-09-01 (published 2014-09-06),shrink weight w = 0.00 (2 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2015,48,12.5272,2.28786,False,sep 2015-09-03 (published 2015-09-08),shrink weight w = 0.10 (3 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2016,48,12.9992,4.57113,False,sep 2016-09-01 (published 2016-09-06),shrink weight w = 0.20 (4 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2017,48,11.3527,-2.75791,False,sep 2017-08-31 (published 2017-09-05),shrink weight w = 0.20 (5 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2018,48,17.9152,3.13145,False,sep 2018-09-06 (published 2018-09-11),shrink weight w = 0.20 (6 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2019,48,14.7085,-7.46719,False,sep 2019-09-04 (published 2019-09-09),shrink weight w = 0.20 (7 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2020,48,8.94405,-2.62174,False,sep 2020-09-01 (published 2020-09-06),shrink weight w = 0.20 (8 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2021,48,11.8465,-0.459448,False,sep 2021-09-01 (published 2021-09-06),shrink weight w = 0.20 (9 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2022,48,14.8597,-7.23791,False,sep 2022-09-02 (published 2022-09-07),shrink weight w = 0.20 (10 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2023,48,9.75511,4.65827,False,sep 2023-09-01 (published 2023-09-06),shrink weight w = 0.25 (11 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,sep,2024,48,11.6982,4.18081,False,sep 2024-09-03 (published 2024-09-08),shrink weight w = 0.25 (12 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2012,48,24.2088,-22.136,False,oct 2012-10-02 (published 2012-10-07),shrink weight w = 0.00 (0 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2013,48,16.0462,2.06278,False,oct 2013-10-01 (published 2013-10-06),shrink weight w = 0.00 (1 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2014,48,12.7316,-1.56773,False,oct 2014-10-01 (published 2014-10-06),shrink weight w = 0.00 (2 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2015,48,12.423,2.26191,False,oct 2015-10-01 (published 2015-10-06),shrink weight w = 0.15 (3 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2016,48,12.9946,4.61113,False,oct 2016-10-03 (published 2016-10-08),shrink weight w = 0.20 (4 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2017,48,11.3716,-2.72823,False,oct 2017-10-02 (published 2017-10-07),shrink weight w = 0.20 (5 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2018,48,17.9461,3.25508,False,oct 2018-10-01 (published 2018-10-06),shrink weight w = 0.25 (6 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2019,48,14.546,-7.23419,False,oct 2019-10-01 (published 2019-10-06),shrink weight w = 0.20 (7 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2020,48,8.94405,-2.62174,False,sep 2020-09-01 (published 2020-09-06),shrink weight w = 0.20 (8 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2021,48,11.8465,-0.459448,False,sep 2021-09-01 (published 2021-09-06),shrink weight w = 0.20 (9 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2022,48,14.76,-7.33049,False,oct 2022-10-03 (published 2022-10-08),shrink weight w = 0.25 (10 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2023,48,9.79542,4.71046,False,oct 2023-10-02 (published 2023-10-07),shrink weight w = 0.25 (11 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,oct,2024,48,11.7027,4.20653,False,oct 2024-10-01 (published 2024-10-06),shrink weight w = 0.25 (12 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2012,48,24.2088,-22.136,False,nov 2012-11-05 (published 2012-11-10),shrink weight w = 0.00 (0 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2013,48,16.0462,2.06278,False,nov 2013-11-01 (published 2013-11-06),shrink weight w = 0.00 (1 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2014,48,12.7316,-1.56773,False,nov 2014-11-01 (published 2014-11-06),shrink weight w = 0.00 (2 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2015,48,12.19,1.99144,False,oct 2015-10-01 (published 2015-10-06),shrink weight w = 0.20 (3 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2016,48,12.9827,4.72045,False,nov 2016-11-01 (published 2016-11-06),shrink weight w = 0.25 (4 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2017,48,11.2546,-2.82653,False,nov 2017-11-01 (published 2017-11-06),shrink weight w = 0.25 (5 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2018,48,17.9465,3.30742,False,nov 2018-11-01 (published 2018-11-06),shrink weight w = 0.25 (6 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2019,48,14.4862,-7.34413,False,nov 2019-11-01 (published 2019-11-06),shrink weight w = 0.25 (7 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2020,48,8.39691,-1.50841,False,nov 2020-11-02 (published 2020-11-07),shrink weight w = 0.25 (8 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2021,48,11.7236,-0.274023,False,nov 2021-11-09 (published 2021-11-14),shrink weight w = 0.25 (9 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2022,48,14.7769,-7.30912,False,nov 2022-11-01 (published 2022-11-06),shrink weight w = 0.25 (10 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2023,48,9.8986,5.21003,False,nov 2023-11-01 (published 2023-11-06),shrink weight w = 0.30 (11 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,nov,2024,48,11.7011,4.21287,False,nov 2024-11-01 (published 2024-11-06),shrink weight w = 0.25 (12 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2012,48,24.2088,-22.136,False,nov 2012-11-05 (published 2012-11-10),shrink weight w = 0.00 (0 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2013,48,16.0462,2.06278,False,dec 2013-12-01 (published 2013-12-06),shrink weight w = 0.00 (1 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2014,48,12.7316,-1.56773,False,dec 2014-12-01 (published 2014-12-06),shrink weight w = 0.00 (2 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2015,48,12.2515,2.20668,False,dec 2015-12-01 (published 2015-12-06),shrink weight w = 0.20 (3 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2016,48,12.9912,4.73987,False,dec 2016-12-02 (published 2016-12-07),shrink weight w = 0.25 (4 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2017,48,11.2469,-2.80391,False,dec 2017-12-01 (published 2017-12-06),shrink weight w = 0.25 (5 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2018,48,17.9647,3.33463,False,dec 2018-12-03 (published 2018-12-08),shrink weight w = 0.25 (6 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2019,48,14.427,-7.25766,False,dec 2019-12-02 (published 2019-12-07),shrink weight w = 0.25 (7 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2020,48,8.30994,-1.32991,False,dec 2020-12-01 (published 2020-12-06),shrink weight w = 0.25 (8 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2021,48,11.7345,-0.262985,False,dec 2021-12-01 (published 2021-12-06),shrink weight w = 0.25 (9 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2022,48,14.7829,-7.29727,False,dec 2022-12-01 (published 2022-12-06),shrink weight w = 0.25 (10 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2023,48,9.91638,5.23375,False,dec 2023-12-01 (published 2023-12-06),shrink weight w = 0.30 (11 training years); states with an FSA residual: 41
+s3_fsa_residual,A,silage,dec,2024,48,11.6973,4.22218,False,dec 2024-12-02 (published 2024-12-07),shrink weight w = 0.25 (12 training years); states with an FSA residual: 41
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2012,48,24.2088,-22.136,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2013,48,16.0462,2.06278,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2014,48,12.7316,-1.56773,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2015,48,13.1923,3.12788,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2016,48,13.1156,4.2858,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2017,48,12.171,-2.26861,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2018,48,17.879,3.16425,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2019,48,14.5818,-6.24507,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2020,48,9.58591,-3.3144,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2021,48,12.3082,-0.461825,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2022,48,15.4781,-6.58848,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2023,48,9.99209,2.40849,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2024,48,12.1092,5.35669,True,,"shrink weight w = 0.00; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2012,48,24.2088,-22.136,False,aug 2012-07-31 (published 2012-08-05),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2013,48,16.0462,2.06278,False,aug 2013-08-01 (published 2013-08-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2014,48,12.7316,-1.56773,False,aug 2014-08-01 (published 2014-08-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2015,48,12.7337,2.50382,False,aug 2015-08-03 (published 2015-08-08),"shrink weight w = 0.05; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2016,48,12.8898,4.14906,False,aug 2016-08-01 (published 2016-08-06),"shrink weight w = 0.10; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2017,48,11.5117,-2.88126,False,aug 2017-08-01 (published 2017-08-06),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2018,48,18.0032,3.40661,False,aug 2018-08-01 (published 2018-08-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2019,48,15.0847,-7.13785,False,aug 2019-08-01 (published 2019-08-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""aug"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2020,48,8.9389,-2.71284,False,aug 2020-07-31 (published 2020-08-05),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2021,48,12.1671,-0.146531,False,aug 2021-08-02 (published 2021-08-07),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2022,48,15.4781,-6.58848,True,,"shrink weight w = 0.20; states with a residual: 0; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2023,48,9.94617,4.35397,False,aug 2023-08-09 (published 2023-08-14),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2024,48,12.1092,5.35669,True,,"shrink weight w = 0.20; states with a residual: 0; NASS planted vintages: {""aug"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2012,48,24.2088,-22.136,False,aug 2012-07-31 (published 2012-08-05),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2013,48,16.0462,2.06278,False,sep 2013-09-01 (published 2013-09-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2014,48,12.7316,-1.56773,False,sep 2014-09-01 (published 2014-09-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2015,48,12.8827,2.72456,False,sep 2015-09-03 (published 2015-09-08),"shrink weight w = 0.05; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2016,48,12.9191,4.34589,False,sep 2016-09-01 (published 2016-09-06),"shrink weight w = 0.10; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2017,48,11.5201,-2.68102,False,sep 2017-08-31 (published 2017-09-05),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2018,48,18.1252,3.49797,False,sep 2018-09-06 (published 2018-09-11),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2019,48,15.0576,-6.99937,False,sep 2019-09-04 (published 2019-09-09),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""aug"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2020,48,8.82709,-2.53082,False,sep 2020-09-01 (published 2020-09-06),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""jun"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2021,48,12.1195,-0.142692,False,sep 2021-09-01 (published 2021-09-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2022,48,14.9737,-6.95463,False,sep 2022-09-02 (published 2022-09-07),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2023,48,9.80843,4.30426,False,sep 2023-09-01 (published 2023-09-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2024,48,11.6648,4.65784,False,sep 2024-09-03 (published 2024-09-08),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2012,48,24.2088,-22.136,False,oct 2012-10-02 (published 2012-10-07),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2013,48,16.0462,2.06278,False,oct 2013-10-01 (published 2013-10-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2014,48,12.7316,-1.56773,False,oct 2014-10-01 (published 2014-10-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2015,48,12.5011,2.32659,False,oct 2015-10-01 (published 2015-10-06),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2016,48,12.8247,4.41714,False,oct 2016-10-03 (published 2016-10-08),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2017,48,11.2379,-2.90647,False,oct 2017-10-02 (published 2017-10-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2018,48,18.1777,3.52638,False,oct 2018-10-01 (published 2018-10-06),"shrink weight w = 0.30; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2019,48,14.7763,-6.58298,False,oct 2019-10-01 (published 2019-10-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2020,48,8.7111,-2.50183,False,sep 2020-09-01 (published 2020-09-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2021,48,12.1195,-0.142692,False,sep 2021-09-01 (published 2021-09-06),"shrink weight w = 0.20; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2022,48,14.8527,-7.01955,False,oct 2022-10-03 (published 2022-10-08),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2023,48,9.92475,4.79821,False,oct 2023-10-02 (published 2023-10-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2024,48,11.5794,4.47786,False,oct 2024-10-01 (published 2024-10-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 39, ""sep"": 9}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2012,48,24.2088,-22.136,False,nov 2012-11-05 (published 2012-11-10),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2013,48,16.0462,2.06278,False,nov 2013-11-01 (published 2013-11-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2014,48,12.7316,-1.56773,False,nov 2014-11-01 (published 2014-11-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2015,48,12.5011,2.32659,False,oct 2015-10-01 (published 2015-10-06),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2016,48,12.672,4.54286,False,nov 2016-11-01 (published 2016-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2017,48,11.2401,-2.89504,False,nov 2017-11-01 (published 2017-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2018,48,18.1554,3.53683,False,nov 2018-11-01 (published 2018-11-06),"shrink weight w = 0.30; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2019,48,14.7689,-6.56551,False,nov 2019-11-01 (published 2019-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2020,48,8.66519,-2.17121,False,nov 2020-11-02 (published 2020-11-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2021,48,12.0413,-0.0340907,False,nov 2021-11-09 (published 2021-11-14),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2022,48,14.8568,-7.01579,False,nov 2022-11-01 (published 2022-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2023,48,9.92224,4.80504,False,nov 2023-11-01 (published 2023-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2024,48,11.5871,4.4848,False,nov 2024-11-01 (published 2024-11-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 39, ""sep"": 9}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2012,48,24.2088,-22.136,False,nov 2012-11-05 (published 2012-11-10),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2013,48,16.0462,2.06278,False,dec 2013-12-01 (published 2013-12-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2014,48,12.7316,-1.56773,False,dec 2014-12-01 (published 2014-12-06),"shrink weight w = 0.00; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2015,48,12.5481,2.48926,False,dec 2015-12-01 (published 2015-12-06),"shrink weight w = 0.15; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2016,48,12.6807,4.56274,False,dec 2016-12-02 (published 2016-12-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2017,48,11.2332,-2.8715,False,dec 2017-12-01 (published 2017-12-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""mar"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2018,48,18.1393,3.52114,False,dec 2018-12-03 (published 2018-12-08),"shrink weight w = 0.30; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2019,48,14.7708,-6.55786,False,dec 2019-12-02 (published 2019-12-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2020,48,8.67106,-2.15298,False,dec 2020-12-01 (published 2020-12-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2021,48,12.0426,-0.0335308,False,dec 2021-12-01 (published 2021-12-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2022,48,14.8475,-7.02158,False,dec 2022-12-01 (published 2022-12-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2023,48,9.91361,4.81261,False,dec 2023-12-01 (published 2023-12-06),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""sep"": 48}"
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2024,48,11.5915,4.48529,False,dec 2024-12-02 (published 2024-12-07),"shrink weight w = 0.25; states with a residual: 41; NASS planted vintages: {""oct"": 39, ""sep"": 9}"
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2017,48,12.3258,-2.80345,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2018,48,18.8229,3.79244,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2019,48,14.8257,-6.57462,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2020,48,9.47376,-3.2178,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2021,48,12.3498,-0.349463,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2022,48,15.3808,-6.57541,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2023,48,9.79776,2.706,False,,NASS finals from 2013 only (the report model)
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2024,48,12.0035,5.211,False,,NASS finals from 2013 only (the report model)
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2012,48,24.2088,-22.136,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2013,48,16.0462,2.06278,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2014,48,12.7316,-1.56773,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2015,48,13.1923,3.12788,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2016,48,13.1156,4.2858,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2017,48,12.171,-2.26861,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2018,48,17.879,3.16425,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2019,48,14.5818,-6.24507,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2020,48,9.58591,-3.3144,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2021,48,12.3082,-0.461825,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2022,48,15.4781,-6.58848,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2023,48,9.99209,2.40849,False,,NASS finals from 2000 only
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2024,48,12.1092,5.35669,False,,NASS finals from 2000 only
+s0_persistence,benchmark: same as last year,silage,jul,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,jul,2024,48,12.3409,4.09215,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,aug,2024,48,12.3409,4.09215,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,sep,2024,48,12.3409,4.09215,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,oct,2024,48,12.3409,4.09215,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,nov,2024,48,12.3409,4.09215,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2012,48,23.3185,-20.0027,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2013,48,25.3548,18.3065,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2014,48,14.1487,-1.41487,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2015,48,13.5963,1.98814,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2016,48,13.2291,0.499517,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2017,48,12.3258,-2.80345,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2018,48,20.2463,4.84401,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2019,48,17.1973,-7.23534,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2020,48,12.0274,0.0762195,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2021,48,14.4319,1.68966,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2022,48,14.1585,-5.83856,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2023,48,13.5273,6.03622,False,,NASS final of last year
+s0_persistence,benchmark: same as last year,silage,dec,2024,48,12.3409,4.09215,False,,NASS final of last year

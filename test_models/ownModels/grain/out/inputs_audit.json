@@ -1,0 +1,105 @@
+{
+ "sources": {
+  "nass_final_prior_years": {
+   "tier": "A",
+   "what": "NASS final state grain acres of years before t (history anchor)"
+  },
+  "fsa_files_published_by_asof": {
+   "tier": "A",
+   "what": "FSA crop acreage files published on or before the as-of date"
+  },
+  "usdm_drought": {
+   "tier": "A",
+   "what": "US Drought Monitor weekly state maps dated on or before the as-of date"
+  },
+  "rma_cause_of_loss": {
+   "tier": "A",
+   "what": "RMA cause-of-loss acres, months before the as-of month (today's vintage)"
+  },
+  "rma_insured_acres": {
+   "tier": "A",
+   "what": "RMA insured corn acres (today's vintage)"
+  },
+  "noaa_weather": {
+   "tier": "A",
+   "what": "NOAA county weather (not used by any candidate here)"
+  },
+  "nass_crop_condition_progress": {
+   "tier": "B",
+   "what": "NASS weekly crop condition and progress of year t"
+  },
+  "nass_current_year_planted": {
+   "tier": "X",
+   "what": "NASS March/June/in-season planted acres of year t"
+  },
+  "nass_current_year_grain_forecast": {
+   "tier": "X",
+   "what": "NASS in-season harvested-for-grain forecast of year t"
+  },
+  "nass_current_year_yield_forecast": {
+   "tier": "X",
+   "what": "NASS in-season grain yield forecast of year t"
+  }
+ },
+ "candidates": {
+  "g0_persistence": {
+   "role": "benchmark",
+   "sources": [
+    "nass_final_prior_years"
+   ],
+   "tier": "A (independent)"
+  },
+  "g1_fsa_ratio": {
+   "role": "own",
+   "sources": [
+    "nass_final_prior_years",
+    "fsa_files_published_by_asof"
+   ],
+   "tier": "A (independent)"
+  },
+  "g2_fsa_planted_share": {
+   "role": "own",
+   "sources": [
+    "nass_final_prior_years",
+    "fsa_files_published_by_asof"
+   ],
+   "tier": "A (independent)"
+  },
+  "g3_fsa_ratio_multi": {
+   "role": "own",
+   "sources": [
+    "nass_final_prior_years",
+    "fsa_files_published_by_asof"
+   ],
+   "tier": "A (independent)"
+  },
+  "g4_fsa_plus_stress": {
+   "role": "own",
+   "sources": [
+    "nass_final_prior_years",
+    "fsa_files_published_by_asof",
+    "usdm_drought",
+    "rma_cause_of_loss",
+    "rma_insured_acres"
+   ],
+   "tier": "A (independent)"
+  },
+  "g5_fsa_ratio_vintage": {
+   "role": "own",
+   "sources": [
+    "nass_final_prior_years",
+    "fsa_files_published_by_asof"
+   ],
+   "tier": "A (independent)"
+  },
+  "nass_latest": {
+   "role": "benchmark",
+   "sources": [
+    "nass_final_prior_years",
+    "nass_current_year_planted",
+    "nass_current_year_grain_forecast"
+   ],
+   "tier": "not independent"
+  }
+ }
+}

@@ -1,0 +1,137 @@
+model,tier,crop,asof,period,n_years,mean_state_wape_pct,mean_abs_us_error_pct,mean_signed_us_error_pct,fallback_share,fallback_years,worst_year_state_wape_pct
+g3_fsa_ratio_multi,A,grain,jul,2017-2024,8,7.35289,4.11467,0.672563,1,2017 2018 2019 2020 2021 2022 2023 2024,9.80356
+g3_fsa_ratio_multi,A,grain,aug,2017-2024,8,4.57683,3.65914,-0.344356,0.375,2022 2023 2024,9.04793
+g3_fsa_ratio_multi,A,grain,sep,2017-2024,8,1.74993,0.922176,0.638324,0,,3.24853
+g3_fsa_ratio_multi,A,grain,oct,2017-2024,8,1.74609,1.0352,0.765877,0,,3.27555
+g3_fsa_ratio_multi,A,grain,nov,2017-2024,8,1.76559,1.0759,0.808229,0,,3.28362
+g3_fsa_ratio_multi,A,grain,dec,2017-2024,8,1.77281,1.1169,0.850594,0,,3.29125
+g3_fsa_ratio_multi,A,grain,avg_jul_dec,2017-2024,8,3.16069,1.98733,0.565205,0.229167,,
+g3_fsa_ratio_multi,A,grain,avg_aug_dec,2017-2024,8,2.32225,1.56186,0.543734,0.075,,
+b7_blend_b5_fsa_level,B,grain,jul,2017-2024,8,5.23946,2.87269,0.735488,1,2017 2018 2019 2020 2021 2022 2023 2024,7.77882
+b7_blend_b5_fsa_level,B,grain,aug,2017-2024,8,3.49012,2.38552,0.205545,0.375,2022 2023 2024,6.3489
+b7_blend_b5_fsa_level,B,grain,sep,2017-2024,8,2.07771,1.08268,0.831982,0,,3.25184
+b7_blend_b5_fsa_level,B,grain,oct,2017-2024,8,1.72589,1.03706,0.793922,0,,3.26324
+b7_blend_b5_fsa_level,B,grain,nov,2017-2024,8,1.73573,1.05489,0.812212,0,,3.26705
+b7_blend_b5_fsa_level,B,grain,dec,2017-2024,8,1.73893,1.07457,0.832516,0,,3.27175
+b7_blend_b5_fsa_level,B,grain,avg_jul_dec,2017-2024,8,2.66797,1.58457,0.701944,0.229167,,
+b7_blend_b5_fsa_level,B,grain,avg_aug_dec,2017-2024,8,2.15368,1.32694,0.695235,0.075,,
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2017-2024,8,4.00533,1.56381,1.36562,0,,6.60567
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2017-2024,8,3.26393,1.29596,0.996613,0,,5.37069
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2017-2024,8,2.52544,1.0523,0.951152,0,,4.16829
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2017-2024,8,1.65742,0.81979,0.718641,0,,3.61731
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2017-2024,8,1.65742,0.81979,0.718641,0,,3.61731
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2017-2024,8,1.65742,0.81979,0.718641,0,,3.61731
+nass_latest,benchmark: NASS forecast (not independent),grain,avg_jul_dec,2017-2024,8,2.46116,1.06191,0.911551,0,,
+nass_latest,benchmark: NASS forecast (not independent),grain,avg_aug_dec,2017-2024,8,2.15232,0.961526,0.820738,0,,
+g0_persistence,benchmark: same as last year,grain,jul,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,aug,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,sep,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,oct,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,nov,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,dec,2017-2024,8,7.35289,4.11467,0.672563,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,avg_jul_dec,2017-2024,8,7.35289,4.11467,0.672563,0,,
+g0_persistence,benchmark: same as last year,grain,avg_aug_dec,2017-2024,8,7.35289,4.11467,0.672563,0,,
+s3_fsa_residual,A,silage,jul,2017-2024,8,13.0132,3.72598,-0.99362,1,2017 2018 2019 2020 2021 2022 2023 2024,17.879
+s3_fsa_residual,A,silage,aug,2017-2024,8,13.1095,4.32107,-1.65541,0.375,2022 2023 2024,17.9713
+s3_fsa_residual,A,silage,sep,2017-2024,8,12.6446,4.09293,-1.04312,0,,17.9152
+s3_fsa_residual,A,silage,oct,2017-2024,8,12.5722,4.04537,-1.00235,0,,17.9461
+s3_fsa_residual,A,silage,nov,2017-2024,8,12.5267,4.02105,-0.838473,0,,17.9465
+s3_fsa_residual,A,silage,dec,2017-2024,8,12.5099,3.96779,-0.770147,0,,17.9647
+s3_fsa_residual,A,silage,avg_jul_dec,2017-2024,8,12.7294,4.02903,-1.05052,0.229167,,
+s3_fsa_residual,A,silage,avg_aug_dec,2017-2024,8,12.6726,4.08964,-1.0619,0.075,,
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2017-2024,8,13.0132,3.72598,-0.99362,1,2017 2018 2019 2020 2021 2022 2023 2024,17.879
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2017-2024,8,12.9106,3.82984,-1.0369,0.375,2022 2023 2024,18.0032
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2017-2024,8,12.7142,3.9533,-0.838288,0,,18.1252
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2017-2024,8,12.6704,3.99088,-0.790268,0,,18.1777
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2017-2024,8,12.6604,3.94113,-0.734461,0,,18.1554
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2017-2024,8,12.6512,3.93206,-0.727302,0,,18.1393
+c5b_residual_fsa_planted_pre_june,B,silage,avg_jul_dec,2017-2024,8,12.77,3.89553,-0.853473,0.229167,,
+c5b_residual_fsa_planted_pre_june,B,silage,avg_aug_dec,2017-2024,8,12.7214,3.92944,-0.825443,0.075,,
+reversion_only_report_H13,benchmark: report model reversion_only,silage,jul,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,aug,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,sep,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,oct,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,nov,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,dec,2017-2024,8,13.1225,3.90377,-0.976412,0,,18.8229
+reversion_only_report_H13,benchmark: report model reversion_only,silage,avg_jul_dec,2017-2024,8,13.1225,3.90377,-0.976412,0,,
+reversion_only_report_H13,benchmark: report model reversion_only,silage,avg_aug_dec,2017-2024,8,13.1225,3.90377,-0.976412,0,,
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2017-2024,8,13.0132,3.72598,-0.99362,0,,17.879
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,avg_jul_dec,2017-2024,8,13.0132,3.72598,-0.99362,0,,
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,avg_aug_dec,2017-2024,8,13.0132,3.72598,-0.99362,0,,
+s0_persistence,benchmark: same as last year,silage,jul,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,aug,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,sep,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,oct,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,nov,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,dec,2017-2024,8,14.5319,4.07695,0.107614,0,,20.2463
+s0_persistence,benchmark: same as last year,silage,avg_jul_dec,2017-2024,8,14.5319,4.07695,0.107614,0,,
+s0_persistence,benchmark: same as last year,silage,avg_aug_dec,2017-2024,8,14.5319,4.07695,0.107614,0,,
+g3_fsa_ratio_multi,A,grain,jul,2012-2024,13,6.85574,4.00624,0.19406,1,2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024,9.80356
+g3_fsa_ratio_multi,A,grain,aug,2012-2024,13,4.13594,3.27703,-1.08155,0.230769,2022 2023 2024,9.04793
+g3_fsa_ratio_multi,A,grain,sep,2012-2024,13,2.29065,1.43254,-0.316619,0,,4.90319
+g3_fsa_ratio_multi,A,grain,oct,2012-2024,13,1.99274,1.1996,0.195363,0,,3.53322
+g3_fsa_ratio_multi,A,grain,nov,2012-2024,13,1.94371,1.11238,0.361243,0,,3.51664
+g3_fsa_ratio_multi,A,grain,dec,2012-2024,13,1.92108,1.10136,0.433022,0,,3.51664
+g3_fsa_ratio_multi,A,grain,avg_jul_dec,2012-2024,13,3.18998,2.02152,-0.0357469,0.205128,,
+g3_fsa_ratio_multi,A,grain,avg_aug_dec,2012-2024,13,2.45682,1.62458,-0.0817084,0.0461538,,
+b7_blend_b5_fsa_level,B,grain,jul,2012-2024,13,4.86887,2.59272,0.402648,1,2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024,7.77882
+b7_blend_b5_fsa_level,B,grain,aug,2012-2024,13,3.2086,1.9472,-0.194508,0.230769,2022 2023 2024,6.3489
+b7_blend_b5_fsa_level,B,grain,sep,2012-2024,13,2.31389,1.06513,0.271318,0,,3.55234
+b7_blend_b5_fsa_level,B,grain,oct,2012-2024,13,1.93206,0.966567,0.4512,0,,3.47745
+b7_blend_b5_fsa_level,B,grain,nov,2012-2024,13,1.89962,1.01097,0.452341,0,,3.46502
+b7_blend_b5_fsa_level,B,grain,dec,2012-2024,13,1.89251,1.00603,0.48678,0,,3.46502
+b7_blend_b5_fsa_level,B,grain,avg_jul_dec,2012-2024,13,2.68592,1.43144,0.31163,0.205128,,
+b7_blend_b5_fsa_level,B,grain,avg_aug_dec,2012-2024,13,2.24933,1.19918,0.293426,0.0461538,,
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2012-2024,13,3.61052,1.35524,1.19816,0,,6.60567
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2012-2024,13,3.03541,1.05992,0.839884,0,,5.37069
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2012-2024,13,2.58096,0.909973,0.811908,0,,4.16829
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2012-2024,13,1.75899,0.702716,0.614818,0,,3.62676
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2012-2024,13,1.60376,0.574923,0.44815,0,,3.61731
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2012-2024,13,1.60376,0.574923,0.44815,0,,3.61731
+nass_latest,benchmark: NASS forecast (not independent),grain,avg_jul_dec,2012-2024,13,2.36556,0.862948,0.726844,0,,
+nass_latest,benchmark: NASS forecast (not independent),grain,avg_aug_dec,2012-2024,13,2.11657,0.76449,0.632582,0,,
+g0_persistence,benchmark: same as last year,grain,jul,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,aug,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,sep,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,oct,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,nov,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,dec,2012-2024,13,6.85574,4.00624,0.19406,0,,9.80356
+g0_persistence,benchmark: same as last year,grain,avg_jul_dec,2012-2024,13,6.85574,4.00624,0.19406,0,,
+g0_persistence,benchmark: same as last year,grain,avg_aug_dec,2012-2024,13,6.85574,4.00624,0.19406,0,,
+s3_fsa_residual,A,silage,jul,2012-2024,13,14.1077,4.84523,-1.70586,1,2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024,24.2088
+s3_fsa_residual,A,silage,aug,2012-2024,13,14.119,5.15678,-2.16778,0.230769,2022 2023 2024,24.2088
+s3_fsa_residual,A,silage,sep,2012-2024,13,13.7996,4.99648,-1.81089,0,,24.2088
+s3_fsa_residual,A,silage,oct,2012-2024,13,13.7679,5.00019,-1.75282,0,,24.2088
+s3_fsa_residual,A,silage,nov,2012-2024,13,13.7232,4.98381,-1.65339,0,,24.2088
+s3_fsa_residual,A,silage,dec,2012-2024,13,13.7161,4.9581,-1.60427,0,,24.2088
+s3_fsa_residual,A,silage,avg_jul_dec,2012-2024,13,13.8722,4.9901,-1.7825,0.205128,,
+s3_fsa_residual,A,silage,avg_aug_dec,2012-2024,13,13.8251,5.01907,-1.79783,0.0461538,,
+c5b_residual_fsa_planted_pre_june,B,silage,jul,2012-2024,13,14.1077,4.84523,-1.70586,1,2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,aug,2012-2024,13,13.9919,4.85062,-1.79102,0.230769,2022 2023 2024,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,sep,2012-2024,13,13.8607,4.94771,-1.64769,0,,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,oct,2012-2024,13,13.8212,4.95671,-1.63226,0,,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,nov,2012-2024,13,13.805,4.9441,-1.57991,0,,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,dec,2012-2024,13,13.8019,4.94423,-1.56979,0,,24.2088
+c5b_residual_fsa_planted_pre_june,B,silage,avg_jul_dec,2012-2024,13,13.8981,4.91477,-1.65442,0.205128,,
+c5b_residual_fsa_planted_pre_june,B,silage,avg_aug_dec,2012-2024,13,13.8561,4.92867,-1.64413,0.0461538,,
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,jul,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,aug,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,sep,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,oct,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,nov,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,dec,2012-2024,13,14.1077,4.84523,-1.70586,0,,24.2088
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,avg_jul_dec,2012-2024,13,14.1077,4.84523,-1.70586,0,,
+reversion_only_H00,benchmark: reversion_only on finals from 2000,silage,avg_aug_dec,2012-2024,13,14.1077,4.84523,-1.70586,0,,
+s0_persistence,benchmark: same as last year,silage,jul,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,aug,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,sep,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,oct,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,nov,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,dec,2012-2024,13,15.8387,5.75595,0.018268,0,,25.3548
+s0_persistence,benchmark: same as last year,silage,avg_jul_dec,2012-2024,13,15.8387,5.75595,0.018268,0,,
+s0_persistence,benchmark: same as last year,silage,avg_aug_dec,2012-2024,13,15.8387,5.75595,0.018268,0,,

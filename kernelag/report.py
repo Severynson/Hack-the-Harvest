@@ -18,6 +18,7 @@ Run: ``python -m kernelag.report``
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import math
@@ -40,7 +41,8 @@ FEATURE_WORDS = {
     "ndti_post": "Residue left after the cut",
 }
 PREDICTOR_WORDS = {
-    "same_as_last_year": "Last year", "reversion_only": "Kernel", "nass_latest": "Kernel",
+    "same_as_last_year": "Last year", "smoothed_chopping": "Kernel", "reversion_only": "Ridge (reversion)",
+    "nass_latest": "Kernel",
     "reversion_plus_satellite": "Kernel + satellite", "satellite_ratio": "Satellite ratio",
 }
 
@@ -69,6 +71,13 @@ def gather(models: Path) -> dict:
         "state_model_asof_sep": read_json(models / "state_model_metrics_asof_sep.json"),
         "score_2025": read_json(models / "state_score_2025.json"),
         "field_eval": read_json(models / "field_eval.json"),
+        "deliverable": read_json(models / "deliverable_summary.json"),
+        "satellite_aggregate_present": (models.parent / "panel" / "state_satellite.csv").exists(),
+        "source_sha256": {name: hashlib.sha256((models / name).read_bytes()).hexdigest() for name in
+                          [f"state_forecast_{FORECAST_YEAR}.csv", "state_model_metrics.json",
+                           "state_model_metrics_asof_sep.json", "state_score_2025.json", "field_eval.json",
+                           "state_model_backtest.csv", "state_model_bias.csv", "field_earliness.csv", "deliverable_summary.json",
+                           "field_model_coefficients.csv"] if (models / name).is_file()},
     }
 
 
@@ -98,6 +107,96 @@ def dig(tree: dict, *keys):
 
 def esc(text) -> str:
     return html.escape(str(text))
+
+
+def comparison_rows(metrics: dict, backtest: pd.DataFrame) -> pd.DataFrame:
+    """Comparable state WAPE and national absolute error, keeping satellite scopes separate."""
+    rows = []
+    if not backtest.empty:
+        selected = dig(metrics, "state_model", "selected_silage_set")
+        keep = {"same_as_last_year", selected, "nass_latest", "reversion_only", "reversion_plus_satellite", "satellite_ratio"}
+        for (scope, series, predictor), part in backtest[backtest["predictor"].isin(keep)].groupby(
+                ["scope", "series", "predictor"], sort=False):
+            rows.append({"evaluation": "historical validation", "years": f"{part['year'].min()}–{part['year'].max()}",
+                         "cutoff": "15 November; current-vintage inputs", "scope": scope,
+                         "series": series, "predictor": predictor,
+                         "minimum_states": int(part["n_states"].min()),
+                         "state_wape_pct": round(float(part["state_error_pct"].mean()), 2),
+                         "national_abs_error_pct": round(float(part["total_error_pct"].abs().mean()), 2),
+                         "source": "data/models/state_model_backtest.csv"})
+    for series, score in metrics.get("score_2025", {}).items():
+        for key in ["model", "same_as_last_year"]:
+            values = score.get(key, {})
+            rows.append({"evaluation": "stored separate score", "years": "2025",
+                         "cutoff": "15 November; current-vintage inputs", "scope": "all_states",
+                         "series": series, "predictor": key, "minimum_states": values.get("n_states"),
+                         "state_wape_pct": values.get("state_error_pct"),
+                         "national_abs_error_pct": abs(values["total_error_pct"]) if "total_error_pct" in values else None,
+                         "source": "data/models/state_score_2025.json"})
+    return pd.DataFrame(rows)
+
+
+def comparison_table(metrics: dict, backtest: pd.DataFrame) -> str:
+    table = comparison_rows(metrics, backtest)
+    if table.empty:
+        return ""
+    body = "".join(f'<tr><th scope="row">{esc(r["series"])} · {esc(PREDICTOR_WORDS.get(r["predictor"], r["predictor"]))}</th>'
+                   f'<td>{esc(r["years"])}</td><td>{esc(r["scope"].replace("_", " "))}</td>'
+                   f'<td class="num">{number(r["minimum_states"], 0)}</td>'
+                   f'<td class="num">{number(r["state_wape_pct"], 2, "%")}</td>'
+                   f'<td class="num">{number(r["national_abs_error_pct"], 2, "%")}</td></tr>'
+                   for r in table.to_dict("records"))
+    return ('<div class="scroll" tabindex="0" role="region" aria-label="Verified acreage comparisons"><table>'
+            '<thead><tr><th scope="col">Target / method</th><th scope="col">Years</th><th scope="col">Scope</th>'
+            '<th scope="col">States, min</th><th scope="col">State WAPE</th><th scope="col">US absolute error</th>'
+            f'</tr></thead><tbody>{body}</tbody></table></div>'
+            '<p class="muted">Historical rows average annual errors. Grain’s NASS row includes fallbacks where '
+            'no in-season forecast exists. NASS publishes no comparable in-season silage forecast here. '
+            'State satellite improvement is uncomputed unless a satellite comparison row appears.</p>')
+
+
+def verification_markdown(metrics: dict, backtest: pd.DataFrame, by_date: pd.DataFrame) -> str:
+    table = comparison_rows(metrics, backtest)
+    lines = ["# Verified metrics and baselines", "", f"Generated {metrics['built_utc']} by `python -m kernelag.report`.",
+             "", "State WAPE = summed absolute state acreage error / summed actual acreage. National error is absolute total error.",
+             "Current-vintage inputs make these pseudo real-time replays, not archived-vintage operational tests.", "",
+             "| Target | Predictor | Years | Scope | States (min) | State WAPE % | US absolute error % | Source |",
+             "| --- | --- | --- | --- | ---: | ---: | ---: | --- |"]
+    for r in table.to_dict("records"):
+        lines.append(f'| {r["series"]} | {r["predictor"]} | {r["years"]} | {r["scope"]} | '
+                     f'{number(r["minimum_states"], 0)} | {number(r["state_wape_pct"], 2)} | '
+                     f'{number(r["national_abs_error_pct"], 2)} | `{r["source"]}` |')
+    lines += ["", "The stored 2025 score remains separate; no tuning or overwrite in this delivery. Historical validation years also selected the feature set.",
+              "NASS-anchored grain is not an independent satellite forecast. Missing satellite rows mean uncomputed, not zero error.",
+              "", "## Maryland research-farm proxy labels", "",
+              f'Field-years: {dig(metrics, "field_eval", "test", "field_years")}; distinct field IDs: {dig(metrics, "field_eval", "test", "unique_fields")}.',
+              "Intervals are 90% field-cluster bootstrap intervals; they do not measure national transfer uncertainty.", "",
+              "| Metric | Value | 90% interval |", "| --- | ---: | --- |"]
+    field = metrics.get("field_eval", {})
+    for key in ["silage_precision", "silage_recall", "false_positive_rate", "balanced_accuracy", "silage_f1", "accuracy"]:
+        low, high = dig(field, "intervals_90", key) or (None, None)
+        lines.append(f'| {key} | {number(dig(field, "rates", key), 3)} | {number(low, 3)}–{number(high, 3)} |')
+    lines += ["", f'Confusion matrix: TP={dig(field, "rates", "TP")}, FP={dig(field, "rates", "FP")}, FN={dig(field, "rates", "FN")}, TN={dig(field, "rates", "TN")}.',
+              f'Runtime: {number(field.get("response_seconds_per_field"), 4)} seconds/field; downloads excluded.',
+              "Source: `data/models/field_eval.json`. Binary benchmark rates preserve the historical grain-fallback convention only for scoring.",
+              "Operational decisions abstain on missing evidence or a fixed 40–60 uncalibrated score; see the `selective` block and field explorer.",
+              "", "## Prediction-date check", "", "| Date | Field-years | Feature coverage | Not assessable | Uncertain | Binary recall | Operational coverage | Operational roster recall |",
+              "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    if not by_date.empty:
+        for r in by_date[by_date["asof"].isin(["09-01", "10-01", "11-01"])].to_dict("records"):
+            lines.append(f'| {r["asof"]} | {r["field_years"]} | {number(r["assessable_share"], 3)} | '
+                         f'{number(r.get("not_assessable"), 0)} | {number(r.get("uncertain"), 0)} | '
+                         f'{number(r["silage_recall"], 3)} | {number(r.get("decisive_share"), 3)} | '
+                         f'{number(r.get("selective_roster_recall"), 3)} |')
+    lines += ["", "Source: `data/models/field_earliness.csv`. Each series is truncated before feature extraction; early drops remain provisional.",
+              "", "## Intervals, bias and forecast", "",
+              "State/US forecast intervals: `data/models/state_forecast_2026.csv`; region/year signed bias: `data/models/state_model_bias.csv`.",
+              "Coverage: `data/models/state_model_metrics.json` and `state_score_2025.json`. Historical interval coverage uses leave-one-year-out calibration, including later years.",
+              "The offline report displays the forecast, intervals, coverage and bias. `data/models/metrics.json` includes source hashes for audit."]
+    lines += ["", "Other team experiments remain separate: `test_models/danielModel/` contains longer-history ridge/boosted models;",
+              "`autoresearch/RESULTS.md` documents the Caveman rules, repeated-development caveats and regional transfer checks.",
+              "Different histories and inspected cohorts must not be treated as interchangeable independent tests."]
+    return "\n".join(lines) + "\n"
 
 
 # --- charts (inline SVG) -------------------------------------------------------------------------
@@ -223,7 +322,11 @@ def answer(metrics: dict) -> str:
         for name in ("silage", "grain"))
     return section("The answer", f"US acres, November forecast. Built {esc(metrics['built_utc'])}.",
                    f'<div class="tiles two">{tiles}</div><p class="muted">'
-                   'Silage is a historical acreage model. Grain uses NASS’s in-season forecast where available. '
+                   'Silage is our model: a smoothed state level plus drought chopping. '
+                   'Grain is NASS’s own November forecast where published, so its accuracy is NASS’s, not ours; '
+                   'without it, our planted × last-share grain number was off '
+                   f'{number(dig(metrics, "deliverable", "grain_without_nass_forecast", "backtest_2017_2024", "state_wape_pct"), 2, "%")} '
+                   'by state in 2017–2024. '
                    'Satellite acreage improvement is unproven; the field test is separate evidence. '
                    f'Totals sum the states shown: {number(dig(metrics, "forecast_scope", "silage"), 0)} silage, '
                    f'{number(dig(metrics, "forecast_scope", "grain"), 0)} grain; missing states are excluded.</p>')
@@ -285,7 +388,8 @@ def trust(metrics: dict, backtest: pd.DataFrame) -> str:
     years = dig(metrics, "state_model", "backtest_years") or []
     span = f"{years[0]} to {years[-1]}" if years else DASH
     return section("Can you trust it", f"Each year {span} forecast from earlier years only. 2025 was held out and scored once.",
-                   f'<div class="charts">{"".join(charts)}</div><div class="tiles four">{tiles}</div>{us_error}')
+                   f'<div class="charts">{"".join(charts)}</div><div class="tiles four">{tiles}</div>{us_error}'
+                   f'{comparison_table(metrics, backtest)}')
 
 
 def bias(table: pd.DataFrame) -> str:
@@ -349,6 +453,8 @@ def field_signal(metrics: dict, curves: pd.DataFrame, weights: pd.DataFrame) -> 
         tile("Silage precision", rate("silage_precision"), interval("silage_precision"), "silage"),
         tile("Silage recall", rate("silage_recall"), interval("silage_recall"), "silage"),
         tile("False positive rate", rate("false_positive_rate"), interval("false_positive_rate")),
+        tile("Balanced accuracy", rate("balanced_accuracy"), interval("balanced_accuracy")),
+        tile("Silage F1", rate("silage_f1"), interval("silage_f1")),
         tile("Response time", f"{number(dig(field, 'response_seconds_per_field'), 3)}<span class='unit'>s per field</span>",
              "Features and call; download excluded"),
     ])
@@ -366,7 +472,13 @@ def field_signal(metrics: dict, curves: pd.DataFrame, weights: pd.DataFrame) -> 
             "Silage is cut green and wet; grain fades first.")
     return section("The field signal", lead,
                    f'<div class="charts"><figure><figcaption>Greenness through the season, Maryland</figcaption>'
-                   f'{curves_chart(curves)}</figure>{evidence}</div><div class="tiles four">{tiles}</div>')
+                   f'{curves_chart(curves)}</figure>{evidence}</div><div class="tiles four">{tiles}</div>'
+                   f'<p class="muted">Binary benchmark: TP {number(dig(field, "rates", "TP"), 0)}, '
+                   f'FP {number(dig(field, "rates", "FP"), 0)}, FN {number(dig(field, "rates", "FN"), 0)}, '
+                   f'TN {number(dig(field, "rates", "TN"), 0)}. '
+                   f'Accuracy {rate("accuracy")}; always grain {number(dig(field, "always_grain", "accuracy"), 2)}. '
+                   'Product calls abstain on missing evidence or scores in the fixed 40–60 band; '
+                   'benchmark rates retain the historical binary scoring convention.</p>')
 
 
 def limits(metrics: dict) -> str:
@@ -379,6 +491,8 @@ def limits(metrics: dict) -> str:
              "Harvest calendars and soil colour differ by region; evidence is relative to each field's own season.",
              "Satellite backtests with a fixed Quebec classifier are retrospective; the classifier may use later training labels.",
              satellite]
+    if not metrics.get("satellite_aggregate_present"):
+        fixed.insert(0, "Satellite acreage comparison unavailable: the state sample aggregate has not been delivered. The field evidence is separate from the headline acreage forecast.")
     items = "".join(f"<li>{esc(text)}</li>" for text in fixed + [c[0].upper() + c[1:] + "." for c in caveats])
     return section("Limits", "What the numbers do not show.", f"<ul>{items}</ul>")
 
@@ -460,6 +574,7 @@ def presentation_notes(metrics: dict) -> str:
     baseline = errors.get("silage.same_as_last_year", {})
     field = metrics["field_eval"]
     score = metrics["score_2025"]
+    own_grain = dig(metrics, "deliverable", "grain_without_nass_forecast", "backtest_2017_2024") or {}
     return f'''# Kernel: five-minute presentation
 
 Generated from `data/models/metrics.json` at {metrics["built_utc"]}. Open `report/index.html` offline.
@@ -471,14 +586,19 @@ USDA needs corn acreage by harvest use before January. Silage is cut green and w
 Kernel combines a state acreage forecast with a separate satellite test of that physical signal.
 Our November forecast is {acres(us.get("silage"))} million silage acres, with an 80% interval of
 {acres(us.get("silage_lo80"))} to {acres(us.get("silage_hi80"))} million.
-Grain is {acres(us.get("grain"))} million acres, primarily NASS's own in-season figures.
+Grain is {acres(us.get("grain"))} million acres. That number is NASS's own November harvested-for-grain
+forecast in every state where NASS publishes one, so its accuracy is NASS's, not ours. Say so first.
+Without that forecast, our own grain number (in-season planted acres × last year's grain share) was off by
+{number(own_grain.get("state_wape_pct"), 2, "%")} by state and {number(own_grain.get("us_error_pct"), 2, "%")} on the US total in 2017–2024.
+Our skill claim is silage, where NASS publishes nothing in season.
 These totals sum the states shown; missing grain states are excluded.
 
 ## 0:40–1:05 — States (usefulness)
 
 Scroll the state table. Each silage forecast has an interval and change from last year.
 The state model uses public acreage history and tests additional season context against persistence.
-The selected model is `{selected}`; it adjusts unusual prior-year silage acreage toward its historical level.
+The selected model is `{selected}`: a smoothed state level (most yearly swings reverse the next year)
+plus drought chopping, i.e. grain corn cut for silage when NASS's November yield forecast falls over 10% below trend.
 Do not present the satellite classifier as the source of these acreage totals.
 
 ## 1:05–2:00 — Can you trust it (technical quality)
@@ -491,7 +611,7 @@ The separate 2025 score is {number(dig(score, "silage", "model", "state_error_pc
 For the 2025 national total, signed error is {number(dig(score, "silage", "model", "total_error_pct"), 2)}%, versus
 {number(dig(score, "silage", "same_as_last_year", "total_error_pct"), 2)}%.
 That is a modest validation gain and no held-out silage win. We do not claim otherwise.
-The grain advantage comes largely from NASS inputs, not a new satellite discovery.
+The grain advantage is NASS's own forecast, not a new satellite discovery or our method.
 
 ## 2:00–2:30 — Bias (technical maturity)
 
@@ -510,6 +630,10 @@ An early state replay requires its own dated satellite aggregate; it cannot reus
 
 ## 3:05–4:10 — The field signal (innovation and evidence)
 
+Open `report/fields.html`, choose one real field, and show its NDVI/NDMI curves and provisional cut bracket.
+Explain that these satellite features feed the field classifier. Without the state sample aggregate,
+they do not yet drive the headline acreage forecast. Return to the acreage report.
+
 The six features describe drop size, speed, fade time, greenness and moisture before the cut, and residue after it.
 We fit on {number(dig(field, "train", "field_years"), 0)} Quebec parcels and test on
 {number(dig(field, "test", "field_years"), 0)} Maryland research-farm field-years from
@@ -518,6 +642,8 @@ Silage precision is {number(dig(field, "rates", "silage_precision"), 3)}, recall
 {number(dig(field, "rates", "silage_recall"), 3)}, false positive rate
 {number(dig(field, "rates", "false_positive_rate"), 3)}. The confusion matrix is
 TP={dig(field, "rates", "TP")}, FP={dig(field, "rates", "FP")}, FN={dig(field, "rates", "FN")}, TN={dig(field, "rates", "TN")}.
+Balanced accuracy is {number(dig(field, "rates", "balanced_accuracy"), 3)}; silage F1 is
+{number(dig(field, "rates", "silage_f1"), 3)}. Operational calls can abstain; scores are not calibrated probabilities.
 Confidence intervals resample whole fields, keeping their repeated years together.
 Feature extraction plus prediction takes {number(field.get("response_seconds_per_field"), 4)} seconds per field
 on this machine; imagery downloading is excluded.
@@ -569,6 +695,12 @@ def main() -> None:
         "weights": read_csv(models / "field_model_coefficients.csv"),
         "curves": maryland_curves(data),
     }
+    verified = comparison_rows(metrics, tables["backtest"])
+    verified_path = models / "verified_metrics.csv"
+    verified.to_csv(verified_path, index=False, lineterminator="\n")
+    record_in_manifest(verified_path, "derived: kernelag.report; comparison table")
+    (REPO / "DOCS" / "VERIFIED_METRICS.md").write_text(
+        verification_markdown(metrics, tables["backtest"], tables["earliness"]), encoding="utf-8")
     target = Path(args.out)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(render(metrics, tables), encoding="utf-8")

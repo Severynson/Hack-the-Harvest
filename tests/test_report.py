@@ -19,3 +19,18 @@ def test_page_renders_with_no_inputs():
     page = report.render(metrics, tables)
     assert page.startswith("<!doctype html>") and report.DASH in page
     assert "http" not in page.replace("http://www.w3.org", "")     # nothing is fetched from the network
+
+
+def test_comparison_keeps_sampled_scope_and_absolute_total_error():
+    rows = pd.DataFrame([
+        {"scope": scope, "series": "silage", "predictor": "same_as_last_year", "year": year,
+         "n_states": count, "state_error_pct": error, "total_error_pct": total}
+        for scope, count, error, year, total in
+        [("all_states", 48, 12., 2020, -5.), ("all_states", 48, 14., 2021, 5.),
+         ("sampled_states", 10, 8., 2020, 3.)]])
+    table = report.comparison_rows({"state_model": {}, "score_2025": {}}, rows)
+    all_states = table[table["scope"] == "all_states"].iloc[0]
+    assert all_states["state_wape_pct"] == 13
+    assert all_states["national_abs_error_pct"] == 5
+    assert all_states["minimum_states"] == 48
+    assert len(table) == 2

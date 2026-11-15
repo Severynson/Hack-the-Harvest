@@ -359,7 +359,7 @@ QUICKSTATS_SERIES = {
     "hay_price_received": {"commodity_desc": "HAY", "statisticcat_desc": "PRICE RECEIVED"},
     "milk_price_received": {"commodity_desc": "MILK", "statisticcat_desc": "PRICE RECEIVED"},
     "cattle_on_feed": {"commodity_desc": "CATTLE", "prodn_practice_desc": "ON FEED"},
-    # The long history behind test_models/model: finals plus every in-season figure (reference_period_desc).
+    # The long history behind test_models/danielModel: finals plus every in-season figure (reference_period_desc).
     "corn_planted_acres": {"commodity_desc": "CORN", "statisticcat_desc": "AREA PLANTED", "unit_desc": "ACRES"},
     "corn_grain_harvested_acres": {"commodity_desc": "CORN", "util_practice_desc": "GRAIN", "statisticcat_desc": "AREA HARVESTED", "unit_desc": "ACRES"},
     "corn_silage_harvested_acres": {"commodity_desc": "CORN", "util_practice_desc": "SILAGE", "statisticcat_desc": "AREA HARVESTED", "unit_desc": "ACRES"},

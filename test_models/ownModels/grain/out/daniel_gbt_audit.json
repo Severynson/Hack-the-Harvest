@@ -1,0 +1,24 @@
+{
+ "model": "grain_gbt_independent (test_models/danielModel/train_gbt.py)",
+ "verdict": "not independent (uses NASS current-year planted acres and NASS current-year yield forecasts); also uses NASS crop condition and progress",
+ "inputs_used": {
+  "starting value 'last'": "planted_asof x grain(t-1) / planted(t-1): planted_asof is NASS's latest in-season planted acres (June Acreage or later); for years before 2018 build_panel.py fills it with NASS's FINAL planted acres (stand_in=True): current-year NASS and a look-ahead",
+  "d_planted": "log(planted_asof / planted(t-1)): NASS current-year planted acres",
+  "yield_shock": "log(yield_asof / mean yield of 3 earlier years): NASS Aug-Nov grain yield forecast",
+  "d_poor, poor": "cond_poor: NASS weekly crop condition (Tier B source)",
+  "late_plant": "planted_may20: NASS weekly crop progress (Tier B source)",
+  "d_mature": "mature_sep22: NASS weekly crop progress (Tier B source)",
+  "d_drought, drought": "drought_d2: US Drought Monitor (Tier A)",
+  "d_rain, d_gdd, early_freeze": "NOAA weather (Tier A)",
+  "share_last": "silage(t-1) / planted(t-1): NASS finals of t-1 (Tier A history)"
+ },
+ "tier": "not independent",
+ "reported_backtest": {
+  "source": "test_models/danielModel/out/gbt_backtest_by_year.csv",
+  "years": "2012-2024",
+  "mean_state_wape_pct": 2.553,
+  "mean_abs_us_error_pct": 1.61,
+  "mean_state_wape_pct_2017_2024": 2.196,
+  "note": "Daniel's own harness and panel (not re-run here); quoted only"
+ }
+}

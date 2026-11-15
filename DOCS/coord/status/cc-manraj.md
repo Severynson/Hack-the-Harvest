@@ -1,3 +1,12 @@
 # cc-manraj status ledger (append-only, single writer)
 - 2026-11-15T03:09Z delivered to branch Manraj (rebased on main f781eb5): merged state model with the satellite change, 2026 planted and grain from NASS text reports, field evaluation (rates with intervals, response time, earliness). Silage scan: no public tabular feature beats reversion_only. Next: static report, then satellite rerun when state_satellite.csv lands
 - 2026-11-15T03:12Z delivered to branch Manraj: offline report (python -m kernelag.report -> report/index.html). Not done: satellite rerun (waits for data/panel/state_satellite.csv), FSA change test, DOCS/presentation.md, delivery of Manraj to main
+- 2026-11-15T07:42Z claim T-cc-manraj-noise-floor ttl=90m
+- 2026-11-15T07:42Z result: silage state error is mostly target noise (lag-1 autocorr of state changes -0.40, floor about 10% vs 13% achieved; survey vs census gap 15.6%/32.1%). Smoothed level + drought chopping: US silage error 3.44% vs LAD 5.12% (gain 1.67, SE 0.76, 2012-2024); state error unchanged. Not promoted to kernelag (vs reversion_only on 2017-24: gains 0.33/0.57, under 2 SE).
+- 2026-11-15T07:51Z promoted smoothed_chopping into kernelag.state_model at the user's request (2026 US silage 6.26M, 80% 5.95-6.59M; 2025 held-out state 13.12%, US +2.19%)
+- 2026-11-15T08:01Z claim T-cc-manraj-deliverable ttl=90m
+- 2026-11-15T08:05Z result: deliverable vs NASS final (organizer CSV; 2017/2022 from pipeline NASS copy, 979 shared rows identical): silage 2017-24 state 12.80% US 3.34% (last year 14.53/4.08), 2025 13.12/2.19; grain 2017-24 1.66/0.82, 2025 1.64/0.99
+- 2026-11-15T08:14Z claim T-cc-manraj-grain-anchor ttl=90m
+- 2026-11-15T08:15Z result: grain without NASS's grain forecast (planted asof x last grain share), 2017-24: state 2.35% US 1.05% (NASS-anchored 1.66/0.82); 2025: 1.63/0.69. Presentation now leads with 'grain is NASS's forecast'.
+- 2026-11-15T08:35Z claim T-cc-manraj-submission ttl=90m
+- 2026-11-15T08:35Z result: Keeboh submission folder jupyter/workspace/Kernel_Submission (22 MB): executed notebook + kernelag + inputs; lean run outputs byte-identical to the full pipeline

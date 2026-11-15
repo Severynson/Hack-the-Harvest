@@ -1,0 +1,163 @@
+model,role,tier,asof,period,n_years,mean_state_wape_pct,mean_abs_us_error_pct,mean_signed_us_error_pct,max_abs_us_error_pct
+A,reference,A,nov,2012-2024,13,13.7232,4.9838,-1.6534,22.1360
+A,reference,A,nov,2017-2024,8,12.5267,4.0211,-0.8385,7.3441
+A,reference,A,oct,2012-2024,13,13.7877,5.0306,-1.7832,22.1360
+A,reference,A,oct,2017-2024,8,12.6044,4.0948,-1.0518,7.4560
+A,reference,A,sep,2012-2024,13,13.7996,4.9965,-1.8109,22.1360
+A,reference,A,sep,2017-2024,8,12.6446,4.0929,-1.0431,7.4672
+B,reference,B,nov,2012-2024,13,13.8050,4.9441,-1.5799,22.1360
+B,reference,B,nov,2017-2024,8,12.6604,3.9411,-0.7345,7.0158
+B,reference,B,oct,2012-2024,13,13.8224,4.9589,-1.6345,22.1360
+B,reference,B,oct,2017-2024,8,12.6724,3.9945,-0.7939,7.0196
+B,reference,B,sep,2012-2024,13,13.8607,4.9477,-1.6477,22.1360
+B,reference,B,sep,2017-2024,8,12.7142,3.9533,-0.8383,6.9994
+SC,reference,C,nov,2012-2024,13,13.2276,3.4473,-2.1617,14.0825
+SC,reference,C,nov,2017-2024,8,12.8000,3.3369,-1.3153,6.1277
+SC,reference,C,oct,2012-2024,13,13.2499,3.4350,-2.1346,13.8631
+SC,reference,C,oct,2017-2024,8,12.8107,3.3730,-1.3295,6.1406
+SC,reference,C,sep,2012-2024,13,13.3523,3.8539,-2.4070,19.1972
+SC,reference,C,sep,2017-2024,8,12.7860,3.5110,-1.2855,6.1726
+SC_A,reference,A,nov,2012-2024,13,13.2391,3.5154,-1.8084,10.3303
+SC_A,reference,A,nov,2017-2024,8,12.5658,3.6481,-1.0606,7.0647
+SC_A,reference,A,oct,2012-2024,13,13.2391,3.5154,-1.8084,10.3303
+SC_A,reference,A,oct,2017-2024,8,12.5658,3.6481,-1.0606,7.0647
+SC_A,reference,A,sep,2012-2024,13,13.2861,3.7278,-1.9507,10.7740
+SC_A,reference,A,sep,2017-2024,8,12.5356,3.6825,-1.0875,7.0951
+SC_B,reference,B,nov,2012-2024,13,13.2331,3.5561,-2.2491,14.4289
+SC_B,reference,B,nov,2017-2024,8,12.8105,3.3625,-1.3086,6.1288
+SC_B,reference,B,oct,2012-2024,13,13.2457,3.4692,-2.1369,14.2193
+SC_B,reference,B,oct,2017-2024,8,12.8160,3.4165,-1.3328,6.1386
+SC_B,reference,B,sep,2012-2024,13,13.3931,3.8519,-2.4185,19.3380
+SC_B,reference,B,sep,2017-2024,8,12.8322,3.4702,-1.3264,6.1705
+SC_L,reference,A,nov,2012-2024,13,13.9126,4.4821,-2.1653,22.3093
+SC_L,reference,A,nov,2017-2024,8,12.9641,3.6872,-1.3795,6.7422
+SC_L,reference,A,oct,2012-2024,13,13.9126,4.4821,-2.1653,22.3093
+SC_L,reference,A,oct,2017-2024,8,12.9641,3.6872,-1.3795,6.7422
+SC_L,reference,A,sep,2012-2024,13,13.9126,4.4821,-2.1653,22.3093
+SC_L,reference,A,sep,2017-2024,8,12.9641,3.6872,-1.3795,6.7422
+s0_persistence,reference,benchmark,nov,2012-2024,13,15.8387,5.7559,0.0183,20.0027
+s0_persistence,reference,benchmark,nov,2017-2024,8,14.5319,4.0770,0.1076,7.2353
+s0_persistence,reference,benchmark,oct,2012-2024,13,15.8387,5.7559,0.0183,20.0027
+s0_persistence,reference,benchmark,oct,2017-2024,8,14.5319,4.0770,0.1076,7.2353
+s0_persistence,reference,benchmark,sep,2012-2024,13,15.8387,5.7559,0.0183,20.0027
+s0_persistence,reference,benchmark,sep,2017-2024,8,14.5319,4.0770,0.1076,7.2353
+s1_reversion_only,reference,A (history only),nov,2012-2024,13,14.1077,4.8452,-1.7059,22.1360
+s1_reversion_only,reference,A (history only),nov,2017-2024,8,13.0132,3.7260,-0.9936,6.5885
+s1_reversion_only,reference,A (history only),oct,2012-2024,13,14.1077,4.8452,-1.7059,22.1360
+s1_reversion_only,reference,A (history only),oct,2017-2024,8,13.0132,3.7260,-0.9936,6.5885
+s1_reversion_only,reference,A (history only),sep,2012-2024,13,14.1077,4.8452,-1.7059,22.1360
+s1_reversion_only,reference,A (history only),sep,2017-2024,8,13.0132,3.7260,-0.9936,6.5885
+v10_topdown_SCL,exploratory,A,nov,2012-2024,13,13.7280,4.4821,-2.1653,22.3093
+v10_topdown_SCL,exploratory,A,nov,2017-2024,8,12.5535,3.6872,-1.3795,6.7422
+v10_topdown_SCL,exploratory,A,oct,2012-2024,13,13.7767,4.4821,-2.1653,22.3093
+v10_topdown_SCL,exploratory,A,oct,2017-2024,8,12.6021,3.6872,-1.3795,6.7422
+v10_topdown_SCL,exploratory,A,sep,2012-2024,13,13.7847,4.4821,-2.1653,22.3093
+v10_topdown_SCL,exploratory,A,sep,2017-2024,8,12.6368,3.6872,-1.3795,6.7422
+v11_topdown_SCA,exploratory,A,nov,2012-2024,13,13.6998,3.5154,-1.8084,10.3303
+v11_topdown_SCA,exploratory,A,nov,2017-2024,8,12.5769,3.6481,-1.0606,7.0647
+v11_topdown_SCA,exploratory,A,oct,2012-2024,13,13.7508,3.5154,-1.8084,10.3303
+v11_topdown_SCA,exploratory,A,oct,2017-2024,8,12.6293,3.6481,-1.0606,7.0647
+v11_topdown_SCA,exploratory,A,sep,2012-2024,13,13.7464,3.7278,-1.9507,10.7740
+v11_topdown_SCA,exploratory,A,sep,2017-2024,8,12.6602,3.6825,-1.0875,7.0951
+v12_geo_SCA,exploratory,A,nov,2012-2024,13,13.0805,4.1366,-1.8720,17.2493
+v12_geo_SCA,exploratory,A,nov,2017-2024,8,12.2731,3.7791,-0.9843,7.2386
+v12_geo_SCA,exploratory,A,oct,2012-2024,13,13.1228,4.1595,-1.9367,17.2493
+v12_geo_SCA,exploratory,A,oct,2017-2024,8,12.3269,3.8161,-1.0898,7.2945
+v12_geo_SCA,exploratory,A,sep,2012-2024,13,13.1726,4.2520,-2.0271,17.4398
+v12_geo_SCA,exploratory,A,sep,2017-2024,8,12.3614,3.8300,-1.0959,7.3060
+v13_chopmult_SCA,exploratory,A,nov,2012-2024,13,13.3343,4.5696,0.6770,9.3610
+v13_chopmult_SCA,exploratory,A,nov,2017-2024,8,12.3580,4.4494,0.6332,9.3610
+v13_chopmult_SCA,exploratory,A,oct,2012-2024,13,13.3905,4.6134,0.5436,9.1574
+v13_chopmult_SCA,exploratory,A,oct,2017-2024,8,12.4223,4.5185,0.4140,8.8198
+v13_chopmult_SCA,exploratory,A,sep,2012-2024,13,13.4349,4.5771,0.4965,9.6119
+v13_chopmult_SCA,exploratory,A,sep,2017-2024,8,12.4363,4.5188,0.3788,8.5670
+v1_geo,primary,C,nov,2012-2024,13,13.2356,4.1521,-1.9901,18.6798
+v1_geo,primary,C,nov,2017-2024,8,12.5315,3.6835,-1.1021,6.7753
+v1_geo,primary,C,oct,2012-2024,13,13.2818,4.1850,-2.0425,18.6044
+v1_geo,primary,C,oct,2017-2024,8,12.5935,3.7394,-1.2136,6.8389
+v1_geo,primary,C,sep,2012-2024,13,13.4875,4.4224,-2.1468,20.7731
+v1_geo,primary,C,sep,2017-2024,8,12.6203,3.8028,-1.1853,6.8513
+v2_topdown,primary,C,nov,2012-2024,13,13.6799,3.4473,-2.1617,14.0825
+v2_topdown,primary,C,nov,2017-2024,8,12.5958,3.3369,-1.3153,6.1277
+v2_topdown,primary,C,oct,2012-2024,13,13.7359,3.4350,-2.1346,13.8631
+v2_topdown,primary,C,oct,2017-2024,8,12.6525,3.3730,-1.3295,6.1406
+v2_topdown,primary,C,sep,2012-2024,13,13.7410,3.8539,-2.4070,19.1972
+v2_topdown,primary,C,sep,2017-2024,8,12.7039,3.5110,-1.2855,6.1726
+v3_reverse,primary (control),C,nov,2012-2024,13,13.6571,4.9838,-1.6534,22.1360
+v3_reverse,primary (control),C,nov,2017-2024,8,12.8300,4.0211,-0.8385,7.3441
+v3_reverse,primary (control),C,oct,2012-2024,13,13.6980,5.0306,-1.7832,22.1360
+v3_reverse,primary (control),C,oct,2017-2024,8,12.8583,4.0948,-1.0518,7.4560
+v3_reverse,primary (control),C,sep,2012-2024,13,13.5532,4.9965,-1.8109,22.1360
+v3_reverse,primary (control),C,sep,2017-2024,8,12.8159,4.0929,-1.0431,7.4672
+v4_mean3,primary,C,nov,2012-2024,13,13.3592,4.3959,-1.7983,19.4515
+v4_mean3,primary,C,nov,2017-2024,8,12.5226,3.7664,-0.9628,6.6791
+v4_mean3,primary,C,oct,2012-2024,13,13.4001,4.4205,-1.8508,19.3783
+v4_mean3,primary,C,oct,2017-2024,8,12.5766,3.8208,-1.0584,6.7265
+v4_mean3,primary,C,sep,2012-2024,13,13.5828,4.5968,-1.9552,21.1564
+v4_mean3,primary,C,sep,2017-2024,8,12.6200,3.8482,-1.0556,6.8797
+v5_chopmult,primary,C,nov,2012-2024,13,13.2227,4.1249,-0.6304,12.9038
+v5_chopmult,primary,C,nov,2017-2024,8,12.3493,3.7663,-0.3439,6.8783
+v5_chopmult,primary,C,oct,2012-2024,13,13.2900,4.2225,-0.7805,12.9953
+v5_chopmult,primary,C,oct,2017-2024,8,12.4134,3.9198,-0.5705,6.9873
+v5_chopmult,primary,C,sep,2012-2024,13,13.4313,4.6608,-1.2866,18.8333
+v5_chopmult,primary,C,sep,2017-2024,8,12.4498,3.9567,-0.6074,7.0247
+v5b_chopadd,primary (variant of v5),C,nov,2012-2024,13,13.2195,4.1381,-0.6522,13.0816
+v5b_chopadd,primary (variant of v5),C,nov,2017-2024,8,12.3572,3.7659,-0.3565,6.8774
+v5b_chopadd,primary (variant of v5),C,oct,2012-2024,13,13.2917,4.2235,-0.7934,13.0557
+v5b_chopadd,primary (variant of v5),C,oct,2017-2024,8,12.4208,3.9140,-0.5837,6.9816
+v5b_chopadd,primary (variant of v5),C,sep,2012-2024,13,13.4334,4.6544,-1.2890,18.7978
+v5b_chopadd,primary (variant of v5),C,sep,2017-2024,8,12.4580,3.9510,-0.6157,7.0167
+v6_topdown_geoUS,primary,C,nov,2012-2024,13,13.6233,4.1250,-1.9218,18.2083
+v6_topdown_geoUS,primary,C,nov,2017-2024,8,12.5090,3.6771,-1.0821,6.7379
+v6_topdown_geoUS,primary,C,oct,2012-2024,13,13.6926,4.1551,-1.9725,18.1039
+v6_topdown_geoUS,primary,C,oct,2017-2024,8,12.5925,3.7321,-1.1944,6.8006
+v6_topdown_geoUS,primary,C,sep,2012-2024,13,13.7263,4.4193,-2.1143,20.6802
+v6_topdown_geoUS,primary,C,sep,2017-2024,8,12.6412,3.7945,-1.1674,6.8222
+v7_mean2,exploratory,C,nov,2012-2024,13,13.2032,4.1217,-1.9076,18.1093
+v7_mean2,exploratory,C,nov,2017-2024,8,12.5313,3.6790,-1.0769,6.7359
+v7_mean2,exploratory,C,oct,2012-2024,13,13.2471,4.1512,-1.9589,17.9995
+v7_mean2,exploratory,C,oct,2017-2024,8,12.5937,3.7339,-1.1906,6.7983
+v7_mean2,exploratory,C,sep,2012-2024,13,13.4893,4.4214,-2.1090,20.6666
+v7_mean2,exploratory,C,sep,2017-2024,8,12.6215,3.7957,-1.1643,6.8199
+v8_geo_fitted,exploratory,C,nov,2012-2024,13,13.2697,3.9491,-2.1668,18.6798
+v8_geo_fitted,exploratory,C,nov,2017-2024,8,12.6623,3.5446,-1.1982,6.3964
+v8_geo_fitted,exploratory,C,oct,2012-2024,13,13.2859,3.9414,-2.2008,18.6044
+v8_geo_fitted,exploratory,C,oct,2017-2024,8,12.6899,3.5467,-1.2677,6.4298
+v8_geo_fitted,exploratory,C,sep,2012-2024,13,13.5073,4.0177,-2.4335,20.7731
+v8_geo_fitted,exploratory,C,sep,2017-2024,8,12.7860,3.5110,-1.2855,6.1726
+v9_topdown_SCB,exploratory,B,nov,2012-2024,13,13.6753,3.5561,-2.2491,14.4289
+v9_topdown_SCB,exploratory,B,nov,2017-2024,8,12.5907,3.3625,-1.3086,6.1288
+v9_topdown_SCB,exploratory,B,oct,2012-2024,13,13.7306,3.4692,-2.1369,14.2193
+v9_topdown_SCB,exploratory,B,oct,2017-2024,8,12.6508,3.4165,-1.3328,6.1386
+v9_topdown_SCB,exploratory,B,sep,2012-2024,13,13.7415,3.8519,-2.4185,19.3380
+v9_topdown_SCB,exploratory,B,sep,2017-2024,8,12.7043,3.4702,-1.3264,6.1705
+w1_mean2_SCA,round 2 (post hoc),A,nov,2012-2024,13,13.0055,4.0867,-1.7309,16.2331
+w1_mean2_SCA,round 2 (post hoc),A,nov,2017-2024,8,12.2575,3.7783,-0.9496,7.2044
+w1_mean2_SCA,round 2 (post hoc),A,oct,2012-2024,13,13.0486,4.1101,-1.7958,16.2331
+w1_mean2_SCA,round 2 (post hoc),A,oct,2017-2024,8,12.3112,3.8152,-1.0562,7.2603
+w1_mean2_SCA,round 2 (post hoc),A,sep,2012-2024,13,13.0989,4.1975,-1.8808,16.4550
+w1_mean2_SCA,round 2 (post hoc),A,sep,2017-2024,8,12.3469,3.8303,-1.0653,7.2812
+w2_geo_fitted_SCA,round 2 (post hoc),A,nov,2012-2024,13,13.0855,4.0092,-2.0782,17.2493
+w2_geo_fitted_SCA,round 2 (post hoc),A,nov,2017-2024,8,12.3604,3.7373,-1.0078,7.1601
+w2_geo_fitted_SCA,round 2 (post hoc),A,oct,2012-2024,13,13.1092,4.0014,-2.1232,17.2493
+w2_geo_fitted_SCA,round 2 (post hoc),A,oct,2017-2024,8,12.3963,3.7295,-1.0808,7.1647
+w2_geo_fitted_SCA,round 2 (post hoc),A,sep,2012-2024,13,13.1243,4.1423,-2.1731,17.4398
+w2_geo_fitted_SCA,round 2 (post hoc),A,sep,2017-2024,8,12.3775,3.7701,-1.0855,7.2067
+w3_geo_SCA_rescaled,round 2 (post hoc),A,nov,2012-2024,13,13.0047,3.5154,-1.8084,10.3303
+w3_geo_SCA_rescaled,round 2 (post hoc),A,nov,2017-2024,8,12.3545,3.6481,-1.0606,7.0647
+w3_geo_SCA_rescaled,round 2 (post hoc),A,oct,2012-2024,13,13.0335,3.5154,-1.8084,10.3303
+w3_geo_SCA_rescaled,round 2 (post hoc),A,oct,2017-2024,8,12.3843,3.6481,-1.0606,7.0647
+w3_geo_SCA_rescaled,round 2 (post hoc),A,sep,2012-2024,13,13.0846,3.7278,-1.9507,10.7740
+w3_geo_SCA_rescaled,round 2 (post hoc),A,sep,2017-2024,8,12.4202,3.6825,-1.0875,7.0951
+w4_geo_rescaled,round 2 (post hoc),C,nov,2012-2024,13,13.1548,3.4473,-2.1617,14.0825
+w4_geo_rescaled,round 2 (post hoc),C,nov,2017-2024,8,12.5821,3.3369,-1.3153,6.1277
+w4_geo_rescaled,round 2 (post hoc),C,oct,2012-2024,13,13.1884,3.4350,-2.1346,13.8631
+w4_geo_rescaled,round 2 (post hoc),C,oct,2017-2024,8,12.6190,3.3730,-1.3295,6.1406
+w4_geo_rescaled,round 2 (post hoc),C,sep,2012-2024,13,13.4325,3.8539,-2.4070,19.1972
+w4_geo_rescaled,round 2 (post hoc),C,sep,2017-2024,8,12.6579,3.5110,-1.2855,6.1726
+w5_SC_A,round 2 (post hoc),A,nov,2012-2024,13,13.2391,3.5154,-1.8084,10.3303
+w5_SC_A,round 2 (post hoc),A,nov,2017-2024,8,12.5658,3.6481,-1.0606,7.0647
+w5_SC_A,round 2 (post hoc),A,oct,2012-2024,13,13.2391,3.5154,-1.8084,10.3303
+w5_SC_A,round 2 (post hoc),A,oct,2017-2024,8,12.5658,3.6481,-1.0606,7.0647
+w5_SC_A,round 2 (post hoc),A,sep,2012-2024,13,13.2861,3.7278,-1.9507,10.7740
+w5_SC_A,round 2 (post hoc),A,sep,2017-2024,8,12.5356,3.6825,-1.0875,7.0951

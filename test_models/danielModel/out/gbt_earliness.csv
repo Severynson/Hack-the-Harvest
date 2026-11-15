@@ -1,0 +1,17 @@
+asof,candidate,years,state_error_pct,us_abs_error_pct,us_bias_pct
+aug,silage_gbt_small_monotone,13,13.39,4.4,-2.17
+aug,grain_gbt_correction,13,3.47,1.93,0.28
+aug,grain_gbt_independent,13,3.23,1.64,0.19
+aug,nass_latest (grain),13,3.03,1.06,0.84
+sep,silage_gbt_small_monotone,13,13.3,4.17,-1.96
+sep,grain_gbt_correction,13,2.9,1.59,0.13
+sep,grain_gbt_independent,13,2.65,1.46,0.14
+sep,nass_latest (grain),13,2.58,0.91,0.81
+oct,silage_gbt_small_monotone,13,13.23,3.83,-1.8
+oct,grain_gbt_correction,13,2.59,1.6,0.12
+oct,grain_gbt_independent,13,2.5,1.55,-0.08
+oct,nass_latest (grain),13,1.76,0.7,0.61
+nov,silage_gbt_small_monotone,13,13.27,3.7,-1.71
+nov,grain_gbt_correction,13,2.48,1.52,0.01
+nov,grain_gbt_independent,13,2.55,1.61,-0.1
+nov,nass_latest (grain),13,1.6,0.58,0.45

@@ -1,0 +1,70 @@
+{
+ "status": "done",
+ "preregistration": {
+  "sha256_now": "c0640f0446896557767565e42d1c56e9a507f666dc711080a6386637878e8135",
+  "sha256_stored": "c0640f0446896557767565e42d1c56e9a507f666dc711080a6386637878e8135",
+  "unchanged": true
+ },
+ "selected": "s3_fsa_residual",
+ "inputs_used_2026": [
+  {
+   "year": 2026,
+   "asof": "2026-09-15",
+   "current_zip": "06OAypAHYasf.zip",
+   "current_data_as_of": "2026-09-01",
+   "current_published": "2026-09-11",
+   "current_vintage": "sep",
+   "prior_final_zip": "DoISjehvQfz9.ZIP",
+   "prior_final_data_as_of": "2026-01-05",
+   "prior_final_published": "2026-01-12",
+   "prior_final_vintage": "final",
+   "asof_key": "sep"
+  },
+  {
+   "year": 2026,
+   "asof": "2026-10-15",
+   "current_zip": "IV4i8vWMYLge.zip",
+   "current_data_as_of": "2026-10-01",
+   "current_published": "2026-10-09",
+   "current_vintage": "oct",
+   "prior_final_zip": "DoISjehvQfz9.ZIP",
+   "prior_final_data_as_of": "2026-01-05",
+   "prior_final_published": "2026-01-12",
+   "prior_final_vintage": "final",
+   "asof_key": "oct"
+  },
+  {
+   "year": 2026,
+   "asof": "2026-11-15",
+   "current_zip": "Wrcdk92KC1587MaHom35213.zip",
+   "current_data_as_of": "2026-11-05",
+   "current_published": "2026-11-10",
+   "current_vintage": "nov",
+   "prior_final_zip": "DoISjehvQfz9.ZIP",
+   "prior_final_data_as_of": "2026-01-05",
+   "prior_final_published": "2026-01-12",
+   "prior_final_vintage": "final",
+   "asof_key": "nov"
+  }
+ ],
+ "interval_info_2026": {
+  "us_log_error_q10": -0.04515245465723297,
+  "us_log_error_q90": 0.07620234230660655,
+  "n_backtest_years": 13,
+  "state_interval_loyo_coverage": {
+   "80": 0.788,
+   "90": 0.893
+  }
+ },
+ "fsa_files_status": {
+  "ok": 89,
+  "summary_only": 9,
+  "corrupt": 3,
+  "unusable": 1
+ },
+ "caveats": [
+  "RMA files are today's vintage (insured acres and losses of past years are more complete than they were in real time)",
+  "FSA publication dates before 2025 are assumed: data date + 5 days",
+  "2025 is excluded from the backtest, fitting of backtest years and selection"
+ ]
+}

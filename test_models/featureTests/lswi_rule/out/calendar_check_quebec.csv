@@ -1,0 +1,7 @@
+dataset,label,n,n_with_cut_date,cut_doy_q25,cut_doy_q50,cut_doy_q75,share_cut_by_sep10,share_cut_by_sep30,n_cut_in_september,lswi_at_september_cut_q50,share_september_cut_lswi_le_015
+qc_regions_2023,grain,1681,1681,267.0,275.0,290.0,0.035,0.433,705,0.164,0.444
+qc_regions_2023,silage,1129,1129,270.0,272.0,282.0,0.017,0.545,609,0.005,0.777
+quebec_all,grain,1861,1861,267.0,275.0,290.0,0.034,0.448,809,0.182,0.399
+quebec_all,silage,1267,1267,270.0,272.0,282.0,0.019,0.545,679,0.02,0.72
+quebec_maize_2023,grain,180,180,272.0,272.0,277.0,0.022,0.589,104,0.256,0.096
+quebec_maize_2023,silage,138,138,272.0,272.0,277.0,0.036,0.543,70,0.265,0.229

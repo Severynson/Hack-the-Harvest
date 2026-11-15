@@ -1,0 +1,124 @@
+state,candidate,pred,actual
+ALABAMA,g3_fsa_ratio_multi,335030,330000
+ARIZONA,g3_fsa_ratio_multi,20288.2,13000
+ARKANSAS,g3_fsa_ratio_multi,781587,790000
+CALIFORNIA,g3_fsa_ratio_multi,45793,75000
+COLORADO,g3_fsa_ratio_multi,1.15786e+06,1.23e+06
+DELAWARE,g3_fsa_ratio_multi,170732,172000
+FLORIDA,g3_fsa_ratio_multi,53071.8,57000
+GEORGIA,g3_fsa_ratio_multi,485978,505000
+IDAHO,g3_fsa_ratio_multi,133773,145000
+ILLINOIS,g3_fsa_ratio_multi,1.09768e+07,1.095e+07
+INDIANA,g3_fsa_ratio_multi,5.25045e+06,5.24e+06
+IOWA,g3_fsa_ratio_multi,1.30229e+07,1.315e+07
+KANSAS,g3_fsa_ratio_multi,6.10736e+06,6.45e+06
+KENTUCKY,g3_fsa_ratio_multi,1.42149e+06,1.42e+06
+LOUISIANA,g3_fsa_ratio_multi,792298,790000
+MARYLAND,g3_fsa_ratio_multi,396573,410000
+MICHIGAN,g3_fsa_ratio_multi,2.00317e+06,1.98e+06
+MINNESOTA,g3_fsa_ratio_multi,8.36869e+06,8.44e+06
+MISSISSIPPI,g3_fsa_ratio_multi,873331,865000
+MISSOURI,g3_fsa_ratio_multi,3.62042e+06,3.64e+06
+MONTANA,g3_fsa_ratio_multi,81855.2,77000
+NEBRASKA,g3_fsa_ratio_multi,1.02424e+07,1.039e+07
+NEW JERSEY,g3_fsa_ratio_multi,66064.7,67000
+NEW MEXICO,g3_fsa_ratio_multi,46700.8,44000
+NEW YORK,g3_fsa_ratio_multi,487638,435000
+NORTH CAROLINA,g3_fsa_ratio_multi,899510,905000
+NORTH DAKOTA,g3_fsa_ratio_multi,4.37282e+06,4.49e+06
+OHIO,g3_fsa_ratio_multi,3.19267e+06,3.15e+06
+OKLAHOMA,g3_fsa_ratio_multi,477562,485000
+OREGON,g3_fsa_ratio_multi,57215.6,75000
+PENNSYLVANIA,g3_fsa_ratio_multi,643806,645000
+SOUTH CAROLINA,g3_fsa_ratio_multi,375731,370000
+SOUTH DAKOTA,g3_fsa_ratio_multi,6.09911e+06,6.35e+06
+TENNESSEE,g3_fsa_ratio_multi,872198,865000
+TEXAS,g3_fsa_ratio_multi,2.10482e+06,2.14e+06
+UTAH,g3_fsa_ratio_multi,29049,33000
+VIRGINIA,g3_fsa_ratio_multi,346959,355000
+WASHINGTON,g3_fsa_ratio_multi,149654,125000
+WEST VIRGINIA,g3_fsa_ratio_multi,27610.7,31000
+WISCONSIN,g3_fsa_ratio_multi,3.22407e+06,3.21e+06
+WYOMING,g3_fsa_ratio_multi,59499.9,54000
+ALABAMA,nass_latest,340000,330000
+ARIZONA,nass_latest,27000,13000
+ARKANSAS,nass_latest,790000,790000
+CALIFORNIA,nass_latest,28000,75000
+COLORADO,nass_latest,1.22e+06,1.23e+06
+DELAWARE,nass_latest,167000,172000
+FLORIDA,nass_latest,52000,57000
+GEORGIA,nass_latest,495000,505000
+IDAHO,nass_latest,160000,145000
+ILLINOIS,nass_latest,1.1e+07,1.095e+07
+INDIANA,nass_latest,5.25e+06,5.24e+06
+IOWA,nass_latest,1.3e+07,1.315e+07
+KANSAS,nass_latest,6.29e+06,6.45e+06
+KENTUCKY,nass_latest,1.42e+06,1.42e+06
+LOUISIANA,nass_latest,770000,790000
+MARYLAND,nass_latest,405000,410000
+MICHIGAN,nass_latest,1.99e+06,1.98e+06
+MINNESOTA,nass_latest,8.38e+06,8.44e+06
+MISSISSIPPI,nass_latest,880000,865000
+MISSOURI,nass_latest,3.63e+06,3.64e+06
+MONTANA,nass_latest,84000,77000
+NEBRASKA,nass_latest,1.03e+07,1.039e+07
+NEW JERSEY,nass_latest,65000,67000
+NEW MEXICO,nass_latest,43000,44000
+NEW YORK,nass_latest,555000,435000
+NORTH CAROLINA,nass_latest,885000,905000
+NORTH DAKOTA,nass_latest,4.36e+06,4.49e+06
+OHIO,nass_latest,3.18e+06,3.15e+06
+OKLAHOMA,nass_latest,460000,485000
+OREGON,nass_latest,65000,75000
+PENNSYLVANIA,nass_latest,640000,645000
+SOUTH CAROLINA,nass_latest,360000,370000
+SOUTH DAKOTA,nass_latest,6.11e+06,6.35e+06
+TENNESSEE,nass_latest,870000,865000
+TEXAS,nass_latest,2.05e+06,2.14e+06
+UTAH,nass_latest,35000,33000
+VIRGINIA,nass_latest,335000,355000
+WASHINGTON,nass_latest,100000,125000
+WEST VIRGINIA,nass_latest,24000,31000
+WISCONSIN,nass_latest,3.17e+06,3.21e+06
+WYOMING,nass_latest,62000,54000
+ALABAMA,g0_persistence,270000,330000
+ARIZONA,g0_persistence,19000,13000
+ARKANSAS,g0_persistence,480000,790000
+CALIFORNIA,g0_persistence,55000,75000
+COLORADO,g0_persistence,1.18e+06,1.23e+06
+DELAWARE,g0_persistence,161000,172000
+FLORIDA,g0_persistence,47000,57000
+GEORGIA,g0_persistence,305000,505000
+IDAHO,g0_persistence,110000,145000
+ILLINOIS,g0_persistence,1.065e+07,1.095e+07
+INDIANA,g0_persistence,5.05e+06,5.24e+06
+IOWA,g0_persistence,1.245e+07,1.315e+07
+KANSAS,g0_persistence,5.8e+06,6.45e+06
+KENTUCKY,g0_persistence,1.28e+06,1.42e+06
+LOUISIANA,g0_persistence,440000,790000
+MARYLAND,g0_persistence,380000,410000
+MICHIGAN,g0_persistence,1.95e+06,1.98e+06
+MINNESOTA,g0_persistence,7.73e+06,8.44e+06
+MISSISSIPPI,g0_persistence,470000,865000
+MISSOURI,g0_persistence,3.35e+06,3.64e+06
+MONTANA,g0_persistence,77000,77000
+NEBRASKA,g0_persistence,9.59e+06,1.039e+07
+NEW JERSEY,g0_persistence,61000,67000
+NEW MEXICO,g0_persistence,49000,44000
+NEW YORK,g0_persistence,555000,435000
+NORTH CAROLINA,g0_persistence,810000,905000
+NORTH DAKOTA,g0_persistence,3.64e+06,4.49e+06
+OHIO,g0_persistence,3.2e+06,3.15e+06
+OKLAHOMA,g0_persistence,410000,485000
+OREGON,g0_persistence,63000,75000
+PENNSYLVANIA,g0_persistence,700000,645000
+SOUTH CAROLINA,g0_persistence,305000,370000
+SOUTH DAKOTA,g0_persistence,5.39e+06,6.35e+06
+TENNESSEE,g0_persistence,660000,865000
+TEXAS,g0_persistence,1.89e+06,2.14e+06
+UTAH,g0_persistence,27000,33000
+VIRGINIA,g0_persistence,290000,355000
+WASHINGTON,g0_persistence,103000,125000
+WEST VIRGINIA,g0_persistence,24000,31000
+WISCONSIN,g0_persistence,2.96e+06,3.21e+06
+WYOMING,g0_persistence,65000,54000

@@ -1,0 +1,1872 @@
+{
+ "group": "fsa",
+ "status": "done",
+ "verdict": "fsa_realtime_over_incumbent_reversion_only: -0.07 points of mean state WAPE (90% CI over years -0.56 to +0.36); two-SE rule passes: False",
+ "primary_comparison": "fsa_realtime_over_incumbent_reversion_only",
+ "data_step": {
+  "status": "OK",
+  "page": "https://www.fsa.usda.gov/tools/informational/freedom-information-act-foia/electronic-reading-room/frequently-requested/crop-acreage-data",
+  "probe_2026_11_14": [
+   {
+    "url": "https://www.fsa.usda.gov/tools/informational/freedom-information-act-foia/electronic-reading-room/frequently-requested/crop-acreage-data",
+    "result": "ReadTimeout after 40 s"
+   },
+   {
+    "url": "https://www.fsa.usda.gov/sites/default/files/documents/2016_fsa_acres_jan2017_edr32.zip",
+    "result": "ReadTimeout after 40 s"
+   },
+   {
+    "url": "https://www.fsa.usda.gov/sites/default/files/2026-11/Wrcdk92KC1587MaHom35213.zip",
+    "result": "ReadTimeout after 40 s"
+   }
+  ],
+  "files_found": {
+   "2016_final": "data/raw/fsa/2016_fsa_acres_jan2017_edr32.zip",
+   "2017_final": "data/raw/fsa/2017_fsa_acres_jan2018.zip",
+   "2017_nov": "data/raw/fsa/2017_fsa_acres_nov2017gru14.zip",
+   "2018_final": "data/raw/fsa/2018_fsa_acres_Jan-2019-kgcr.zip",
+   "2018_nov": "data/raw/fsa/2018_fsa_acres_Nov_2018_grufs!.zip",
+   "2019_final": "data/raw/fsa/2019_fsa_acres_jan2020_stlno1.zip",
+   "2019_nov": "data/raw/fsa/2019_fsa_acres_nov_2019_ohnot.ZIP",
+   "2020_final": "data/raw/fsa/2020_fsa_acres_as_of_010521-BbO60I.zip",
+   "2020_nov": "data/raw/fsa/2020_FSA_Acres_web_as_of_110220-vkfNG6.zip",
+   "2021_final": "data/raw/fsa/2021_fsa_acres_web_as_of_010322.zip",
+   "2021_nov": "data/raw/fsa/2021_fsa_acres_web_as_of_110921.zip",
+   "2022_final": "data/raw/fsa/vc8Jn1nR42.zip",
+   "2022_nov": "data/raw/fsa/NEBP1OybFfUr83utFEB2.zip",
+   "2023_final": "data/raw/fsa/3QPVeIgPizDl.zip",
+   "2023_nov": "data/raw/fsa/XoNdctf9jmvWFGY.zip",
+   "2024_final": "data/raw/fsa/FnNg0ix5oKdi.zip",
+   "2024_nov": "data/raw/fsa/kmWMJUc631qPEbuuKeWH.zip",
+   "2025_dec": "data/raw/fsa/UhYA3k5AKxVM.zip",
+   "2025_final": "data/raw/fsa/DoISjehvQfz9.ZIP",
+   "2026_nov": "data/raw/fsa/Wrcdk92KC1587MaHom35213.zip"
+  },
+  "files_missing": [],
+  "parse_summaries": [
+   {
+    "year": 2016,
+    "vintage": "final",
+    "file": "2016_fsa_acres_jan2017_edr32.zip",
+    "silage_acres_us": 2660075,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 122179,
+     "Grain": 87013178,
+     "Forage": 2660075,
+     "Left Standing": 4163,
+     "Grazing": 7883,
+     "Seed": 783533,
+     "Processed": 297330
+    },
+    "research_us_total": 2660075,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2017,
+    "vintage": "final",
+    "file": "2017_fsa_acres_jan2018.zip",
+    "silage_acres_us": 2672847,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 116879,
+     "Forage": 2672847,
+     "Grain": 83400047,
+     "Seed": 781505,
+     "Grazing": 6376,
+     "Processed": 268343,
+     "Left Standing": 3919
+    },
+    "research_us_total": 2672847,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2017,
+    "vintage": "nov",
+    "file": "2017_fsa_acres_nov2017gru14.zip",
+    "silage_acres_us": 2667894,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 116753,
+     "Forage": 2667894,
+     "Grain": 83370700,
+     "Seed": 781297,
+     "Grazing": 6301,
+     "Processed": 263486,
+     "Left Standing": 3915
+    },
+    "research_us_total": 2667894,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2018,
+    "vintage": "final",
+    "file": "2018_fsa_acres_Jan-2019-kgcr.zip",
+    "silage_acres_us": 2789769,
+    "states_with_corn": 53,
+    "corn_acres_by_intended_use": {
+     "Fresh": 134868,
+     "Forage": 2789769,
+     "Grain": 82459474,
+     "Seed": 657456,
+     "Left Standing": 4965,
+     "Grazing": 6210,
+     "Processed": 262248
+    },
+    "research_us_total": 2789769,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2018,
+    "vintage": "nov",
+    "file": "2018_fsa_acres_Nov_2018_grufs!.zip",
+    "silage_acres_us": 2782295,
+    "states_with_corn": 53,
+    "corn_acres_by_intended_use": {
+     "Fresh": 132803,
+     "Forage": 2782295,
+     "Grain": 82344839,
+     "Seed": 656993,
+     "Left Standing": 4959,
+     "Grazing": 6189,
+     "Processed": 261532
+    },
+    "research_us_total": 2782295,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2019,
+    "vintage": "final",
+    "file": "2019_fsa_acres_jan2020_stlno1.zip",
+    "silage_acres_us": 2578805,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 118064,
+     "Grain": 83068644,
+     "Grazing": 14642,
+     "Silage": 2578221,
+     "Left Standing": 3563,
+     "Processed": 240665,
+     "Forage": 584,
+     "Seed": 692470
+    },
+    "research_us_total": 2578805,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2019,
+    "vintage": "nov",
+    "file": "2019_fsa_acres_nov_2019_ohnot.ZIP",
+    "silage_acres_us": 2547231,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 117260,
+     "Grain": 82997049,
+     "Grazing": 12182,
+     "Silage": 2546646,
+     "Left Standing": 3587,
+     "Processed": 238889,
+     "Forage": 584,
+     "Seed": 692180
+    },
+    "research_us_total": 2547231,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2020,
+    "vintage": "final",
+    "file": "2020_fsa_acres_as_of_010521-BbO60I.zip",
+    "silage_acres_us": 2831376,
+    "states_with_corn": 50,
+    "corn_acres_by_intended_use": {
+     "Fresh": 121143,
+     "Grain": 84611799,
+     "Silage": 2831376,
+     "Processed": 260936,
+     "Seed": 733999,
+     "Left Standing": 3800,
+     "Grazing": 10577
+    },
+    "research_us_total": 2831376,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2020,
+    "vintage": "nov",
+    "file": "2020_FSA_Acres_web_as_of_110220-vkfNG6.zip",
+    "silage_acres_us": 2758863,
+    "states_with_corn": 50,
+    "corn_acres_by_intended_use": {
+     "Fresh": 122384,
+     "Grain": 84463860,
+     "Silage": 2758863,
+     "Seed": 732132,
+     "Left Standing": 3728,
+     "Processed": 257444,
+     "Grazing": 10506
+    },
+    "research_us_total": 2758863,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2021,
+    "vintage": "final",
+    "file": "2021_fsa_acres_web_as_of_010322.zip",
+    "silage_acres_us": 2778667,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 131556,
+     "Grain": 87488607,
+     "Grazing": 9194,
+     "Silage": 2778667,
+     "Processed": 242594,
+     "Left Standing": 3503,
+     "Seed": 623411
+    },
+    "research_us_total": 2778667,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2021,
+    "vintage": "nov",
+    "file": "2021_fsa_acres_web_as_of_110921.zip",
+    "silage_acres_us": 2776606,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 131392,
+     "Grain": 87484012,
+     "Grazing": 9173,
+     "Silage": 2776606,
+     "Processed": 242653,
+     "Left Standing": 3493,
+     "Seed": 623242
+    },
+    "research_us_total": 2776606,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2022,
+    "vintage": "final",
+    "file": "vc8Jn1nR42.zip",
+    "silage_acres_us": 2642901,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 111757,
+     "Grain": 83074766,
+     "Silage": 2642901,
+     "Grazing": 7822,
+     "Processed": 229478,
+     "Left Standing": 3232,
+     "Seed": 739394
+    },
+    "research_us_total": 2642901,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2022,
+    "vintage": "nov",
+    "file": "NEBP1OybFfUr83utFEB2.zip",
+    "silage_acres_us": 2638919,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 111403,
+     "Grain": 83065061,
+     "Silage": 2638919,
+     "Grazing": 7734,
+     "Processed": 229402,
+     "Left Standing": 3232,
+     "Seed": 739273
+    },
+    "research_us_total": 2638919,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2023,
+    "vintage": "final",
+    "file": "3QPVeIgPizDl.zip",
+    "silage_acres_us": 2842347,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 106029,
+     "Grain": 89345232,
+     "Silage": 2842347,
+     "Seed": 674902,
+     "Grazing": 7064,
+     "Left Standing": 3148,
+     "Processed": 224199
+    },
+    "research_us_total": 2842347,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2023,
+    "vintage": "nov",
+    "file": "XoNdctf9jmvWFGY.zip",
+    "silage_acres_us": 2835792,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 105886,
+     "Grain": 89346771,
+     "Silage": 2835792,
+     "Seed": 674900,
+     "Grazing": 7189,
+     "Left Standing": 3131,
+     "Processed": 224087
+    },
+    "research_us_total": 2835792,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2024,
+    "vintage": "final",
+    "file": "FnNg0ix5oKdi.zip",
+    "silage_acres_us": 2785954,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 100760,
+     "Grain": 85308501,
+     "Silage": 2785954,
+     "Left Standing": 3495,
+     "Seed": 709879,
+     "Grazing": 6542,
+     "Processed": 201137
+    },
+    "research_us_total": 2785954,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2024,
+    "vintage": "nov",
+    "file": "kmWMJUc631qPEbuuKeWH.zip",
+    "silage_acres_us": 2780809,
+    "states_with_corn": 51,
+    "corn_acres_by_intended_use": {
+     "Fresh": 100723,
+     "Grain": 85302791,
+     "Silage": 2780809,
+     "Left Standing": 3495,
+     "Seed": 709684,
+     "Grazing": 6526,
+     "Processed": 201137
+    },
+    "research_us_total": 2780809,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2025,
+    "vintage": "dec",
+    "file": "UhYA3k5AKxVM.zip",
+    "silage_acres_us": 2885058,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 106778,
+     "Grain": 93141221,
+     "Silage": 2885058,
+     "Seed": 660603,
+     "Grazing": 7832,
+     "Processed": 243994,
+     "Left Standing": 2609
+    },
+    "research_us_total": 2885058,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2025,
+    "vintage": "final",
+    "file": "DoISjehvQfz9.ZIP",
+    "silage_acres_us": 2919232,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Fresh": 109127,
+     "Grain": 93255738,
+     "Silage": 2919232,
+     "Seed": 660926,
+     "Grazing": 7885,
+     "Processed": 245887,
+     "Left Standing": 2630
+    },
+    "research_us_total": 2919232,
+    "matches_research_within_0_1pct": true
+   },
+   {
+    "year": 2026,
+    "vintage": "nov",
+    "file": "Wrcdk92KC1587MaHom35213.zip",
+    "silage_acres_us": 2885866,
+    "states_with_corn": 52,
+    "corn_acres_by_intended_use": {
+     "Grain": 91165479,
+     "Silage": 2885863,
+     "Fresh": 119271,
+     "Processed": 254402,
+     "Grazing": 8044,
+     "Left Standing": 3668,
+     "Seed": 805955,
+     "Blank": 5,
+     "Forage": 3
+    },
+    "research_us_total": 2885863,
+    "matches_research_within_0_1pct": true
+   }
+  ],
+  "parse_errors": {},
+  "fsa_backtest_years_available": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ]
+ },
+ "incumbent": {
+  "primary": "kernelag.state_model, selected silage set 'reversion_only' (root report model; DOCS/DECISIONS.md 02:40Z and 03:45Z)",
+  "secondary": "test_models/danielModel nodrift_nass (kept as incumbent by test_models/accuracy/state)",
+  "truth": "NASS final silage acres harvested as stored in data/nass/corn_acres_state.csv (latest revised Quick Stats value), not the first January estimate the research note uses",
+  "years": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "states": 48,
+  "metric": "state WAPE = 100 * sum|pred - actual| / sum actual per year, averaged over years; US error = 100 * sum(pred - actual) / sum actual",
+  "reproduced_stored_backtest": "per-state predictions recomputed in memory; yearly errors equal data/models/state_model_backtest.csv",
+  "truth_mismatch_state_years_vs_danielModel": 0,
+  "residual_states_per_year": 39
+ },
+ "method": {
+  "candidate": "S(t-1) * clip(F_nov(t) / F_final(t-1), 0.5, 2.0) in gated states, capped at R(t) > 0; other states keep the base; F_final(t-1) < 500 acres -> ratio 1",
+  "gates": {
+   "realtime": "F_final(t-1) / S(t-1) >= 0.75 (primary)",
+   "fixed_list": [
+    "NEW YORK",
+    "IDAHO",
+    "CALIFORNIA",
+    "ARIZONA",
+    "NEW MEXICO",
+    "VERMONT",
+    "MONTANA"
+   ]
+  },
+  "bases": [
+   "incumbent_reversion_only (primary)",
+   "persistence (variant B)",
+   "incumbent_nodrift_nass"
+  ],
+  "fsa_vintage": "in-season file published by mid-November of year t over the final file of t-1; 2025 uses the 1 Dec 2025 file (information only)",
+  "pre_registered_sensitivity": "mean state WAPE without 2019, the Forage-to-Silage relabel year"
+ },
+ "fsa_rows": {
+  "fsa_realtime_over_incumbent_reversion_only": {
+   "gated_state_years": 109
+  },
+  "fsa_realtime_over_persistence": {
+   "gated_state_years": 109
+  },
+  "fsa_realtime_over_incumbent_nodrift_nass": {
+   "gated_state_years": 109
+  },
+  "fsa_fixed_list_over_incumbent_reversion_only": {
+   "gated_state_years": 56
+  },
+  "fsa_fixed_list_over_persistence": {
+   "gated_state_years": 56
+  },
+  "fsa_fixed_list_over_incumbent_nodrift_nass": {
+   "gated_state_years": 56
+  }
+ },
+ "summaries": {
+  "ceiling_fixed_list_capped": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 11.961,
+   "pooled_state_wape_pct": 11.937,
+   "mean_abs_us_error_pct": 4.337,
+   "mean_us_error_pct": -1.487,
+   "mean_state_wape_pct_without_2019": 11.639,
+   "by_year_state_wape_pct": {
+    "2017": 10.76,
+    "2018": 17.75,
+    "2019": 14.22,
+    "2020": 9.26,
+    "2021": 10.86,
+    "2022": 13.16,
+    "2023": 9.21,
+    "2024": 10.48
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.77,
+    "2018": 3.32,
+    "2019": -7.06,
+    "2020": -3.32,
+    "2021": -0.68,
+    "2022": -8.46,
+    "2023": 2.9,
+    "2024": 5.17
+   }
+  },
+  "ceiling_fixed_list_exact": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 11.473,
+   "pooled_state_wape_pct": 11.451,
+   "mean_abs_us_error_pct": 4.171,
+   "mean_us_error_pct": -0.999,
+   "mean_state_wape_pct_without_2019": 11.279,
+   "by_year_state_wape_pct": {
+    "2017": 10.51,
+    "2018": 17.17,
+    "2019": 12.83,
+    "2020": 8.53,
+    "2021": 10.61,
+    "2022": 13.16,
+    "2023": 8.98,
+    "2024": 10.0
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.52,
+    "2018": 3.9,
+    "2019": -5.68,
+    "2020": -2.59,
+    "2021": -0.43,
+    "2022": -8.46,
+    "2023": 3.14,
+    "2024": 5.66
+   }
+  },
+  "fsa_fixed_list_over_incumbent_nodrift_nass": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 12.846,
+   "pooled_state_wape_pct": 12.811,
+   "mean_abs_us_error_pct": 3.779,
+   "mean_us_error_pct": 0.249,
+   "mean_state_wape_pct_without_2019": 12.488,
+   "by_year_state_wape_pct": {
+    "2017": 10.52,
+    "2018": 18.2,
+    "2019": 15.36,
+    "2020": 9.23,
+    "2021": 12.42,
+    "2022": 12.99,
+    "2023": 11.4,
+    "2024": 12.67
+   },
+   "by_year_us_error_pct": {
+    "2017": -2.62,
+    "2018": 5.22,
+    "2019": -5.75,
+    "2020": -0.15,
+    "2021": 1.04,
+    "2022": -5.61,
+    "2023": 5.53,
+    "2024": 4.32
+   }
+  },
+  "fsa_fixed_list_over_incumbent_reversion_only": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 13.059,
+   "pooled_state_wape_pct": 13.03,
+   "mean_abs_us_error_pct": 4.221,
+   "mean_us_error_pct": -1.401,
+   "mean_state_wape_pct_without_2019": 12.703,
+   "by_year_state_wape_pct": {
+    "2017": 11.46,
+    "2018": 18.89,
+    "2019": 15.55,
+    "2020": 10.16,
+    "2021": 12.55,
+    "2022": 13.99,
+    "2023": 9.52,
+    "2024": 12.36
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.38,
+    "2018": 4.12,
+    "2019": -8.31,
+    "2020": -2.42,
+    "2021": -0.54,
+    "2022": -7.84,
+    "2023": 3.02,
+    "2024": 4.13
+   }
+  },
+  "fsa_fixed_list_over_persistence": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 14.259,
+   "pooled_state_wape_pct": 14.224,
+   "mean_abs_us_error_pct": 4.568,
+   "mean_us_error_pct": -0.272,
+   "mean_state_wape_pct_without_2019": 13.679,
+   "by_year_state_wape_pct": {
+    "2017": 11.46,
+    "2018": 19.97,
+    "2019": 18.32,
+    "2020": 11.79,
+    "2021": 14.83,
+    "2022": 12.81,
+    "2023": 12.51,
+    "2024": 12.38
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.38,
+    "2018": 5.42,
+    "2019": -8.93,
+    "2020": 0.32,
+    "2021": 1.04,
+    "2022": -7.04,
+    "2023": 7.42,
+    "2024": 2.99
+   }
+  },
+  "fsa_ratio_all_states": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 18.462,
+   "pooled_state_wape_pct": 18.429,
+   "mean_abs_us_error_pct": 8.844,
+   "mean_us_error_pct": 2.737,
+   "mean_state_wape_pct_without_2019": 17.22,
+   "by_year_state_wape_pct": {
+    "2017": 14.23,
+    "2018": 25.49,
+    "2019": 27.16,
+    "2020": 19.83,
+    "2021": 15.13,
+    "2022": 15.04,
+    "2023": 15.73,
+    "2024": 15.1
+   },
+   "by_year_us_error_pct": {
+    "2017": 2.88,
+    "2018": 15.03,
+    "2019": -13.97,
+    "2020": 11.9,
+    "2021": 1.92,
+    "2022": -10.46,
+    "2023": 11.44,
+    "2024": 3.16
+   }
+  },
+  "fsa_realtime_over_incumbent_nodrift_nass": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 12.907,
+   "pooled_state_wape_pct": 12.865,
+   "mean_abs_us_error_pct": 3.829,
+   "mean_us_error_pct": -0.01,
+   "mean_state_wape_pct_without_2019": 12.607,
+   "by_year_state_wape_pct": {
+    "2017": 10.5,
+    "2018": 18.7,
+    "2019": 15.0,
+    "2020": 9.27,
+    "2021": 12.89,
+    "2022": 12.71,
+    "2023": 11.39,
+    "2024": 12.79
+   },
+   "by_year_us_error_pct": {
+    "2017": -2.6,
+    "2018": 5.15,
+    "2019": -6.44,
+    "2020": -0.26,
+    "2021": 0.42,
+    "2022": -6.07,
+    "2023": 5.5,
+    "2024": 4.21
+   }
+  },
+  "fsa_realtime_over_incumbent_reversion_only": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 13.047,
+   "pooled_state_wape_pct": 13.013,
+   "mean_abs_us_error_pct": 4.448,
+   "mean_us_error_pct": -1.612,
+   "mean_state_wape_pct_without_2019": 12.705,
+   "by_year_state_wape_pct": {
+    "2017": 11.46,
+    "2018": 19.14,
+    "2019": 15.45,
+    "2020": 10.2,
+    "2021": 12.56,
+    "2022": 13.62,
+    "2023": 9.56,
+    "2024": 12.39
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.38,
+    "2018": 4.31,
+    "2019": -8.81,
+    "2020": -2.99,
+    "2021": -0.66,
+    "2022": -8.39,
+    "2023": 2.93,
+    "2024": 4.1
+   }
+  },
+  "fsa_realtime_over_persistence": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 14.172,
+   "pooled_state_wape_pct": 14.135,
+   "mean_abs_us_error_pct": 4.727,
+   "mean_us_error_pct": -0.302,
+   "mean_state_wape_pct_without_2019": 13.627,
+   "by_year_state_wape_pct": {
+    "2017": 11.46,
+    "2018": 19.82,
+    "2019": 17.99,
+    "2020": 11.97,
+    "2021": 14.78,
+    "2022": 12.5,
+    "2023": 12.36,
+    "2024": 12.49
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.38,
+    "2018": 6.05,
+    "2019": -9.35,
+    "2020": 0.11,
+    "2021": 1.05,
+    "2022": -7.38,
+    "2023": 7.57,
+    "2024": 2.91
+   }
+  },
+  "incumbent_capped_all": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 13.464,
+   "pooled_state_wape_pct": 13.446,
+   "mean_abs_us_error_pct": 4.716,
+   "mean_us_error_pct": -3.09,
+   "mean_state_wape_pct_without_2019": 13.15,
+   "by_year_state_wape_pct": {
+    "2017": 18.29,
+    "2018": 17.13,
+    "2019": 15.66,
+    "2020": 9.93,
+    "2021": 11.83,
+    "2022": 14.22,
+    "2023": 9.47,
+    "2024": 11.17
+   },
+   "by_year_us_error_pct": {
+    "2017": -11.12,
+    "2018": 1.51,
+    "2019": -7.44,
+    "2020": -3.74,
+    "2021": -0.9,
+    "2022": -8.03,
+    "2023": 1.07,
+    "2024": 3.93
+   }
+  },
+  "incumbent_capped_fixed_list": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 13.0,
+   "pooled_state_wape_pct": 12.974,
+   "mean_abs_us_error_pct": 4.173,
+   "mean_us_error_pct": -1.301,
+   "mean_state_wape_pct_without_2019": 12.681,
+   "by_year_state_wape_pct": {
+    "2017": 12.09,
+    "2018": 18.81,
+    "2019": 15.23,
+    "2020": 9.78,
+    "2021": 12.0,
+    "2022": 14.4,
+    "2023": 9.83,
+    "2024": 11.85
+   },
+   "by_year_us_error_pct": {
+    "2017": -3.04,
+    "2018": 3.78,
+    "2019": -6.98,
+    "2020": -3.59,
+    "2021": -0.73,
+    "2022": -7.56,
+    "2023": 2.64,
+    "2024": 5.06
+   }
+  },
+  "incumbent_nodrift_nass": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 12.781,
+   "pooled_state_wape_pct": 12.762,
+   "mean_abs_us_error_pct": 3.277,
+   "mean_us_error_pct": 0.901,
+   "mean_state_wape_pct_without_2019": 12.533,
+   "by_year_state_wape_pct": {
+    "2017": 10.7,
+    "2018": 17.65,
+    "2019": 14.52,
+    "2020": 8.8,
+    "2021": 11.79,
+    "2022": 14.69,
+    "2023": 11.8,
+    "2024": 12.31
+   },
+   "by_year_us_error_pct": {
+    "2017": -2.0,
+    "2018": 4.63,
+    "2019": -3.58,
+    "2020": -0.01,
+    "2021": 1.58,
+    "2022": -3.91,
+    "2023": 4.91,
+    "2024": 5.6
+   }
+  },
+  "incumbent_reversion_only": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 13.122,
+   "pooled_state_wape_pct": 13.102,
+   "mean_abs_us_error_pct": 3.904,
+   "mean_us_error_pct": -0.976,
+   "mean_state_wape_pct_without_2019": 12.879,
+   "by_year_state_wape_pct": {
+    "2017": 12.33,
+    "2018": 18.82,
+    "2019": 14.83,
+    "2020": 9.47,
+    "2021": 12.35,
+    "2022": 15.38,
+    "2023": 9.8,
+    "2024": 12.0
+   },
+   "by_year_us_error_pct": {
+    "2017": -2.8,
+    "2018": 3.79,
+    "2019": -6.57,
+    "2020": -3.22,
+    "2021": -0.35,
+    "2022": -6.58,
+    "2023": 2.71,
+    "2024": 5.21
+   }
+  },
+  "persistence": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 14.532,
+   "pooled_state_wape_pct": 14.503,
+   "mean_abs_us_error_pct": 4.077,
+   "mean_us_error_pct": 0.108,
+   "mean_state_wape_pct_without_2019": 14.151,
+   "by_year_state_wape_pct": {
+    "2017": 12.33,
+    "2018": 20.25,
+    "2019": 17.2,
+    "2020": 12.03,
+    "2021": 14.43,
+    "2022": 14.16,
+    "2023": 13.53,
+    "2024": 12.34
+   },
+   "by_year_us_error_pct": {
+    "2017": -2.8,
+    "2018": 4.84,
+    "2019": -7.24,
+    "2020": 0.08,
+    "2021": 1.69,
+    "2022": -5.84,
+    "2023": 6.04,
+    "2024": 4.09
+   }
+  },
+  "persistence_capped_all": {
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "mean_state_wape_pct": 14.488,
+   "pooled_state_wape_pct": 14.466,
+   "mean_abs_us_error_pct": 4.613,
+   "mean_us_error_pct": -2.407,
+   "mean_state_wape_pct_without_2019": 13.961,
+   "by_year_state_wape_pct": {
+    "2017": 18.29,
+    "2018": 17.13,
+    "2019": 18.17,
+    "2020": 11.74,
+    "2021": 13.73,
+    "2022": 12.89,
+    "2023": 12.0,
+    "2024": 11.95
+   },
+   "by_year_us_error_pct": {
+    "2017": -11.12,
+    "2018": 1.07,
+    "2019": -8.45,
+    "2020": -1.34,
+    "2021": 0.99,
+    "2022": -7.17,
+    "2023": 3.58,
+    "2024": 3.19
+   }
+  }
+ },
+ "comparisons": [
+  {
+   "candidate": "incumbent_reversion_only",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -1.409,
+   "ci90_resampling_years": [
+    -2.277,
+    -0.534
+   ],
+   "ci90_resampling_states": [
+    -2.245,
+    -0.73
+   ],
+   "years_candidate_better": 6,
+   "delta_mean_abs_us_error_points": -0.173,
+   "two_se_rule": {
+    "gain_points": 1.409,
+    "se_points": 0.569,
+    "passes": true
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "incumbent_nodrift_nass",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -1.751,
+   "ci90_resampling_years": [
+    -2.459,
+    -0.994
+   ],
+   "ci90_resampling_states": [
+    -2.318,
+    -1.139
+   ],
+   "years_candidate_better": 7,
+   "delta_mean_abs_us_error_points": -0.8,
+   "two_se_rule": {
+    "gain_points": 1.751,
+    "se_points": 0.476,
+    "passes": true
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "incumbent_nodrift_nass",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.342,
+   "ci90_resampling_years": [
+    -0.886,
+    0.309
+   ],
+   "ci90_resampling_states": [
+    -1.0,
+    0.402
+   ],
+   "years_candidate_better": 6,
+   "delta_mean_abs_us_error_points": -0.627,
+   "two_se_rule": {
+    "gain_points": 0.342,
+    "se_points": 0.39,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "incumbent_capped_fixed_list",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.122,
+   "ci90_resampling_years": [
+    -0.365,
+    0.099
+   ],
+   "ci90_resampling_states": [
+    -0.324,
+    0.007
+   ],
+   "years_candidate_better": 5,
+   "delta_mean_abs_us_error_points": 0.269,
+   "two_se_rule": {
+    "gain_points": 0.122,
+    "se_points": 0.153,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "incumbent_capped_all",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": 0.342,
+   "ci90_resampling_years": [
+    -0.763,
+    1.841
+   ],
+   "ci90_resampling_states": [
+    -0.309,
+    1.109
+   ],
+   "years_candidate_better": 5,
+   "delta_mean_abs_us_error_points": 0.813,
+   "two_se_rule": {
+    "gain_points": -0.342,
+    "se_points": 0.854,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "persistence_capped_all",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.044,
+   "ci90_resampling_years": [
+    -1.338,
+    1.566
+   ],
+   "ci90_resampling_states": [
+    -0.748,
+    0.652
+   ],
+   "years_candidate_better": 6,
+   "delta_mean_abs_us_error_points": 0.536,
+   "two_se_rule": {
+    "gain_points": 0.044,
+    "se_points": 0.954,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "ceiling_fixed_list_exact",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -1.649,
+   "ci90_resampling_years": [
+    -1.91,
+    -1.364
+   ],
+   "ci90_resampling_states": [
+    -2.83,
+    -0.694
+   ],
+   "years_candidate_better": 8,
+   "delta_mean_abs_us_error_points": 0.267,
+   "two_se_rule": {
+    "gain_points": 1.649,
+    "se_points": 0.179,
+    "passes": true
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "ceiling_fixed_list_capped",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -1.161,
+   "ci90_resampling_years": [
+    -1.523,
+    -0.797
+   ],
+   "ci90_resampling_states": [
+    -2.014,
+    -0.478
+   ],
+   "years_candidate_better": 8,
+   "delta_mean_abs_us_error_points": 0.433,
+   "two_se_rule": {
+    "gain_points": 1.161,
+    "se_points": 0.234,
+    "passes": true
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_ratio_all_states",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": 3.93,
+   "ci90_resampling_years": [
+    2.165,
+    5.853
+   ],
+   "ci90_resampling_states": [
+    1.228,
+    7.047
+   ],
+   "years_candidate_better": 0,
+   "delta_mean_abs_us_error_points": 4.767,
+   "two_se_rule": {
+    "gain_points": -3.93,
+    "se_points": 1.205,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_realtime_over_incumbent_reversion_only",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.075,
+   "ci90_resampling_years": [
+    -0.563,
+    0.359
+   ],
+   "ci90_resampling_states": [
+    -0.49,
+    0.273
+   ],
+   "years_candidate_better": 3,
+   "delta_mean_abs_us_error_points": 0.545,
+   "two_se_rule": {
+    "gain_points": 0.075,
+    "se_points": 0.301,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_realtime_over_persistence",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.36,
+   "ci90_resampling_years": [
+    -0.821,
+    0.081
+   ],
+   "ci90_resampling_states": [
+    -0.874,
+    0.021
+   ],
+   "years_candidate_better": 5,
+   "delta_mean_abs_us_error_points": 0.65,
+   "two_se_rule": {
+    "gain_points": 0.36,
+    "se_points": 0.292,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_realtime_over_incumbent_nodrift_nass",
+   "base": "incumbent_nodrift_nass",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": 0.126,
+   "ci90_resampling_years": [
+    -0.45,
+    0.623
+   ],
+   "ci90_resampling_states": [
+    -0.247,
+    0.461
+   ],
+   "years_candidate_better": 3,
+   "delta_mean_abs_us_error_points": 0.552,
+   "two_se_rule": {
+    "gain_points": -0.126,
+    "se_points": 0.354,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_fixed_list_over_incumbent_reversion_only",
+   "base": "incumbent_reversion_only",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.063,
+   "ci90_resampling_years": [
+    -0.481,
+    0.326
+   ],
+   "ci90_resampling_states": [
+    -0.465,
+    0.28
+   ],
+   "years_candidate_better": 3,
+   "delta_mean_abs_us_error_points": 0.317,
+   "two_se_rule": {
+    "gain_points": 0.063,
+    "se_points": 0.264,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_fixed_list_over_persistence",
+   "base": "persistence",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": -0.273,
+   "ci90_resampling_years": [
+    -0.705,
+    0.168
+   ],
+   "ci90_resampling_states": [
+    -0.762,
+    0.096
+   ],
+   "years_candidate_better": 5,
+   "delta_mean_abs_us_error_points": 0.491,
+   "two_se_rule": {
+    "gain_points": 0.273,
+    "se_points": 0.285,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  },
+  {
+   "candidate": "fsa_fixed_list_over_incumbent_nodrift_nass",
+   "base": "incumbent_nodrift_nass",
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "n_states": 48,
+   "delta_mean_state_wape_points": 0.066,
+   "ci90_resampling_years": [
+    -0.415,
+    0.469
+   ],
+   "ci90_resampling_states": [
+    -0.298,
+    0.397
+   ],
+   "years_candidate_better": 3,
+   "delta_mean_abs_us_error_points": 0.502,
+   "two_se_rule": {
+    "gain_points": -0.066,
+    "se_points": 0.291,
+    "passes": false
+   },
+   "draws": 10000,
+   "seed": 20261114
+  }
+ ],
+ "fixed_list_share_of_incumbent_abs_error": 0.126,
+ "fixed_list_share_of_actual_acres": 0.2022,
+ "pooled_wape_pct_within_fixed_list_states": {
+  "fsa_fixed_list_over_incumbent_nodrift_nass": 7.81,
+  "fsa_fixed_list_over_incumbent_reversion_only": 7.81,
+  "fsa_fixed_list_over_persistence": 7.81,
+  "fsa_ratio_all_states": 7.63,
+  "fsa_realtime_over_incumbent_nodrift_nass": 7.78,
+  "fsa_realtime_over_incumbent_reversion_only": 7.75,
+  "fsa_realtime_over_persistence": 7.77,
+  "incumbent_capped_all": 7.54,
+  "incumbent_capped_fixed_list": 7.54,
+  "incumbent_nodrift_nass": 7.56,
+  "incumbent_reversion_only": 8.17,
+  "persistence": 9.19,
+  "persistence_capped_all": 8.06
+ },
+ "fixed_list_state_years_where_actual_exceeds_november_residual": {
+  "count": 18,
+  "of": 56,
+  "meaning": "state-years where the cap would cut even a perfect forecast (NASS data only)"
+ },
+ "information_only": {
+  "2025": {
+   "note": "information only; the stored 2025 score is frozen and nothing here is chosen on it. FSA input is the 1 Dec 2025 file (released 9 Dec): later than the mid-November cutoff",
+   "incumbent_reversion_only": 14.14,
+   "fsa_realtime": 15.58
+  },
+  "2026": {
+   "note": "information only: implied 2026 silage acres in realtime-gated states",
+   "rows": [
+    {
+     "state": "ARIZONA",
+     "last": 50000.0,
+     "residual": 49000.0,
+     "fsa_now": 43329.73,
+     "fsa_prev_final": 44402.75,
+     "coverage_prev": 0.888,
+     "fsa_capped": 48791.719,
+     "incumbent_2026": 51600.0
+    },
+    {
+     "state": "CALIFORNIA",
+     "last": 370000.0,
+     "residual": 345000.0,
+     "fsa_now": 282473.229,
+     "fsa_prev_final": 312812.741,
+     "coverage_prev": 0.845,
+     "fsa_capped": 334113.932,
+     "incumbent_2026": 362500.0
+    },
+    {
+     "state": "CONNECTICUT",
+     "last": 19000.0,
+     "residual": NaN,
+     "fsa_now": 17928.255,
+     "fsa_prev_final": 18694.905,
+     "coverage_prev": 0.984,
+     "fsa_capped": 18220.839,
+     "incumbent_2026": 20000.0
+    },
+    {
+     "state": "FLORIDA",
+     "last": 24000.0,
+     "residual": 36000.0,
+     "fsa_now": 25790.04,
+     "fsa_prev_final": 23089.88,
+     "coverage_prev": 0.962,
+     "fsa_capped": 26806.591,
+     "incumbent_2026": 25900.0
+    },
+    {
+     "state": "GEORGIA",
+     "last": 35000.0,
+     "residual": 50000.0,
+     "fsa_now": 38546.79,
+     "fsa_prev_final": 35688.796,
+     "coverage_prev": 1.02,
+     "fsa_capped": 37802.835,
+     "incumbent_2026": 35800.0
+    },
+    {
+     "state": "IDAHO",
+     "last": 280000.0,
+     "residual": 275000.0,
+     "fsa_now": 286692.94,
+     "fsa_prev_final": 292581.03,
+     "coverage_prev": 1.045,
+     "fsa_capped": 274365.099,
+     "incumbent_2026": 257500.0
+    },
+    {
+     "state": "MAINE",
+     "last": 25000.0,
+     "residual": NaN,
+     "fsa_now": 18516.86,
+     "fsa_prev_final": 23037.1,
+     "coverage_prev": 0.921,
+     "fsa_capped": 20094.608,
+     "incumbent_2026": 24700.0
+    },
+    {
+     "state": "MASSACHUSETTS",
+     "last": 11000.0,
+     "residual": NaN,
+     "fsa_now": 9472.873,
+     "fsa_prev_final": 10275.318,
+     "coverage_prev": 0.934,
+     "fsa_capped": 10140.962,
+     "incumbent_2026": 11000.0
+    },
+    {
+     "state": "MONTANA",
+     "last": 57000.0,
+     "residual": 75000.0,
+     "fsa_now": 98770.939,
+     "fsa_prev_final": 67621.15,
+     "coverage_prev": 1.186,
+     "fsa_capped": 75000.0,
+     "incumbent_2026": 53900.0
+    },
+    {
+     "state": "NEVADA",
+     "last": 24000.0,
+     "residual": NaN,
+     "fsa_now": 9825.37,
+     "fsa_prev_final": 20358.28,
+     "coverage_prev": 0.848,
+     "fsa_capped": 12000.0,
+     "incumbent_2026": 17700.0
+    },
+    {
+     "state": "NEW HAMPSHIRE",
+     "last": 10000.0,
+     "residual": NaN,
+     "fsa_now": 9748.62,
+     "fsa_prev_final": 10099.02,
+     "coverage_prev": 1.01,
+     "fsa_capped": 9653.036,
+     "incumbent_2026": 10600.0
+    },
+    {
+     "state": "NEW MEXICO",
+     "last": 59000.0,
+     "residual": 65000.0,
+     "fsa_now": 56843.355,
+     "fsa_prev_final": 53979.84,
+     "coverage_prev": 0.915,
+     "fsa_capped": 62129.824,
+     "incumbent_2026": 58700.0
+    },
+    {
+     "state": "NEW YORK",
+     "last": 495000.0,
+     "residual": 525000.0,
+     "fsa_now": 495735.361,
+     "fsa_prev_final": 472324.901,
+     "coverage_prev": 0.954,
+     "fsa_capped": 519534.336,
+     "incumbent_2026": 465100.0
+    },
+    {
+     "state": "OREGON",
+     "last": 34000.0,
+     "residual": 43000.0,
+     "fsa_now": 37101.27,
+     "fsa_prev_final": 36287.69,
+     "coverage_prev": 1.067,
+     "fsa_capped": 34762.289,
+     "incumbent_2026": 36700.0
+    },
+    {
+     "state": "RHODE ISLAND",
+     "last": 1000.0,
+     "residual": NaN,
+     "fsa_now": 958.53,
+     "fsa_prev_final": 936.73,
+     "coverage_prev": 0.937,
+     "fsa_capped": 1023.272,
+     "incumbent_2026": 1000.0
+    },
+    {
+     "state": "UTAH",
+     "last": 49000.0,
+     "residual": 50000.0,
+     "fsa_now": 39362.26,
+     "fsa_prev_final": 47417.69,
+     "coverage_prev": 0.968,
+     "fsa_capped": 40675.763,
+     "incumbent_2026": 48000.0
+    },
+    {
+     "state": "VERMONT",
+     "last": 84000.0,
+     "residual": NaN,
+     "fsa_now": 78874.08,
+     "fsa_prev_final": 80236.464,
+     "coverage_prev": 0.955,
+     "fsa_capped": 82573.713,
+     "incumbent_2026": 83200.0
+    }
+   ]
+  }
+ },
+ "research_reported_not_recomputed": {
+  "source": "DOCS/research/gap_fsa_ratio_baseline_2026.md, not recomputed",
+  "truth": "NASS first January estimate (Crop Production Annual Summary), 48 states",
+  "coverage_class_75_plus_2019_2025": {
+   "section": "3.3",
+   "state_years": 83,
+   "wape_persistence_pct": 10.5,
+   "wape_fsa_ratio_pct": 9.4,
+   "wape_fsa_additive_pct": 9.3,
+   "pearson_r": 0.49,
+   "same_direction": "37 of 49",
+   "note": "83 state-years is more than 8 states x 7 years, so the class looks assigned per state-year (section 6 also names Georgia, Florida and Oregon at about 100%); the note does not say so"
+  },
+  "named_high_coverage_states": {
+   "section_0": [
+    "NEW YORK",
+    "IDAHO",
+    "CALIFORNIA",
+    "ARIZONA",
+    "NEW MEXICO",
+    "VERMONT",
+    "MONTANA"
+   ],
+   "section_2_3_adds": [
+    "WASHINGTON"
+   ]
+  },
+  "per_year_wape_pct_section_3_1": {
+   "columns": [
+    "persistence",
+    "fsa_ratio_nov_file_all_states",
+    "fsa_ratio_only_where_coverage_50_plus"
+   ],
+   "2017": [
+    13.2,
+    14.8,
+    12.2
+   ],
+   "2018": [
+    19.6,
+    24.8,
+    19.0
+   ],
+   "2019": [
+    16.5,
+    27.2,
+    19.3
+   ],
+   "2020": [
+    12.8,
+    17.8,
+    10.8
+   ],
+   "2021": [
+    16.0,
+    17.7,
+    16.9
+   ],
+   "2022": [
+    13.6,
+    14.9,
+    12.1
+   ],
+   "2023": [
+    13.4,
+    15.5,
+    12.4
+   ],
+   "2024": [
+    11.8,
+    14.4,
+    12.2
+   ],
+   "2025 (1 Dec file)": [
+    15.1,
+    15.4,
+    14.8
+   ],
+   "2017-2025 pooled": [
+    14.6,
+    18.0,
+    14.4
+   ],
+   "2019-2025 pooled": [
+    14.2,
+    17.6,
+    14.1
+   ]
+  },
+  "best_public_baseline_loyo_2020_2025_pct_section_4_3": {
+   "persistence": 13.8,
+   "residual_cap": 13.1,
+   "fsa_additive_fitted_pass_through": 13.2,
+   "fsa_pass_through_plus_residual_cap": 12.9,
+   "fsa_pass_through_where_coverage_50_plus_plus_residual_cap": 12.8,
+   "oracle_final_residual_ratio": 8.9,
+   "note": "additive form S(t-1) + b * dF with b fitted leave-one-year-out (0.72-0.95), gate coverage >= 50%, cap on every state; not the ratio rule with a 0.75 gate pre-registered here"
+  },
+  "benchmark_rows_section_6": {
+   "columns": [
+    "2024",
+    "2025",
+    "2019-2025"
+   ],
+   "same_as_last_year": [
+    11.8,
+    15.1,
+    14.2
+   ],
+   "fsa_per_state_ratio": [
+    14.4,
+    15.4,
+    17.6
+   ],
+   "best_public_baseline": [
+    11.6,
+    15.3,
+    "12.8 (2020-2025, leave-one-year-out)"
+   ],
+   "oracle_final_residual_ratio": [
+    5.3,
+    6.6,
+    8.9
+   ]
+  },
+  "residual_cap_section_4_2": "min(S(t-1), R(t)): WAPE 13.7% vs 14.2% (2019-2025), better in 5 of 7 years",
+  "fsa_2026": "5 Nov 2026 file: corn Silage 2,885,863 acres, -1.1% vs 2025 final 2,919,232 (section 2.1); best public baseline implies a 2026 US total of 6,143 thousand acres (section 5.3)"
+ }
+}
