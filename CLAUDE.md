@@ -75,3 +75,8 @@
 - **Traps they named:** satellite signal alone (ignoring prices, policy, weather); one harvest calendar for all regions (Texas early August, Nebraska October); post-harvest soil colour that differs by region; cloud cover; over-calibrating to one place.
 - **Data they pointed to:** RMA and FSA abandoned acres; distance to dairy, dairies per county, average dairy size; NASS Quick Stats history.
 - **Farmer validation:** the reps were sceptical. The value is a method that does not depend on farmer response.
+
+## Data in git v1 (Daniel's decision, 2026-11-15; supersedes the 5 MB limit and the "stay out of git" line for organizer data in "Secrets and data" above)
+- **Data is tracked:** files under `data/` and the organizer workspace at `jupyter/workspace/` are committed to `main`, organizer-provided files included. `.gitignore` no longer excludes `data/`.
+- **Size limit:** 30 MB per file (was 5 MB), enforced by `scripts/guard.sh`. Anything larger stays local and is listed in `data/DATA_MANIFEST.tsv`.
+- **Still never commit:** `.env`, key files, tokens, Python environments (`.keeboh/`, `.venv/`) and a second workspace copy at the repo root (`/workspace/`).

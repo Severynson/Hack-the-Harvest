@@ -4,7 +4,7 @@
 set -eu
 BASE="${1:?usage: guard.sh BASE [HEAD]}"
 HEAD_REV="${2:-HEAD}"
-max_bytes="${GUARD_MAX_BYTES:-5000000}"
+max_bytes="${GUARD_MAX_BYTES:-30000000}"
 fail=0
 err() { echo "ERROR guard: $*" >&2; fail=1; }
 for rev in "$BASE" "$HEAD_REV"; do
@@ -52,7 +52,7 @@ fi
 while read -r path; do
   [ -n "$path" ] || continue
   size=$(git cat-file -s "$HEAD_REV:$path")
-  [ "$size" -le "$max_bytes" ] || err "$path is $size bytes (limit $max_bytes): keep data out of main, list it in data/DATA_MANIFEST.tsv"
+  [ "$size" -le "$max_bytes" ] || err "$path is $size bytes (limit $max_bytes): too large for main, keep it local and list it in data/DATA_MANIFEST.tsv"
 done < <(git -c core.quotepath=false diff --name-only --no-renames --diff-filter=AM "$BASE" "$HEAD_REV")
 if git diff "$BASE" "$HEAD_REV" | grep -qE '^\+.*(nvapi-[A-Za-z0-9_-]{16,}|BEGIN [A-Z ]*PRIVATE KEY|"private_key"[[:space:]]*:)'; then
   err "possible secret in added lines (if it was ever pushed, rotate the key)"

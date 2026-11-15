@@ -222,12 +222,16 @@ __marimo__/
 # --- Kernel additions (multi-agent protocol v1) ---
 .env.*
 !.env.example
-data/*
-!data/DATA_MANIFEST.tsv
 .claude/worktrees/
 .claude/settings.local.json
 # The Python template above ignores every lib/ folder; the web app needs this one tracked.
 !web/src/lib/
 
-# Local copy of the organizer Keeboh workspace: organizer data, papers and a Python environment; never commit
-workspace/
+# Organizer Keeboh workspace: the tracked copy is jupyter/workspace/. A second copy at the repo root stays local,
+# and so do the workspace's Python environment and JupyterLab trash.
+/workspace/
+.keeboh/
+.Trash-*/
+
+# Raw downloads over the 30 MB file limit (GitHub refuses files over 100 MB); listed in data/DATA_MANIFEST.tsv
+data/raw/

@@ -30,8 +30,31 @@ def data_dir() -> Path:
     return path
 
 
+def secret(name: str) -> str:
+    """A key from the environment or from ``.env`` (repo root, then the kit folder). Empty if unset.
+
+    ``.env`` is git-ignored and left out of the Keeboh submission. Never print or log the value.
+    """
+    if os.environ.get(name):
+        return os.environ[name]
+    for folder in [REPO, Path("/workspace")]:
+        env_file = folder / ".env"
+        if not env_file.is_file():
+            continue
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            key, sep, value = line.strip().partition("=")
+            if sep and key.strip() == name and not key.startswith("#"):
+                return value.strip().strip('"').strip("'")
+    return ""
+
+
 def record_in_manifest(path: Path, source_url: str) -> None:
-    """Add or refresh one row of ``data/DATA_MANIFEST.tsv`` (path, bytes, sha256, source, agent, UTC)."""
+    """Add or refresh one row of ``data/DATA_MANIFEST.tsv`` (path, bytes, sha256, source, agent, UTC).
+
+    Skipped when ``KERNEL_NO_MANIFEST`` is set: parallel pulls must not rewrite one file at once.
+    """
+    if os.environ.get("KERNEL_NO_MANIFEST"):
+        return
     manifest = data_dir() / "DATA_MANIFEST.tsv"
     header = "path\tbytes\tsha256\tsource_url\tmade_by\tutc"
     try:
