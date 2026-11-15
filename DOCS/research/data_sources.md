@@ -2,9 +2,36 @@
 
 Compiled 2026-11-15 by cc-varun from the research notes in this folder, the USDA briefing and rep Q&A transcripts, and a link check run the same day. This is the single list the data-harvest agents work from. It adds soil, drought, irrigation, price and thermal sources that the earlier notes did not cover.
 
-**Not yet included:** the organizer sample data in the team JupyterLab. The lab needs a login and has not been read. Section 8 lists what to record from it. Whatever the organizers supply overrides the matching rows here.
+The organizer starter kit was read on 2026-11-15 from a local copy of the team workspace (`workspace/`, git-ignored). Section 0 records it. Whatever the organizers supply overrides the matching rows further down.
 
-## 0. Organizer messages, 14 Nov (these override the rows below)
+## 0. Organizer starter kit and messages (these override the rows below)
+
+### 0.1 What the kit contains
+
+| Folder | Content | What it means for us |
+| --- | --- | --- |
+| `01_Challenge` | The challenge statement | The required report is a confusion matrix, precision and recall for both classes, counts by year and class, the split design, and the limits of the method |
+| `02_QuickStats` | `corn_grain_silage_acres_2012_2025.csv` (39,906 rows) and its downloader | All-corn planted acres and grain and silage harvested acres, 2012 to 2025. County level in the census years 2012, 2017 and 2022; state level in the other years. 6,035 values are withheld or non-numeric and must be dropped. It also carries NASS's own in-season rows (June acreage; August, September, October and November forecasts), so NASS's forecast-against-final error can be computed from this one file |
+| `03_Geospatial_References` | A source list and a Sentinel-2 starter notebook | The kit's own route is Sentinel-2 L2A through Microsoft Planetary Computer, which needs no key. Also named: Landsat, gridMET, Daymet, the Cropland Data Layer, Census TIGER boundaries |
+| `04_Evaluation` | `BARC_Corn.2021-2023.gpkg` | **Field-level labels exist.** 83 field polygons at the USDA Beltsville research farm in Maryland; 44 labeled field-years (32 grain, 12 silage) on 34 fields: 2021 has 14 grain and 4 silage, 2022 has 3 and 4, 2023 has 15 and 4. Blank labels are unlabeled, not negatives |
+| `Prior_Work` | A reading list and three papers | Harvest-date detection (a harvest index on Landsat and Sentinel-2; radar), residue cover, and field-scale phenology. None is a silage-or-grain study |
+| `05 - Nemotron on NVIDIA` | A notebook calling `nvidia/nemotron-3-super-120b-a12b` at `https://integrate.api.nvidia.com/v1` | The key is read from `.env` in the workspace; the `openai` package is already installed |
+
+### 0.2 What this changes
+
+- **There are two evaluations, not one.** Field level: the 44 Maryland field-years. Acreage level: the 2025 state totals (0.4). `usda_reps_qa.md` says no field-level truth was given; the kit contradicts that.
+- **The Maryland labels are a test set, not a training set.** 12 silage field-years cannot train a model without overfitting. They are also one farm in one state, so a result there says nothing yet about Texas or California.
+- **The kit's rule on splits:** hold out a year, or a spatially separate group of fields; never a random split of neighbouring fields.
+- **The kit's rule on proxies:** an early greenness decline is a hypothesis, not a label.
+
+### 0.3 Limits of the Keeboh workspace (all training runs there)
+
+- 10 GB of storage for the whole team. Pull compact per-field tables, never raw scenes.
+- The submission is a copy of the whole workspace: all code and notebooks with saved outputs. `.env` and key files are left out, and so are the largest files.
+- The organizers start and stop the GPU; unsaved work and anything in notebook memory is lost when it stops.
+- Planetary Computer works from the workspace without a key. Earth Engine would need a sign-in there, so prefer Planetary Computer for anything that must run inside the submitted notebook.
+
+### 0.4 Organizer messages, 14 Nov
 
 - **The scoring year is 2025.** The organizers posted the numbers results will be evaluated against: 2025 corn harvested for grain and for silage, by state.
   - Source: `https://quickstats.nass.usda.gov/results/ACC45317-B978-3390-B0A1-BE0EC02A9D63` (CSV at `/data/spreadsheet/<same id>.csv`).
@@ -22,7 +49,7 @@ Compiled 2026-11-15 by cc-varun from the research notes in this folder, the USDA
 ## 1. What we predict, and what counts as truth
 
 - **Deliverable:** two numbers per state and for the US, acres of corn harvested for grain and acres harvested for silage, before NASS publishes them in January.
-- **Truth:** NASS state totals only. The organizers gave no field-level labels (`usda_reps_qa.md`).
+- **Truth:** NASS state totals for 2025, plus 44 labeled field-years in Maryland (section 0).
 - **Bars to clear:**
   - NASS's own forecast is usually within 3% of its final figure (1.8 to 2.5%), and missed by more than 4% last year.
   - "Same as last year" misses state silage acres by 12 to 15% (`README.md`, decision 5).
@@ -34,7 +61,7 @@ Compiled 2026-11-15 by cc-varun from the research notes in this folder, the USDA
 | Targets and baselines | state-year (some county-year) | the truth we are scored on, and the numbers to beat | 3A |
 | Field evidence | field, per satellite pass | what happened in each cornfield | 3B, 3C |
 | Context | field, county or state-year | why a field or region behaves differently (soil, weather, water, demand, prices) | 3D to 3G |
-| Proxy field labels | field | the only way to train and test a field-level call | 3H |
+| Field labels | field | the organizers' 44 Maryland field-years to test on (section 0.1); proxy labels to train on | 0.1, 3H |
 
 ## 2. What affects what
 
@@ -84,7 +111,7 @@ Notes: FSA covers only 47% of the silage NASS later reports, and RMA is a floor,
 
 | Id | Source | What we take | Access | Unit, years | Status | Pri |
 | --- | --- | --- | --- | --- | --- | --- |
-| B1 | Organizer data (Keeboh lab) | Cropland Data Layer, field boundaries, state totals as supplied | team JupyterLab | to be recorded | not read | P0 |
+| B1 | Organizer starter kit | Labeled Maryland field polygons and the 2012 to 2025 Quick Stats file (section 0.1). The kit holds no Cropland Data Layer raster and no national field boundaries | team workspace | field (Maryland); state and county | V, read 2026-11-15 | P0 |
 | B2 | Cropland Data Layer 2025 | Corn mask: classes 1, 225, 226, 228, 237, 241 | `https://www.nass.usda.gov/Research_and_Science/Cropland/Release/` (Earth Engine stops at 2024) | 30 m, 2025 | V `data_access.md` 2.4 | P0 |
 | B3 | Cropland Data Layer history | Masks for backtest years, rotation and double-crop history per field | Earth Engine `USDA/NASS/CDL` | 30 m, 2008 to 2024 | V `data_access.md` 2.1 | P0 |
 | B4 | Crop Sequence Boundaries | Field polygons | Earth Engine `projects/nass-csb/assets/CSB1825_rev23/CSB{ST}1825` | field, 2018 to 2025 edition | V `data_access.md` 2.4 | P0 |
@@ -201,7 +228,7 @@ Training rows for the fine-tune:
 | --- | --- |
 | Input | One field-season as text: the per-pass series of NDVI, NDMI, NDTI and radar VH and VV with dates in growing degree days; cloud-gap flags; the bare-soil baseline; soil texture and colour class; drought index; irrigation flag; cows per corn acre nearby |
 | Output | The label (silage or grain) and a short reason that cites only values in the input |
-| Label source | H1 (main), H5 (more regions), H2 to H4 (US check, never training) |
+| Label source | H1 (main), H5 (more regions). The organizers' Maryland labels (section 0.1) and H2 to H4 are US tests, never training |
 | Held out | Whole regions and whole years, plus every US field |
 
 Model and compute, from `brev_ops.md` 4.7: Unsloth supports LoRA on all Nemotron models; Nemotron 3 Nano 4B fits on a small GPU; the 30B model needs about 60 GB of GPU memory. No source gives a training time.
@@ -232,7 +259,7 @@ Each puller writes one cached file, skips if the file exists, and adds a row to 
 
 ## 8. Open items
 
-1. **Organizer lab not read.** Record for each folder: file names, formats, years, states, the field-boundary schema, and whether the state totals match A1.
+1. **Filter the kit's Quick Stats file before use.** Its 2025 rows match the scoring table in section 0.4 exactly (90 of 90 state values) once filtered to `reference_period = YEAR` and the plain `CORN, GRAIN - ACRES HARVESTED` and `CORN, SILAGE - ACRES HARVESTED` items. Unfiltered, it mixes in forecast rows and irrigated and non-irrigated sub-rows.
 2. **Which years to backtest.** Sentinel-2 surface reflectance in Earth Engine starts in 2017; MODIS (C6) is the only option before that.
 3. **Earth Engine quota.** Step 4 decides how many fields per state we can afford.
 4. **Rows marked `N` or `U`** must be opened and their fields checked before a number from them goes on a slide.
