@@ -6,3 +6,4 @@
 - 2026-11-15T07:51Z promoted smoothed_chopping into kernelag.state_model at the user's request (2026 US silage 6.26M, 80% 5.95-6.59M; 2025 held-out state 13.12%, US +2.19%)
 - 2026-11-15T08:01Z claim T-cc-manraj-deliverable ttl=90m
 - 2026-11-15T08:05Z result: deliverable vs NASS final (organizer CSV; 2017/2022 from pipeline NASS copy, 979 shared rows identical): silage 2017-24 state 12.80% US 3.34% (last year 14.53/4.08), 2025 13.12/2.19; grain 2017-24 1.66/0.82, 2025 1.64/0.99
+- 2026-11-15T08:14Z claim T-cc-manraj-grain-anchor ttl=90m
