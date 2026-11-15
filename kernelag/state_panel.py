@@ -14,6 +14,9 @@ Columns ("as of" = the latest figure NASS had published by mid-November of that 
     silage_yield                   final tons per acre
     milk_cows, cattle              head on 1 January of that year
     corn_price_sep                 price received in September, dollars per bushel
+    drought_summer                 mean share of the state in severe drought (class D2 or worse),
+                                   June to September, from the weekly US Drought Monitor
+    rma_silage                     corn acres insured as silage (RMA type 026); a floor, not a total
     sat_share, share_se            satellite silage-like share of sampled corn acres and its standard
                                    error (``kernelag.state_signal``; sampled states, 2019 on)
 
@@ -61,6 +64,31 @@ def latest_available(table: pd.DataFrame, periods: list[str]) -> pd.Series:
     return result
 
 
+def rma_silage_acres(folder: Path) -> pd.DataFrame:
+    """Insured corn-silage acres per state and year, and the state names behind RMA's abbreviations."""
+    parts = []
+    for path in sorted(folder.glob("sobtpu_corn_*.csv.gz")):
+        raw = pd.read_csv(path, dtype=str, usecols=["commodity_year", "state_name", "state_abbreviation",
+                                                    "type_code", "reporting_level_type",
+                                                    "net_reporting_level_amount"])
+        raw["acres"] = pd.to_numeric(raw["net_reporting_level_amount"], errors="coerce").fillna(0)
+        raw["silage"] = raw["acres"].where((raw["type_code"] == "026") & (raw["reporting_level_type"] == "Acres"), 0)
+        parts.append(raw.groupby(["commodity_year", "state_name", "state_abbreviation"], as_index=False)["silage"].sum())
+    table = pd.concat(parts, ignore_index=True)
+    return pd.DataFrame({"state": table["state_name"].str.upper(), "abbreviation": table["state_abbreviation"],
+                         "year": table["commodity_year"].astype(int), "rma_silage": table["silage"]})
+
+
+def summer_drought(path: Path, names: dict) -> pd.DataFrame:
+    """Mean June-to-September share of each state in drought class D2 or worse, per year."""
+    weekly = pd.read_csv(path, usecols=["MapDate", "StateAbbreviation", "D2"])
+    date = pd.to_datetime(weekly["MapDate"].astype(str), format="%Y%m%d")
+    summer = weekly[date.dt.month.between(6, 9)].assign(year=date.dt.year)
+    table = summer.groupby(["StateAbbreviation", "year"], as_index=False)["D2"].mean()
+    return pd.DataFrame({"state": table["StateAbbreviation"].map(names), "year": table["year"],
+                         "drought_summer": (table["D2"] / 100).round(4)}).dropna(subset=["state"])
+
+
 def build_panel(acres: pd.DataFrame, folder: Path) -> pd.DataFrame:
     """Join acreage and context into one state-year table."""
     acres = acres.rename(columns={"acres": "value"})
@@ -91,6 +119,12 @@ def main() -> None:
     data = data_dir()
     acres = pd.read_csv(data / "nass" / "corn_acres_state.csv")
     panel = build_panel(acres, data / QUICKSTATS_DIR)
+    rma_folder, drought_file = data / "rma" / "insured_by_type_corn", data / "drought" / "usdm_state_weekly_2000_2026.csv"
+    if rma_folder.is_dir() and drought_file.exists():   # the team's context pulls (scripts/pull_data.py)
+        rma = rma_silage_acres(rma_folder)
+        names = dict(zip(rma["abbreviation"], rma["state"]))
+        panel = panel.merge(rma[["state", "year", "rma_silage"]], on=["state", "year"], how="left")
+        panel = panel.merge(summer_drought(drought_file, names), on=["state", "year"], how="left")
     satellite = data / "panel" / "state_satellite.csv"   # from kernelag.state_signal, if it has been run
     if satellite.exists():
         signal = pd.read_csv(satellite)[["state", "year", "sat_share", "share_se", "assessable_share"]]

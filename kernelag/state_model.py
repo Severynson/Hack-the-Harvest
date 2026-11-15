@@ -12,6 +12,8 @@ are public by mid-November of the same year (``kernelag.state_panel``):
     d_cattle       change in all cattle on 1 January
     yield_shock    NASS's latest grain-yield forecast against the state's previous three-year mean
     d_price        change in the September corn price
+    drought        share of the state in severe drought, June to September of the same year
+    d_rma          change in corn acres insured as silage (states with at least 1,000 such acres)
     d_sat          change in the satellite silage-like share on the state's fixed sample areas
                    (in log-odds; ``kernelag.state_signal``; sampled states only, 2020 on)
 
@@ -42,6 +44,8 @@ FEATURE_SETS = {
     "reversion_only": ["reversion"],
     "nass_acres": ["reversion", "d_planted", "d_not_grain"],
     "all_public": FEATURES,
+    "reversion_plus_drought": ["reversion", "drought"],
+    "reversion_plus_rma": ["reversion", "d_rma"],
     "reversion_plus_satellite": ["reversion", "d_sat"],
 }
 MIN_FIT_YEARS = 3
@@ -72,6 +76,11 @@ def add_changes(panel: pd.DataFrame) -> pd.DataFrame:
     table["d_cattle"] = np.log(table["cattle"] / last("cattle"))
     table["yield_shock"] = np.log(table["grain_yield_asof"] / mean_of_last_three("grain_yield"))
     table["d_price"] = np.log(table["corn_price_sep"] / last("corn_price_sep"))
+    for column in ["drought_summer", "rma_silage"]:
+        if column not in table:
+            table[column] = np.nan
+    table["drought"] = table["drought_summer"]
+    table["d_rma"] = np.log(table["rma_silage"] / last("rma_silage")).where(last("rma_silage") >= 1000)
     if "sat_share" not in table:
         table["sat_share"] = np.nan
     logit = np.log(table["sat_share"] / (1 - table["sat_share"]))
