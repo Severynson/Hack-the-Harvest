@@ -7,7 +7,7 @@ const SEQ2 = ["#4a2412", "#6b3018", "#8f3f1e", "#b84d23", "#d95926", "#ef8a5f", 
 const DIV = ["#184f95", "#3987e5", "#86b6ef", "#383835", "#f2a3a3", "#e66767", "#b83a3a"];          // down <- 0 -> up
 const NODATA = "#1b2029";
 const NAMES = {};
-const VB = {x: -10, y: -58, w: 995, h: 690};   // room for the controls above the map
+const VB = {x: -10, y: -14, w: 995, h: 640};   // a little room around the outlines
 let GEO = null, MAP = null, EXT = null, CTY = null, M = {layer: "forecast", crop: "silage", fcModel: {}, errModel: {}, year: 2025, signal: "drought", wx: "rain", cyear: null, wyear: null, myear: null,
   sel: null, k: 1, tx: 0, ty: 0, playing: null, built: false};
 
@@ -362,7 +362,7 @@ function kpis() {
   const tiles = [];
   for (const crop of ["silage", "grain"]) { const id = M.fcModel[crop], t = usTotal(id, crop);
     tiles.push(el("div", {className: "kpi"}, el("div", {className: "eyebrow", textContent: `2026 ${crop}, US acres`}), el("div", {className: "big", textContent: t ? kfmt(t.v) : "—"}),
-      el("div", {className: "note", textContent: t ? modelLabel(id) + (t.lo != null ? ` · 80% ${kfmt(t.lo)}–${kfmt(t.hi)}` : "") : "no forecast yet"}))); }
+      el("div", {className: "note", title: t ? modelLabel(id) : "", textContent: t ? modelLabel(id) + (t.lo != null ? ` · 80% ${kfmt(t.lo)}–${kfmt(t.hi)}` : "") : "no forecast yet"}))); }
   const pub = (CAT.models || []).filter(c => Object.values(MODELS).some(m => m.model == c.id && m.target == c.crop)).length;
   tiles.push(el("div", {className: "kpi"}, el("div", {className: "eyebrow", textContent: "Models on the board"}), el("div", {className: "big", textContent: D.models.length}),
     el("div", {className: "note", textContent: `${new Set(D.models.map(m => m.source)).size} folders · ${D.field.length} field-model runs`})));
@@ -410,13 +410,15 @@ function startPlay(years) { let i = years[0] == M.year || M.year == years.at(-1)
   M.playing = setInterval(() => { i++; if (i >= years.length) return stopPlay(); M.year = years[i]; draw(); }, 900); draw(); }
 function stopPlay() { if (M.playing) { clearInterval(M.playing); M.playing = null; } }
 function legend(cls) {
-  const box = $("#legend-map");
-  if (!cls.bins.length) { box.replaceChildren(el("div", {className: "what"}, el("b", {textContent: "What am I looking at? "}), CUR.explain), el("span", {className: "note", textContent: "No data for this layer yet"})); return; }
+  const box = $("#legend-map"), ex = $("#explain");
+  ex.replaceChildren(...[el("b", {textContent: "What am I looking at? "}), CUR.explain, CUR.note ? el("span", {className: "note", textContent: CUR.note}) : null].filter(Boolean));
+  if (!cls.bins.length) { box.replaceChildren(el("span", {className: "note", textContent: "No data for this layer yet"})); return; }
   const ends = CUR.div ? (M.layer == "weather" ? (M.wx == "rain" ? ["drier", "normal", "wetter"] : ["cooler", "normal", "hotter"]) : ["less", "same", "more"]) : M.layer == "error" ? ["closer", "", "further off"]
     : ["harvest", "frost"].includes(M.layer) ? ["earlier", "", "later"] : ["less", "", "more"];
-  box.replaceChildren(...[el("div", {className: "what"}, el("b", {textContent: "What am I looking at? "}), CUR.explain), el("div", {className: "lt", textContent: CUR.title}), el("div", {className: "ramp"}, cls.bins.map(b => el("i", {style: `background:${b.c}`, title: `${CUR.fmt(b.lo)} to ${CUR.fmt(b.hi)}`}))),
-    M.layer == "satellite" ? null : el("div", {className: "rl"}, el("span", {textContent: `${CUR.fmt(cls.bins[0].lo)} (${ends[0]})`}), el("span", {textContent: ends[1]}), el("span", {textContent: `${CUR.fmt(cls.bins.at(-1).hi)} (${ends[2]})`})),
-    el("div", {className: "nd"}, el("i", {style: `background:${NODATA}`}), "no data"), CUR.note ? el("div", {className: "note", textContent: CUR.note}) : null].filter(Boolean));
+  if (M.layer == "satellite") { box.replaceChildren(el("div", {className: "lt", textContent: "Blue states: in the satellite sample"}), el("div", {className: "nd"}, el("i", {style: "background:var(--accent);border-radius:50%"}), "test fields with known answers")); return; }
+  box.replaceChildren(el("div", {className: "lt", textContent: CUR.title}), el("div", {className: "ramp"}, cls.bins.map(b => el("i", {style: `background:${b.c}`, title: `${CUR.fmt(b.lo)} to ${CUR.fmt(b.hi)}`}))),
+    el("div", {className: "rl"}, el("span", {textContent: `${CUR.fmt(cls.bins[0].lo)} (${ends[0]})`}), el("span", {textContent: ends[1]}), el("span", {textContent: `${CUR.fmt(cls.bins.at(-1).hi)} (${ends[2]})`})),
+    el("div", {className: "nd"}, el("i", {style: `background:${NODATA}`}), "no data"));
 }
 function select(code) { M.sel = code; draw(); zoomToState(code); }
 
@@ -452,8 +454,8 @@ function helpCard() {
   if (seen || $("#help")) return;
   const ok = el("button", {className: "act", textContent: "Got it"});
   const card = el("div", {id: "help"}, el("b", {textContent: "How to use this map"}),
-    el("ol", {}, el("li", {textContent: "Pick what to show in \u201cShow me\u201d (top left)."}), el("li", {textContent: "Drag to move, scroll or use + \u2212 to zoom."}),
-      el("li", {textContent: "Click any state to see its history and every model's 2026 number."}), el("li", {textContent: "The box at the bottom left explains the colors in plain words."})), ok);
+    el("ol", {}, el("li", {textContent: "Pick what to show in \u201cShow me\u201d above the map."}), el("li", {textContent: "Drag to move, scroll or use + \u2212 to zoom."}),
+      el("li", {textContent: "Click any state to see its history and every model's 2026 number."}), el("li", {textContent: "The gold line under it explains the colors in plain words."})), ok);
   ok.onclick = () => { card.remove(); try { localStorage.setItem("board-help", "1"); } catch (e) { /* storage off */ } };
   $(".stage").append(card);
 }
@@ -471,7 +473,7 @@ function overlayControls() {
   const items = [["roads", "Highways"], ["trade", "Export routes"], ["sats", "Satellites (live)"]];
   box.replaceChildren(el("div", {className: "ovt", textContent: "Overlays"}), ...items.map(([k, l]) => {
     const b = el("button", {className: "chip", textContent: l}); b.setAttribute("aria-pressed", OV[k]);
-    b.onclick = () => { OV[k] = !OV[k]; if (k == "trade" && OV.trade && M.k == 1 && !M.sel) tween({k: 0.94, tx: 25, ty: -26}); drawOverlays(); }; return b; }));
+    b.onclick = () => { OV[k] = !OV[k]; drawOverlays(); }; return b; }));
 }
 async function drawOverlays() {
   overlayControls();

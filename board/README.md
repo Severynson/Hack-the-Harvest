@@ -111,3 +111,10 @@ the BARC field file). County outlines: `board/us_counties.topo.json` from `us-at
   USDA AMS Grain Transportation Report). Update the facts there; each carries its source link.
 
 Plain-English model and folder names: `board/names.json`.
+
+## Hosting it live (Hugging Face Space)
+
+`board/deploy/` holds a Docker Space: it clones this repo (data from `main`, board code from `board`),
+starts the board on port 7860 and pulls both every 5 minutes (`BOARD_AUTOPULL`), rereading the models
+when anything changed. Open pages pick up new data within 2 minutes. Copy `Dockerfile` and `start.sh`
+into a new Docker Space and `SPACE_README.md` as its `README.md`.

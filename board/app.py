@@ -139,10 +139,54 @@ def index():
     return PAGE.read_text()
 
 
-if __name__ == "__main__":
-    print("Reading model folders...", flush=True)
+def rebuild():
     cached("board", build_board, True)
     map_data(fresh=1)
     extras_data(fresh=1)
+
+
+def auto_refresh(minutes: float, command: str) -> None:
+    """Every few minutes run ``command`` (e.g. a git pull) and, if the repo changed, reread every model folder.
+
+    Used by the hosted board (board/deploy) so new results appear without anyone pressing Refresh.
+    """
+    import subprocess
+    import threading
+    import time
+
+    root = Path(__file__).resolve().parent.parent
+
+    def head() -> str:
+        """HEAD plus the board branch tip, so a change to either one triggers a reread."""
+        refs = ["HEAD", "refs/remotes/origin/" + os.environ.get("BOARD_BRANCH", "board")]
+        out = subprocess.run(["git", "rev-parse", *refs], cwd=root, capture_output=True, text=True, check=False)
+        return out.stdout.strip()
+
+    def loop() -> None:
+        while True:
+            time.sleep(minutes * 60)
+            before = head()
+            subprocess.run(command, shell=True, cwd=root, capture_output=True, check=False)
+            if head() != before:
+                try:
+                    rebuild()
+                    print(f"{datetime.now(UTC):%H:%M} UTC: new commits, board reread", flush=True)
+                except Exception as error:  # noqa: BLE001 - keep serving the last good data
+                    print(f"refresh failed: {error}", flush=True)
+
+    threading.Thread(target=loop, daemon=True).start()
+
+
+@app.get("/api/status")
+def status():
+    """When the data was last read, for the hosted board's 'updated' line."""
+    return {"read_at": (_CACHE.get("board") or {}).get("read_at")}
+
+
+if __name__ == "__main__":
+    print("Reading model folders...", flush=True)
+    rebuild()
+    if os.environ.get("BOARD_AUTOPULL"):
+        auto_refresh(float(os.environ["BOARD_AUTOPULL"]), os.environ.get("BOARD_PULL_CMD", "git pull --ff-only"))
     print("Ready: open http://localhost:" + os.environ.get("BOARD_PORT", "7870"), flush=True)
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("BOARD_PORT", "7870")))

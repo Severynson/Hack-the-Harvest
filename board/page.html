@@ -5,7 +5,7 @@
 :root{--bg:#0e1116;--panel:#151a22;--line:#262d38;--text:#e6e9ee;--muted:#8b95a5;--accent:#e0b04a;--warn:#c98a4b;--focus:#5fa8d3;
 --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#0ca30c;--s7:#9085e9;--s8:#e66767;
 --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:13px/1.5 var(--sans)}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--text);font:13px/1.5 var(--sans)}
 header{display:flex;align-items:baseline;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 header h1{font-size:20px;margin:0;font-weight:600}header .muted{font-size:12px}
 nav{display:flex;gap:4px;padding:0 24px;border-bottom:1px solid var(--line)}
@@ -42,12 +42,13 @@ pre{background:var(--panel);border:1px solid var(--line);border-radius:6px;paddi
 tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text)}
 .pass{color:var(--s3)}.fail{color:var(--muted)}.await{color:var(--muted);font-style:italic}
 
-#kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 14px}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+#kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0 0 10px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:0}
+.kpi .note{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kpi .eyebrow,.eyebrow{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
-.kpi .big{font:600 26px/1.2 var(--mono);font-variant-numeric:tabular-nums;margin:4px 0 2px}
+.kpi .big{font:600 22px/1.2 var(--mono);font-variant-numeric:tabular-nums;margin:4px 0 2px}
 .mapwrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}
-.stage{position:relative;background:radial-gradient(ellipse at 50% 40%,#141a23 0%,#0b0e13 75%);border:1px solid var(--line);border-radius:10px;overflow:hidden;height:min(68vh,640px)}
+.stage{position:relative;background:radial-gradient(ellipse at 50% 40%,#141a23 0%,#0b0e13 75%);border:1px solid var(--line);border-radius:10px;overflow:hidden;height:min(66vh,620px)}
 #usmap{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none}#usmap.grabbing{cursor:grabbing}
 #usmap .nation{fill:#11151c;stroke:#2c3440;stroke-width:1}
 #usmap .st{stroke:#0b0e13;transition:fill .25s ease-out;cursor:pointer}#usmap .st:hover{filter:brightness(1.25)}
@@ -56,15 +57,15 @@ tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text
 #usmap .selpath{fill:none;stroke:var(--accent);pointer-events:none;stroke-linejoin:round}
 #usmap .lbl.dark{fill:#0b0e13;stroke:rgba(255,255,255,.35)}
 #usmap .lbl{fill:#e6e9ee;font-family:var(--sans);font-weight:600;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:#0b0e13;stroke-width:.35;opacity:.85}
-#mapctl .ask{font-weight:600;color:var(--text);background:rgba(14,17,22,.88);padding:6px 8px;border-radius:6px}
-#mapctl .layersel{font-weight:600;border-color:var(--accent);min-width:290px}
+#mapctl .ask{font-weight:600;color:var(--text)}
+#mapctl .layersel{font-weight:600;border-color:var(--accent);min-width:260px}
 #usmap.countymode #states .st{pointer-events:none}#usmap .cty{stroke:#0b0e13;stroke-width:.15;cursor:pointer;display:none}#usmap.countymode .cty{display:inline}
 #usmap .cty:hover{filter:brightness(1.35)}#usmap.countymode .borders{stroke:#e6e9ee;stroke-opacity:.5}
 #usmap .mk{fill:var(--accent);stroke:#0b0e13}#usmap .mkl{fill:var(--text);font-family:var(--sans);font-weight:600;paint-order:stroke;stroke:#0b0e13;stroke-width:.4}
 #legend-map .what{font-size:12px;line-height:1.45;margin-bottom:8px;color:var(--text)}#legend-map .what b{color:var(--accent)}
-#ovctl{position:absolute;top:150px;right:12px;display:flex;flex-direction:column;gap:4px;align-items:stretch;background:rgba(14,17,22,.88);border:1px solid var(--line);border-radius:8px;padding:8px}
-#ovctl .chip{text-align:left}.ovt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
-#satcard{position:absolute;right:12px;top:300px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
+#ovctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}#ovctl .ovt{margin:0 4px 0 0}
+#ovctl .chip{padding:6px 10px;font-size:12px}.ovt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+#satcard{position:absolute;right:12px;bottom:34px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
 #satcard td{padding:3px 6px;font-size:12px}#satcard[hidden]{display:none}
 #usmap .road{fill:none;stroke-linecap:round;stroke-linejoin:round}#usmap .road.interstate{stroke:#f2c14e;stroke-opacity:.9}#usmap .road.us{stroke:#c9ced6;stroke-opacity:.55}
 #usmap .river{fill:none;stroke:#5fd0ff;stroke-opacity:1;stroke-linecap:round;stroke-linejoin:round}
@@ -76,20 +77,24 @@ tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text
 .sathead{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:12px}.sathead .ghost{padding:3px 8px;font-size:11px}
 #usmap .swath{fill:none;stroke:#7fd1ff;stroke-opacity:.16;stroke-linecap:round;pointer-events:none}#usmap .track{fill:none;stroke:#7fd1ff;stroke-dasharray:4 3;pointer-events:none}
 #usmap .sat{fill:#7fd1ff;stroke:#0b0e13}#usmap .satl{fill:#e6f6ff;font-family:var(--sans);font-weight:600;text-anchor:middle;paint-order:stroke;stroke:#0b0e13;stroke-width:.4}
-#help{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(14,17,22,.96);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;max-width:420px;z-index:5}
+#help{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(14,17,22,.96);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;max-width:420px;z-index:5}
 #help ol{margin:8px 0 12px;padding-left:18px}#help li{margin:3px 0}
-#mapctl{position:absolute;top:12px;left:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 140px)}
-#mapctl select,#mapctl .seg,#mapctl .yr{background:rgba(14,17,22,.88);backdrop-filter:blur(2px)}
+.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 10px}
+#mapctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;flex:1 1 auto;min-width:0}
+#mapctl select:not(.layersel){max-width:320px;text-overflow:ellipsis}
+#explain{font-size:13px;line-height:1.5;color:var(--text);margin:0 0 10px;padding:8px 12px;border-left:3px solid var(--accent);background:rgba(224,176,74,.07);border-radius:0 8px 8px 0}
+#explain b{color:var(--accent)}#explain .note{display:block;margin-top:2px}
+#mapctl select,#mapctl .seg,#mapctl .yr{background:var(--bg)}
 #mapctl .yr{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:4px 8px}#mapctl input[type=range]{accent-color:var(--accent);width:150px}
 .zoom{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px;align-items:center}
 .zoom button{width:32px;height:32px;border-radius:6px;border:1px solid var(--line);background:rgba(14,17,22,.88);color:var(--text);font:600 16px var(--sans);cursor:pointer}
 .zoom span{font:10px var(--mono);color:var(--muted)}
-#legend-map{position:absolute;left:12px;bottom:12px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:400px}
+#legend-map{position:absolute;left:12px;bottom:12px;background:rgba(14,17,22,.9);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:300px}
 #legend-map .lt{font-size:12px;margin-bottom:6px}#legend-map .ramp{display:flex;height:10px;border-radius:3px;overflow:hidden}#legend-map .ramp i{flex:1}
 #legend-map .rl{display:flex;justify-content:space-between;font:11px var(--mono);color:var(--muted);margin-top:3px}
 #legend-map .nd{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--muted);margin-top:4px}#legend-map .nd i{width:12px;height:10px;border-radius:2px;display:inline-block;border:1px solid var(--line)}
 .hint{position:absolute;right:12px;bottom:12px;font-size:11px;color:var(--muted)}
-#sp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;height:min(68vh,640px);overflow:auto}
+#sp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;height:min(66vh,620px);overflow:auto}
 #sp .hero{font:600 30px/1.2 var(--mono);margin:4px 0}#sp h3{font-size:12px;color:var(--muted);font-weight:500;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.05em}
 #sp svg text{fill:var(--muted);font:10px var(--mono)}#sp svg .grid{stroke:var(--line)}
 table.mini td{padding:5px 6px;font-size:12px}table.mini tr{cursor:pointer}table.mini tr.on td{color:var(--accent)}
@@ -107,11 +112,12 @@ td.barcell{width:40%}td.barcell i{display:block;height:6px;border-radius:3px;bac
 
 <section id="map">
  <div id="kpis"></div>
+ <div class="toolbar"><div id="mapctl"></div><div id="ovctl"></div></div>
+ <div id="explain"></div>
  <div class="mapwrap">
   <div class="stage"><svg id="usmap" role="img" aria-label="Map of US states"></svg>
-   <div id="mapctl"></div>
-   <div class="zoom"><button id="zin" title="Zoom in">+</button><button id="zout" title="Zoom out">−</button><button id="zreset" title="Reset view">↺</button><span id="zoomlvl">1.0×</span></div>
-   <div id="ovctl"></div><div id="legend-map"></div><div class="hint">Drag to pan · scroll to zoom · click a state</div></div>
+   <div class="zoom"><button id="zin" title="Zoom in" aria-label="Zoom in">+</button><button id="zout" title="Zoom out" aria-label="Zoom out">−</button><button id="zreset" title="Reset view" aria-label="Reset view">↺</button><span id="zoomlvl">1.0×</span></div>
+   <div id="legend-map"></div><div class="hint">Drag to move · scroll to zoom · click a state</div></div>
   <aside id="sp" aria-label="State details"></aside>
  </div>
 </section>
@@ -359,7 +365,7 @@ function planned(c){const d=$("#drawer"),close=el("button",{className:"ghost x",
 
 function draw(){TABS.forEach(([id])=>{$("#"+id).hidden=S.tab!=id;$("#tab-"+id).setAttribute("aria-selected",S.tab==id)});
  $("#tab-compare").textContent=`Compare (${S.sel.size})`;
- $("#global").hidden=!["map","tiers","leader","compare"].includes(S.tab);seg($("#asof"),"asof",(CAT.asof||[{key:"nov",label:"Nov 15"}]).map(a=>[a.key,a.label]));
+ $("#global").hidden=!["tiers","leader","compare"].includes(S.tab);seg($("#asof"),"asof",(CAT.asof||[{key:"nov",label:"Nov 15"}]).map(a=>[a.key,a.label]));
  if(S.tab=="map")mapTab().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Map could not load: "+e.message})));
  if(S.tab=="tiers")tiers();if(S.tab=="leader")leader();if(S.tab=="compare")compare();if(S.tab=="forecast")forecast();if(S.tab=="field")field()}
 
@@ -382,5 +388,6 @@ $("#zin").onclick=()=>zoomAt([VB.x+VB.w/2,VB.y+VB.h/2],1.6,true);$("#zout").oncl
 addEventListener("resize",()=>{if(S.tab=="compare"||S.tab=="forecast")draw()});
 addEventListener("keydown",e=>{if(S.tab!="map"||e.target.tagName=="INPUT"||e.target.tagName=="SELECT")return;if(e.key=="+"||e.key=="=")$("#zin").click();if(e.key=="-")$("#zout").click();if(e.key=="0"||e.key=="Escape"){M.sel=null;draw();resetView()}});
 if(window.__SNAP){$("#refresh").hidden=true;}
+else setInterval(async()=>{try{const r=await fetch("/api/status");if(!r.ok)return;const st=await r.json();if(D&&st.read_at&&st.read_at!=D.read_at){GEO=null;await load()}}catch(e){}},120000);
 load().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Could not load the board: "+e.message})));
 </script></body></html>
