@@ -133,7 +133,7 @@ def candidates(panel: pd.DataFrame) -> pd.DataFrame:
             return np.exp(ewma_base(np.log(normal), a)) + g * over
 
         gamma = min(GAMMAS, key=lambda g: np.mean([err(chop_pred(g, alpha), t) for t in past]))
-        preds = {"same_as_last_year": acres.shift(1), f"smoothed": bases[alpha],
+        preds = {"same_as_last_year": acres.shift(1), "smoothed": bases[alpha],
                  "smoothed_plus_chopping": chop_pred(gamma, alpha)}
         truth = acres.loc[year]
         for name, p in preds.items():
