@@ -1,6 +1,7 @@
 """Field-level silage-or-grain model: train on Quebec declarations, test on the Maryland fields.
 
-Train: Quebec parcels whose farmer declared grain maize or silage maize (``kernelag.quebec``).
+Train: Quebec parcels whose farmer declared grain maize or silage maize (``kernelag.quebec``),
+       every label year that has satellite series.
 Test:  the organizers' 44 labeled Maryland field-years (``kernelag.barc``). Never used for fitting.
 
 The model is the team notebook's: a logistic regression on six pieces of harvest evidence that
@@ -13,6 +14,8 @@ do not depend on the calendar, so a model fitted in Quebec can be asked about Ma
 
 Three checks are reported, each with the confusion matrix and precision and recall for both classes:
     quebec_held_out_blocks    fitted on some 2 km blocks of Quebec parcels, scored on the others
+    quebec_held_out_years     fitted on the other years, scored on each year in turn (when
+                              more than one label year has series): the cross-year check
     maryland_always_grain     the trivial baseline on the Maryland test set
     maryland_from_quebec      the Quebec-fitted model on the Maryland test set
 
@@ -38,6 +41,7 @@ from kernelag.paths import data_dir, record_in_manifest
 
 MODEL_FEATURES = ["max_drop", "max_drop_rate", "fade_days", "green_at_cut", "ndmi_before_cut", "ndti_post"]
 DECISION_THRESHOLD = 0.5   # fixed in advance; never tuned on the test set
+TRAIN_PATTERN = "quebec_maize_*"   # every Quebec label year that has series
 BLOCK_KM = 2               # size of the spatial blocks held out together inside the training region
 
 
@@ -130,12 +134,44 @@ def held_out_block_calls(train: pd.DataFrame, blocks: pd.Series, folds: int = 5)
     return call
 
 
+def load_training(data: Path, pattern: str = TRAIN_PATTERN) -> tuple[pd.DataFrame, pd.Series]:
+    """Evidence table and spatial blocks from every training label file that has a series folder.
+
+    Label files are ``data/labels/<pattern>.parquet`` (one per year); the series of each are in
+    ``data/s2_series/<same name>/``.
+    """
+    import geopandas as gpd
+
+    tables, blocks = [], []
+    for labels_file in sorted((data / "labels").glob(pattern + ".parquet")):
+        series_dir = data / "s2_series" / labels_file.stem
+        if not series_dir.is_dir() or not any(series_dir.glob("*.csv")):
+            continue
+        labels = gpd.read_parquet(labels_file)
+        table = evidence_table(labels, load_series(series_dir))
+        tables.append(table)
+        blocks.append(spatial_blocks(labels))   # whole file, so every year uses the same grid
+    if not tables:
+        raise FileNotFoundError(f"no training labels with series under {data}; run kernelag.quebec and s2_series")
+    return pd.concat(tables, ignore_index=True), pd.concat(blocks)
+
+
+def held_out_year_calls(train: pd.DataFrame) -> np.ndarray:
+    """Calls for every training row, each made by a model fitted on the other years only."""
+    call = np.zeros(len(train), int)
+    for year in sorted(train["year"].unique()):
+        fit_part = train[(train["year"] != year) & train["assessable"]]
+        score_rows = (train["year"] == year).to_numpy()
+        model = make_model().fit(fit_part[MODEL_FEATURES], fit_part["is_silage"])
+        call[score_rows] = predict_silage(model, train[score_rows])[1]
+    return call
+
+
 def main() -> None:
     import geopandas as gpd
 
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--train-labels", default="labels/quebec_maize_2023.parquet")
-    parser.add_argument("--train-series", default="s2_series/quebec_maize_2023")
+    parser.add_argument("--train-pattern", default=TRAIN_PATTERN, help="label files under data/labels to train on")
     parser.add_argument("--test-labels", default="labels/barc_2021_2023.parquet")
     parser.add_argument("--test-series", default="s2_series/barc_2021_2023")
     args = parser.parse_args()
@@ -144,20 +180,26 @@ def main() -> None:
     def resolve(text: str) -> Path:
         return Path(text) if Path(text).exists() else data / text
 
-    train_labels = gpd.read_parquet(resolve(args.train_labels))
-    train = evidence_table(train_labels, load_series(resolve(args.train_series)))
+    train, blocks = load_training(data, args.train_pattern)
     test_labels = gpd.read_parquet(resolve(args.test_labels))
     test = evidence_table(test_labels, load_series(resolve(args.test_series)))
-    for name, table, labels in [("train", train, train_labels), ("test", test, test_labels)]:
+    for name, table in [("train", train), ("test", test)]:
         print(f"{name}: {len(table)} field-years with a series "
               f"({int(table['is_silage'].sum())} silage, {int((1 - table['is_silage']).sum())} grain), "
-              f"{int((~table['assessable']).sum())} not assessable")
+              f"{int((~table['assessable']).sum())} not assessable, "
+              f"by year {table.groupby('year').size().to_dict()}")
     if len(test) < len(test_labels):
         print(f"WARNING: {len(test_labels) - len(test)} test field-years have no series yet")
 
     report = []
-    block_call = held_out_block_calls(train, spatial_blocks(train_labels))
-    report.append({"check": "quebec_held_out_blocks", **scores(train["is_silage"].to_numpy(), block_call)})
+    train_truth = train["is_silage"].to_numpy()
+    report.append({"check": "quebec_held_out_blocks", **scores(train_truth, held_out_block_calls(train, blocks))})
+    if train["year"].nunique() > 1:
+        year_call = held_out_year_calls(train)
+        report.append({"check": "quebec_held_out_years", **scores(train_truth, year_call)})
+        for year in sorted(train["year"].unique()):
+            rows = (train["year"] == year).to_numpy()
+            report.append({"check": f"quebec_held_out_{year}", **scores(train_truth[rows], year_call[rows])})
 
     fit_part = train[train["assessable"]]
     model = make_model().fit(fit_part[MODEL_FEATURES], fit_part["is_silage"])

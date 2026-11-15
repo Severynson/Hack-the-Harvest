@@ -2,8 +2,8 @@
  "silage": {
   "model": {
    "n_states": 48,
-   "state_error_pct": 14.14,
-   "total_error_pct": 3.06
+   "state_error_pct": 13.12,
+   "total_error_pct": 2.19
   },
   "same_as_last_year": {
    "n_states": 48,

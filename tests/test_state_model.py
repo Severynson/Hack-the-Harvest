@@ -115,3 +115,18 @@ def test_satellite_change_is_used_when_it_tracks_the_truth():
     sampled = silage.groupby("predictor")["state_error_pct"].mean()
     assert sampled["reversion_plus_satellite"] < sampled["same_as_last_year"]
     assert sampled["reversion_plus_satellite"] < sampled["reversion_only"]
+
+
+def test_early_replay_does_not_load_full_season_satellite(tmp_path, monkeypatch):
+    from kernelag import state_panel
+
+    (tmp_path / "panel").mkdir()
+    (tmp_path / "panel" / "state_satellite.csv").write_text("state,year,sat_share\nA,2024,0.2\n")
+    pd.DataFrame({"state": ["A"]}).to_csv(tmp_path / "acres.csv", index=False)
+    (tmp_path / "nass").mkdir()
+    (tmp_path / "nass" / "corn_acres_state.csv").write_bytes((tmp_path / "acres.csv").read_bytes())
+    monkeypatch.setattr(state_panel, "data_dir", lambda: tmp_path)
+    monkeypatch.setattr(state_panel, "build_context", lambda *_: None)
+    monkeypatch.setattr(state_panel, "build_panel", lambda acres, folder, context, asof, satellite: satellite)
+    assert state_panel.load_panel("sep") is None
+    assert state_panel.load_panel("nov")["sat_share"].iloc[0] == 0.2

@@ -1,0 +1,31 @@
+{
+ "silage": {
+  "model": {
+   "states": 48,
+   "state_error": 13.565701226789837,
+   "us_error": 2.940701376093613
+  },
+  "same_as_last_year": {
+   "states": 48,
+   "state_error": 13.96476482948117,
+   "us_error": 0.32325844512688384
+  }
+ },
+ "grain": {
+  "model": {
+   "states": 41,
+   "state_error": 1.6415973963143775,
+   "us_error": -0.9906759906759932
+  },
+  "same_as_last_year": {
+   "states": 41,
+   "state_error": 9.231648854290365,
+   "us_error": -8.688481329990761
+  }
+ },
+ "choices": {
+  "silage": "nodrift_nass",
+  "silage_base": "nodrift_nass",
+  "grain": "nass_latest"
+ }
+}

@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import time
 from pathlib import Path
 
 import numpy as np
@@ -36,6 +37,8 @@ INNER_BUFFER_M = 20           # shrink fields by one pixel so roads and tree lin
 CELL_KM = 10
 DATES_PER_BATCH = 12          # dates fetched together; about 30 MB of memory per batch
 READ_THREADS = int(os.environ.get("KERNEL_READ_THREADS", 32))   # reads wait on the network
+READ_ATTEMPTS = 3             # tries per batch of dates before the area-year is given up
+RETRY_WAIT_S = 20             # wait before the second try; twice that before the third
 COLUMNS = ["field_id", "date", "year", "valid_frac", "ndvi", "ndmi", "ndti", "s2_offset"]
 
 
@@ -61,12 +64,15 @@ def assign_cells(fields, cell_km: int = CELL_KM):
     return utm
 
 
-def cell_series(fields_utm, year: int) -> pd.DataFrame:
-    """Series for all fields of one cell in one year. ``fields_utm`` needs ``field_id`` and a UTM CRS."""
+def _open_cube(fields_utm, year: int):
+    """Find the season's scenes and open them lazily. Returns (items, cube); cube is None without scenes.
+
+    The search signs every file link, and a signed link stops working after a while, so a read
+    that fails calls this again to get fresh links.
+    """
     import planetary_computer
     from odc.stac import configure_rio, load
     from pystac_client import Client
-    from rasterio.features import rasterize
 
     catalog = Client.open(STAC_URL, modifier=planetary_computer.sign_inplace)
     bbox = tuple(fields_utm.to_crs("EPSG:4326").total_bounds)
@@ -76,11 +82,40 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
         query={"eo:cloud_cover": {"lt": MAX_SCENE_CLOUD}},
     ).item_collection())
     if not items:
-        return pd.DataFrame(columns=COLUMNS)
-
+        return items, None
     configure_rio(cloud_defaults=True)  # skip directory listings on every remote file open
     cube = load(items, bands=BANDS, bbox=bbox, crs=fields_utm.crs, resolution=RESOLUTION_M,
                 groupby="solar_day", chunks={})  # lazy: nothing is read yet
+    return items, cube
+
+
+def _read_dates(cube, dates, fields_utm, year: int):
+    """Read some dates of the cube into memory. Returns (data, cube); the cube is new after a retry.
+
+    Remote reads fail now and then (expired link, dropped connection). One failure used to lose
+    the whole area, so wait, reopen the cube with fresh links and try again.
+    """
+    from rasterio.errors import RasterioError
+
+    for attempt in range(1, READ_ATTEMPTS + 1):
+        try:
+            return cube.sel(time=dates).compute(scheduler="threads", num_workers=READ_THREADS), cube
+        except RasterioError as error:
+            if attempt == READ_ATTEMPTS:
+                raise
+            print(f"read failed ({type(error).__name__}), attempt {attempt} of {READ_ATTEMPTS}; reopening",
+                  flush=True)
+            time.sleep(RETRY_WAIT_S * attempt)
+            _, cube = _open_cube(fields_utm, year)
+
+
+def cell_series(fields_utm, year: int) -> pd.DataFrame:
+    """Series for all fields of one cell in one year. ``fields_utm`` needs ``field_id`` and a UTM CRS."""
+    from rasterio.features import rasterize
+
+    items, cube = _open_cube(fields_utm, year)
+    if cube is None:
+        return pd.DataFrame(columns=COLUMNS)
 
     # Field numbers burned onto the cube grid. Field ids can be strings, so use positions.
     gbox = cube.odc.geobox
@@ -97,8 +132,7 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
     times = cube.time.values
     for start in range(0, len(times), DATES_PER_BATCH):
         # Reads are slow and independent, so fetch a batch of dates at once on many threads.
-        batch = cube.isel(time=slice(start, start + DATES_PER_BATCH)).compute(
-            scheduler="threads", num_workers=READ_THREADS)
+        batch, cube = _read_dates(cube, times[start:start + DATES_PER_BATCH], fields_utm, year)
         for t in batch.time.values:
             rows.append(_field_medians(batch.sel(time=t), zones, in_field, field_ids,
                                        pd.Timestamp(t).normalize(), year, offsets))
@@ -166,6 +200,25 @@ def densest_cells(fields, n: int, by: str = "label", value: str = "silage") -> l
     return counts.head(n).index.tolist()
 
 
+def pull_cells_in_parallel(fields_path: str, cells: list[str], workers: int) -> None:
+    """One process per cell, ``workers`` at a time. Finished cell-years are kept, so it resumes."""
+    import subprocess
+    import sys
+    from concurrent.futures import ThreadPoolExecutor
+
+    environment = {**os.environ, "KERNEL_NO_MANIFEST": "1", "KERNEL_READ_THREADS": "16"}
+
+    def run(cell: str) -> str:
+        done = subprocess.run([sys.executable, "-m", "kernelag.s2_series", "--fields", fields_path,
+                               f"--only-cells={cell}"], capture_output=True, text=True, env=environment)
+        lines = [line for line in done.stdout.splitlines() if line.startswith("cell ")]
+        return "\n".join(lines) if done.returncode == 0 else f"cell {cell}: FAILED\n{done.stderr[-400:]}"
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for text in pool.map(run, cells):
+            print(text, flush=True)
+
+
 def main() -> None:
     import geopandas as gpd
 
@@ -175,6 +228,7 @@ def main() -> None:
                         help="how many cells to pull, densest in silage first; 0 means every cell")
     parser.add_argument("--only-cells", default="",
                         help="comma-separated cell ids to pull, written as --only-cells=ID,ID; overrides --cells")
+    parser.add_argument("--parallel", type=int, default=1, help="cells pulled at the same time")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
@@ -183,6 +237,9 @@ def main() -> None:
         chosen = args.only_cells.split(",")
     else:
         chosen = densest_cells(fields, args.cells) if args.cells > 0 else None
+    if args.parallel > 1:
+        cells = chosen if chosen is not None else sorted(assign_cells(fields)["cell"].unique())
+        pull_cells_in_parallel(args.fields, cells, args.parallel)
     table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force)
     print(f"{len(table)} field-dates for {table['field_id'].nunique() if len(table) else 0} fields")
 

@@ -1,19 +1,23 @@
 {
- "built_utc": "2026-11-15T03:11Z",
+ "built_utc": "2026-11-15T08:15Z",
  "forecast_year": 2026,
  "us_forecast": {
-  "silage": 6314600.0,
-  "silage_lo80": 5964800.0,
-  "silage_hi80": 6685000.0,
-  "silage_lo90": 5869200.0,
-  "silage_hi90": 6793900.0,
+  "silage": 6259300.0,
+  "silage_lo80": 5948900.0,
+  "silage_hi80": 6586000.0,
+  "silage_lo90": 5863700.0,
+  "silage_hi90": 6681700.0,
   "grain": 88506000.0,
   "grain_lo80": 87265300.0,
   "grain_hi80": 89764300.0,
   "grain_lo90": 86916800.0,
   "grain_hi90": 90124300.0,
-  "silage_method": "reversion_only",
+  "silage_method": "smoothed_chopping",
   "grain_method": "sum"
+ },
+ "forecast_scope": {
+  "silage": 48,
+  "grain": 41
  },
  "state_model": {
   "asof": "nov",
@@ -27,8 +31,43 @@
    2023,
    2024
   ],
-  "selected_silage_set": "reversion_only",
+  "selected_silage_set": "smoothed_chopping",
+  "best_ridge_set": "reversion_only",
   "selection_tolerance_points": 0.3,
+  "smoothed_chopping_params_by_year": {
+   "2017": {
+    "alpha": 0.5,
+    "gamma": 0.05
+   },
+   "2018": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2019": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2020": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2021": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2022": {
+    "alpha": 0.4,
+    "gamma": 0.05
+   },
+   "2023": {
+    "alpha": 0.45,
+    "gamma": 0.05
+   },
+   "2024": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   }
+  },
   "mean_errors_pct": {
    "grain.nass_latest": {
     "state_error_pct": 1.66,
@@ -54,6 +93,10 @@
     "state_error_pct": 14.53,
     "abs_total_error_pct": 4.08
    },
+   "silage.smoothed_chopping": {
+    "state_error_pct": 12.8,
+    "abs_total_error_pct": 3.34
+   },
    "silage.stress": {
     "state_error_pct": 13.82,
     "abs_total_error_pct": 3.12
@@ -70,7 +113,7 @@
    }
   },
   "us_log_error_rms": {
-   "silage": 0.0445,
+   "silage": 0.0397,
    "grain": 0.011
   },
   "sampled_states_silage_errors_pct": {},
@@ -91,8 +134,43 @@
    2023,
    2024
   ],
-  "selected_silage_set": "reversion_only",
+  "selected_silage_set": "smoothed_chopping",
+  "best_ridge_set": "reversion_only",
   "selection_tolerance_points": 0.3,
+  "smoothed_chopping_params_by_year": {
+   "2017": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2018": {
+    "alpha": 0.5,
+    "gamma": 0.04
+   },
+   "2019": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2020": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2021": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2022": {
+    "alpha": 0.4,
+    "gamma": 0.07
+   },
+   "2023": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   },
+   "2024": {
+    "alpha": 0.45,
+    "gamma": 0.04
+   }
+  },
   "mean_errors_pct": {
    "grain.nass_latest": {
     "state_error_pct": 2.52,
@@ -118,6 +196,10 @@
     "state_error_pct": 14.53,
     "abs_total_error_pct": 4.08
    },
+   "silage.smoothed_chopping": {
+    "state_error_pct": 12.79,
+    "abs_total_error_pct": 3.51
+   },
    "silage.stress": {
     "state_error_pct": 13.79,
     "abs_total_error_pct": 3.46
@@ -125,7 +207,7 @@
   },
   "interval_coverage": {
    "silage": {
-    "80": 0.789,
+    "80": 0.786,
     "90": 0.88
    },
    "grain": {
@@ -134,7 +216,7 @@
    }
   },
   "us_log_error_rms": {
-   "silage": 0.0445,
+   "silage": 0.0415,
    "grain": 0.0128
   },
   "sampled_states_silage_errors_pct": {},
@@ -147,8 +229,8 @@
   "silage": {
    "model": {
     "n_states": 48,
-    "state_error_pct": 14.14,
-    "total_error_pct": 3.06
+    "state_error_pct": 13.12,
+    "total_error_pct": 2.19
    },
    "same_as_last_year": {
     "n_states": 48,
@@ -175,11 +257,15 @@
   "train": {
    "region": "Quebec declared parcels",
    "field_years": 318,
+   "years": [
+    2023
+   ],
    "silage": 138
   },
   "test": {
-   "region": "Maryland (organizer labels)",
+   "region": "Maryland research-farm proxy labels",
    "field_years": 44,
+   "unique_fields": 34,
    "silage": 12,
    "not_assessable": 0
   },
@@ -195,7 +281,83 @@
    "grain_precision": 0.931,
    "grain_recall": 0.844,
    "false_positive_rate": 0.156,
-   "accuracy": 0.841
+   "accuracy": 0.841,
+   "silage_f1": 0.741,
+   "balanced_accuracy": 0.839
+  },
+  "scoring_policy": "Legacy binary benchmark only: unassessable rows count as grain; product decisions abstain",
+  "selective": {
+   "policy": "Missing evidence abstains; uncalibrated scores 40\u201360 abstain; band not tuned on Maryland",
+   "counts": {
+    "silage-like": 12,
+    "grain-like": 26,
+    "uncertain": 6,
+    "not assessable": 0
+   },
+   "coverage": 0.864,
+   "rates_on_decisive_fields": {
+    "n_grain": 27,
+    "n_silage": 11,
+    "TP": 10,
+    "FP": 2,
+    "FN": 1,
+    "TN": 25,
+    "silage_precision": 0.833,
+    "silage_recall": 0.909,
+    "grain_precision": 0.962,
+    "grain_recall": 0.926,
+    "false_positive_rate": 0.074,
+    "accuracy": 0.921,
+    "silage_f1": 0.87,
+    "balanced_accuracy": 0.918
+   },
+   "complete_roster_silage_recall": 0.833,
+   "calls": [
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "grain-like",
+    "silage-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "silage-like",
+    "silage-like",
+    "silage-like",
+    "silage-like",
+    "uncertain",
+    "uncertain",
+    "grain-like",
+    "uncertain",
+    "uncertain",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "grain-like",
+    "grain-like",
+    "uncertain",
+    "uncertain",
+    "grain-like",
+    "grain-like",
+    "grain-like",
+    "silage-like",
+    "silage-like"
+   ]
   },
   "always_grain": {
    "n_grain": 32,
@@ -209,11 +371,13 @@
    "grain_precision": 0.727,
    "grain_recall": 1.0,
    "false_positive_rate": 0.0,
-   "accuracy": 0.727
+   "accuracy": 0.727,
+   "silage_f1": 0.0,
+   "balanced_accuracy": 0.5
   },
   "intervals_90": {
    "silage_precision": [
-    0.455,
+    0.462,
     0.857
    ],
    "silage_recall": [
@@ -221,19 +385,365 @@
     1.0
    ],
    "false_positive_rate": [
-    0.061,
-    0.276
+    0.059,
+    0.28
    ],
    "accuracy": [
-    0.75,
-    0.932
+    0.744,
+    0.929
+   ],
+   "balanced_accuracy": [
+    0.724,
+    0.934
+   ],
+   "silage_f1": [
+    0.556,
+    0.875
    ]
   },
-  "response_seconds_per_field": 0.0147,
-  "fit_seconds": 0.799,
+  "interval_method": "percentile bootstrap by field ID, keeping repeated years together",
+  "response_seconds_per_field": 0.0145,
+  "fit_seconds": 0.79,
   "caveats": [
-   "44 test field-years on one farm: intervals are wide",
+   "test field-years cover one farm: field-cluster intervals do not capture regional transfer uncertainty",
+   "unassessable fields count as grain for scoring only; no observed harvest is implied",
+   "early drops are provisional; feature availability does not confirm harvest",
    "response time excludes the imagery download"
   ]
+ },
+ "deliverable": {
+  "grain": {
+   "by_year": {
+    "2017": {
+     "states": 41,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 0.9,
+     "last_year_state_wape_pct": 5.99,
+     "us_error_pct": 0.47,
+     "last_year_us_error_pct": 4.85
+    },
+    "2018": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.55,
+     "last_year_state_wape_pct": 3.68,
+     "us_error_pct": 0.74,
+     "last_year_us_error_pct": 1.93
+    },
+    "2019": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.81,
+     "last_year_state_wape_pct": 9.8,
+     "us_error_pct": 1.02,
+     "last_year_us_error_pct": 0.22
+    },
+    "2020": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.23,
+     "last_year_state_wape_pct": 8.53,
+     "us_error_pct": 0.44,
+     "last_year_us_error_pct": -1.43
+    },
+    "2021": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.61,
+     "last_year_state_wape_pct": 6.97,
+     "us_error_pct": 0.11,
+     "last_year_us_error_pct": -3.32
+    },
+    "2022": {
+     "states": 41,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 3.62,
+     "last_year_state_wape_pct": 8.07,
+     "us_error_pct": 2.7,
+     "last_year_us_error_pct": 7.98
+    },
+    "2023": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.25,
+     "last_year_state_wape_pct": 9.05,
+     "us_error_pct": 0.68,
+     "last_year_us_error_pct": -9.02
+    },
+    "2024": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.29,
+     "last_year_state_wape_pct": 6.73,
+     "us_error_pct": -0.4,
+     "last_year_us_error_pct": 4.17
+    },
+    "2025": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.64,
+     "last_year_state_wape_pct": 9.23,
+     "us_error_pct": -0.99,
+     "last_year_us_error_pct": -8.69
+    }
+   },
+   "backtest_2017_2024": {
+    "state_wape_pct": 1.66,
+    "last_year_state_wape_pct": 7.35,
+    "us_error_pct": 0.82,
+    "last_year_us_error_pct": 4.12,
+    "us_within_3pct_years": 8,
+    "years": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "held_out_2025": {
+    "state_wape_pct": 1.64,
+    "last_year_state_wape_pct": 9.23,
+    "us_error_pct": 0.99,
+    "last_year_us_error_pct": 8.69,
+    "us_within_3pct_years": 1,
+    "years": [
+     2025
+    ]
+   }
+  },
+  "grain_without_nass_forecast": {
+   "by_year": {
+    "2017": {
+     "states": 41,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 2.81,
+     "last_year_state_wape_pct": 5.99,
+     "us_error_pct": 0.33,
+     "last_year_us_error_pct": 4.85
+    },
+    "2018": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 2.16,
+     "last_year_state_wape_pct": 3.68,
+     "us_error_pct": 0.64,
+     "last_year_us_error_pct": 1.93
+    },
+    "2019": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 2.77,
+     "last_year_state_wape_pct": 9.8,
+     "us_error_pct": 1.38,
+     "last_year_us_error_pct": 0.22
+    },
+    "2020": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.93,
+     "last_year_state_wape_pct": 8.53,
+     "us_error_pct": 0.41,
+     "last_year_us_error_pct": -1.43
+    },
+    "2021": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.55,
+     "last_year_state_wape_pct": 6.97,
+     "us_error_pct": -0.23,
+     "last_year_us_error_pct": -3.32
+    },
+    "2022": {
+     "states": 41,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 3.48,
+     "last_year_state_wape_pct": 8.07,
+     "us_error_pct": 3.01,
+     "last_year_us_error_pct": 7.98
+    },
+    "2023": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 2.63,
+     "last_year_state_wape_pct": 9.05,
+     "us_error_pct": -2.16,
+     "last_year_us_error_pct": -9.02
+    },
+    "2024": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.46,
+     "last_year_state_wape_pct": 6.73,
+     "us_error_pct": -0.26,
+     "last_year_us_error_pct": 4.17
+    },
+    "2025": {
+     "states": 41,
+     "truth": "organizer_csv",
+     "state_wape_pct": 1.63,
+     "last_year_state_wape_pct": 9.23,
+     "us_error_pct": -0.69,
+     "last_year_us_error_pct": -8.69
+    }
+   },
+   "backtest_2017_2024": {
+    "state_wape_pct": 2.35,
+    "last_year_state_wape_pct": 7.35,
+    "us_error_pct": 1.05,
+    "last_year_us_error_pct": 4.12,
+    "us_within_3pct_years": 7,
+    "years": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "held_out_2025": {
+    "state_wape_pct": 1.63,
+    "last_year_state_wape_pct": 9.23,
+    "us_error_pct": 0.69,
+    "last_year_us_error_pct": 8.69,
+    "us_within_3pct_years": 1,
+    "years": [
+     2025
+    ]
+   }
+  },
+  "silage": {
+   "by_year": {
+    "2017": {
+     "states": 48,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 11.55,
+     "last_year_state_wape_pct": 12.33,
+     "us_error_pct": -2.91,
+     "last_year_us_error_pct": -2.8
+    },
+    "2018": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 17.74,
+     "last_year_state_wape_pct": 20.25,
+     "us_error_pct": 3.04,
+     "last_year_us_error_pct": 4.84
+    },
+    "2019": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 14.65,
+     "last_year_state_wape_pct": 17.2,
+     "us_error_pct": -6.13,
+     "last_year_us_error_pct": -7.24
+    },
+    "2020": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 9.78,
+     "last_year_state_wape_pct": 12.03,
+     "us_error_pct": -3.85,
+     "last_year_us_error_pct": 0.08
+    },
+    "2021": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 11.36,
+     "last_year_state_wape_pct": 14.43,
+     "us_error_pct": -0.2,
+     "last_year_us_error_pct": 1.69
+    },
+    "2022": {
+     "states": 48,
+     "truth": "nass_quickstats",
+     "state_wape_pct": 15.66,
+     "last_year_state_wape_pct": 14.16,
+     "us_error_pct": -5.52,
+     "last_year_us_error_pct": -5.84
+    },
+    "2023": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 9.51,
+     "last_year_state_wape_pct": 13.53,
+     "us_error_pct": 0.41,
+     "last_year_us_error_pct": 6.04
+    },
+    "2024": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 12.13,
+     "last_year_state_wape_pct": 12.34,
+     "us_error_pct": 4.63,
+     "last_year_us_error_pct": 4.09
+    },
+    "2025": {
+     "states": 48,
+     "truth": "organizer_csv",
+     "state_wape_pct": 13.12,
+     "last_year_state_wape_pct": 13.96,
+     "us_error_pct": 2.19,
+     "last_year_us_error_pct": 0.32
+    }
+   },
+   "backtest_2017_2024": {
+    "state_wape_pct": 12.8,
+    "last_year_state_wape_pct": 14.53,
+    "us_error_pct": 3.34,
+    "last_year_us_error_pct": 4.08,
+    "us_within_3pct_years": 3,
+    "years": [
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ]
+   },
+   "held_out_2025": {
+    "state_wape_pct": 13.12,
+    "last_year_state_wape_pct": 13.96,
+    "us_error_pct": 2.19,
+    "last_year_us_error_pct": 0.32,
+    "us_within_3pct_years": 1,
+    "years": [
+     2025
+    ]
+   }
+  },
+  "truth_check": {
+   "organizer_rows_also_in_pipeline_copy": 979,
+   "rows_that_differ": 0
+  },
+  "notes": [
+   "Truth: final NASS survey acres from the organizer CSV; 2017 and 2022 (Census years, no state survey rows in that CSV) from the pipeline's NASS Quick Stats copy, marked in truth_source.",
+   "2017-2024 also chose the method; 2025 was scored once after it was fixed.",
+   "Delivered grain IS NASS's own November harvested-for-grain forecast where published (every scored state, 2017-2025), so its error is NASS's forecast error, not our skill. The organizer CSV holds the same forecasts. grain_without_nass_forecast scores our own number instead: in-season planted acres x last year's grain share. Our skill claim is silage.",
+   "Silage has no NASS in-season figure; the baseline is last year's acres.",
+   "Current-vintage inputs: a replay, not archived real-time runs."
+  ]
+ },
+ "satellite_aggregate_present": false,
+ "source_sha256": {
+  "state_forecast_2026.csv": "c6158410cf7393994ab552d99a9d7a661352845c33a4278bd21f0bd558fde1e9",
+  "state_model_metrics.json": "32cd6da35e8a75c4f2a11baafb8f163097fa6c1a15eac8b4457f7d055794b0ad",
+  "state_model_metrics_asof_sep.json": "d9958c9fe1732a64430fb66bba2e92b67f21f9493f90760b4546b730d063ce00",
+  "state_score_2025.json": "512101f8721e424617fbf393ca952c00ec6cad4b05dc0f1e0c5e7ea938b61423",
+  "field_eval.json": "78b3842750847084eace3997b11361a4ef5773e4bbeae3fc043458e529d768a6",
+  "state_model_backtest.csv": "68fc07c676872213311276b5547bf8331d2ff10a29fae51e128dac3db21a4698",
+  "state_model_bias.csv": "3e6b4ca768f3c2f0548c8c644f4f404dadba39676e8ca2bbdf669433a0dc3b0d",
+  "field_earliness.csv": "2a9e15f897f2fd49396ced600e56cdfed82d3786c34a89cd667fb3c939ab96e4",
+  "deliverable_summary.json": "a913d40da0c3f2352c443060a68e34cafff0f4cfce223d2283eb62266d39c248",
+  "field_model_coefficients.csv": "a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3"
  }
 }

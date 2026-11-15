@@ -1,0 +1,22 @@
+commit	val_f1	balanced_acc	status	description
+c4d67f2	0.500000	0.6406	keep	baseline caveman: season_len = harvest(50% drop) - greenup(50% rise), 1 threshold
+d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore spring cover crop)
+09192d5	0.818182	0.8594	keep	rule on drop_days (80%->20% amplitude after summer peak) instead of season length
+598fca8	0.750000	0.8281	discard	smoothing window 15 -> 5 days (keep abrupt cuts sharp)
+5f09419	0.800000	0.8698	discard	despike: drop obs >0.1 below both neighbours before smoothing
+451b9a2	0.640000	0.7552	discard	single rule on post-harvest residue: median NDTI 0-30 d after 50% drop
+09a8a12	0.571429	0.7031	discard	drop band 80/20 -> 70/30 of amplitude
+f8bb82b	0.818182	0.8594	discard	drop band 80/20 -> 90/10 of amplitude
+ccc9af7	0.800000	0.8333	discard	drop clock on absolute NDVI 0.7 -> 0.35 instead of amplitude fractions
+ec57c26	0.727273	0.8021	discard	single rule on late-season regreen: median NDVI DOY 300-355
+be6ba92	0.869565	0.9010	keep	OR rule: fast drop_days OR late Nov-Dec regreen (greedy thresholds)
+41c4f4b	0.800000	0.8698	discard	OR rule + despike obs >0.1 below both neighbours
+696b10f	0.727273	0.8021	discard	min clear-pixel share 0.6 -> 0.8
+511daf9	0.909091	0.9167	keep	min clear-pixel share 0.6 -> 0.4
+f9dd43f	0.800000	0.8333	discard	min clear-pixel share 0.4 -> 0.2
+1fbe818	0.880000	0.9271	discard	OR rule with independently fitted thresholds (no greedy)
+449cf48	0.909091	0.9167	discard	simplify: delete unused green-up/season-length/harvest-day code
+449cf48	0.909091	0.9167	keep	correction: previous row restored as keep (equal score, less code)
+2663faf	1.000000	1.0000	keep	simplify: drop summer peak window, use season-wide NDVI max
+449a901	0.909091	0.9167	discard	simplify (ablation): drop rule only, regreen rule off
+9d7545d	0.956522	0.9583	discard	simplify: amplitude low = season-wide NDVI min (no spring window)

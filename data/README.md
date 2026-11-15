@@ -9,7 +9,7 @@ The organizers' starter kit is tracked separately at `jupyter/workspace/`.
 | Folder | What it holds | Unit, years | Source | Pulled by |
 | --- | --- | --- | --- | --- |
 | `Quickstats Data/*_2015_2025.csv` | Corn planted, grain and silage acres; yields; production; irrigated acres; corn price; all cattle; milk cows | state and county, yearly (prices monthly), 2015 to 2025 | NASS Quick Stats | `download_hack_the_harvest_quickstats.py` |
-| `Quickstats Data/*_state_2000_2026.csv` | In-season series: corn progress, corn silage harvest progress, corn condition, pasture condition, hay production, hay stocks, hay price, milk price, cattle on feed | state; weekly, monthly or yearly; 2000 to 2026 | NASS Quick Stats | `scripts/pull_data.py quickstats` |
+| `Quickstats Data/*_state_2000_2026.csv` | In-season series: corn progress, corn silage harvest progress, corn condition, pasture condition, hay production, hay stocks, hay price, milk price, cattle on feed. Long history with every in-season figure: corn planted, grain and silage acres, grain yield, milk cows | state; weekly, monthly or yearly; 2000 to 2026 | NASS Quick Stats | `scripts/pull_data.py quickstats` |
 | `drought/` | Share of area in each drought class | state and county, weekly, 2000 to 2026 | US Drought Monitor | `scripts/pull_data.py drought` |
 | `weather/county_month/` | Heat units, rain, mean daily high and low, hot days, frost days | county-month, 2000 to 2026 | NOAA nClimGrid-Daily | `scripts/pull_data.py weather` |
 | `weather/county_season/` | Last spring frost, first fall frost, first hard freeze, May to September heat units and rain | county-year, 2000 to 2026 | NOAA nClimGrid-Daily | same |
@@ -36,12 +36,11 @@ The organizers' starter kit is tracked separately at `jupyter/workspace/`.
 
 ## Known gaps (checked 2026-11-15)
 
-- The hay production, hay stocks, hay price, milk price and cattle-on-feed series named in the table are not in `Quickstats Data/`.
-- `drought/county_weekly/` has no file for Texas, Virginia, West Virginia, Wisconsin or Wyoming; the state file covers all states.
 - State silage acres for 2021, grain acres for 2018 and county planted acres for 2021 are missing from the `*_2015_2025.csv`
   files; `kernelag.nass` takes those years from the organizers' file.
-- No file holds 2026 planted acres or NASS's 2026 grain forecasts.
-- `scripts/pull_data.py` is not in the repository.
+- 2026 planted and grain forecasts are available in `nass/reports/` and the tidy acreage table. Long-history Quick Stats files are also present.
+- State satellite aggregates and state sample series are not yet in this checkout; the report leaves their comparisons uncomputed.
+- County boundaries for the field explorer are cached in `geography/md_counties.geojson`; county weather is contextual and does not enter field classification. Soil and radar are not integrated.
 
 ## Built by `kernelag` (rebuild with the commands in each module's docstring)
 
