@@ -231,3 +231,56 @@ data/*
 
 # Local copy of the organizer Keeboh workspace: organizer data, papers and a Python environment; never commit
 workspace/
+
+# --- Data stays out of git ---
+# Data lives in data/ (ignored above) and is listed in data/DATA_MANIFEST.tsv. The lines below catch
+# data that lands anywhere else. To track one small file on purpose, add a `!path/to/file` line at the end.
+
+# Data folders, wherever they appear. The Quick Stats download script writes next to itself by default.
+Quickstats Data/
+jupyter/
+
+# Tables
+*.csv
+*.parquet
+*.feather
+*.arrow
+*.xlsx
+*.xls
+
+# Geospatial
+*.geojson
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.fgb
+*.tif
+*.tiff
+*.nc
+*.zarr/
+*.pmtiles
+*.mbtiles
+
+# Databases
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+*.db
+
+# Arrays and pickles
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+
+# Archives
+*.zip
+*.tar
+*.tgz
+*.gz
+*.7z
