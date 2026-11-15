@@ -6,3 +6,4 @@ d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore s
 5f09419	0.800000	0.8698	discard	despike: drop obs >0.1 below both neighbours before smoothing
 451b9a2	0.640000	0.7552	discard	single rule on post-harvest residue: median NDTI 0-30 d after 50% drop
 09a8a12	0.571429	0.7031	discard	drop band 80/20 -> 70/30 of amplitude
+f8bb82b	0.818182	0.8594	discard	drop band 80/20 -> 90/10 of amplitude
