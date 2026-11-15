@@ -16,3 +16,4 @@ be6ba92	0.869565	0.9010	keep	OR rule: fast drop_days OR late Nov-Dec regreen (gr
 f9dd43f	0.800000	0.8333	discard	min clear-pixel share 0.4 -> 0.2
 1fbe818	0.880000	0.9271	discard	OR rule with independently fitted thresholds (no greedy)
 449cf48	0.909091	0.9167	discard	simplify: delete unused green-up/season-length/harvest-day code
+449cf48	0.909091	0.9167	keep	correction: previous row restored as keep (equal score, less code)
