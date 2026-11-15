@@ -29,7 +29,8 @@ SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolat
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
-RULES = ["drop_days", "late_rel_neg"]
+RULES = ["drop_days"]       # learned rules: silage if feature < cut-off
+FIXED_RULES = {"late_ndvi_neg": -0.65}  # physical rule, not learned: Nov-Dec NDVI > 0.65 = dense green cover crop after an early cut
 MIN_RULE_PRECISION = 0.7   # a secondary rule may only use cut-offs where >= 70% of the fields it adds are silage  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
 
 # ---------------------------------------------------------------------------
@@ -126,7 +127,7 @@ def fit(ts, lab):
         x = np.nan_to_num(f[r].to_numpy(float), nan=np.inf)  # missing -> rule does not fire
         cuts[r] = fit_threshold(x, y, already=fired)
         fired |= x < cuts[r]
-    return cuts
+    return {**cuts, **FIXED_RULES}
 
 
 def predict(ts, keys, cuts):
