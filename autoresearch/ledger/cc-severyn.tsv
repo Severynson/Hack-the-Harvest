@@ -4,3 +4,4 @@ d37f690	0.457143	0.5990	discard	corn peak searched in DOY 170-260 only (ignore s
 09192d5	0.818182	0.8594	keep	rule on drop_days (80%->20% amplitude after summer peak) instead of season length
 598fca8	0.750000	0.8281	discard	smoothing window 15 -> 5 days (keep abrupt cuts sharp)
 5f09419	0.800000	0.8698	discard	despike: drop obs >0.1 below both neighbours before smoothing
+451b9a2	0.640000	0.7552	discard	single rule on post-harvest residue: median NDTI 0-30 d after 50% drop
