@@ -31,7 +31,6 @@ LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cu
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
 RULES = ["drop_days"]       # learned rules: silage if feature < cut-off
 FIXED_RULES = {"late_ndvi_neg": -0.65}  # physical rule, not learned: Nov-Dec NDVI > 0.65 = dense green cover crop after an early cut
-MIN_RULE_PRECISION = 0.7   # a secondary rule may only use cut-offs where >= 70% of the fields it adds are silage  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
 
 # ---------------------------------------------------------------------------
 # Features
@@ -80,14 +79,11 @@ def featurize(ts: pd.DataFrame, keys: pd.DataFrame) -> pd.DataFrame:
         g = groups.get((oid, yr))
         f = season_features(g) if g is not None else {}
         rows.append({"OBJECTID": oid, "year": yr, "group": gr, **f})
-    out = pd.DataFrame(rows)
-    # winter green relative to the region-year: snow makes every field dull, cover crops stand out
-    out["late_rel_neg"] = out["late_ndvi_neg"] - out.groupby("group")["late_ndvi_neg"].transform("median")
-    return out
+    return pd.DataFrame(rows)
 
 
 # ---------------------------------------------------------------------------
-# Model: OR of two thresholds, fitted greedily on training labels
+# Model: silage if any rule fires (learned cut-offs from training labels, plus fixed physical rules)
 # ---------------------------------------------------------------------------
 
 
@@ -107,13 +103,7 @@ def fit_threshold(x, y, already=None):
     cands = np.unique(xf[np.isfinite(xf)])
     cands = (cands[:-1] + cands[1:]) / 2 if len(cands) > 1 else cands
     cands = np.concatenate([[-np.inf], cands])
-    def score(c):
-        new = ~already & (xf < c)
-        if already.any() and new.any() and y[new].mean() < MIN_RULE_PRECISION:
-            return -1.0  # this cut adds mostly grain: not allowed
-        return f1(y, (already | (xf < c)).astype(int))
-
-    scores = np.array([score(c) for c in cands])
+    scores = np.array([f1(y, (already | (xf < c)).astype(int)) for c in cands])
     best = np.flatnonzero(scores == scores.max())
     return float(np.median(cands[best])) if 0 not in best else -np.inf
 
