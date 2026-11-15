@@ -1,0 +1,50 @@
+"""The state panel picks the latest in-season figure, and the backtest never sees the future."""
+
+import numpy as np
+import pandas as pd
+
+from kernelag import state_model
+from kernelag.state_panel import latest_available
+
+
+def test_latest_available_prefers_the_latest_period():
+    table = pd.DataFrame({
+        "state": ["A", "A", "B"], "year": [2023, 2023, 2023],
+        "period": ["aug", "nov", "aug"], "value": [90.0, 100.0, 50.0],
+    })
+    asof = latest_available(table, ["nov", "oct", "sep", "aug"])
+    assert asof[("A", 2023)] == 100.0 and asof[("B", 2023)] == 50.0
+
+
+def _panel(years, silage_by_year):
+    rows = []
+    for state, scale in [("A", 1.0), ("B", 2.0), ("C", 0.5)]:
+        for year in years:
+            rows.append({
+                "state": state, "year": year, "silage": 100.0 * scale * silage_by_year[year],
+                "grain": 900.0, "planted": 1000.0, "planted_asof": 1000.0, "grain_asof": 900.0,
+                "grain_yield": 180.0, "grain_yield_asof": 180.0, "milk_cows": 50.0, "cattle": 80.0,
+                "corn_price_sep": 4.0,
+            })
+    return pd.DataFrame(rows)
+
+
+def test_changes_use_the_previous_calendar_year_only():
+    years = list(range(2010, 2016))
+    panel = _panel(years, {y: 1.0 for y in years})
+    panel = panel[~((panel["state"] == "A") & (panel["year"] == 2013))]   # a gap year for state A
+    table = state_model.add_changes(panel)
+    gap = table[(table["state"] == "A") & (table["year"] == 2014)].iloc[0]
+    assert np.isnan(gap["silage_last"]) and np.isnan(gap["target"])       # no 2013, so no "last year"
+
+
+def test_backtest_excludes_the_scoring_year_and_learns_reversion():
+    years = list(range(2010, 2026))
+    # Silage alternates high and low around a flat level: last year's deviation always reverses.
+    level = {y: (1.2 if y % 2 else 0.8) for y in years}
+    table = state_model.add_changes(_panel(years, level))
+    results = state_model.backtest(table)
+
+    assert results["year"].max() <= state_model.LAST_BASELINE_YEAR
+    mean_error = results.groupby("predictor")["state_error_pct"].mean()
+    assert mean_error["reversion_only"] < mean_error["same_as_last_year"]
