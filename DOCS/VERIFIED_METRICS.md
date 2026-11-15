@@ -1,6 +1,6 @@
 # Verified metrics and baselines
 
-Generated 2026-11-15T04:05Z by `python -m kernelag.report`.
+Generated 2026-11-15T04:07Z by `python -m kernelag.report`.
 
 State WAPE = summed absolute state acreage error / summed actual acreage. National error is absolute total error.
 Current-vintage inputs make these pseudo real-time replays, not archived-vintage operational tests.
@@ -21,7 +21,7 @@ NASS-anchored grain is not an independent satellite forecast. Missing satellite 
 
 ## Maryland research-farm proxy labels
 
-Field-years: 44; independent field IDs: 34.
+Field-years: 44; distinct field IDs: 34.
 Intervals are 90% field-cluster bootstrap intervals; they do not measure national transfer uncertainty.
 
 | Metric | Value | 90% interval |
@@ -53,3 +53,7 @@ Source: `data/models/field_earliness.csv`. Each series is truncated before featu
 State/US forecast intervals: `data/models/state_forecast_2026.csv`; region/year signed bias: `data/models/state_model_bias.csv`.
 Coverage: `data/models/state_model_metrics.json` and `state_score_2025.json`. Historical interval coverage uses leave-one-year-out calibration, including later years.
 The offline report displays the forecast, intervals, coverage and bias. `data/models/metrics.json` includes source hashes for audit.
+
+Other team experiments remain separate: `test_models/danielModel/` contains longer-history ridge/boosted models;
+`autoresearch/RESULTS.md` documents the Caveman rules, repeated-development caveats and regional transfer checks.
+Different histories and inspected cohorts must not be treated as interchangeable independent tests.

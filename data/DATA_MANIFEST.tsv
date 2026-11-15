@@ -236,6 +236,6 @@ data/models/state_model_backtest_asof_sep.csv	2853	6696ff0fb7277ab753e0d7fc69a0d
 data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
 data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a7a866312a5846501933aa66ece3494	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
 data/models/state_model_metrics_asof_sep.json	1239	57f4933c3969946b7d4a479191b2bbd1311558d918130bc7a9fb27c2504adb95	derived: kernelag.state_model	codex-manraj	2026-11-15T04:04Z
-data/models/metrics.json	7932	20dd771c20b68d104567b8acf582af0e93fd405c733e29c48a276d44288b2e0e	derived: kernelag.report	codex-manraj	2026-11-15T04:05Z
-data/models/verified_metrics.csv	1281	315dd0ee7b1de9f787bbfa6c753194a8dc119ef1c968318a979cd19791c80668	derived: kernelag.report; comparison table	codex-manraj	2026-11-15T04:05Z
 data/fsa/index.html	105571	70d2ab3cec184c2d5cfe9baf9a0d3e3b0d71005b8af8b3203879e76217ab80b0	https://www.fsa.usda.gov/tools/informational/freedom-information-act-foia/electronic-reading-room/frequently-requested/crop-acreage-data	codex-manraj	2026-11-15T04:06Z
+data/models/metrics.json	7932	830571ae2b73e1887ec25f4470eb15220a1acaffedb796a593a1ac8ef164062a	derived: kernelag.report	codex-manraj	2026-11-15T04:07Z
+data/models/verified_metrics.csv	1281	315dd0ee7b1de9f787bbfa6c753194a8dc119ef1c968318a979cd19791c80668	derived: kernelag.report; comparison table	codex-manraj	2026-11-15T04:07Z

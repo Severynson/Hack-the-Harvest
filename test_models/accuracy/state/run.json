@@ -1,7 +1,7 @@
 {
   "signature": {
     "source_sha256": "0f068020547687e498c4cf14dd4771ff42f126300edf3db0525ff9458e29f450",
-    "code_sha256": "fa415dd096ee09767c0a68095e7a2dbd6dbea81a259a613d1eee6b3b37ef83e5",
+    "code_sha256": "f12b7aafc26c2f8bb7ef47ecb4d0db107e878c11d3b63cd8a88dbf7e45bd2619",
     "incumbent_metrics_sha256": "cadcd23c44df43ed8378602af201afb0e71c5d127432dfcf8e19df7e17d96b1a",
     "incumbent_backtest_sha256": "685fca103cd6f0b89f6d59e769eade169c14cef99c761651fb642bcd9e6ebfd1",
     "versions": {

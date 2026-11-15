@@ -214,8 +214,8 @@
     "Full national outcome scope stays 48 states for every year and candidate",
     "A mean error below 2% would not imply every year or state is within 2%"
   ],
-  "source_sha256": "b9e57b34ec0a23da9cdd73eb82f8c58bd7423b794bbc1be7ad3d27dc3eb98a6d",
-  "source": "test_models/model/out/panel_nov.csv",
+  "source_sha256": "f10465e76469aeb0bf7cf0f6573bc9fd903be27abc9a878f553e84f608c2112d",
+  "source": "test_models/danielModel/out/panel_nov.csv",
   "versions": {
     "numpy": "2.4.6",
     "pandas": "3.1.1",

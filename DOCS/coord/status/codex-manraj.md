@@ -5,3 +5,4 @@
 
 - 2026-11-15T03:45Z claim T-codex-manraj-accuracy ttl=90m; pursue 2% acreage error with temporal validation and public inputs
 - 2026-11-15T03:57Z comparison ready: 50 tests pass and changed-file Ruff passes. No alternative clears promotion evidence. Satellite missing on main2a95dfc; added Nov15 aggregation cutoff and owner handoff. User requests branch push now; final methodology/report audit follows.
+- 2026-11-15T04:05Z final audit complete: 53 tests, changed-file Ruff, offline browser checks and delivery_audit.json pass. Stored2025 score reproduced without overwrite. Satellite cutoff/coverage/cache guards added; state data still absent. Final report, script, methodology and verified comparison table ready for approved delivery. Bounded experiments rerun after Daniel's folder rename; no model promoted.

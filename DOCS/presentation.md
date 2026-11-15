@@ -1,6 +1,6 @@
 # Kernel: five-minute presentation
 
-Generated from `data/models/metrics.json` at 2026-11-15T04:05Z. Open `report/index.html` offline.
+Generated from `data/models/metrics.json` at 2026-11-15T04:07Z. Open `report/index.html` offline.
 The talk follows the seven sections from top to bottom. Acreage error is WAPE unless stated otherwise.
 
 ## 0:00–0:40 — The answer (mission)

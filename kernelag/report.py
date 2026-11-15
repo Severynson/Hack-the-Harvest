@@ -167,7 +167,7 @@ def verification_markdown(metrics: dict, backtest: pd.DataFrame, by_date: pd.Dat
     lines += ["", "The stored 2025 score remains separate; no tuning or overwrite in this delivery. Historical validation years also selected the feature set.",
               "NASS-anchored grain is not an independent satellite forecast. Missing satellite rows mean uncomputed, not zero error.",
               "", "## Maryland research-farm proxy labels", "",
-              f'Field-years: {dig(metrics, "field_eval", "test", "field_years")}; independent field IDs: {dig(metrics, "field_eval", "test", "unique_fields")}.',
+              f'Field-years: {dig(metrics, "field_eval", "test", "field_years")}; distinct field IDs: {dig(metrics, "field_eval", "test", "unique_fields")}.',
               "Intervals are 90% field-cluster bootstrap intervals; they do not measure national transfer uncertainty.", "",
               "| Metric | Value | 90% interval |", "| --- | ---: | --- |"]
     field = metrics.get("field_eval", {})
@@ -191,6 +191,9 @@ def verification_markdown(metrics: dict, backtest: pd.DataFrame, by_date: pd.Dat
               "State/US forecast intervals: `data/models/state_forecast_2026.csv`; region/year signed bias: `data/models/state_model_bias.csv`.",
               "Coverage: `data/models/state_model_metrics.json` and `state_score_2025.json`. Historical interval coverage uses leave-one-year-out calibration, including later years.",
               "The offline report displays the forecast, intervals, coverage and bias. `data/models/metrics.json` includes source hashes for audit."]
+    lines += ["", "Other team experiments remain separate: `test_models/danielModel/` contains longer-history ridge/boosted models;",
+              "`autoresearch/RESULTS.md` documents the Caveman rules, repeated-development caveats and regional transfer checks.",
+              "Different histories and inspected cohorts must not be treated as interchangeable independent tests."]
     return "\n".join(lines) + "\n"
 
 

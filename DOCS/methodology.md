@@ -61,6 +61,7 @@ No experiment currently clears the established promotion evidence while improvin
 .venv/bin/python -m kernelag.state_model --asof sep
 .venv/bin/python -m kernelag.report
 .venv/bin/python -m kernelag.explorer
+PYTHONPATH=. .venv/bin/python test_models/accuracy/verify_delivery.py
 ```
 
 Open `report/index.html` and `report/fields.html` directly from disk. Use `DOCS/presentation.md` for the five-minute demonstration and `DOCS/VERIFIED_METRICS.md` for the source-backed numerical table. Setup and optional live-pull requirements are in the root README.
