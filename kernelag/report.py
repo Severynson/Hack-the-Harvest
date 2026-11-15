@@ -70,6 +70,7 @@ def gather(models: Path) -> dict:
         "state_model_asof_sep": read_json(models / "state_model_metrics_asof_sep.json"),
         "score_2025": read_json(models / "state_score_2025.json"),
         "field_eval": read_json(models / "field_eval.json"),
+        "satellite_aggregate_present": (models.parent / "panel" / "state_satellite.csv").exists(),
         "source_sha256": {name: hashlib.sha256((models / name).read_bytes()).hexdigest() for name in
                           [f"state_forecast_{FORECAST_YEAR}.csv", "state_model_metrics.json",
                            "state_model_metrics_asof_sep.json", "state_score_2025.json", "field_eval.json",
@@ -140,8 +141,8 @@ def comparison_table(metrics: dict, backtest: pd.DataFrame) -> str:
     body = "".join(f'<tr><th scope="row">{esc(r["series"])} · {esc(PREDICTOR_WORDS.get(r["predictor"], r["predictor"]))}</th>'
                    f'<td>{esc(r["years"])}</td><td>{esc(r["scope"].replace("_", " "))}</td>'
                    f'<td class="num">{number(r["minimum_states"], 0)}</td>'
-                   f'<td class="num">{number(r["state_wape_pct"], 2)}%</td>'
-                   f'<td class="num">{number(r["national_abs_error_pct"], 2)}%</td></tr>'
+                   f'<td class="num">{number(r["state_wape_pct"], 2, "%")}</td>'
+                   f'<td class="num">{number(r["national_abs_error_pct"], 2, "%")}</td></tr>'
                    for r in table.to_dict("records"))
     return ('<div class="scroll" tabindex="0" role="region" aria-label="Verified acreage comparisons"><table>'
             '<thead><tr><th scope="col">Target / method</th><th scope="col">Years</th><th scope="col">Scope</th>'
@@ -481,6 +482,8 @@ def limits(metrics: dict) -> str:
              "Harvest calendars and soil colour differ by region; evidence is relative to each field's own season.",
              "Satellite backtests with a fixed Quebec classifier are retrospective; the classifier may use later training labels.",
              satellite]
+    if not metrics.get("satellite_aggregate_present"):
+        fixed.insert(0, "Satellite acreage comparison unavailable: the state sample aggregate has not been delivered. The field evidence is separate from the headline acreage forecast.")
     items = "".join(f"<li>{esc(text)}</li>" for text in fixed + [c[0].upper() + c[1:] + "." for c in caveats])
     return section("Limits", "What the numbers do not show.", f"<ul>{items}</ul>")
 

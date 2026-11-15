@@ -17,7 +17,8 @@ import pandas as pd
 from scipy.optimize import lsq_linear
 
 HERE = Path(__file__).resolve().parent
-SOURCE = HERE.parent / "model" / "out" / "panel_nov.csv"
+SOURCES = [HERE.parent / name / "out" / "panel_nov.csv" for name in ("danielModel", "model")]
+SOURCE = next((path for path in SOURCES if path.exists()), SOURCES[0])
 OUT = HERE / "national"
 MIN_TRAIN, FIRST_TEST, LAST_TEST, LAST_DEVELOPMENT = 8, 2012, 2024, 2020
 MAX_LOG_CHANGE = 0.5

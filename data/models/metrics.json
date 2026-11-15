@@ -1,5 +1,5 @@
 {
- "built_utc": "2026-11-15T03:54Z",
+ "built_utc": "2026-11-15T04:05Z",
  "forecast_year": 2026,
  "us_forecast": {
   "silage": 6314600.0,
@@ -333,6 +333,7 @@
    "response time excludes the imagery download"
   ]
  },
+ "satellite_aggregate_present": false,
  "source_sha256": {
   "state_forecast_2026.csv": "48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a515a514b74538c81a13d2a779a",
   "state_model_metrics.json": "ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b",

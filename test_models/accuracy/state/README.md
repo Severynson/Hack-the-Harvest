@@ -6,11 +6,11 @@ Run from the repository root:
 .venv/bin/python test_models/accuracy/state_candidates.py
 ```
 
-Unchanged source, code and package versions reuse cached outputs; `--force` repeats the same fixed slate. No production files are changed. The source is `test_models/model/out/panel_nov.csv` (2000–2026); rows after 2024 are dropped before feature engineering. Every forecast year from 2012 through 2024 fits outcomes from strictly earlier years. Each year retains all 48 states. Exact calendar joins construct the lags; missing features use medians fitted to training rows only.
+Unchanged source, code and package versions reuse cached outputs; `--force` repeats the same fixed slate. No production files are changed. The source is `test_models/danielModel/out/panel_nov.csv` (2000–2026); rows after 2024 are dropped before feature engineering. Every forecast year from 2012 through 2024 fits outcomes from strictly earlier years. Each year retains all 48 states. Exact calendar joins construct the lags; missing features use medians fitted to training rows only.
 
 ## Result and decision
 
-Keep the existing `nodrift_nass` model. The development-selected LAD model lowers average state WAPE from 13.50% to 13.02% across 2012–2024, but its paired-year gain is only 0.47 percentage points with standard error 0.44. It fails the established improvement threshold of more than two standard errors (0.89 points). Its national total error also worsens. No candidate is promoted.
+Keep the existing long-history `test_models/danielModel/` incumbent, `nodrift_nass`. This is separate from the root `kernelag` report's `reversion_only` model; neither production forecast is changed. The development-selected LAD model lowers average state WAPE from 13.50% to 13.02% across 2012–2024, but its paired-year gain is only 0.47 percentage points with standard error 0.44. It fails the established improvement threshold of more than two standard errors (0.89 points). Its national total error also worsens. No candidate is promoted.
 
 Values below are averages of yearly errors from `summary.csv`. State WAPE is `100 × sum_state(abs(predicted − actual)) / sum_state(actual)`. National absolute error takes the absolute value after summing state errors, allowing opposite state errors to cancel.
 

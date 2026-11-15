@@ -107,15 +107,16 @@ def state_table(totals: pd.DataFrame) -> pd.DataFrame:
     """One row per year from the per-area totals of one state."""
     rows = []
     for year, areas in totals.groupby("year"):
-        areas = areas[areas["corn_acres"] > 0]
-        if areas.empty:
+        assessable = areas[areas["corn_acres"] > 0]
+        if assessable.empty:
             continue
         rows.append({
-            "year": int(year), "areas": len(areas), "fields": int(areas["fields"].sum()),
+            "year": int(year), "areas": len(areas), "assessable_areas": len(assessable),
+            "fields": int(areas["fields"].sum()),
             "assessable_share": round(areas["corn_acres"].sum() / areas["sampled_acres"].sum(), 3),
             "sat_share": round(share(areas), 4),
             "sat_share_calls": round(share(areas, "called_silage_acres"), 4),
-            "share_se": round(jackknife_se(areas), 4),
+            "share_se": round(jackknife_se(assessable), 4),
             "median_peak_doy": float(areas["median_peak_doy"].median()),
             "median_cut_doy": float(areas["median_cut_doy"].median()),
         })
@@ -168,16 +169,14 @@ def main() -> None:
 
     files = [str(p) for p in sorted((data / "samples").glob("corn_*.parquet"))]
     if not files:
-        print("UNCOMPUTED: no state sample files; no satellite aggregate written")
-        return
+        parser.exit(2, "UNCOMPUTED: no state sample files; no satellite aggregate written. Existing cache, if any, was not refreshed.\n")
     model, n_train = fit_field_model()
     print(f"field model fitted on {n_train} Quebec parcels", flush=True)
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
         tables = list(pool.map(score_state, files, [model] * len(files), [args.asof] * len(files)))
     complete = [t for t in tables if len(t)]
     if not complete:
-        print("UNCOMPUTED: no complete, assessable state sample series; no satellite aggregate written")
-        return
+        parser.exit(2, "UNCOMPUTED: no complete, assessable state sample series; no satellite aggregate written. Existing cache, if any, was not refreshed.\n")
     table = pd.concat(complete, ignore_index=True)
 
     summary = pd.read_csv(data / "samples" / "sample_summary.csv", dtype={"state_fips": str})

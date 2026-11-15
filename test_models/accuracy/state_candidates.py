@@ -27,7 +27,8 @@ from xgboost import XGBRegressor
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
-SOURCE = REPO / "test_models/model/out/panel_nov.csv"
+SOURCES = [REPO / "test_models" / name / "out" / "panel_nov.csv" for name in ("danielModel", "model")]
+SOURCE = next((path for path in SOURCES if path.exists()), SOURCES[0])
 OUT = HERE / "state"
 YEARS = tuple(range(2012, 2025))
 CORE = ["reversion", "d_planted", "d_not_grain", "yield_shock"]
