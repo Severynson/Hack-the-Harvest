@@ -28,6 +28,9 @@ SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolat
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 GREENUP_FRAC = 0.5         # green-up = first day NDVI regains this share of (peak - spring low)
 HARVEST_FRAC = 0.5         # harvest = first day after peak NDVI falls below low + this share of amplitude
+PEAK_WINDOW = (170, 260)   # corn peak is searched only in summer, so a spring cover crop peak is ignored
+DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
+FEATURE = "drop_days"      # which feature the single threshold rule uses
 
 # ---------------------------------------------------------------------------
 # Features
@@ -46,10 +49,13 @@ def daily_ndvi(g: pd.DataFrame) -> pd.Series:
 
 def season_features(g: pd.DataFrame) -> dict:
     s = daily_ndvi(g)
-    out = {"greenup_doy": np.nan, "harvest_doy": np.nan, "season_len": np.nan}
+    out = {"greenup_doy": np.nan, "harvest_doy": np.nan, "season_len": np.nan, "drop_days": np.nan}
     if s.empty:
         return out
-    peak_doy = int(s.idxmax())
+    summer = s.loc[PEAK_WINDOW[0] : PEAK_WINDOW[1]]
+    if summer.empty:
+        return out
+    peak_doy = int(summer.idxmax())
     spring = s.loc[SPRING_WINDOW[0] : min(SPRING_WINDOW[1], peak_doy)]
     if spring.empty:
         return out
@@ -60,6 +66,10 @@ def season_features(g: pd.DataFrame) -> dict:
     up = rising[rising >= low + GREENUP_FRAC * amp]
     after = s.loc[peak_doy:]
     down = after[after <= low + HARVEST_FRAC * amp]
+    hi = after[after <= low + DROP_HI * amp]
+    lo = after[after <= low + DROP_LO * amp]
+    if not hi.empty and not lo.empty:
+        out["drop_days"] = int(lo.index[0] - hi.index[0])
     if up.empty or down.empty:
         return out
     out["greenup_doy"] = int(up.index[0])
@@ -103,9 +113,9 @@ def fit_threshold(x, y):
 
 def fit_predict(ts_tr, lab_tr, ts_te, keys_te):
     ftr = featurize(ts_tr, lab_tr).merge(lab_tr[["OBJECTID", "year", "y"]], on=["OBJECTID", "year"])
-    thr = fit_threshold(ftr["season_len"], ftr["y"])
+    thr = fit_threshold(ftr[FEATURE], ftr["y"])
     fte = featurize(ts_te, keys_te)
-    x = fte["season_len"].to_numpy(float)
+    x = fte[FEATURE].to_numpy(float)
     return np.where(np.isfinite(x), x < thr, 0).astype(int)  # missing -> grain (majority class)
 
 
