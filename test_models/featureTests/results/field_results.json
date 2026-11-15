@@ -1,0 +1,2548 @@
+{
+ "generated_utc": "2026-11-15T07:23Z",
+ "decision_rule": "PRE-REGISTERED DECISION RULE: a feature group IMPROVES the field model only if, on E2 qc_regions_loco (leave one Quebec cell out), its change in balanced accuracy versus base is > 0 AND the 90% paired cluster-bootstrap interval (resampling cells) excludes 0. E1 and E3 are supporting evidence only. Maryland (n=44, one farm) is underpowered and never used for selection.",
+ "settings": {
+  "model": "kernelag.field_model.make_model (median imputer, scaler, balanced logistic C=0.5)",
+  "decision_threshold": 0.5,
+  "base_features": [
+   "max_drop",
+   "max_drop_rate",
+   "fade_days",
+   "green_at_cut",
+   "ndmi_before_cut",
+   "ndti_post"
+  ],
+  "block_folds": 5,
+  "draws": 2000,
+  "seed": 0,
+  "interval": [
+   0.05,
+   0.95
+  ],
+  "not_assessable": "scored as grain (field_model.predict_silage semantics)",
+  "versions": {
+   "numpy": "2.4.6",
+   "pandas": "3.1.1",
+   "sklearn": "1.9.1"
+  }
+ },
+ "datasets": {
+  "quebec_maize_2023": {
+   "field_years": 318,
+   "silage": 138,
+   "not_assessable": 0,
+   "cells": 1
+  },
+  "qc_regions_2023": {
+   "field_years": 2810,
+   "silage": 1129,
+   "not_assessable": 0,
+   "cells": 16
+  },
+  "barc_2021_2023": {
+   "field_years": 44,
+   "silage": 12,
+   "not_assessable": 0,
+   "cells": 3
+  }
+ },
+ "sources": {
+  "s2": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  },
+  "group:dairy_balance": {
+   "quebec_maize_2023": "county dairy balance needs dairy cows and corn area by region; the repository has none for Quebec (would need Statistics Canada Census of Agriculture 2021 by census division plus the division boundaries); see README",
+   "qc_regions_2023": "county dairy balance needs dairy cows and corn area by region; the repository has none for Quebec (would need Statistics Canada Census of Agriculture 2021 by census division plus the division boundaries); see README",
+   "barc_2021_2023": "all 34 fields lie in one county (Prince George's, MD, FIPS 24033): the county prior is a single value per year for every field, so it carries no field-level information (county_prior.csv has it for 2023 only; milk cows are withheld for 2021-2022)"
+  },
+  "group:dairydist": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  },
+  "group:gdd": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  },
+  "group:lswi": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  },
+  "radar": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  },
+  "landsat": {
+   "quebec_maize_2023": null,
+   "qc_regions_2023": null,
+   "barc_2021_2023": null
+  }
+ },
+ "groups": [
+  {
+   "key": "dairy_balance",
+   "folder": "dairy_balance",
+   "features": [],
+   "rule": null,
+   "problem": null,
+   "built": [],
+   "uncomputed": {
+    "quebec_maize_2023": "county dairy balance needs dairy cows and corn area by region; the repository has none for Quebec (would need Statistics Canada Census of Agriculture 2021 by census division plus the division boundaries); see README",
+    "qc_regions_2023": "county dairy balance needs dairy cows and corn area by region; the repository has none for Quebec (would need Statistics Canada Census of Agriculture 2021 by census division plus the division boundaries); see README",
+    "barc_2021_2023": "all 34 fields lie in one county (Prince George's, MD, FIPS 24033): the county prior is a single value per year for every field, so it carries no field-level information (county_prior.csv has it for 2023 only; milk cows are withheld for 2021-2022)"
+   },
+   "description": "County dairy feed-demand balance (DOCS/research/dairy_prior.md 8.2). Tested at county and state level in run.py; not a field feature for any labelled dataset.",
+   "inputs": {
+    "meta.json": "b6408ea64d683d38",
+    "features.csv": "9a36e3a7381b8085"
+   }
+  },
+  {
+   "key": "dairydist",
+   "folder": "dairy_distance",
+   "features": [
+    "dairydist_d_dairy_km",
+    "dairydist_n_dairy_18km"
+   ],
+   "rule": "dairydist_rule_dairy_1p5km",
+   "problem": null,
+   "built": [
+    "barc_2021_2023",
+    "qc_regions_2023",
+    "quebec_maize_2023"
+   ],
+   "uncomputed": {
+    "barc_2021_2023": "roll-based columns UNCOMPUTED (NaN): no public registry of dairy sites comparable to the Quebec assessment roll covers Maryland; Climate TRACE lists 39 Maryland dairies from state permit lists, not the research farm's own herd. Climate TRACE columns are built."
+   },
+   "description": "Distance from each maize field to dairy sites of the Quebec property assessment roll (MAMH role d'evaluation fonciere 2023, CC BY 4.0): units with CUBF 8122 'Elevage de bovins laitiers' (legacy 8150), a building value above zero and an accepted point. dairydist_d_dairy_km = km from the field's representative point to the nearest dairy site; dairydist_n_dairy_18km = dairy sites within 18 km; rule = 1 when the nearest dairy site is within 1.5 km. Distances in EPSG:32618. Herd size is UNCOMPUTED (the roll has none). Maryland has no comparable registry: roll-based columns are NaN there. Climate TRACE columns (descriptive) cover every dataset.",
+   "inputs": {
+    "meta.json": "22754815dcdbbca8",
+    "features.csv": "3d32eb514e29c675"
+   }
+  },
+  {
+   "key": "gdd",
+   "folder": "gdd",
+   "features": [
+    "gdd_peak_to_cut",
+    "gdd_share_at_cut"
+   ],
+   "rule": null,
+   "problem": null,
+   "built": [
+    "barc_2021_2023",
+    "qc_regions_2023",
+    "quebec_maize_2023"
+   ],
+   "uncomputed": {},
+   "description": "Optical harvest dates (kernelag.features peak_doy, cut_doy) expressed in thermal time: corn modified GDD in degC-days (base 10, cap 30, both temperatures clipped to 10-30), cumulative from May 1, from Open-Meteo archive daily Tmax/Tmin (ERA5-Land, ERA5 fallback) at each 10 km cell centre. gdd_peak_to_cut = GDD(cut) - GDD(peak); gdd_share_at_cut = GDD(cut) / GDD(May 1-Oct 31). Descriptive only: gdd_at_cut, gdd_season_may_oct. No benchmark rule: the research thresholds are relative to black layer, which no input here observes.",
+   "inputs": {
+    "meta.json": "d8f3d53f86d7da63",
+    "features.csv": "c437d801e82ab21b"
+   }
+  },
+  {
+   "key": "lswi",
+   "folder": "lswi_rule",
+   "features": [
+    "lswi_sep_median",
+    "lswi_sep_min"
+   ],
+   "rule": "lswi_rule_silage",
+   "problem": null,
+   "built": [
+    "barc_2021_2023",
+    "qc_regions_2023",
+    "quebec_maize_2023"
+   ],
+   "uncomputed": {},
+   "description": "Published September moisture rule, Lin et al. 2025 (Agronomy 15(6):1438, TempDiff-SMID, Hohhot): silage if September LSWI <= 0.15, else grain. LSWI = repo ndmi (B8A, B11). Literal port fixed before evaluation: rule = median of clear (valid_frac >= 0.5) Sentinel-2 looks dated 1-30 September <= 0.15; NaN when the field-year has no clear September look. Features: that median and the September minimum. Calendar-bound by design: the paper's thresholds were re-tuned by hand each year and one harvest calendar does not transfer across regions.",
+   "inputs": {
+    "meta.json": "6baba4b63b4c0ea3",
+    "features.csv": "b0aefa7d7ca808d0"
+   }
+  }
+ ],
+ "evaluations": {
+  "qc_cell_blocks": {
+   "label": "E1",
+   "description": "quebec_maize_2023 cell 79_515, 5-fold GroupKFold over 2 km blocks",
+   "train": [
+    "quebec_maize_2023"
+   ],
+   "score": [
+    "quebec_maize_2023"
+   ],
+   "bootstrap_unit": "block",
+   "arms": {
+    "base": {
+     "kind": "model",
+     "sources": [],
+     "description": "field_model path: MODEL_FEATURES on Sentinel-2",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post"
+     ],
+     "coverage_score": {},
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 97,
+      "FP": 53,
+      "FN": 41,
+      "TN": 127,
+      "silage_precision": 0.647,
+      "silage_recall": 0.703,
+      "grain_precision": 0.756,
+      "grain_recall": 0.706,
+      "false_positive_rate": 0.294,
+      "accuracy": 0.704,
+      "silage_f1": 0.674,
+      "balanced_accuracy": 0.704
+     },
+     "notes": [],
+     "reproduced": true,
+     "reference": {
+      "TP": 97,
+      "FP": 53,
+      "FN": 41,
+      "TN": 127
+     }
+    },
+    "base+dairydist": {
+     "kind": "model",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "Distance from each maize field to dairy sites of the Quebec property assessment roll (MAMH role d'evaluation fonciere 2023, CC BY 4.0): units with CUBF 8122 'Elevage de bovins laitiers' (legacy 8150), a building value above zero and an accepted point. dairydist_d_dairy_km = km from the field's representative point to the nearest dairy site; dairydist_n_dairy_18km = dairy sites within 18 km; rule = 1 when the nearest dairy site is within 1.5 km. Distances in EPSG:32618. Herd size is UNCOMPUTED (the roll has none). Maryland has no comparable registry: roll-based columns are NaN there. Climate TRACE columns (descriptive) cover every dataset.",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km"
+     ],
+     "coverage_score": {
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 97,
+      "FP": 48,
+      "FN": 41,
+      "TN": 132,
+      "silage_precision": 0.669,
+      "silage_recall": 0.703,
+      "grain_precision": 0.763,
+      "grain_recall": 0.733,
+      "false_positive_rate": 0.267,
+      "accuracy": 0.72,
+      "silage_f1": 0.686,
+      "balanced_accuracy": 0.718
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0139,
+      "d_balanced_accuracy_ci90": [
+       -0.0215,
+       0.0488
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0119,
+      "d_silage_f1_ci90": [
+       -0.0252,
+       0.0476
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 12,
+       "arm_only_right": 17,
+       "p": 0.4583
+      }
+     }
+    },
+    "rule:dairydist": {
+     "kind": "rule",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "0/1 benchmark call dairydist_rule_dairy_1p5km",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "rule_column": "g:dairydist:dairydist_rule_dairy_1p5km",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 138,
+      "FP": 180,
+      "FN": 0,
+      "TN": 0,
+      "silage_precision": 0.434,
+      "silage_recall": 1.0,
+      "grain_precision": null,
+      "grain_recall": 0.0,
+      "false_positive_rate": 1.0,
+      "accuracy": 0.434,
+      "silage_f1": 0.605,
+      "balanced_accuracy": 0.5
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.2042,
+      "d_balanced_accuracy_ci90": [
+       -0.2533,
+       -0.1566
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0683,
+      "d_silage_f1_ci90": [
+       -0.1375,
+       -0.003
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 127,
+       "arm_only_right": 41,
+       "p": 0.0
+      }
+     }
+    },
+    "base+gdd": {
+     "kind": "model",
+     "sources": [
+      "group:gdd"
+     ],
+     "description": "Optical harvest dates (kernelag.features peak_doy, cut_doy) expressed in thermal time: corn modified GDD in degC-days (base 10, cap 30, both temperatures clipped to 10-30), cumulative from May 1, from Open-Meteo archive daily Tmax/Tmin (ERA5-Land, ERA5 fallback) at each 10 km cell centre. gdd_peak_to_cut = GDD(cut) - GDD(peak); gdd_share_at_cut = GDD(cut) / GDD(May 1-Oct 31). Descriptive only: gdd_at_cut, gdd_season_may_oct. No benchmark rule: the research thresholds are relative to black layer, which no input here observes.",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut"
+     ],
+     "coverage_score": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 99,
+      "FP": 48,
+      "FN": 39,
+      "TN": 132,
+      "silage_precision": 0.673,
+      "silage_recall": 0.717,
+      "grain_precision": 0.772,
+      "grain_recall": 0.733,
+      "false_positive_rate": 0.267,
+      "accuracy": 0.726,
+      "silage_f1": 0.695,
+      "balanced_accuracy": 0.725
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0211,
+      "d_balanced_accuracy_ci90": [
+       0.003,
+       0.0443
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0211,
+      "d_silage_f1_ci90": [
+       -0.0006,
+       0.05
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 2,
+       "arm_only_right": 9,
+       "p": 0.0654
+      }
+     }
+    },
+    "base+lswi": {
+     "kind": "model",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "Published September moisture rule, Lin et al. 2025 (Agronomy 15(6):1438, TempDiff-SMID, Hohhot): silage if September LSWI <= 0.15, else grain. LSWI = repo ndmi (B8A, B11). Literal port fixed before evaluation: rule = median of clear (valid_frac >= 0.5) Sentinel-2 looks dated 1-30 September <= 0.15; NaN when the field-year has no clear September look. Features: that median and the September minimum. Calendar-bound by design: the paper's thresholds were re-tuned by hand each year and one harvest calendar does not transfer across regions.",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min"
+     ],
+     "coverage_score": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 92,
+      "FP": 47,
+      "FN": 46,
+      "TN": 133,
+      "silage_precision": 0.662,
+      "silage_recall": 0.667,
+      "grain_precision": 0.743,
+      "grain_recall": 0.739,
+      "false_positive_rate": 0.261,
+      "accuracy": 0.708,
+      "silage_f1": 0.664,
+      "balanced_accuracy": 0.703
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0014,
+      "d_balanced_accuracy_ci90": [
+       -0.0153,
+       0.0157
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0094,
+      "d_silage_f1_ci90": [
+       -0.0245,
+       0.008
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 6,
+       "arm_only_right": 7,
+       "p": 1.0
+      }
+     }
+    },
+    "rule:lswi": {
+     "kind": "rule",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "0/1 benchmark call lswi_rule_silage",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "rule_column": "g:lswi:lswi_rule_silage",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 10,
+      "FP": 10,
+      "FN": 128,
+      "TN": 170,
+      "silage_precision": 0.5,
+      "silage_recall": 0.072,
+      "grain_precision": 0.57,
+      "grain_recall": 0.944,
+      "false_positive_rate": 0.056,
+      "accuracy": 0.566,
+      "silage_f1": 0.127,
+      "balanced_accuracy": 0.508
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.1958,
+      "d_balanced_accuracy_ci90": [
+       -0.2524,
+       -0.1323
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.547,
+      "d_silage_f1_ci90": [
+       -0.6649,
+       -0.4069
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 101,
+       "arm_only_right": 57,
+       "p": 0.0006
+      }
+     }
+    },
+    "optical:s2+landsat": {
+     "kind": "model",
+     "sources": [
+      "landsat"
+     ],
+     "description": "MODEL_FEATURES on Sentinel-2 + calibrated Landsat looks",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.566,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.453
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 88,
+      "FP": 53,
+      "FN": 50,
+      "TN": 127,
+      "silage_precision": 0.624,
+      "silage_recall": 0.638,
+      "grain_precision": 0.718,
+      "grain_recall": 0.706,
+      "false_positive_rate": 0.294,
+      "accuracy": 0.676,
+      "silage_f1": 0.631,
+      "balanced_accuracy": 0.672
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0326,
+      "d_balanced_accuracy_ci90": [
+       -0.0925,
+       0.0232
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0428,
+      "d_silage_f1_ci90": [
+       -0.1081,
+       0.0165
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 40,
+       "arm_only_right": 31,
+       "p": 0.3425
+      }
+     }
+    },
+    "base+radar": {
+     "kind": "model",
+     "sources": [
+      "radar"
+     ],
+     "description": "MODEL_FEATURES + Sentinel-1 radar features",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "r:radar_lag_days",
+      "r:s1_vh_drop_db",
+      "r:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "r:radar_lag_days": 0.167,
+      "r:s1_vh_drop_db": 0.176,
+      "r:s1_vhvv_before_db": 0.176
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 92,
+      "FP": 54,
+      "FN": 46,
+      "TN": 126,
+      "silage_precision": 0.63,
+      "silage_recall": 0.667,
+      "grain_precision": 0.733,
+      "grain_recall": 0.7,
+      "false_positive_rate": 0.3,
+      "accuracy": 0.686,
+      "silage_f1": 0.648,
+      "balanced_accuracy": 0.683
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0209,
+      "d_balanced_accuracy_ci90": [
+       -0.0539,
+       0.0061
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0257,
+      "d_silage_f1_ci90": [
+       -0.0647,
+       0.0071
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 10,
+       "arm_only_right": 4,
+       "p": 0.1796
+      }
+     }
+    },
+    "all": {
+     "kind": "model",
+     "sources": [
+      "landsat",
+      "group:dairydist",
+      "group:gdd",
+      "group:lswi",
+      "radar"
+     ],
+     "description": "every extra source available for the evaluation",
+     "status": "ok",
+     "n": 318,
+     "assessable": 318,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min",
+      "or:radar_lag_days",
+      "or:s1_vh_drop_db",
+      "or:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.566,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.453,
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.167,
+      "or:s1_vh_drop_db": 0.176,
+      "or:s1_vhvv_before_db": 0.176
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 180,
+      "n_silage": 138,
+      "TP": 78,
+      "FP": 56,
+      "FN": 60,
+      "TN": 124,
+      "silage_precision": 0.582,
+      "silage_recall": 0.565,
+      "grain_precision": 0.674,
+      "grain_recall": 0.689,
+      "false_positive_rate": 0.311,
+      "accuracy": 0.635,
+      "silage_f1": 0.574,
+      "balanced_accuracy": 0.627
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 24,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0772,
+      "d_balanced_accuracy_ci90": [
+       -0.1354,
+       -0.0259
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.1001,
+      "d_silage_f1_ci90": [
+       -0.1716,
+       -0.0417
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 52,
+       "arm_only_right": 30,
+       "p": 0.0198
+      }
+     }
+    }
+   }
+  },
+  "qc_regions_loco": {
+   "label": "E2",
+   "description": "79_515 + 16 regional Quebec cells, leave one cell out (regional transfer)",
+   "train": [
+    "quebec_maize_2023",
+    "qc_regions_2023"
+   ],
+   "score": [
+    "quebec_maize_2023",
+    "qc_regions_2023"
+   ],
+   "bootstrap_unit": "cell",
+   "arms": {
+    "base": {
+     "kind": "model",
+     "sources": [],
+     "description": "field_model path: MODEL_FEATURES on Sentinel-2",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post"
+     ],
+     "coverage_score": {},
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 877,
+      "FP": 345,
+      "FN": 390,
+      "TN": 1516,
+      "silage_precision": 0.718,
+      "silage_recall": 0.692,
+      "grain_precision": 0.795,
+      "grain_recall": 0.815,
+      "false_positive_rate": 0.185,
+      "accuracy": 0.765,
+      "silage_f1": 0.705,
+      "balanced_accuracy": 0.753
+     },
+     "notes": []
+    },
+    "base+dairydist": {
+     "kind": "model",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "Distance from each maize field to dairy sites of the Quebec property assessment roll (MAMH role d'evaluation fonciere 2023, CC BY 4.0): units with CUBF 8122 'Elevage de bovins laitiers' (legacy 8150), a building value above zero and an accepted point. dairydist_d_dairy_km = km from the field's representative point to the nearest dairy site; dairydist_n_dairy_18km = dairy sites within 18 km; rule = 1 when the nearest dairy site is within 1.5 km. Distances in EPSG:32618. Herd size is UNCOMPUTED (the roll has none). Maryland has no comparable registry: roll-based columns are NaN there. Climate TRACE columns (descriptive) cover every dataset.",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km"
+     ],
+     "coverage_score": {
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 864,
+      "FP": 327,
+      "FN": 403,
+      "TN": 1534,
+      "silage_precision": 0.725,
+      "silage_recall": 0.682,
+      "grain_precision": 0.792,
+      "grain_recall": 0.824,
+      "false_positive_rate": 0.176,
+      "accuracy": 0.767,
+      "silage_f1": 0.703,
+      "balanced_accuracy": 0.753
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0003,
+      "d_balanced_accuracy_ci90": [
+       -0.0061,
+       0.0061
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0017,
+      "d_silage_f1_ci90": [
+       -0.0106,
+       0.0066
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 37,
+       "arm_only_right": 42,
+       "p": 0.653
+      }
+     }
+    },
+    "rule:dairydist": {
+     "kind": "rule",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "0/1 benchmark call dairydist_rule_dairy_1p5km",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "rule_column": "g:dairydist:dairydist_rule_dairy_1p5km",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 1128,
+      "FP": 1662,
+      "FN": 139,
+      "TN": 199,
+      "silage_precision": 0.404,
+      "silage_recall": 0.89,
+      "grain_precision": 0.589,
+      "grain_recall": 0.107,
+      "false_positive_rate": 0.893,
+      "accuracy": 0.424,
+      "silage_f1": 0.556,
+      "balanced_accuracy": 0.499
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.2548,
+      "d_balanced_accuracy_ci90": [
+       -0.2967,
+       -0.2078
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.1486,
+      "d_silage_f1_ci90": [
+       -0.2161,
+       -0.0825
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 1416,
+       "arm_only_right": 350,
+       "p": 0.0
+      }
+     }
+    },
+    "base+gdd": {
+     "kind": "model",
+     "sources": [
+      "group:gdd"
+     ],
+     "description": "Optical harvest dates (kernelag.features peak_doy, cut_doy) expressed in thermal time: corn modified GDD in degC-days (base 10, cap 30, both temperatures clipped to 10-30), cumulative from May 1, from Open-Meteo archive daily Tmax/Tmin (ERA5-Land, ERA5 fallback) at each 10 km cell centre. gdd_peak_to_cut = GDD(cut) - GDD(peak); gdd_share_at_cut = GDD(cut) / GDD(May 1-Oct 31). Descriptive only: gdd_at_cut, gdd_season_may_oct. No benchmark rule: the research thresholds are relative to black layer, which no input here observes.",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut"
+     ],
+     "coverage_score": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 877,
+      "FP": 343,
+      "FN": 390,
+      "TN": 1518,
+      "silage_precision": 0.719,
+      "silage_recall": 0.692,
+      "grain_precision": 0.796,
+      "grain_recall": 0.816,
+      "false_positive_rate": 0.184,
+      "accuracy": 0.766,
+      "silage_f1": 0.705,
+      "balanced_accuracy": 0.754
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0005,
+      "d_balanced_accuracy_ci90": [
+       -0.0041,
+       0.0053
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0006,
+      "d_silage_f1_ci90": [
+       -0.0047,
+       0.0059
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 32,
+       "arm_only_right": 34,
+       "p": 0.9022
+      }
+     }
+    },
+    "base+lswi": {
+     "kind": "model",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "Published September moisture rule, Lin et al. 2025 (Agronomy 15(6):1438, TempDiff-SMID, Hohhot): silage if September LSWI <= 0.15, else grain. LSWI = repo ndmi (B8A, B11). Literal port fixed before evaluation: rule = median of clear (valid_frac >= 0.5) Sentinel-2 looks dated 1-30 September <= 0.15; NaN when the field-year has no clear September look. Features: that median and the September minimum. Calendar-bound by design: the paper's thresholds were re-tuned by hand each year and one harvest calendar does not transfer across regions.",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min"
+     ],
+     "coverage_score": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 879,
+      "FP": 326,
+      "FN": 388,
+      "TN": 1535,
+      "silage_precision": 0.729,
+      "silage_recall": 0.694,
+      "grain_precision": 0.798,
+      "grain_recall": 0.825,
+      "false_positive_rate": 0.175,
+      "accuracy": 0.772,
+      "silage_f1": 0.711,
+      "balanced_accuracy": 0.759
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0059,
+      "d_balanced_accuracy_ci90": [
+       0.002,
+       0.0102
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0065,
+      "d_silage_f1_ci90": [
+       0.0013,
+       0.011
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 22,
+       "arm_only_right": 43,
+       "p": 0.0125
+      }
+     }
+    },
+    "rule:lswi": {
+     "kind": "rule",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "0/1 benchmark call lswi_rule_silage",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "rule_column": "g:lswi:lswi_rule_silage",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 192,
+      "FP": 232,
+      "FN": 1075,
+      "TN": 1629,
+      "silage_precision": 0.453,
+      "silage_recall": 0.152,
+      "grain_precision": 0.602,
+      "grain_recall": 0.875,
+      "false_positive_rate": 0.125,
+      "accuracy": 0.582,
+      "silage_f1": 0.227,
+      "balanced_accuracy": 0.513
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.24,
+      "d_balanced_accuracy_ci90": [
+       -0.2759,
+       -0.2008
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.4776,
+      "d_silage_f1_ci90": [
+       -0.5523,
+       -0.4113
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 987,
+       "arm_only_right": 415,
+       "p": 0.0
+      }
+     }
+    },
+    "optical:s2+landsat": {
+     "kind": "model",
+     "sources": [
+      "landsat"
+     ],
+     "description": "MODEL_FEATURES on Sentinel-2 + calibrated Landsat looks",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.703,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.613
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 882,
+      "FP": 306,
+      "FN": 385,
+      "TN": 1555,
+      "silage_precision": 0.742,
+      "silage_recall": 0.696,
+      "grain_precision": 0.802,
+      "grain_recall": 0.836,
+      "false_positive_rate": 0.164,
+      "accuracy": 0.779,
+      "silage_f1": 0.719,
+      "balanced_accuracy": 0.766
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0125,
+      "d_balanced_accuracy_ci90": [
+       0.001,
+       0.0258
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0138,
+      "d_silage_f1_ci90": [
+       0.001,
+       0.027
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 119,
+       "arm_only_right": 163,
+       "p": 0.0103
+      }
+     }
+    },
+    "base+radar": {
+     "kind": "model",
+     "sources": [
+      "radar"
+     ],
+     "description": "MODEL_FEATURES + Sentinel-1 radar features",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "r:radar_lag_days",
+      "r:s1_vh_drop_db",
+      "r:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "r:radar_lag_days": 0.241,
+      "r:s1_vh_drop_db": 0.246,
+      "r:s1_vhvv_before_db": 0.246
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 888,
+      "FP": 346,
+      "FN": 379,
+      "TN": 1515,
+      "silage_precision": 0.72,
+      "silage_recall": 0.701,
+      "grain_precision": 0.8,
+      "grain_recall": 0.814,
+      "false_positive_rate": 0.186,
+      "accuracy": 0.768,
+      "silage_f1": 0.71,
+      "balanced_accuracy": 0.757
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0041,
+      "d_balanced_accuracy_ci90": [
+       -0.0,
+       0.0081
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0054,
+      "d_silage_f1_ci90": [
+       0.0004,
+       0.01
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 22,
+       "arm_only_right": 32,
+       "p": 0.2203
+      }
+     }
+    },
+    "all": {
+     "kind": "model",
+     "sources": [
+      "landsat",
+      "group:dairydist",
+      "group:gdd",
+      "group:lswi",
+      "radar"
+     ],
+     "description": "every extra source available for the evaluation",
+     "status": "ok",
+     "n": 3128,
+     "assessable": 3128,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min",
+      "or:radar_lag_days",
+      "or:s1_vh_drop_db",
+      "or:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.703,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.613,
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.243,
+      "or:s1_vh_drop_db": 0.246,
+      "or:s1_vhvv_before_db": 0.246
+     },
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 1861,
+      "n_silage": 1267,
+      "TP": 873,
+      "FP": 279,
+      "FN": 394,
+      "TN": 1582,
+      "silage_precision": 0.758,
+      "silage_recall": 0.689,
+      "grain_precision": 0.801,
+      "grain_recall": 0.85,
+      "false_positive_rate": 0.15,
+      "accuracy": 0.785,
+      "silage_f1": 0.722,
+      "balanced_accuracy": 0.77
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 17,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0162,
+      "d_balanced_accuracy_ci90": [
+       0.0022,
+       0.033
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0171,
+      "d_silage_f1_ci90": [
+       0.0017,
+       0.0315
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 144,
+       "arm_only_right": 206,
+       "p": 0.0011
+      }
+     }
+    }
+   }
+  },
+  "maryland_transfer": {
+   "label": "E3",
+   "description": "fit on quebec_maize_2023, score all 44 Maryland field-years",
+   "train": [
+    "quebec_maize_2023"
+   ],
+   "score": [
+    "barc_2021_2023"
+   ],
+   "bootstrap_unit": "field_id",
+   "arms": {
+    "base": {
+     "kind": "model",
+     "sources": [],
+     "description": "field_model path: MODEL_FEATURES on Sentinel-2",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post"
+     ],
+     "coverage_score": {},
+     "coverage_train": {},
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 5,
+      "FN": 2,
+      "TN": 27,
+      "silage_precision": 0.667,
+      "silage_recall": 0.833,
+      "grain_precision": 0.931,
+      "grain_recall": 0.844,
+      "false_positive_rate": 0.156,
+      "accuracy": 0.841,
+      "silage_f1": 0.741,
+      "balanced_accuracy": 0.839
+     },
+     "notes": [],
+     "reproduced": true,
+     "reference": {
+      "TP": 10,
+      "FP": 5,
+      "FN": 2,
+      "TN": 27
+     }
+    },
+    "base+dairydist": {
+     "kind": "model",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "Distance from each maize field to dairy sites of the Quebec property assessment roll (MAMH role d'evaluation fonciere 2023, CC BY 4.0): units with CUBF 8122 'Elevage de bovins laitiers' (legacy 8150), a building value above zero and an accepted point. dairydist_d_dairy_km = km from the field's representative point to the nearest dairy site; dairydist_n_dairy_18km = dairy sites within 18 km; rule = 1 when the nearest dairy site is within 1.5 km. Distances in EPSG:32618. Herd size is UNCOMPUTED (the roll has none). Maryland has no comparable registry: roll-based columns are NaN there. Climate TRACE columns (descriptive) cover every dataset.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km"
+     ],
+     "coverage_score": {
+      "g:dairydist:dairydist_d_dairy_km": 0.0,
+      "g:dairydist:dairydist_n_dairy_18km": 0.0
+     },
+     "coverage_train": {
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 5,
+      "FN": 2,
+      "TN": 27,
+      "silage_precision": 0.667,
+      "silage_recall": 0.833,
+      "grain_precision": 0.931,
+      "grain_recall": 0.844,
+      "false_positive_rate": 0.156,
+      "accuracy": 0.841,
+      "silage_f1": 0.741,
+      "balanced_accuracy": 0.839
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0,
+      "d_balanced_accuracy_ci90": [
+       0.0,
+       0.0
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0,
+      "d_silage_f1_ci90": [
+       0.0,
+       0.0
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 0,
+       "p": 1.0
+      }
+     }
+    },
+    "rule:dairydist": {
+     "kind": "rule",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "0/1 benchmark call dairydist_rule_dairy_1p5km",
+     "status": "ok",
+     "n": 44,
+     "assessable": 0,
+     "rule_column": "g:dairydist:dairydist_rule_dairy_1p5km",
+     "coverage_score": 0.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 0,
+      "FP": 0,
+      "FN": 12,
+      "TN": 32,
+      "silage_precision": null,
+      "silage_recall": 0.0,
+      "grain_precision": 0.727,
+      "grain_recall": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.727,
+      "silage_f1": 0.0,
+      "balanced_accuracy": 0.5
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.3385,
+      "d_balanced_accuracy_ci90": [
+       -0.4375,
+       -0.2292
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.7407,
+      "d_silage_f1_ci90": [
+       -0.8696,
+       -0.56
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 10,
+       "arm_only_right": 5,
+       "p": 0.3018
+      }
+     }
+    },
+    "base+gdd": {
+     "kind": "model",
+     "sources": [
+      "group:gdd"
+     ],
+     "description": "Optical harvest dates (kernelag.features peak_doy, cut_doy) expressed in thermal time: corn modified GDD in degC-days (base 10, cap 30, both temperatures clipped to 10-30), cumulative from May 1, from Open-Meteo archive daily Tmax/Tmin (ERA5-Land, ERA5 fallback) at each 10 km cell centre. gdd_peak_to_cut = GDD(cut) - GDD(peak); gdd_share_at_cut = GDD(cut) / GDD(May 1-Oct 31). Descriptive only: gdd_at_cut, gdd_season_may_oct. No benchmark rule: the research thresholds are relative to black layer, which no input here observes.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut"
+     ],
+     "coverage_score": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "coverage_train": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 6,
+      "FN": 1,
+      "TN": 26,
+      "silage_precision": 0.647,
+      "silage_recall": 0.917,
+      "grain_precision": 0.963,
+      "grain_recall": 0.812,
+      "false_positive_rate": 0.188,
+      "accuracy": 0.841,
+      "silage_f1": 0.759,
+      "balanced_accuracy": 0.865
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.026,
+      "d_balanced_accuracy_ci90": [
+       -0.0323,
+       0.1051
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0179,
+      "d_silage_f1_ci90": [
+       -0.0641,
+       0.1091
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 1,
+       "arm_only_right": 1,
+       "p": 1.0
+      }
+     }
+    },
+    "base+lswi": {
+     "kind": "model",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "Published September moisture rule, Lin et al. 2025 (Agronomy 15(6):1438, TempDiff-SMID, Hohhot): silage if September LSWI <= 0.15, else grain. LSWI = repo ndmi (B8A, B11). Literal port fixed before evaluation: rule = median of clear (valid_frac >= 0.5) Sentinel-2 looks dated 1-30 September <= 0.15; NaN when the field-year has no clear September look. Features: that median and the September minimum. Calendar-bound by design: the paper's thresholds were re-tuned by hand each year and one harvest calendar does not transfer across regions.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min"
+     ],
+     "coverage_score": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "coverage_train": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 3,
+      "FN": 1,
+      "TN": 29,
+      "silage_precision": 0.786,
+      "silage_recall": 0.917,
+      "grain_precision": 0.967,
+      "grain_recall": 0.906,
+      "false_positive_rate": 0.094,
+      "accuracy": 0.909,
+      "silage_f1": 0.846,
+      "balanced_accuracy": 0.911
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0729,
+      "d_balanced_accuracy_ci90": [
+       0.0101,
+       0.1568
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.1054,
+      "d_silage_f1_ci90": [
+       0.0192,
+       0.2167
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 3,
+       "p": 0.25
+      }
+     }
+    },
+    "rule:lswi": {
+     "kind": "rule",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "0/1 benchmark call lswi_rule_silage",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "rule_column": "g:lswi:lswi_rule_silage",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 18,
+      "FN": 1,
+      "TN": 14,
+      "silage_precision": 0.379,
+      "silage_recall": 0.917,
+      "grain_precision": 0.933,
+      "grain_recall": 0.438,
+      "false_positive_rate": 0.562,
+      "accuracy": 0.568,
+      "silage_f1": 0.537,
+      "balanced_accuracy": 0.677
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.1615,
+      "d_balanced_accuracy_ci90": [
+       -0.3182,
+       -0.0074
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.2042,
+      "d_silage_f1_ci90": [
+       -0.3864,
+       -0.0244
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 18,
+       "arm_only_right": 6,
+       "p": 0.0227
+      }
+     }
+    },
+    "optical:s2+landsat": {
+     "kind": "model",
+     "sources": [
+      "landsat"
+     ],
+     "description": "MODEL_FEATURES on Sentinel-2 + calibrated Landsat looks",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.955,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.932
+     },
+     "coverage_train": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.566,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.453
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 1,
+      "FN": 1,
+      "TN": 31,
+      "silage_precision": 0.917,
+      "silage_recall": 0.917,
+      "grain_precision": 0.969,
+      "grain_recall": 0.969,
+      "false_positive_rate": 0.031,
+      "accuracy": 0.955,
+      "silage_f1": 0.917,
+      "balanced_accuracy": 0.943
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.1042,
+      "d_balanced_accuracy_ci90": [
+       0.0312,
+       0.197
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.1759,
+      "d_silage_f1_ci90": [
+       0.0664,
+       0.3259
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 5,
+       "p": 0.0625
+      }
+     }
+    },
+    "base+radar": {
+     "kind": "model",
+     "sources": [
+      "radar"
+     ],
+     "description": "MODEL_FEATURES + Sentinel-1 radar features",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "r:radar_lag_days",
+      "r:s1_vh_drop_db",
+      "r:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "r:radar_lag_days": 0.477,
+      "r:s1_vh_drop_db": 0.477,
+      "r:s1_vhvv_before_db": 0.477
+     },
+     "coverage_train": {
+      "r:radar_lag_days": 0.167,
+      "r:s1_vh_drop_db": 0.176,
+      "r:s1_vhvv_before_db": 0.176
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 5,
+      "FN": 2,
+      "TN": 27,
+      "silage_precision": 0.667,
+      "silage_recall": 0.833,
+      "grain_precision": 0.931,
+      "grain_recall": 0.844,
+      "false_positive_rate": 0.156,
+      "accuracy": 0.841,
+      "silage_f1": 0.741,
+      "balanced_accuracy": 0.839
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0,
+      "d_balanced_accuracy_ci90": [
+       0.0,
+       0.0
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0,
+      "d_silage_f1_ci90": [
+       0.0,
+       0.0
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 0,
+       "p": 1.0
+      }
+     }
+    },
+    "all": {
+     "kind": "model",
+     "sources": [
+      "landsat",
+      "group:dairydist",
+      "group:gdd",
+      "group:lswi",
+      "radar"
+     ],
+     "description": "every extra source available for the evaluation",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min",
+      "or:radar_lag_days",
+      "or:s1_vh_drop_db",
+      "or:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.955,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.932,
+      "g:dairydist:dairydist_d_dairy_km": 0.0,
+      "g:dairydist:dairydist_n_dairy_18km": 0.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.455,
+      "or:s1_vh_drop_db": 0.477,
+      "or:s1_vhvv_before_db": 0.477
+     },
+     "coverage_train": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.566,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.453,
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.167,
+      "or:s1_vh_drop_db": 0.176,
+      "or:s1_vhvv_before_db": 0.176
+     },
+     "train_rows_assessable": 318,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 7,
+      "FP": 0,
+      "FN": 5,
+      "TN": 32,
+      "silage_precision": 1.0,
+      "silage_recall": 0.583,
+      "grain_precision": 0.865,
+      "grain_recall": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.886,
+      "silage_f1": 0.737,
+      "balanced_accuracy": 0.792
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0469,
+      "d_balanced_accuracy_ci90": [
+       -0.1992,
+       0.1094
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0039,
+      "d_silage_f1_ci90": [
+       -0.2574,
+       0.2381
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 4,
+       "arm_only_right": 6,
+       "p": 0.7539
+      }
+     }
+    }
+   }
+  },
+  "maryland_transfer_allqc": {
+   "label": "E3b",
+   "description": "fit on all 17 Quebec cells, score all 44 Maryland field-years",
+   "train": [
+    "quebec_maize_2023",
+    "qc_regions_2023"
+   ],
+   "score": [
+    "barc_2021_2023"
+   ],
+   "bootstrap_unit": "field_id",
+   "arms": {
+    "base": {
+     "kind": "model",
+     "sources": [],
+     "description": "field_model path: MODEL_FEATURES on Sentinel-2",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post"
+     ],
+     "coverage_score": {},
+     "coverage_train": {},
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 4,
+      "FN": 2,
+      "TN": 28,
+      "silage_precision": 0.714,
+      "silage_recall": 0.833,
+      "grain_precision": 0.933,
+      "grain_recall": 0.875,
+      "false_positive_rate": 0.125,
+      "accuracy": 0.864,
+      "silage_f1": 0.769,
+      "balanced_accuracy": 0.854
+     },
+     "notes": []
+    },
+    "base+dairydist": {
+     "kind": "model",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "Distance from each maize field to dairy sites of the Quebec property assessment roll (MAMH role d'evaluation fonciere 2023, CC BY 4.0): units with CUBF 8122 'Elevage de bovins laitiers' (legacy 8150), a building value above zero and an accepted point. dairydist_d_dairy_km = km from the field's representative point to the nearest dairy site; dairydist_n_dairy_18km = dairy sites within 18 km; rule = 1 when the nearest dairy site is within 1.5 km. Distances in EPSG:32618. Herd size is UNCOMPUTED (the roll has none). Maryland has no comparable registry: roll-based columns are NaN there. Climate TRACE columns (descriptive) cover every dataset.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km"
+     ],
+     "coverage_score": {
+      "g:dairydist:dairydist_d_dairy_km": 0.0,
+      "g:dairydist:dairydist_n_dairy_18km": 0.0
+     },
+     "coverage_train": {
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 4,
+      "FN": 2,
+      "TN": 28,
+      "silage_precision": 0.714,
+      "silage_recall": 0.833,
+      "grain_precision": 0.933,
+      "grain_recall": 0.875,
+      "false_positive_rate": 0.125,
+      "accuracy": 0.864,
+      "silage_f1": 0.769,
+      "balanced_accuracy": 0.854
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0,
+      "d_balanced_accuracy_ci90": [
+       0.0,
+       0.0
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0,
+      "d_silage_f1_ci90": [
+       0.0,
+       0.0
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 0,
+       "p": 1.0
+      }
+     }
+    },
+    "rule:dairydist": {
+     "kind": "rule",
+     "sources": [
+      "group:dairydist"
+     ],
+     "description": "0/1 benchmark call dairydist_rule_dairy_1p5km",
+     "status": "ok",
+     "n": 44,
+     "assessable": 0,
+     "rule_column": "g:dairydist:dairydist_rule_dairy_1p5km",
+     "coverage_score": 0.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 0,
+      "FP": 0,
+      "FN": 12,
+      "TN": 32,
+      "silage_precision": null,
+      "silage_recall": 0.0,
+      "grain_precision": 0.727,
+      "grain_recall": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.727,
+      "silage_f1": 0.0,
+      "balanced_accuracy": 0.5
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.3542,
+      "d_balanced_accuracy_ci90": [
+       -0.4495,
+       -0.2446
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.7692,
+      "d_silage_f1_ci90": [
+       -0.8967,
+       -0.5924
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 10,
+       "arm_only_right": 4,
+       "p": 0.1796
+      }
+     }
+    },
+    "base+gdd": {
+     "kind": "model",
+     "sources": [
+      "group:gdd"
+     ],
+     "description": "Optical harvest dates (kernelag.features peak_doy, cut_doy) expressed in thermal time: corn modified GDD in degC-days (base 10, cap 30, both temperatures clipped to 10-30), cumulative from May 1, from Open-Meteo archive daily Tmax/Tmin (ERA5-Land, ERA5 fallback) at each 10 km cell centre. gdd_peak_to_cut = GDD(cut) - GDD(peak); gdd_share_at_cut = GDD(cut) / GDD(May 1-Oct 31). Descriptive only: gdd_at_cut, gdd_season_may_oct. No benchmark rule: the research thresholds are relative to black layer, which no input here observes.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut"
+     ],
+     "coverage_score": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "coverage_train": {
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 3,
+      "FN": 2,
+      "TN": 29,
+      "silage_precision": 0.769,
+      "silage_recall": 0.833,
+      "grain_precision": 0.935,
+      "grain_recall": 0.906,
+      "false_positive_rate": 0.094,
+      "accuracy": 0.886,
+      "silage_f1": 0.8,
+      "balanced_accuracy": 0.87
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0156,
+      "d_balanced_accuracy_ci90": [
+       0.0,
+       0.0455
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.0308,
+      "d_silage_f1_ci90": [
+       0.0,
+       0.0952
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 1,
+       "p": 1.0
+      }
+     }
+    },
+    "base+lswi": {
+     "kind": "model",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "Published September moisture rule, Lin et al. 2025 (Agronomy 15(6):1438, TempDiff-SMID, Hohhot): silage if September LSWI <= 0.15, else grain. LSWI = repo ndmi (B8A, B11). Literal port fixed before evaluation: rule = median of clear (valid_frac >= 0.5) Sentinel-2 looks dated 1-30 September <= 0.15; NaN when the field-year has no clear September look. Features: that median and the September minimum. Calendar-bound by design: the paper's thresholds were re-tuned by hand each year and one harvest calendar does not transfer across regions.",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min"
+     ],
+     "coverage_score": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "coverage_train": {
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 10,
+      "FP": 5,
+      "FN": 2,
+      "TN": 27,
+      "silage_precision": 0.667,
+      "silage_recall": 0.833,
+      "grain_precision": 0.931,
+      "grain_recall": 0.844,
+      "false_positive_rate": 0.156,
+      "accuracy": 0.841,
+      "silage_f1": 0.741,
+      "balanced_accuracy": 0.839
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.0156,
+      "d_balanced_accuracy_ci90": [
+       -0.0469,
+       0.0
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0285,
+      "d_silage_f1_ci90": [
+       -0.0802,
+       0.0
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 1,
+       "arm_only_right": 0,
+       "p": 1.0
+      }
+     }
+    },
+    "rule:lswi": {
+     "kind": "rule",
+     "sources": [
+      "group:lswi"
+     ],
+     "description": "0/1 benchmark call lswi_rule_silage",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "rule_column": "g:lswi:lswi_rule_silage",
+     "coverage_score": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 18,
+      "FN": 1,
+      "TN": 14,
+      "silage_precision": 0.379,
+      "silage_recall": 0.917,
+      "grain_precision": 0.933,
+      "grain_recall": 0.438,
+      "false_positive_rate": 0.562,
+      "accuracy": 0.568,
+      "silage_f1": 0.537,
+      "balanced_accuracy": 0.677
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": -0.1771,
+      "d_balanced_accuracy_ci90": [
+       -0.3267,
+       -0.0274
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.2326,
+      "d_silage_f1_ci90": [
+       -0.419,
+       -0.0511
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 18,
+       "arm_only_right": 5,
+       "p": 0.0106
+      }
+     }
+    },
+    "optical:s2+landsat": {
+     "kind": "model",
+     "sources": [
+      "landsat"
+     ],
+     "description": "MODEL_FEATURES on Sentinel-2 + calibrated Landsat looks",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.955,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.932
+     },
+     "coverage_train": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.703,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.613
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 2,
+      "FN": 1,
+      "TN": 30,
+      "silage_precision": 0.846,
+      "silage_recall": 0.917,
+      "grain_precision": 0.968,
+      "grain_recall": 0.938,
+      "false_positive_rate": 0.062,
+      "accuracy": 0.932,
+      "silage_f1": 0.88,
+      "balanced_accuracy": 0.927
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0729,
+      "d_balanced_accuracy_ci90": [
+       0.0125,
+       0.1566
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.1108,
+      "d_silage_f1_ci90": [
+       0.0254,
+       0.2333
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 0,
+       "arm_only_right": 3,
+       "p": 0.25
+      }
+     }
+    },
+    "base+radar": {
+     "kind": "model",
+     "sources": [
+      "radar"
+     ],
+     "description": "MODEL_FEATURES + Sentinel-1 radar features",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post",
+      "r:radar_lag_days",
+      "r:s1_vh_drop_db",
+      "r:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "r:radar_lag_days": 0.477,
+      "r:s1_vh_drop_db": 0.477,
+      "r:s1_vhvv_before_db": 0.477
+     },
+     "coverage_train": {
+      "r:radar_lag_days": 0.241,
+      "r:s1_vh_drop_db": 0.246,
+      "r:s1_vhvv_before_db": 0.246
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 6,
+      "FN": 1,
+      "TN": 26,
+      "silage_precision": 0.647,
+      "silage_recall": 0.917,
+      "grain_precision": 0.963,
+      "grain_recall": 0.812,
+      "false_positive_rate": 0.188,
+      "accuracy": 0.841,
+      "silage_f1": 0.759,
+      "balanced_accuracy": 0.865
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0104,
+      "d_balanced_accuracy_ci90": [
+       -0.0556,
+       0.0955
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": -0.0106,
+      "d_silage_f1_ci90": [
+       -0.1075,
+       0.0962
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 2,
+       "arm_only_right": 1,
+       "p": 1.0
+      }
+     }
+    },
+    "all": {
+     "kind": "model",
+     "sources": [
+      "landsat",
+      "group:dairydist",
+      "group:gdd",
+      "group:lswi",
+      "radar"
+     ],
+     "description": "every extra source available for the evaluation",
+     "status": "ok",
+     "n": 44,
+     "assessable": 44,
+     "features": [
+      "o:max_drop",
+      "o:max_drop_rate",
+      "o:fade_days",
+      "o:green_at_cut",
+      "o:ndmi_before_cut",
+      "o:ndti_post",
+      "g:dairydist:dairydist_d_dairy_km",
+      "g:dairydist:dairydist_n_dairy_18km",
+      "g:gdd:gdd_peak_to_cut",
+      "g:gdd:gdd_share_at_cut",
+      "g:lswi:lswi_sep_median",
+      "g:lswi:lswi_sep_min",
+      "or:radar_lag_days",
+      "or:s1_vh_drop_db",
+      "or:s1_vhvv_before_db"
+     ],
+     "coverage_score": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.955,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.932,
+      "g:dairydist:dairydist_d_dairy_km": 0.0,
+      "g:dairydist:dairydist_n_dairy_18km": 0.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.455,
+      "or:s1_vh_drop_db": 0.477,
+      "or:s1_vhvv_before_db": 0.477
+     },
+     "coverage_train": {
+      "o:max_drop": 1.0,
+      "o:max_drop_rate": 1.0,
+      "o:fade_days": 0.703,
+      "o:green_at_cut": 1.0,
+      "o:ndmi_before_cut": 1.0,
+      "o:ndti_post": 0.613,
+      "g:dairydist:dairydist_d_dairy_km": 1.0,
+      "g:dairydist:dairydist_n_dairy_18km": 1.0,
+      "g:gdd:gdd_peak_to_cut": 1.0,
+      "g:gdd:gdd_share_at_cut": 1.0,
+      "g:lswi:lswi_sep_median": 1.0,
+      "g:lswi:lswi_sep_min": 1.0,
+      "or:radar_lag_days": 0.243,
+      "or:s1_vh_drop_db": 0.246,
+      "or:s1_vhvv_before_db": 0.246
+     },
+     "train_rows_assessable": 3128,
+     "landsat_looks_share": 1.0,
+     "metrics": {
+      "n_grain": 32,
+      "n_silage": 12,
+      "TP": 11,
+      "FP": 2,
+      "FN": 1,
+      "TN": 30,
+      "silage_precision": 0.846,
+      "silage_recall": 0.917,
+      "grain_precision": 0.968,
+      "grain_recall": 0.938,
+      "false_positive_rate": 0.062,
+      "accuracy": 0.932,
+      "silage_f1": 0.88,
+      "balanced_accuracy": 0.927
+     },
+     "notes": [],
+     "vs_base": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0729,
+      "d_balanced_accuracy_ci90": [
+       0.0,
+       0.1645
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.1108,
+      "d_silage_f1_ci90": [
+       0.0,
+       0.2607
+      ],
+      "silage_f1_draws_used": 2000,
+      "mcnemar": {
+       "base_only_right": 1,
+       "arm_only_right": 4,
+       "p": 0.375
+      }
+     }
+    }
+   }
+  }
+ },
+ "decisions": {
+  "base+dairydist": "NO IMPROVEMENT SHOWN",
+  "rule:dairydist": "WORSE (E2 interval below 0)",
+  "base+gdd": "NO IMPROVEMENT SHOWN",
+  "base+lswi": "IMPROVES",
+  "rule:lswi": "WORSE (E2 interval below 0)",
+  "optical:s2+landsat": "IMPROVES",
+  "base+radar": "NO IMPROVEMENT SHOWN",
+  "all": "IMPROVES"
+ }
+}

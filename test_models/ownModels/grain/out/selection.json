@@ -1,0 +1,83 @@
+{
+ "selection": {
+  "nov": {
+   "asof": "nov",
+   "period": "2012-2024",
+   "n_years": 13,
+   "mean_state_wape_pct": {
+    "g1_fsa_ratio": 2.1469,
+    "g2_fsa_planted_share": 2.2409,
+    "g3_fsa_ratio_multi": 1.9378,
+    "g4_fsa_plus_stress": 2.1468,
+    "g5_fsa_ratio_vintage": 2.2405
+   },
+   "best": "g3_fsa_ratio_multi",
+   "simplest": "g1_fsa_ratio",
+   "mean_gain_vs_simplest_pts": 0.2090652414244315,
+   "se_pts": 0.09873039557927829,
+   "two_se_pts": 0.19746079115855658,
+   "selected": "g3_fsa_ratio_multi",
+   "reason": "beats the simplest candidate by more than 2 SE"
+  },
+  "oct": {
+   "asof": "oct",
+   "period": "2012-2024",
+   "n_years": 13,
+   "mean_state_wape_pct": {
+    "g1_fsa_ratio": 2.2213,
+    "g2_fsa_planted_share": 2.3166,
+    "g3_fsa_ratio_multi": 1.9862,
+    "g4_fsa_plus_stress": 2.2371,
+    "g5_fsa_ratio_vintage": 2.3453
+   },
+   "best": "g3_fsa_ratio_multi",
+   "simplest": "g1_fsa_ratio",
+   "mean_gain_vs_simplest_pts": 0.23506825181689012,
+   "se_pts": 0.10082009203163424,
+   "two_se_pts": 0.20164018406326847,
+   "selected": "g3_fsa_ratio_multi",
+   "reason": "beats the simplest candidate by more than 2 SE"
+  },
+  "sep": {
+   "asof": "sep",
+   "period": "2012-2024",
+   "n_years": 13,
+   "mean_state_wape_pct": {
+    "g1_fsa_ratio": 2.2601,
+    "g2_fsa_planted_share": 2.346,
+    "g3_fsa_ratio_multi": 2.0371,
+    "g4_fsa_plus_stress": 2.2603,
+    "g5_fsa_ratio_vintage": 2.3682
+   },
+   "best": "g3_fsa_ratio_multi",
+   "simplest": "g1_fsa_ratio",
+   "mean_gain_vs_simplest_pts": 0.22301453568379687,
+   "se_pts": 0.10291427463115198,
+   "two_se_pts": 0.20582854926230396,
+   "selected": "g3_fsa_ratio_multi",
+   "reason": "beats the simplest candidate by more than 2 SE"
+  }
+ },
+ "intervals": {
+  "state_80_coverage_leave_one_year_out": 0.792,
+  "us_log_error_rms": 0.0141,
+  "size_class_edges_acres": [
+   270000.0,
+   1323333.3333333326
+  ],
+  "log_error_q10_q90_by_class": {
+   "0": [
+    -0.1819,
+    0.2
+   ],
+   "1": [
+    -0.062,
+    0.0433
+   ],
+   "2": [
+    -0.0386,
+    0.0342
+   ]
+  }
+ }
+}

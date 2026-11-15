@@ -1,0 +1,33 @@
+{
+ "utc": "2026-11-15T07:47:09+00:00",
+ "preregistration": {
+  "sha256_now": "ef4f4014f38299f64818e685024265df2f955c4a9dd5a48a53d8f8ab29d54e80",
+  "sha256_stored": "ef4f4014f38299f64818e685024265df2f955c4a9dd5a48a53d8f8ab29d54e80",
+  "unchanged": true
+ },
+ "selected": "c5b_residual_fsa_planted_pre_june",
+ "interval_coverage_leave_one_year_out": {
+  "80": 0.788,
+  "90": 0.896
+ },
+ "fsa_2026_file": {
+  "year": 2026,
+  "asof": "2026-11-15",
+  "current_zip_name": "Wrcdk92KC1587MaHom35213.zip",
+  "current_data_as_of": "2026-11-05",
+  "current_assumed_published": "2026-11-10",
+  "current_vintage": "nov",
+  "prior_final_zip_name": "DoISjehvQfz9.ZIP",
+  "prior_final_data_as_of": "2026-01-05",
+  "prior_final_assumed_published": "2026-01-12",
+  "prior_final_vintage": "final",
+  "asof_key": "nov",
+  "nass_planted_vintages": "{\"sep\": 48}"
+ },
+ "caveats": [
+  "NASS in-season planted for 2012-2017 is the March Prospective Plantings figure only (no June or later state vintage in the repo's Quick Stats pull for those years)",
+  "NASS finals, milk cows and RMA files are today's vintage (mild look-ahead)",
+  "FSA publication dates before 2025 are assumed (data date + 5 days)",
+  "2026 NASS planted is the September vintage: the October 2026 report is not in the repo"
+ ]
+}

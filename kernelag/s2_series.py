@@ -29,6 +29,20 @@ from kernelag.paths import data_dir, record_in_manifest
 STAC_URL = "https://planetarycomputer.microsoft.com/api/stac/v1"
 SOURCE_URL = "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"
 BANDS = ["B04", "B08", "B8A", "B11", "B12", "SCL"]
+# Optional second source: Element 84 Earth Search, the AWS Open Data copy of ESA's reprocessed Collection 1 L2A
+# (listed next to Planetary Computer in the organizers' geospatial references). Same bands under common names,
+# no signing. Chosen with KERNEL_S2_SOURCE=earthsearch, e.g. when Planetary Computer throttles a large pull.
+# Collection 1 is processing baseline 05.x everywhere, so _s2_offset removes the same 1000 counts.
+EARTH_SEARCH = {"stac": "https://earth-search.aws.element84.com/v1", "collection": "sentinel-2-c1-l2a",
+                "source_url": "https://registry.opendata.aws/sentinel-2-l2a-cogs/",
+                "assets": {"B04": "red", "B08": "nir", "B8A": "nir08", "B11": "swir16", "B12": "swir22", "SCL": "scl"}}
+
+
+MIN_SEASON_SCENES = 10        # fewer Collection 1 scenes than this in a season means that year is not published
+
+
+def _source() -> str:
+    return os.environ.get("KERNEL_S2_SOURCE", "pc").lower()
 SEASON = ("05-01", "11-30")   # May catches green-up and the peak; November shows what is left
 MAX_SCENE_CLOUD = 70          # loose at scene level; the per-pixel mask does the real cloud work
 CLEAR_SCL = [4, 5, 6, 7]      # vegetation, bare soil, water, unclassified
@@ -74,18 +88,33 @@ def _open_cube(fields_utm, year: int):
     from odc.stac import configure_rio, load
     from pystac_client import Client
 
-    catalog = Client.open(STAC_URL, modifier=planetary_computer.sign_inplace)
     bbox = tuple(fields_utm.to_crs("EPSG:4326").total_bounds)
-    items = list(catalog.search(
-        collections=["sentinel-2-l2a"], bbox=bbox,
-        datetime=f"{year}-{SEASON[0]}/{year}-{SEASON[1]}",
-        query={"eo:cloud_cover": {"lt": MAX_SCENE_CLOUD}},
-    ).item_collection())
+
+    def search(catalog, collection):
+        return list(catalog.search(
+            collections=[collection], bbox=bbox,
+            datetime=f"{year}-{SEASON[0]}/{year}-{SEASON[1]}",
+            query={"eo:cloud_cover": {"lt": MAX_SCENE_CLOUD}},
+        ).item_collection())
+
+    earth_search = _source() == "earthsearch"
+    items = search(Client.open(EARTH_SEARCH["stac"]), EARTH_SEARCH["collection"]) if earth_search else []
+    if earth_search and len(items) < MIN_SEASON_SCENES:
+        # Collection 1 has not been published for every year (2022 has 0-2 scenes where a season has 80-170),
+        # so that cell-year comes from Planetary Computer; the two agree to about 0.004 NDVI (BARC 2021, 2023).
+        print(f"only {len(items)} Collection 1 scenes for {year}; using Planetary Computer for this cell-year",
+              flush=True)
+        earth_search = False
+    if not earth_search:
+        items = search(Client.open(STAC_URL, modifier=planetary_computer.sign_inplace), "sentinel-2-l2a")
     if not items:
         return items, None
     configure_rio(cloud_defaults=True)  # skip directory listings on every remote file open
-    cube = load(items, bands=BANDS, bbox=bbox, crs=fields_utm.crs, resolution=RESOLUTION_M,
+    assets = [EARTH_SEARCH["assets"][b] for b in BANDS] if earth_search else BANDS
+    cube = load(items, bands=assets, bbox=bbox, crs=fields_utm.crs, resolution=RESOLUTION_M,
                 groupby="solar_day", chunks={})  # lazy: nothing is read yet
+    if earth_search:   # back to the band names the rest of this module uses
+        cube = cube.rename({EARTH_SEARCH["assets"][b]: b for b in BANDS})
     return items, cube
 
 
@@ -168,9 +197,17 @@ def _field_medians(scene, zones, in_field, field_ids, date, year, offsets):
     return out.drop(columns="zone")
 
 
-def series_for_fields(fields, name: str, cells: list[str] | None = None, force: bool = False) -> pd.DataFrame:
-    """Series for a table of fields with ``field_id``, ``year`` and geometry. One cached file per cell-year."""
-    out_dir = data_dir() / "s2_series" / name
+def series_for_fields(fields, name: str, cells: list[str] | None = None, force: bool = False, *,
+                      folder: str = "s2_series", cell_fn=None, columns: list[str] | None = None,
+                      source_url: str = SOURCE_URL) -> pd.DataFrame:
+    """Series for a table of fields with ``field_id``, ``year`` and geometry. One cached file per cell-year.
+
+    The defaults are the Sentinel-2 pull. The Landsat and Sentinel-1 pullers reuse this loop with
+    their own ``folder`` (under ``data/``), ``cell_fn(fields_utm, year)``, ``columns`` and ``source_url``.
+    """
+    cell_fn = cell_fn or cell_series
+    columns = columns or COLUMNS
+    out_dir = data_dir() / folder / name
     out_dir.mkdir(parents=True, exist_ok=True)
     utm = assign_cells(fields)
     parts = []
@@ -181,13 +218,13 @@ def series_for_fields(fields, name: str, cells: list[str] | None = None, force: 
         if part_file.exists() and not force:
             part = pd.read_csv(part_file, parse_dates=["date"])
         else:
-            part = cell_series(group, int(year))
+            part = cell_fn(group, int(year))
             if len(part) == 0:
-                part = pd.DataFrame(columns=COLUMNS)   # keep the header so the file reads back
+                part = pd.DataFrame(columns=columns)   # keep the header so the file reads back
             unfinished = part_file.with_suffix(".part")
             part.to_csv(unfinished, index=False, lineterminator="\n")
             os.replace(unfinished, part_file)          # a stopped run never leaves half a file
-            record_in_manifest(part_file, SOURCE_URL)
+            record_in_manifest(part_file, source_url)
         print(f"cell {cell} {year}: {len(group)} fields, {len(part)} field-dates", flush=True)
         parts.append(part)
     return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
@@ -200,8 +237,13 @@ def densest_cells(fields, n: int, by: str = "label", value: str = "silage") -> l
     return counts.head(n).index.tolist()
 
 
-def pull_cells_in_parallel(fields_path: str, cells: list[str], workers: int) -> None:
-    """One process per cell, ``workers`` at a time. Finished cell-years are kept, so it resumes."""
+def pull_cells_in_parallel(fields_path: str, cells: list[str], workers: int,
+                           module: str = "kernelag.s2_series") -> None:
+    """One process per cell, ``workers`` at a time. Finished cell-years are kept, so it resumes.
+
+    ``module`` is the puller to run per cell (``kernelag.landsat_series`` and ``kernelag.s1_series``
+    take the same arguments as this one).
+    """
     import subprocess
     import sys
     from concurrent.futures import ThreadPoolExecutor
@@ -209,7 +251,7 @@ def pull_cells_in_parallel(fields_path: str, cells: list[str], workers: int) -> 
     environment = {**os.environ, "KERNEL_NO_MANIFEST": "1", "KERNEL_READ_THREADS": "16"}
 
     def run(cell: str) -> str:
-        done = subprocess.run([sys.executable, "-m", "kernelag.s2_series", "--fields", fields_path,
+        done = subprocess.run([sys.executable, "-m", module, "--fields", fields_path,
                                f"--only-cells={cell}"], capture_output=True, text=True, env=environment)
         lines = [line for line in done.stdout.splitlines() if line.startswith("cell ")]
         return "\n".join(lines) if done.returncode == 0 else f"cell {cell}: FAILED\n{done.stderr[-400:]}"
@@ -240,7 +282,8 @@ def main() -> None:
     if args.parallel > 1:
         cells = chosen if chosen is not None else sorted(assign_cells(fields)["cell"].unique())
         pull_cells_in_parallel(args.fields, cells, args.parallel)
-    table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force)
+    source_url = EARTH_SEARCH["source_url"] if _source() == "earthsearch" else SOURCE_URL
+    table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force, source_url=source_url)
     print(f"{len(table)} field-dates for {table['field_id'].nunique() if len(table) else 0} fields")
 
 

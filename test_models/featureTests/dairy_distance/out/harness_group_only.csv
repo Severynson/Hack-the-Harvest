@@ -1,0 +1,13 @@
+evaluation,arm,status,n,TP,FP,FN,TN,balanced_accuracy,silage_f1,d_balanced_accuracy,d_balanced_accuracy_lo,d_balanced_accuracy_hi,d_silage_f1,d_silage_f1_lo,d_silage_f1_hi,mcnemar_p,extra_coverage_min,decision
+qc_cell_blocks,base,ok,318.0,97.0,53.0,41.0,127.0,0.704,0.674,,,,,,,,,
+qc_cell_blocks,base+dairydist,ok,318.0,97.0,48.0,41.0,132.0,0.718,0.686,0.0139,-0.0215,0.0488,0.0119,-0.0252,0.0476,0.4583,1.0,NO IMPROVEMENT SHOWN
+qc_cell_blocks,rule:dairydist,ok,318.0,138.0,180.0,0.0,0.0,0.5,0.605,-0.2042,-0.2533,-0.1566,-0.0683,-0.1375,-0.003,0.0,1.0,WORSE (E2 interval below 0)
+qc_regions_loco,base,ok,3128.0,877.0,345.0,390.0,1516.0,0.753,0.705,,,,,,,,,
+qc_regions_loco,base+dairydist,ok,3128.0,864.0,327.0,403.0,1534.0,0.753,0.703,-0.0003,-0.0061,0.0061,-0.0017,-0.0106,0.0066,0.653,1.0,NO IMPROVEMENT SHOWN
+qc_regions_loco,rule:dairydist,ok,3128.0,1128.0,1662.0,139.0,199.0,0.499,0.556,-0.2548,-0.2967,-0.2078,-0.1486,-0.2161,-0.0825,0.0,1.0,WORSE (E2 interval below 0)
+maryland_transfer,base,ok,44.0,10.0,5.0,2.0,27.0,0.839,0.741,,,,,,,,,
+maryland_transfer,base+dairydist,ok,44.0,10.0,5.0,2.0,27.0,0.839,0.741,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,NO IMPROVEMENT SHOWN
+maryland_transfer,rule:dairydist,ok,44.0,0.0,0.0,12.0,32.0,0.5,0.0,-0.3385,-0.4375,-0.2292,-0.7407,-0.8696,-0.56,0.3018,0.0,WORSE (E2 interval below 0)
+maryland_transfer_allqc,base,ok,44.0,10.0,4.0,2.0,28.0,0.854,0.769,,,,,,,,,
+maryland_transfer_allqc,base+dairydist,ok,44.0,10.0,4.0,2.0,28.0,0.854,0.769,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,NO IMPROVEMENT SHOWN
+maryland_transfer_allqc,rule:dairydist,ok,44.0,0.0,0.0,12.0,32.0,0.5,0.0,-0.3542,-0.4495,-0.2446,-0.7692,-0.8967,-0.5924,0.1796,0.0,WORSE (E2 interval below 0)

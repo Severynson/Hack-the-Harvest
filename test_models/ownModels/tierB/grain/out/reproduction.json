@@ -1,0 +1,58 @@
+{
+ "benchmarks_2017_2024": {
+  "nass_latest": {
+   "expected_state_wape_and_abs_us": [
+    1.66,
+    0.82
+   ],
+   "reproduced": [
+    1.66,
+    0.82
+   ],
+   "match": true,
+   "max_abs_diff_state_pct_per_year": 0.0,
+   "max_abs_diff_us_pct_per_year": 0.0,
+   "n_states_per_year": [
+    41
+   ]
+  },
+  "persistence": {
+   "expected_state_wape_and_abs_us": [
+    7.35,
+    4.12
+   ],
+   "reproduced": [
+    7.35,
+    4.12
+   ],
+   "match": true,
+   "max_abs_diff_state_pct_per_year": 0.0,
+   "max_abs_diff_us_pct_per_year": 0.0,
+   "n_states_per_year": [
+    41
+   ]
+  }
+ },
+ "benchmark_vs_incumbent_code": [
+  {
+   "asof": "nov",
+   "years_compared": "2014-2024",
+   "max_abs_difference_acres": 0.0
+  },
+  {
+   "asof": "oct",
+   "years_compared": "2014-2024",
+   "max_abs_difference_acres": 0.0
+  },
+  {
+   "asof": "sep",
+   "years_compared": "2014-2024",
+   "max_abs_difference_acres": 0.0
+  }
+ ],
+ "planted_inseason_vs_repo_table": {
+  "rows_compared": 1008,
+  "years": "2018-2026",
+  "max_abs_difference_acres": 0.0
+ }
+}

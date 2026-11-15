@@ -1,0 +1,17 @@
+group,feature,role,n_grain,n_silage,n_missing,median_grain,median_silage,auc_silage_positive,separation
+qc_regions_2023,gdd_peak_to_cut,model,1681,1129,0,502.7,424.65,0.42,0.58
+qc_regions_2023,gdd_share_at_cut,model,1681,1129,0,0.93,0.916,0.4769,0.5231
+qc_regions_2023,cut_doy,calendar,1681,1129,0,275.0,272.0,0.4731,0.5269
+qc_regions_2023,gdd_at_cut,descriptive,1681,1129,0,1208.4,1177.7,0.3677,0.6323
+quebec_maize_2023,gdd_peak_to_cut,model,180,138,0,413.35,413.35,0.5064,0.5064
+quebec_maize_2023,gdd_share_at_cut,model,180,138,0,0.914,0.914,0.5038,0.5038
+quebec_maize_2023,cut_doy,calendar,180,138,0,272.0,272.0,0.5038,0.5038
+quebec_maize_2023,gdd_at_cut,descriptive,180,138,0,1120.6,1120.6,0.5038,0.5038
+quebec_pooled_17_cells,gdd_peak_to_cut,model,1861,1267,0,489.7,424.65,0.4273,0.5727
+quebec_pooled_17_cells,gdd_share_at_cut,model,1861,1267,0,0.93,0.916,0.4757,0.5243
+quebec_pooled_17_cells,cut_doy,calendar,1861,1267,0,275.0,272.0,0.4728,0.5272
+quebec_pooled_17_cells,gdd_at_cut,descriptive,1861,1267,0,1198.05,1168.4,0.3817,0.6183
+quebec_within_17_cells,gdd_peak_to_cut,model,1861,1267,0,,,0.4734,0.5266
+quebec_within_17_cells,gdd_share_at_cut,model,1861,1267,0,,,0.4441,0.5559
+quebec_within_17_cells,cut_doy,calendar,1861,1267,0,,,0.4441,0.5559
+quebec_within_17_cells,gdd_at_cut,descriptive,1861,1267,0,,,0.4441,0.5559

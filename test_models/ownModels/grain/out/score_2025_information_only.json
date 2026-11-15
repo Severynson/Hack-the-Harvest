@@ -1,0 +1,36 @@
+{
+ "label": "information only: computed once after selection; not used for fitting, selection or intervals",
+ "selected_candidate": "g3_fsa_ratio_multi",
+ "asof": "2025-11-15",
+ "fsa_file_used": {
+  "year": 2025,
+  "asof": "nov",
+  "candidate": "g3_fsa_ratio_multi",
+  "current": "AwCPYHfbDXJx.zip",
+  "current_data_as_of": "2025-09-02",
+  "reference": "FnNg0ix5oKdi.zip|3QPVeIgPizDl.zip|vc8Jn1nR42.zip",
+  "n_fallback": 0
+ },
+ "g3_fsa_ratio_multi": {
+  "n_states": 41,
+  "state_wape_pct": 1.719,
+  "us_error_pct": -1.18,
+  "us_pred": 89874580,
+  "us_actual": 90948000,
+  "inside_80_share": 0.829
+ },
+ "nass_latest": {
+  "n_states": 41,
+  "state_wape_pct": 1.642,
+  "us_error_pct": -0.991,
+  "us_pred": 90047000,
+  "us_actual": 90948000
+ },
+ "g0_persistence": {
+  "n_states": 41,
+  "state_wape_pct": 9.232,
+  "us_error_pct": -8.688,
+  "us_pred": 83046000,
+  "us_actual": 90948000
+ }
+}

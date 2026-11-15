@@ -1,0 +1,52 @@
+{
+ "candidate": "c5b_residual_fsa_planted_pre_june",
+ "asof": "2025-11-15",
+ "fitted_on_years_up_to": 2024,
+ "fsa_file": {
+  "year": 2011,
+  "asof": "2011-11-15",
+  "current_zip_name": "2011_fsa_acres_detail_oct2011.zip",
+  "current_data_as_of": "2011-10-01",
+  "current_assumed_published": "2011-10-06",
+  "current_vintage": "oct",
+  "prior_final_zip_name": null,
+  "prior_final_data_as_of": null,
+  "prior_final_assumed_published": null,
+  "prior_final_vintage": null,
+  "asof_key": "nov",
+  "nass_planted_vintages": "{}"
+ },
+ "params": [
+  {
+   "year": 2025,
+   "train_years": 13,
+   "c0_beta_per_std": -0.1205,
+   "c1_reversion": -0.1376,
+   "c1_d_planted": 0.0399,
+   "c1_d_fsa_nongrain": 0.0136,
+   "c2_reversion": -0.1196,
+   "c2_d_planted": 0.0311,
+   "c2_d_fsa_nongrain": 0.0059,
+   "c2_yield_shock": -0.0686,
+   "c2_d_drought": 0.0234,
+   "c2_d_poor": 0.0354,
+   "c2_d_loss": -0.0285,
+   "c3_reversion": -0.1383,
+   "c3_d_planted": 0.0332,
+   "c3_d_fsa_nongrain": 0.0064,
+   "c3_d_cows": 0.0161,
+   "c3_d_fsa_silage_hc": 0.0204,
+   "w5": 0.25,
+   "w5b": 0.25,
+   "states_with_raw5": 41,
+   "states_with_raw5b": 41,
+   "asof_key": "nov"
+  }
+ ],
+ "state_wape_pct": 14.52,
+ "us_error_pct": 3.66,
+ "persistence_state_wape_pct": 13.96,
+ "persistence_us_error_pct": 0.32,
+ "inside_80": 0.833,
+ "note": "information only; computed once after selection; never used for selection or tuning"
+}
