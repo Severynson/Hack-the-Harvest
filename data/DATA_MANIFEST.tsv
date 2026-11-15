@@ -1,9 +1,9 @@
 path	bytes	sha256	source_url	made_by	utc
 data/nass/quickstats_2025_corn_grain_silage_state.csv	14859	78db6757cf3e90d03468134595b04144c74a23f5d294a8cf48250c3386576972	https://quickstats.nass.usda.gov/results/ACC45317-B978-3390-B0A1-BE0EC02A9D63	cc-varun	2026-11-15T00:16Z
 data/nass/quickstats_state_fill.csv	106695	d7e7cf92f4457598e4e051aa1af73dc9de06baa3212ec763192efc02aa92b6ed	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T00:58Z
-data/nass/corn_acres_state.csv	212953	27c12b71a7a2ffa9951ce73c7bef37068f05ad7c40114ad71f90263bf9a6bc7f	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
-data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
-data/nass/baselines.csv	4647	08102a80fc4607e2905f22eb4c36b4cc7ecdd7388dda8b6b8d8ac57b34789bc4	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
+data/nass/corn_acres_state.csv	206573	3c134eab35b05e6ae09b8e92c05e86b9583a3c8f0848e5b3b8539e74518d8dd2	https://quickstats.nass.usda.gov/	cc-manraj	2026-11-15T03:07Z
+data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	cc-manraj	2026-11-15T03:07Z
+data/nass/baselines.csv	4341	95750af5081de0da60dac5f126270ae2347018378c35c717bd3ad18eb57ca4fe	https://quickstats.nass.usda.gov/	cc-manraj	2026-11-15T03:07Z
 data/labels/quebec_maize_2023.parquet	27617652	88498acc77c48829c2df74fd865000ce4a5850f3f7f3eab4f781ce32a031b3ce	http://www.fadq.qc.ca/documents/donnees/base-de-donnees-des-parcelles-et-productions-agricoles-declarees/	cc-varun	2026-11-15T00:59Z
 data/s2_series/barc/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:07Z
 data/s2_series/barc/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:14Z
@@ -209,15 +209,29 @@ data/weather/county_season/county_season_2026.csv	188798	8ae1d0fd769afeda3e52bed
 data/s2_series/quebec_maize_2023/79_515_2023.csv	259223	f62ceaac75657cea1ae2de43cf46d4179f18f8cece9414a7df96975b08a0c4f9	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:55Z
 data/s2_series/barc_2021_2023/34_432_2021.csv	3197	744977e1cf7169a6a61cd3b1bf6dc684387bdae24b032993cddeb0fedad1db46	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:55Z
 data/raw/quebec/BDPPAD_V03_2023.zip	172750925	9258447ac941b23efc78bf582c8555f66d1eb0a732c5949fa2f169697c139f82	https://www.fadq.qc.ca/fileadmin/geo4tb/BDPPAD/BDPPAD_V03_2023.zip	cc-varun (local only, over the size limit)	2026-11-15T03:00Z
-data/panel/state_year.csv	66187	6f643e841e348de1c3050afd2b952af31cf5b806616fdcc714d74177cf2050d9	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T03:08Z
-data/models/state_model_backtest.csv	2341	d3d19edcb7112b6792bd35f4e0a00236c16effac346dba2d4519b4f71a553fb2	derived: kernelag.state_model	cc-varun	2026-11-15T03:08Z
-data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T03:08Z
-data/models/field_model_report.csv	340	c5be8d12f6839bd1f912ca31eb478d596bf580321e10981589769ff5bfb9bf32	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
-data/models/field_model_by_year.csv	266	d4bca9ec5a5bdc2e5b8638deca3a09323f2dc609090b682d52055bb5cdeffc4b	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
-data/models/field_model_coefficients.csv	135	a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
-data/models/field_model_maryland_predictions.csv	1469	b4e2ec3fcd3e2fb0a3d29d80c677345c5676383d39f185cd5714162508b4be10	derived: kernelag.field_model	cc-varun	2026-11-15T03:16Z
+data/panel/state_year.csv	124758	032943b783f4ed175843c1bfaf166d3907278e49dff382517470499f6cb70aef	https://quickstats.nass.usda.gov/api	codex-manraj	2026-11-15T03:29Z
+data/models/state_model_backtest.csv	2850	af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38	derived: kernelag.state_model	codex-manraj	2026-11-15T03:29Z
+data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	codex-manraj	2026-11-15T03:29Z
+data/models/field_model_report.csv	340	c5be8d12f6839bd1f912ca31eb478d596bf580321e10981589769ff5bfb9bf32	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
+data/models/field_model_by_year.csv	266	d4bca9ec5a5bdc2e5b8638deca3a09323f2dc609090b682d52055bb5cdeffc4b	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
+data/models/field_model_coefficients.csv	135	a0298fdc317347145eaa7dc6ee8c34431c7b2d066a23cc4766ae89a379b7b8c3	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
+data/models/field_model_maryland_predictions.csv	1469	b4e2ec3fcd3e2fb0a3d29d80c677345c5676383d39f185cd5714162508b4be10	derived: kernelag.field_model	cc-varun	2026-11-15T01:56Z
 data/Quickstats Data/corn_grain_harvested_acres_state_2000_2026.csv	938471	336971e19e9e662e78d2a05fffdcc84959c27ce84358ea34734d7815ec1406cc	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, util_practice_desc=GRAIN, statisticcat_desc=AREA HARVESTED, unit_desc=ACRES; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/corn_grain_yield_state_2000_2026.csv	1165160	1286561f13a5d8a4251230e52365bd330e7a93f52f57fcbc05f463d0c9c240a3	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, util_practice_desc=GRAIN, statisticcat_desc=YIELD, unit_desc=BU / ACRE; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/corn_planted_acres_state_2000_2026.csv	827724	9da839ba616c7e22fcfd54b921f3e2ffe68a0a5452ee154e31628b24fd7cab4c	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, statisticcat_desc=AREA PLANTED, unit_desc=ACRES; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/corn_silage_harvested_acres_state_2000_2026.csv	312476	9c1ed1bdcf073f7a951bcf659fb444f7882983f6080e0ce68796491c7d55f744	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CORN, util_practice_desc=SILAGE, statisticcat_desc=AREA HARVESTED, unit_desc=ACRES; state, survey)	cc-daniel	2026-11-15T03:26Z
 data/Quickstats Data/milk_cow_inventory_state_2000_2026.csv	1454155	ed9bb3cb6161792ed4a48bb738be01e8f523cdf48ea037b1e5885b02661b6a1c	https://quickstats.nass.usda.gov/api/api_GET/ (commodity_desc=CATTLE, class_desc=COWS, MILK, statisticcat_desc=INVENTORY; state, survey)	cc-daniel	2026-11-15T03:26Z
+data/models/state_score_2025.csv	7628	1beae9271e202f01bdc509889f40506e899ab635cd13913123beea939d0f5c62	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
+data/models/state_score_2025.json	474	ff033c61e7f188acd2e12c5953dd5143c31a54fe130966205d74509db01c8def	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
+data/models/state_model_backtest_asof_sep.csv	2853	6696ff0fb7277ab753e0d7fc69a0d8ca83768044b7b3b7c33bf83c204e7d3801	derived: kernelag.state_model	cc-manraj	2026-11-15T03:07Z
+data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	cc-manraj	2026-11-15T03:07Z
+data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a7a866312a5846501933aa66ece3494	derived: kernelag.state_model	cc-manraj	2026-11-15T03:07Z
+data/models/state_model_metrics_asof_sep.json	1239	57f4933c3969946b7d4a479191b2bbd1311558d918130bc7a9fb27c2504adb95	derived: kernelag.state_model	cc-manraj	2026-11-15T03:07Z
+data/models/field_eval.json	1478	c4b6a4f66ebac92c2bf134f550bd6776978236a0d86ba759c8197dfbe0edd8e4	derived: kernelag.evaluate	codex-manraj	2026-11-15T03:29Z
+data/models/field_earliness.csv	464	fd044a8f2f10e1e60af9484764b8d653841211793f5924054c970273b875b912	derived: kernelag.evaluate	codex-manraj	2026-11-15T03:29Z
+data/models/state_model_bias.csv	997	9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a	derived: kernelag.state_model	codex-manraj	2026-11-15T03:29Z
+data/models/state_model_metrics.json	1240	ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b	derived: kernelag.state_model	codex-manraj	2026-11-15T03:29Z
+data/models/state_forecast_2026.csv	6175	48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a515a514b74538c81a13d2a779a	derived: kernelag.state_model	codex-manraj	2026-11-15T03:29Z
+data/geography/md_counties.geojson	1808069	966ac6730b223bf7e0b441a9a24b8c738f838e223d5dd3d1aa99a16664384154	https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE%3D%2724%27&outFields=GEOID%2CNAME&outSR=4326&f=geojson&geometryPrecision=5	unknown	2026-11-15T03:36Z
+data/models/metrics.json	5200	e65688bc1235c25f27a8e6b5d0a07f2822e7ef150ab727cf22e7a6261b699195	derived: kernelag.report	codex-manraj	2026-11-15T03:39Z
+data/models/field_explorer.json	387985	aaf0bc0100375b145769428dad96976ce93f174cc78fadc171e810c9b4b54007	derived: kernelag.explorer; BARC public research sample	codex-manraj	2026-11-15T03:41Z

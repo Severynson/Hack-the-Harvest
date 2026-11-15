@@ -6,6 +6,7 @@ Sources:
     data/Quickstats Data/            the team's Quick Stats downloads (2015 to 2025): milk cows and
                                      all cattle on 1 January, corn grain yield with its monthly
                                      forecasts, corn silage yield, monthly corn prices
+    kernelag.context                 drought, crop condition, weather, insured losses, harvest pace
 
 Columns ("as of" = the latest figure NASS had published by mid-November of that year):
     silage, grain, planted         final acres (the targets; NASS publishes them the next January)
@@ -13,33 +14,45 @@ Columns ("as of" = the latest figure NASS had published by mid-November of that 
     grain_yield, grain_yield_asof  final bushels per acre, and the latest in-season forecast
     silage_yield                   final tons per acre
     milk_cows, cattle              head on 1 January of that year
-    corn_price_sep                 price received in September, dollars per bushel
-    drought_summer                 mean share of the state in severe drought (class D2 or worse),
-                                   June to September, from the weekly US Drought Monitor
-    rma_silage                     corn acres insured as silage (RMA type 026); a floor, not a total
-    sat_share, share_se            satellite silage-like share of sampled corn acres and its standard
-                                   error (``kernelag.state_signal``; sampled states, 2019 on)
+    corn_price_sep                 price received in September, dollars per bushel (public from November)
+    drought ... silage_pace        season context; see ``kernelag.context`` for each definition
+
+``asof`` (aug, sep, oct or nov) moves the "as of" date earlier: only NASS reports of that month or
+before are used. The year after the last acreage year is added as rows with context only, so the
+model can make a forecast for the season that is still open.
 
 Output: ``data/panel/state_year.csv``
 
-Run: ``python -m kernelag.state_panel``
+Run: ``python -m kernelag.state_panel [--asof sep]``
 """
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import pandas as pd
 
+from kernelag.context import ASOF_MONTH, build_context
+from kernelag.context import FEATURES as CONTEXT_FEATURES
 from kernelag.paths import data_dir, record_in_manifest
 
 QUICKSTATS_DIR = "Quickstats Data"
+SATELLITE_COLUMNS = ["sat_share", "share_se", "assessable_share"]
 SOURCE_URL = "https://quickstats.nass.usda.gov/api"
 
 # Latest first: the first period that exists for a state-year is its "as of" value.
 PLANTED_ASOF = ["oct", "sep", "aug", "jun", "mar"]
 GRAIN_ASOF = ["nov", "oct", "sep", "aug", "jun"]
 YIELD_ASOF = ["YEAR - NOV FORECAST", "YEAR - OCT FORECAST", "YEAR - SEP FORECAST", "YEAR - AUG FORECAST"]
+REPORT_MONTH = {"mar": 3, "jun": 6, "aug": 8, "sep": 9, "oct": 10, "nov": 11}
+
+
+def public_by(periods: list[str], asof: str) -> list[str]:
+    """The periods whose NASS report is out by the ``asof`` month (reports come out before the 15th)."""
+    def month(period: str) -> int:
+        return next(m for name, m in REPORT_MONTH.items() if name in period.lower())
+    return [p for p in periods if month(p) <= ASOF_MONTH[asof]]
 
 
 def read_item(folder: Path, file_stem: str, item: str) -> pd.DataFrame:
@@ -64,44 +77,27 @@ def latest_available(table: pd.DataFrame, periods: list[str]) -> pd.Series:
     return result
 
 
-def rma_silage_acres(folder: Path) -> pd.DataFrame:
-    """Insured corn-silage acres per state and year, and the state names behind RMA's abbreviations."""
-    parts = []
-    for path in sorted(folder.glob("sobtpu_corn_*.csv.gz")):
-        raw = pd.read_csv(path, dtype=str, usecols=["commodity_year", "state_name", "state_abbreviation",
-                                                    "type_code", "reporting_level_type",
-                                                    "net_reporting_level_amount"])
-        raw["acres"] = pd.to_numeric(raw["net_reporting_level_amount"], errors="coerce").fillna(0)
-        raw["silage"] = raw["acres"].where((raw["type_code"] == "026") & (raw["reporting_level_type"] == "Acres"), 0)
-        parts.append(raw.groupby(["commodity_year", "state_name", "state_abbreviation"], as_index=False)["silage"].sum())
-    table = pd.concat(parts, ignore_index=True)
-    return pd.DataFrame({"state": table["state_name"].str.upper(), "abbreviation": table["state_abbreviation"],
-                         "year": table["commodity_year"].astype(int), "rma_silage": table["silage"]})
-
-
-def summer_drought(path: Path, names: dict) -> pd.DataFrame:
-    """Mean June-to-September share of each state in drought class D2 or worse, per year."""
-    weekly = pd.read_csv(path, usecols=["MapDate", "StateAbbreviation", "D2"])
-    date = pd.to_datetime(weekly["MapDate"].astype(str), format="%Y%m%d")
-    summer = weekly[date.dt.month.between(6, 9)].assign(year=date.dt.year)
-    table = summer.groupby(["StateAbbreviation", "year"], as_index=False)["D2"].mean()
-    return pd.DataFrame({"state": table["StateAbbreviation"].map(names), "year": table["year"],
-                         "drought_summer": (table["D2"] / 100).round(4)}).dropna(subset=["state"])
-
-
-def build_panel(acres: pd.DataFrame, folder: Path) -> pd.DataFrame:
-    """Join acreage and context into one state-year table."""
+def build_panel(acres: pd.DataFrame, folder: Path, context: pd.DataFrame | None = None,
+                asof: str = "nov", satellite: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Join acreage, herd, yield, price, season context and the satellite share into one state-year table."""
     acres = acres.rename(columns={"acres": "value"})
     final = acres[acres["period"] == "final"].pivot(index=["state", "year"], columns="series", values="value")
-    panel = final[["silage", "grain", "planted"]].copy()
+    panel = final.reindex(columns=["silage", "grain", "planted"]).copy()
+
+    # The open season: one more year for every state, holding only what is public so far.
+    last_year = int(panel.index.get_level_values("year").max())
+    states = panel.index.get_level_values("state").unique()
+    open_season = pd.MultiIndex.from_product([states, [last_year + 1]], names=["state", "year"])
+    panel = panel.reindex(panel.index.union(open_season))
+
     planted = acres[acres["series"] == "planted"]
     grain = acres[acres["series"] == "grain"]
-    panel["planted_asof"] = latest_available(planted, PLANTED_ASOF)
-    panel["grain_asof"] = latest_available(grain, GRAIN_ASOF)
+    panel["planted_asof"] = latest_available(planted, public_by(PLANTED_ASOF, asof))
+    panel["grain_asof"] = latest_available(grain, public_by(GRAIN_ASOF, asof))
 
     grain_yield = read_item(folder, "corn_grain_yield_bu_acre", "CORN, GRAIN - YIELD, MEASURED IN BU / ACRE")
     panel["grain_yield"] = latest_available(grain_yield, ["YEAR"])
-    panel["grain_yield_asof"] = latest_available(grain_yield, YIELD_ASOF)
+    panel["grain_yield_asof"] = latest_available(grain_yield, public_by(YIELD_ASOF, asof))
     silage_yield = read_item(folder, "corn_silage_yield_tons_acre", "CORN, SILAGE - YIELD, MEASURED IN TONS / ACRE")
     panel["silage_yield"] = latest_available(silage_yield, ["YEAR"])
 
@@ -111,25 +107,34 @@ def build_panel(acres: pd.DataFrame, folder: Path) -> pd.DataFrame:
     panel["cattle"] = latest_available(cattle, ["FIRST OF JAN"])
 
     price = read_item(folder, "corn_prices_received", "CORN, GRAIN - PRICE RECEIVED, MEASURED IN $ / BU")
-    panel["corn_price_sep"] = latest_available(price, ["SEP"])
-    return panel.reset_index().sort_values(["state", "year"]).reset_index(drop=True)
+    # The September price is published at the end of October.
+    panel["corn_price_sep"] = latest_available(price, ["SEP"]) if ASOF_MONTH[asof] >= 11 else float("nan")
+
+    panel = panel.reset_index()
+    if context is not None:
+        panel = panel.merge(context[["state", "year", *CONTEXT_FEATURES]], on=["state", "year"], how="left")
+    if satellite is not None:
+        panel = panel.merge(satellite[["state", "year", *SATELLITE_COLUMNS]], on=["state", "year"], how="left")
+    return panel.sort_values(["state", "year"]).reset_index(drop=True)
+
+
+def load_panel(asof: str = "nov") -> pd.DataFrame:
+    """The panel built from the files under ``data/`` (``kernelag.nass`` must have run)."""
+    data = data_dir()
+    acres = pd.read_csv(data / "nass" / "corn_acres_state.csv")
+    satellite_file = data / "panel" / "state_satellite.csv"   # from kernelag.state_signal, if it has been run
+    satellite = pd.read_csv(satellite_file) if satellite_file.exists() else None
+    return build_panel(acres, data / QUICKSTATS_DIR, build_context(data, asof), asof, satellite)
 
 
 def main() -> None:
-    data = data_dir()
-    acres = pd.read_csv(data / "nass" / "corn_acres_state.csv")
-    panel = build_panel(acres, data / QUICKSTATS_DIR)
-    rma_folder, drought_file = data / "rma" / "insured_by_type_corn", data / "drought" / "usdm_state_weekly_2000_2026.csv"
-    if rma_folder.is_dir() and drought_file.exists():   # the team's context pulls (scripts/pull_data.py)
-        rma = rma_silage_acres(rma_folder)
-        names = dict(zip(rma["abbreviation"], rma["state"]))
-        panel = panel.merge(rma[["state", "year", "rma_silage"]], on=["state", "year"], how="left")
-        panel = panel.merge(summer_drought(drought_file, names), on=["state", "year"], how="left")
-    satellite = data / "panel" / "state_satellite.csv"   # from kernelag.state_signal, if it has been run
-    if satellite.exists():
-        signal = pd.read_csv(satellite)[["state", "year", "sat_share", "share_se", "assessable_share"]]
-        panel = panel.merge(signal, on=["state", "year"], how="left")
-    target = data / "panel" / "state_year.csv"
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--asof", choices=list(ASOF_MONTH), default="nov")
+    args = parser.parse_args()
+
+    panel = load_panel(args.asof)
+    suffix = "" if args.asof == "nov" else f"_asof_{args.asof}"
+    target = data_dir() / "panel" / f"state_year{suffix}.csv"
     target.parent.mkdir(parents=True, exist_ok=True)
     panel.to_csv(target, index=False, lineterminator="\n")
     record_in_manifest(target, SOURCE_URL)

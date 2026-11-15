@@ -12,8 +12,9 @@ Outputs (under ``data/nass/``):
 ``series`` is planted, grain or silage. ``period`` is ``final`` or the month of an
 in-season NASS report (mar, jun, aug, sep, oct, nov).
 
-The kit has no state rows for the census years 2012, 2017 and 2022. With
-``NASS_QUICKSTATS_API_KEY`` in ``.env`` those years are fetched from the Quick Stats API.
+The kit has no state rows for the census years 2012, 2017 and 2022. The team's Quick Stats
+downloads in ``data/Quickstats Data/`` (2015 to 2025) fill 2017 and 2022 with no key. With
+``NASS_QUICKSTATS_API_KEY`` in ``.env`` any year still missing (2012) is fetched from the API.
 
 Run: ``python -m kernelag.nass``            (baselines stop at 2024; 2025 is the scoring year)
 """
@@ -30,6 +31,16 @@ KIT_FILE = "02_QuickStats/corn_grain_silage_acres_2012_2025.csv"
 SOURCE_URL = "https://quickstats.nass.usda.gov/"
 API_URL = "https://quickstats.nass.usda.gov/api/api_GET/"
 API_KEY_NAME = "NASS_QUICKSTATS_API_KEY"   # free key by email form; kept in .env
+TEAM_FOLDER = "Quickstats Data"
+TEAM_FILES = ["corn_planted_acres", "corn_grain_harvested_acres", "corn_silage_harvested_acres"]
+
+# Quick Stats API column names -> the kit's column names.
+KIT_NAMES = {
+    "year": "year", "agg_level_desc": "aggregation_level", "state_name": "state_name",
+    "state_ansi": "state_ansi", "short_desc": "short_description",
+    "reference_period_desc": "reference_period", "Value": "value",
+    "source_desc": "source", "domain_desc": "domain",
+}
 
 # The three plain totals. Irrigated, non-irrigated and organic sub-rows are left out.
 SERIES = {
@@ -44,8 +55,10 @@ PERIODS = {
     "YEAR - MAR ACREAGE": "mar",
     "YEAR - JUN ACREAGE": "jun",
     "YEAR - AUG FORECAST": "aug",
+    "YEAR - AUG ACREAGE": "aug",
     "YEAR - SEP FORECAST": "sep",
     "YEAR - OCT FORECAST": "oct",
+    "YEAR - OCT ACREAGE": "oct",
     "YEAR - NOV FORECAST": "nov",
 }
 
@@ -73,12 +86,6 @@ def fetch_state_survey(years: list[int], key: str) -> pd.DataFrame:
     """
     import requests
 
-    kit_names = {
-        "year": "year", "agg_level_desc": "aggregation_level", "state_name": "state_name",
-        "state_ansi": "state_ansi", "short_desc": "short_description",
-        "reference_period_desc": "reference_period", "Value": "value",
-        "source_desc": "source", "domain_desc": "domain",
-    }
     rows = []
     for year in years:
         for item in SERIES:
@@ -90,16 +97,35 @@ def fetch_state_survey(years: list[int], key: str) -> pd.DataFrame:
             if response.status_code != 200:   # never echo the URL: it carries the key
                 raise RuntimeError(f"Quick Stats returned HTTP {response.status_code} for {year}, {item}")
             rows.extend(response.json().get("data", []))
-    fetched = pd.DataFrame(rows).astype(str).rename(columns=kit_names)
-    return fetched[list(kit_names.values())] if len(fetched) else fetched
+    fetched = pd.DataFrame(rows).astype(str).rename(columns=KIT_NAMES)
+    return fetched[list(KIT_NAMES.values())] if len(fetched) else fetched
+
+
+def team_folder_state_rows() -> pd.DataFrame:
+    """State survey rows from the team's Quick Stats downloads, with the kit's column names.
+
+    These files use the API's column names and call the state code ``state_fips_code``.
+    Empty if the folder is not there.
+    """
+    parts = []
+    for stem in TEAM_FILES:
+        path = data_dir() / TEAM_FOLDER / f"{stem}_state_2015_2025.csv"
+        if not path.exists():
+            continue
+        rows = pd.read_csv(path, dtype=str, keep_default_na=False)
+        rows = rows[rows["source_desc"] == "SURVEY"].rename(columns={"state_fips_code": "state_ansi"})
+        parts.append(rows.rename(columns=KIT_NAMES)[list(KIT_NAMES.values())])
+    return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=list(KIT_NAMES.values()))
 
 
 def load_with_missing_years(force: bool = False) -> pd.DataFrame:
-    """The kit file, plus state rows for the years it lacks when an API key is available.
+    """The kit file, then the team's downloads, then the API for any year that still has no state rows.
 
-    The fetched rows are cached in ``data/nass/quickstats_state_fill.csv``.
+    Kit rows come first, so they win wherever a figure is in more than one source
+    (``tidy_state`` keeps the first row per year, state, series and period).
+    API rows are cached in ``data/nass/quickstats_state_fill.csv``.
     """
-    raw = load_kit()
+    raw = pd.concat([load_kit(), team_folder_state_rows()], ignore_index=True).fillna("")
     missing = years_without_state_rows(raw)
     cache = data_dir() / "nass" / "quickstats_state_fill.csv"
     if cache.exists() and not force:
@@ -139,9 +165,13 @@ def _plain_totals(raw: pd.DataFrame, level: str) -> pd.DataFrame:
 
 
 def tidy_state(raw: pd.DataFrame) -> pd.DataFrame:
-    """State survey figures: one row per year, state, series and period."""
+    """State survey figures: one row per year, state, series and period.
+
+    "OTHER STATES" is dropped: it is NASS's combined row for the states its monthly forecasts do not
+    list, it has no final figure (the kit stores 0), and so it can be neither a target nor a baseline.
+    """
     rows = _plain_totals(raw, "STATE")
-    rows = rows[rows["source"] == "SURVEY"]
+    rows = rows[(rows["source"] == "SURVEY") & (rows["state_name"] != "OTHER STATES")]
     table = rows.rename(columns={"state_name": "state"})[
         ["year", "state", "state_ansi", "series", "period", "acres"]
     ]
