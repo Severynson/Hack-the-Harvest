@@ -26,7 +26,7 @@ def test_evidence_table_marks_fields_without_a_usable_series():
     labels = pd.DataFrame({"field_id": [1, 2, 3, 4], "year": 2023,
                            "label": ["silage", "grain", "silage", "grain"]})
     table = evidence_table(labels, series)
-    assert table["field_id"].tolist() == [1, 2, 3]            # field 4 has no series at all
+    assert table["field_id"].tolist() == ["1", "2", "3"]      # field 4 has no series at all
     assert table["assessable"].tolist() == [True, True, False]
     assert table["is_silage"].tolist() == [1, 0, 1]
 
@@ -43,3 +43,11 @@ def test_not_assessable_fields_are_scored_as_grain():
     probability, call = predict_silage(model, table)
     assert call.tolist() == [1, 1, 1, 0, 0, 0, 0]
     assert np.isnan(probability[-1])
+
+
+def test_text_ids_in_labels_match_numeric_ids_in_series():
+    """Quebec label files hold ids as text; the series CSVs read back as numbers."""
+    series = pd.concat([CLIFF.assign(field_id=101, year=2023), FADE.assign(field_id=102, year=2023)])
+    labels = pd.DataFrame({"field_id": ["101", "102"], "year": 2023, "label": ["silage", "grain"]})
+    table = evidence_table(labels, series)
+    assert table["field_id"].tolist() == ["101", "102"] and table["assessable"].all()

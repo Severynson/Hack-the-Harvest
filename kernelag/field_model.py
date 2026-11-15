@@ -48,17 +48,19 @@ def load_series(path: Path) -> pd.DataFrame:
         raise FileNotFoundError(f"no series files in {path}; run kernelag.s2_series first")
     series = pd.concat([pd.read_csv(f, parse_dates=["date"]) for f in files], ignore_index=True)
     series = series.rename(columns={"OBJECTID": "field_id"})
+    series["field_id"] = series["field_id"].astype(str)   # ids are text in label files, numbers in CSVs
     series["date"] = series["date"].dt.normalize()
     return series.drop_duplicates(["field_id", "year", "date"])
 
 
 def evidence_table(labels: pd.DataFrame, series: pd.DataFrame) -> pd.DataFrame:
     """One row per labeled field-year that has a series: label, features, and whether it is assessable."""
-    features = build_features(series)
+    features = build_features(series.assign(field_id=series["field_id"].astype(str)))
     for column in MODEL_FEATURES:
         if column not in features:
             features[column] = np.nan
-    table = labels[["field_id", "year", "label"]].merge(features, on=["field_id", "year"], how="inner")
+    labels = pd.DataFrame(labels[["field_id", "year", "label"]]).assign(field_id=labels["field_id"].astype(str))
+    table = labels.merge(features, on=["field_id", "year"], how="inner")
     table["assessable"] = table["max_drop"].notna()
     table["is_silage"] = (table["label"] == "silage").astype(int)
     return table.reset_index(drop=True)
@@ -111,7 +113,7 @@ def spatial_blocks(labels) -> pd.Series:
     centre = utm.geometry.representative_point()
     size = BLOCK_KM * 1000
     block = (centre.x // size).astype(int).astype(str) + "_" + (centre.y // size).astype(int).astype(str)
-    return pd.Series(block.to_numpy(), index=labels["field_id"].to_numpy())
+    return pd.Series(block.to_numpy(), index=labels["field_id"].astype(str).to_numpy())
 
 
 def held_out_block_calls(train: pd.DataFrame, blocks: pd.Series, folds: int = 5) -> np.ndarray:
