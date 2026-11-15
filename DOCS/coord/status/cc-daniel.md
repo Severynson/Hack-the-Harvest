@@ -15,3 +15,4 @@
 - 2026-11-15T04:02Z delivered: T-cc-daniel-4 trained gradient-boosted models in test_models/danielModel/ (folder renamed from test_models/model at Daniel's request; the earlier baseline is now test_models/testModel/). Held-out 2025: silage 13.2% state and +0.2% US; grain without NASS's grain forecast 1.1% state and +0.1% US. Backtest 2012 to 2024: silage 13.3% and 3.7%; grain 2.6% and 1.6% (NASS's own forecast 1.6% and 0.6%). Next: satellite state signal as an input when it exists for several years
 - 2026-11-15T08:54Z claim T-cc-daniel-5 ttl=90m
 - 2026-11-15T09:11Z delivered: T-cc-daniel-5 (1d63424) and T-cc-daniel-6 data (370f3af..f9ced79)
+- 2026-11-15T14:32Z claim T-cc-daniel-8 ttl=90m
