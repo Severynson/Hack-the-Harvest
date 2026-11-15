@@ -1,1 +1,2 @@
 commit	val_f1	balanced_acc	status	description
+c4d67f2	0.500000	0.6406	keep	baseline caveman: season_len = harvest(50% drop) - greenup(50% rise), 1 threshold
