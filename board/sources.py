@@ -37,6 +37,9 @@ FAMILIES = {
     "weather": ["weather", "drought", "rain", "gdd", "frost", "freeze", "stress", "condition", "poor",
                 "loss", "context", "physical", "matur", "yield", "hot", "pasture", "planting"],
     "economy": ["price", "dairy", "cow", "cattle", "forage", "hay", "milk"],
+    "FSA": ["fsa"],
+    "insurance": ["rma", "insur"],
+    "NASS current year": [],          # set by a model card; names alone can't tell current from past NASS
     "NASS history": ["same_as_last_year", "persistence", "mean", "rev", "trend", "nass", "planted",
                      "not_grain", "non_grain", "nodrift", "share", "last"],
 }
@@ -109,16 +112,19 @@ def state_code(value) -> str:
 def errors_from_predictions(frame: pd.DataFrame) -> pd.DataFrame:
     """Per model, target and year: state and US error from state-level predictions.
 
-    Input columns: model, target, year, state, actual, predicted.
+    Input columns: model, target, year, state, actual, predicted, and optionally asof (sep/oct/nov).
     """
     rows = []
-    for (model, target, year), g in frame.groupby(["model", "target", "year"]):
+    keys = ["model", "target", "year"] + (["asof"] if "asof" in frame else [])
+    for key, g in frame.groupby(keys, dropna=False):
+        model, target, year = key[:3]
+        asof = key[3] if len(key) > 3 else None
         g = g.dropna(subset=["actual", "predicted"])
         total = g["actual"].sum()
         if total <= 0:
             continue
         miss = g["predicted"] - g["actual"]
-        rows.append({"model": model, "target": target, "year": int(year), "n_states": len(g),
+        rows.append({"model": model, "target": target, "year": int(year), "n_states": len(g), "asof": asof,
                      "state_error_pct": round(100 * miss.abs().sum() / total, 2),
                      "us_error_pct": round(100 * miss.sum() / total, 2)})
     return pd.DataFrame(rows)
@@ -129,7 +135,12 @@ def errors_from_predictions(frame: pd.DataFrame) -> pd.DataFrame:
 def load_kernel():
     """The main pipeline (kernelag.state_model): backtest per predictor, and the 2026 forecast."""
     out = REPO / "data" / "models"
-    bt = pd.read_csv(out / "state_model_backtest.csv")
+    parts = []
+    for name, asof in [("state_model_backtest.csv", "nov"), ("state_model_backtest_asof_sep.csv", "sep")]:
+        if (out / name).exists():
+            part = pd.read_csv(out / name)
+            parts.append(part.assign(asof=asof))
+    bt = pd.concat(parts)
     bt = bt[bt["scope"] == "all_states"].rename(columns={"series": "target", "predictor": "model",
                                                          "total_error_pct": "us_error_pct"})
     bt["metric"] = "stored per year"
@@ -158,6 +169,7 @@ def load_daniel():
     bt = bt.rename(columns={"states": "n_states"})
     bt["metric"] = "stored per year"
     metrics = json.loads((out / "metrics.json").read_text())
+    bt["asof"] = metrics.get("asof")
     f1 = pd.read_csv(out / "forecast_2026.csv")
     f2 = pd.read_csv(out / "forecast_2026_gbt.csv")
     gbt_names = json.loads((out / "gbt_metrics.json").read_text()).get("saved_models", {})
@@ -179,17 +191,29 @@ def load_daniel():
 
 
 def slate_features() -> dict:
-    """Feature lists from test_models/accuracy/state_candidates.py SLATE, if it imports cleanly."""
-    import importlib.util
+    """Feature lists from test_models/accuracy/state_candidates.py SLATE, read without importing it.
+
+    Importing that file pulls in scikit-learn and xgboost, which can take many seconds on a laptop, so the
+    top-level list/dict assignments are evaluated on their own (no builtins, no imports).
+    """
+    import ast
     path = REPO / "test_models" / "accuracy" / "state_candidates.py"
     try:
-        spec = importlib.util.spec_from_file_location("_board_state_candidates", path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        return {name: list(cfg.get("features", [])) for name, cfg in getattr(module, "SLATE", {}).items()
-                if isinstance(cfg, dict)}
-    except Exception:  # noqa: BLE001 - features are a nicety; the errors still load
+        tree = ast.parse(path.read_text())
+    except (OSError, SyntaxError):
         return {}
+    names: dict = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            if not isinstance(node.value, (ast.List, ast.Dict, ast.BinOp, ast.Tuple, ast.Constant)):
+                continue
+            try:
+                names[node.targets[0].id] = eval(compile(ast.Expression(node.value), str(path), "eval"),
+                                                 {"__builtins__": {}}, names)
+            except Exception:  # noqa: BLE001, S112 - skip anything that isn't plain data
+                continue
+    slate = names.get("SLATE", {})
+    return {name: list(cfg.get("features", [])) for name, cfg in slate.items() if isinstance(cfg, dict)}
 
 
 def load_accuracy_state():
@@ -255,7 +279,7 @@ def load_plugins():
         if any(part.startswith(".") for part in folder.relative_to(REPO).parts):
             continue
         path = folder / "board_backtest.csv"
-        columns = ["model", "target", "year", "state_error_pct", "us_error_pct", "n_states", "metric"]
+        columns = ["model", "target", "year", "state_error_pct", "us_error_pct", "n_states", "metric", "asof"]
         bt = pd.read_csv(path) if path.exists() else pd.DataFrame(columns=columns)
         if "state_error_pct" not in bt and {"actual", "predicted"} <= set(bt.columns):
             bt = errors_from_predictions(bt)
@@ -335,6 +359,55 @@ def field_models() -> tuple[pd.DataFrame, list[str]]:
 LOADERS = [load_kernel, load_daniel, load_accuracy_state, load_accuracy_national, load_test_model]
 
 
+def state_predictions() -> pd.DataFrame:
+    """State-level backtest predictions, where a folder keeps them: model_id, target, year, state, actual,
+    predicted, asof. Feeds the map's per-state error layer. Folders that store only yearly totals
+    (kernel, danielModel) can't be split by state and are absent here."""
+    frames = []
+    acc = REPO / "test_models" / "accuracy" / "state" / "predictions.csv"
+    if acc.exists():
+        t = pd.read_csv(acc).rename(columns={"candidate": "model"})
+        t["model_id"] = "accuracy/state/silage/" + t["model"]
+        t["target"], t["asof"] = "silage", None
+        frames.append(t)
+    for path in find_files("board_backtest.csv"):
+        t = pd.read_csv(path)
+        if not {"actual", "predicted", "state"} <= set(t.columns):
+            continue
+        name = str(path.parent.relative_to(REPO))
+        if name.endswith(("/out", "/board")):
+            name = name.rsplit("/", 1)[0]
+        name = name.removeprefix("test_models/")
+        t["model_id"] = name + "/" + t["target"] + "/" + t["model"].astype(str)
+        if "asof" not in t:
+            t["asof"] = None
+        frames.append(t)
+    if not frames:
+        return pd.DataFrame(columns=["model_id", "target", "year", "state", "actual", "predicted", "asof"])
+    out = pd.concat(frames, ignore_index=True)[["model_id", "target", "year", "state", "actual", "predicted", "asof"]]
+    out["state"] = out["state"].map(state_code)
+    return out
+
+
+def state_history() -> pd.DataFrame:
+    """NASS state history and season context from data/panel/state_year.csv (kernelag.state_panel)."""
+    path = REPO / "data" / "panel" / "state_year.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    cols = ["state", "year", "silage", "grain", "planted", "milk_cows", "drought", "poor_condition", "rain_anom",
+            "gdd_anom", "corn_price_sep", "loss_share"]
+    t = pd.read_csv(path)
+    t = t[[c for c in cols if c in t.columns]].copy()
+    t["state"] = t["state"].map(state_code)
+    return t
+
+
+def catalog() -> dict:
+    """Planned models (board/catalog.json): shown as 'awaiting results' until someone publishes them."""
+    path = Path(__file__).with_name("catalog.json")
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
 def collect() -> dict:
     """Read every source. A source that fails is reported, not fatal: models are still being built."""
     backtests, forecasts, models, problems = [], [], {}, []
@@ -383,8 +456,9 @@ def collect() -> dict:
     if not forecast.empty:
         forecast["state"] = forecast["state"].map(state_code)
         forecast = forecast[["model_id", "target", "state", "predicted", "lo80", "hi80"]]
-    keep = ["model_id", "source", "model", "target", "year", "state_error_pct", "us_error_pct", "n_states", "metric"]
-    backtest = backtest[keep].sort_values(["model_id", "year"]) if not backtest.empty else backtest
+    keep = ["model_id", "source", "model", "target", "year", "state_error_pct", "us_error_pct", "n_states", "metric",
+            "asof"]
+    backtest = backtest.reindex(columns=keep).sort_values(["model_id", "year"]) if not backtest.empty else backtest
     forecast_ids = set(forecast["model_id"]) if not forecast.empty else set()
     backtest_ids = set(backtest["model_id"]) if not backtest.empty else set()
     for mid, card in models.items():

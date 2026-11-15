@@ -1,0 +1,390 @@
+{
+ "about": "Planned models from 'Kernel Model Tiers' (pitch doc). A model fills in on the board when any folder publishes results with model name equal to its id (e.g. model='A-S2'). Edit this file to add, rename or drop candidates.",
+ "tiers": {
+  "A": {
+   "name": "Tier A · Independent",
+   "blurb": "No current-year NASS data. Past NASS finals anchor the model; this year comes from FSA certifications, crop insurance, drought and weather."
+  },
+  "B": {
+   "name": "Tier B · NASS-informed",
+   "blurb": "Everything in Tier A plus current-year NASS inputs that are not the answer: planted acres, yield forecast, crop condition and progress, livestock. Never NASS's harvested-for-grain forecast."
+  }
+ },
+ "benchmarks": [
+  {
+   "crop": "grain",
+   "label": "NASS's own November forecast",
+   "model_id": "kernel/grain/nass_latest"
+  },
+  {
+   "crop": "grain",
+   "label": "Same as last year",
+   "model_id": "kernel/grain/same_as_last_year"
+  },
+  {
+   "crop": "silage",
+   "label": "Our current model (reversion to the 3-year mean)",
+   "model_id": "kernel/silage/reversion_only"
+  },
+  {
+   "crop": "silage",
+   "label": "Same as last year",
+   "model_id": "kernel/silage/same_as_last_year"
+  }
+ ],
+ "models": [
+  {
+   "id": "A-G1",
+   "tier": "A",
+   "crop": "grain",
+   "baseline": true,
+   "name": "FSA ratio",
+   "how": "Acres farmers certified for grain this year, scaled by last year's ratio of NASS final grain acres to FSA grain acres.",
+   "features": [
+    "FSA grain-intended acres",
+    "last year's NASS/FSA ratio"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-G2",
+   "tier": "A",
+   "crop": "grain",
+   "name": "FSA planted share",
+   "how": "All corn planted per FSA, times last year's ratio of NASS grain acres to FSA planted acres.",
+   "features": [
+    "FSA all-corn planted",
+    "last year's ratio"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-G3",
+   "tier": "A",
+   "crop": "grain",
+   "name": "FSA ratio, 3-year",
+   "how": "Like A-G1, with the median ratio of the last three years, so one odd year can't throw it off.",
+   "features": [
+    "FSA grain-intended acres",
+    "3-year median ratio"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-G4",
+   "tier": "A",
+   "crop": "grain",
+   "name": "FSA ratio + stress",
+   "how": "A-G1 corrected for abandonment and switching in bad seasons by a regression fitted on earlier years.",
+   "features": [
+    "A-G1",
+    "drought change",
+    "insurance weather-loss share"
+   ],
+   "signals": [
+    "FSA",
+    "weather",
+    "insurance",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-S1",
+   "tier": "A",
+   "crop": "silage",
+   "baseline": true,
+   "name": "Reversion (current report model)",
+   "how": "Last year's acres pulled toward the state's 3-year average: a high year tends to fall back.",
+   "features": [
+    "last year's acres vs the 3-year mean"
+   ],
+   "signals": [
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-S2",
+   "tier": "A",
+   "crop": "silage",
+   "name": "FSA pass-through",
+   "how": "Where FSA has historically captured at least 75% of silage acres, carry FSA's year-on-year silage change into the forecast; elsewhere use A-S1. Coverage judged from earlier years only.",
+   "features": [
+    "FSA silage-intended acres",
+    "FSA coverage"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-S3",
+   "tier": "A",
+   "crop": "silage",
+   "name": "FSA residual",
+   "how": "Corn planted minus our own grain estimate leaves the acres not going to grain; last year's silage share of those acres turns them into silage, blended with A-S1.",
+   "features": [
+    "FSA planted",
+    "A-G1 grain estimate",
+    "last year's silage share of non-grain acres"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-S4",
+   "tier": "A",
+   "crop": "silage",
+   "name": "Reversion + switch signals",
+   "how": "A-S1 adjusted by signals that farmers chopped more (or less) than usual, from a regression fitted on earlier years.",
+   "features": [
+    "drought change",
+    "insurance-loss change",
+    "FSA silage change",
+    "insured silage acres change"
+   ],
+   "signals": [
+    "FSA",
+    "weather",
+    "insurance",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-S5",
+   "tier": "A",
+   "crop": "silage",
+   "name": "FSA silage share",
+   "how": "Change in the silage share of FSA-certified corn, applied to last year's NASS silage acres.",
+   "features": [
+    "FSA silage share of corn, this year vs last"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "B-G0",
+   "tier": "B",
+   "crop": "grain",
+   "baseline": true,
+   "name": "Planted × last year's share",
+   "how": "NASS planted acres times last year's share of planted corn harvested for grain. The simple baseline.",
+   "features": [
+    "NASS planted",
+    "last year's grain share"
+   ],
+   "signals": [
+    "NASS current year",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "B-G1",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Planted × FSA grain share",
+   "how": "NASS planted acres times this year's FSA grain share, with a correction learned from last year's gap between FSA and NASS.",
+   "features": [
+    "NASS planted",
+    "FSA grain share",
+    "last year's correction"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA"
+   ]
+  },
+  {
+   "id": "B-G2",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Grain-share regression",
+   "how": "Predicts the change in the grain share of planted corn from this season's evidence; one regression pooled over states, fitted on earlier years.",
+   "features": [
+    "FSA grain-share change",
+    "yield shock",
+    "drought change",
+    "poor-condition change",
+    "insurance losses"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "weather",
+    "insurance"
+   ]
+  },
+  {
+   "id": "B-G3",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Monotone boosted trees",
+   "how": "Gradient-boosted trees on the B-G2 inputs, each input forced to push in the direction agronomy expects. Small fixed settings, no tuning.",
+   "features": [
+    "same as B-G2"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "weather",
+    "insurance"
+   ]
+  },
+  {
+   "id": "B-G4",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Daniel's GBT (reference)",
+   "how": "The team's earlier gradient-boosted grain model, re-scored on the same years for comparison.",
+   "features": [
+    "NASS planted",
+    "yield forecast",
+    "condition",
+    "drought",
+    "weather"
+   ],
+   "signals": [
+    "NASS current year",
+    "weather"
+   ]
+  },
+  {
+   "id": "B-S0",
+   "tier": "B",
+   "crop": "silage",
+   "baseline": true,
+   "name": "Reversion",
+   "how": "The current report model, as the reference.",
+   "features": [
+    "last year's acres vs the 3-year mean"
+   ],
+   "signals": [
+    "NASS history"
+   ]
+  },
+  {
+   "id": "B-S1",
+   "tier": "B",
+   "crop": "silage",
+   "name": "Reversion + acreage",
+   "how": "Adds the change in planted acres and the change in the share of corn not intended for grain (from FSA).",
+   "features": [
+    "reversion",
+    "planted change",
+    "FSA non-grain share change"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "B-S2",
+   "tier": "B",
+   "crop": "silage",
+   "name": "+ season stress",
+   "how": "Adds signs of a bad season that push farmers to chop grain corn for silage.",
+   "features": [
+    "B-S1",
+    "yield shock",
+    "drought",
+    "poor condition",
+    "insurance losses"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "weather",
+    "insurance"
+   ]
+  },
+  {
+   "id": "B-S3",
+   "tier": "B",
+   "crop": "silage",
+   "name": "+ dairy demand",
+   "how": "Adds feed demand: more cows means more silage.",
+   "features": [
+    "B-S1",
+    "milk-cow change",
+    "FSA silage change in high-coverage states"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "economy"
+   ]
+  },
+  {
+   "id": "B-S4",
+   "tier": "B",
+   "crop": "silage",
+   "name": "Monotone boosted trees",
+   "how": "Gradient-boosted trees on the B-S2 and B-S3 inputs, directions fixed in advance.",
+   "features": [
+    "B-S2 + B-S3 inputs"
+   ],
+   "signals": [
+    "NASS current year",
+    "FSA",
+    "weather",
+    "insurance",
+    "economy"
+   ]
+  },
+  {
+   "id": "B-S5",
+   "tier": "B",
+   "crop": "silage",
+   "name": "Residual",
+   "how": "Planted acres minus our Tier B grain estimate, times last year's silage share of the remainder, blended with reversion.",
+   "features": [
+    "NASS planted",
+    "B-G1 grain estimate",
+    "last year's silage share"
+   ],
+   "signals": [
+    "NASS current year",
+    "NASS history"
+   ]
+  }
+ ],
+ "satellite": {
+  "name": "Satellite silage signal (both tiers)",
+  "how": "Year-on-year change in each state's share of silage-like acres, from Sentinel-2 harvest evidence on a fixed sample of fields. Added to both tiers as an extra input when it is ready. The field classifier behind it is on the Field models tab.",
+  "id_prefix": "SAT"
+ },
+ "backtest_years": [
+  2012,
+  2024
+ ],
+ "holdout_year": 2025,
+ "asof": [
+  {
+   "key": "nov",
+   "label": "Nov 15"
+  },
+  {
+   "key": "oct",
+   "label": "Oct 15"
+  },
+  {
+   "key": "sep",
+   "label": "Sep 15"
+  }
+ ]
+}

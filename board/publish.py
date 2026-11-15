@@ -5,6 +5,9 @@ Call this at the end of your experiment script. It writes up to three small file
     board_forecast.csv   per model, target and state: predicted, lo80, hi80 (a "US" row is allowed)
     board_models.json    per model: signals, features, method, description, owner
 
+For the Tier A/B candidates, use the id from board/catalog.json as the model name (model="A-S2"), and
+add an ``asof`` column (sep, oct or nov) if you replay several forecast dates.
+
 Example (state-level predictions from a backtest loop):
 
     from board.publish import publish
@@ -51,6 +54,8 @@ def publish(folder: str | Path, predictions: pd.DataFrame | None = None, backtes
         backtest = errors_from_predictions(predictions)
     if backtest is not None:
         _check(backtest, {"model", "target", "year", "us_error_pct"}, "backtest")
+        if "asof" in backtest and not set(backtest["asof"].dropna()) <= {"sep", "oct", "nov"}:
+            raise ValueError("asof must be sep, oct or nov")
         if "state_error_pct" not in backtest:
             backtest = backtest.assign(state_error_pct=float("nan"))
         backtest.to_csv(folder / "board_backtest.csv", index=False)
