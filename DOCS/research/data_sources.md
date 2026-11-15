@@ -4,6 +4,21 @@ Compiled 2026-11-15 by cc-varun from the research notes in this folder, the USDA
 
 **Not yet included:** the organizer sample data in the team JupyterLab. The lab needs a login and has not been read. Section 8 lists what to record from it. Whatever the organizers supply overrides the matching rows here.
 
+## 0. Organizer messages, 14 Nov (these override the rows below)
+
+- **The scoring year is 2025.** The organizers posted the numbers results will be evaluated against: 2025 corn harvested for grain and for silage, by state.
+  - Source: `https://quickstats.nass.usda.gov/results/ACC45317-B978-3390-B0A1-BE0EC02A9D63` (CSV at `/data/spreadsheet/<same id>.csv`).
+  - Local copy: `data/nass/quickstats_2025_corn_grain_silage_state.csv` (git-ignored; listed in `data/DATA_MANIFEST.tsv`).
+  - Content: 92 rows. US total 90,948,000 grain acres and 6,187,000 silage acres. Silage is given for 48 states; grain for 41 states plus an "OTHER STATES" row. Connecticut, Maine, Massachusetts, Nevada, New Hampshire, Rhode Island and Vermont have a silage figure but no separate grain figure.
+  - These are the revised 2025 figures, so use this vintage everywhere.
+- **What a 2025 target changes:**
+  - The 2025 Cropland Data Layer (B2) is the mask; the missing 2026 layer no longer matters for scoring.
+  - HLS (C4) covers all of 2025, so it moves up to `P0` as the merged optical series.
+  - 2026 becomes the demonstration of the nowcast, not the scored result.
+  - The backtest years for fitting are 2024 and earlier; 2025 must stay untouched until the final run.
+- **Cropland Data Layer access.** If the direct download fails, use CropScape (`https://nassgeodata.gmu.edu/CropScape/`): define an area, pick the year, download the raster subset or export acreage statistics. The site did not respond to a scripted request on 2026-11-15, so it may need a browser.
+- **Resolution.** The 2024 and 2025 layers are 10 m. The organizers point to smaller resampled files (about 1.9 GB) for those two years; use them for backtesting, since earlier years exist only at 30 m.
+
 ## 1. What we predict, and what counts as truth
 
 - **Deliverable:** two numbers per state and for the US, acres of corn harvested for grain and acres harvested for silage, before NASS publishes them in January.
