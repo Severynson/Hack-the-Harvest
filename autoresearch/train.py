@@ -1,11 +1,12 @@
 """
-Caveman model: silage vs grain from growing-season length.
+Caveman model: silage vs grain from how the corn leaves the field.
 
-Idea (Severyn, test_models/danielModel/README.md):
-  - Green-up date (proxy for planting) = when NDVI starts its steady rise after the spring low.
-  - Harvest date = when NDVI collapses after the summer peak.
-  - Season length = harvest - green-up. Silage is cut green, weeks before grain, so its season is shorter.
-  - Threshold on season length is learned from the training years' labels only.
+Started from Severyn's idea (test_models/danielModel/README.md): season length = harvest - green-up.
+Ablations showed season length is weak (grain senesces at the same date silage is cut). Two timing
+rules survived:
+  1. Drop speed: silage is chopped green, so NDVI collapses within ~2 weeks; grain dries down over 3-4.
+  2. Re-greening: after an early silage cut a cover crop is sown and is green by Nov-Dec.
+A field-year is silage if it drops fast OR re-greens. Both thresholds are learned from training years.
 
 This is the only file the autoresearch loop edits. Run: uv run train.py
 """
@@ -26,8 +27,6 @@ t0 = time.time()
 MIN_VALID_FRAC = 0.4       # scene kept for a field if >= this share of its pixels are clear
 SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolated NDVI
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
-GREENUP_FRAC = 0.5         # green-up = first day NDVI regains this share of (peak - spring low)
-HARVEST_FRAC = 0.5         # harvest = first day after peak NDVI falls below low + this share of amplitude
 PEAK_WINDOW = (170, 260)   # corn peak is searched only in summer, so a spring cover crop peak is ignored
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
 SECOND_FEATURE = "late_ndvi_neg"  # OR-rule: silage if FEATURE < t1 or SECOND_FEATURE < t2
@@ -50,17 +49,11 @@ def daily_ndvi(g: pd.DataFrame) -> pd.Series:
 
 
 def season_features(g: pd.DataFrame) -> dict:
+    out = {"drop_days": np.nan, "late_ndvi_neg": np.nan}
     late = g[(g["valid_frac"] >= MIN_VALID_FRAC) & g["doy"].between(*LATE_WINDOW)]["ndvi"]
-    feats = _season_features(g)
-    feats["late_ndvi_neg"] = -float(late.median()) if len(late) else np.nan  # negated: rules are "silage if x < thr"
-    return feats
-
-
-def _season_features(g: pd.DataFrame) -> dict:
+    if len(late):
+        out["late_ndvi_neg"] = -float(late.median())  # negated: rules are "silage if x < thr"
     s = daily_ndvi(g)
-    out = {"greenup_doy": np.nan, "harvest_doy": np.nan, "season_len": np.nan, "drop_days": np.nan}
-    if s.empty:
-        return out
     summer = s.loc[PEAK_WINDOW[0] : PEAK_WINDOW[1]]
     if summer.empty:
         return out
@@ -68,22 +61,13 @@ def _season_features(g: pd.DataFrame) -> dict:
     spring = s.loc[SPRING_WINDOW[0] : min(SPRING_WINDOW[1], peak_doy)]
     if spring.empty:
         return out
-    low_doy = int(spring.idxmin())
-    low, peak = s.loc[low_doy], s.loc[peak_doy]
+    low, peak = spring.min(), s.loc[peak_doy]
     amp = peak - low
-    rising = s.loc[low_doy:peak_doy]
-    up = rising[rising >= low + GREENUP_FRAC * amp]
     after = s.loc[peak_doy:]
-    down = after[after <= low + HARVEST_FRAC * amp]
     hi = after[after <= low + DROP_HI * amp]
     lo = after[after <= low + DROP_LO * amp]
     if not hi.empty and not lo.empty:
         out["drop_days"] = int(lo.index[0] - hi.index[0])
-    if up.empty or down.empty:
-        return out
-    out["greenup_doy"] = int(up.index[0])
-    out["harvest_doy"] = int(down.index[0])
-    out["season_len"] = out["harvest_doy"] - out["greenup_doy"]
     return out
 
 
