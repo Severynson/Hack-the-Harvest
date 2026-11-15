@@ -70,6 +70,9 @@ function stateErrors(id) {    // mean absolute % error per state over the board'
   const out = {}; for (const k in acc) out[k] = {v: acc[k].reduce((a, b) => a + b, 0) / acc[k].length, n: acc[k].length}; return out;
 }
 function defaultModel(crop) {
+  const head = (CAT.models || []).find(c => c.crop == crop && c.headline);
+  const headM = head && Object.values(MODELS).find(m => m.model == head.id && m.target == crop && m.has_forecast);
+  if (headM) return headM.model_id;
   const tierPub = (CAT.models || []).filter(c => c.crop == crop).map(c => Object.values(MODELS).find(m => m.model == c.id && m.target == crop && m.has_forecast)).filter(Boolean);
   if (tierPub.length) return tierPub[0].model_id;
   const bench = (CAT.benchmarks || []).find(b => b.crop == crop && MODELS[b.model_id]?.has_forecast);

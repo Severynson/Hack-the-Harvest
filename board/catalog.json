@@ -98,6 +98,38 @@
    ]
   },
   {
+   "id": "A-G5",
+   "tier": "A",
+   "crop": "grain",
+   "name": "FSA ratio, same month",
+   "how": "Ratio against last year's FSA file from the same point in the season.",
+   "features": [
+    "FSA grain-intended acres",
+    "same-month NASS/FSA ratio"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
+   "id": "A-G9",
+   "tier": "A",
+   "crop": "grain",
+   "headline": true,
+   "name": "FSA ratio, national reconciliation",
+   "how": "A-G3's state split scaled to one national FSA x NASS/FSA ratio total.",
+   "features": [
+    "FSA grain-intended acres",
+    "3-year median ratio",
+    "national FSA x ratio total"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history"
+   ]
+  },
+  {
    "id": "A-S1",
    "tier": "A",
    "crop": "silage",
@@ -173,6 +205,40 @@
    "signals": [
     "FSA",
     "NASS history"
+   ]
+  },
+  {
+   "id": "A-S6",
+   "tier": "A",
+   "crop": "silage",
+   "name": "Pass-through + switch",
+   "how": "A-S2 in high-coverage states, A-S4 elsewhere.",
+   "features": [
+    "FSA silage change",
+    "drought",
+    "insurance losses"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history",
+    "weather",
+    "insurance"
+   ]
+  },
+  {
+   "id": "A-S7",
+   "tier": "A",
+   "crop": "silage",
+   "name": "Drought scenario (smoothed level + Drought Monitor chopping)",
+   "how": "Smoothed state level plus gamma x max(0, D2+ share - 0.10) x last year's grain acres.",
+   "features": [
+    "smoothed state level",
+    "Drought Monitor D2+ share",
+    "last year's grain acres"
+   ],
+   "signals": [
+    "NASS history",
+    "weather"
    ]
   },
   {
@@ -259,6 +325,59 @@
    "signals": [
     "NASS current year",
     "weather"
+   ]
+  },
+  {
+   "id": "B-G5",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Planted x FSA share, 3-year",
+   "how": "B-G1 with the median correction of the last three years.",
+   "features": [
+    "NASS planted acres",
+    "FSA grain share",
+    "3-year median correction"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history",
+    "NASS current year"
+   ]
+  },
+  {
+   "id": "B-G6",
+   "tier": "B",
+   "crop": "grain",
+   "name": "B-G1 + stress",
+   "how": "B-G1 corrected by stress signals.",
+   "features": [
+    "NASS planted acres",
+    "FSA grain share",
+    "drought",
+    "insurance losses"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history",
+    "NASS current year",
+    "weather",
+    "insurance"
+   ]
+  },
+  {
+   "id": "B-G7",
+   "tier": "B",
+   "crop": "grain",
+   "name": "Blend",
+   "how": "Geometric mean of B-G5 and A-G3. Selected Tier B grain.",
+   "features": [
+    "B-G5",
+    "A-G3"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history",
+    "NASS current year"
    ]
   },
   {
@@ -360,6 +479,41 @@
    "signals": [
     "NASS current year",
     "NASS history"
+   ]
+  },
+  {
+   "id": "B-S5b",
+   "tier": "B",
+   "crop": "silage",
+   "name": "Residual, filled planted",
+   "how": "B-S5 with FSA-scaled planted where NASS has only March figures. Selected Tier B silage.",
+   "features": [
+    "NASS planted acres",
+    "Tier B grain estimate",
+    "last year's silage share"
+   ],
+   "signals": [
+    "FSA",
+    "NASS history",
+    "NASS current year"
+   ]
+  },
+  {
+   "id": "B-S6",
+   "tier": "B",
+   "crop": "silage",
+   "headline": true,
+   "name": "Smoothed level + drought chopping",
+   "how": "Smoothed state level plus chopping from NASS's in-season yield shortfall x last year's final grain acres. Never NASS's acreage forecast.",
+   "features": [
+    "smoothed state level",
+    "NASS yield shortfall",
+    "last year's grain acres"
+   ],
+   "signals": [
+    "NASS history",
+    "NASS current year",
+    "weather"
    ]
   }
  ],
