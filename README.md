@@ -1,6 +1,6 @@
 # Kernel 🌽 Silage or grain?
 
-**Team Kernel · Hack the Harvest 2026 (USDA NASS × NVIDIA, UC Davis)**
+**Team Kernel · Hack the Harvest 2026 (USDA NASS × NVIDIA, UC Davis X University of the Pacific)**
 
 USDA asked for two numbers: how many acres of this year's corn will be harvested **for grain** and how many **for silage**, for every state, **before January**. NASS publishes its first official silage count in January, after the markets have already moved. Kernel produces both numbers by mid-November. It builds them from public data, mostly from what farmers certify to USDA's Farm Service Agency each summer, and checks individual fields from space.
 
