@@ -29,6 +29,8 @@ SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after 
 GREENUP_FRAC = 0.5         # green-up = first day NDVI regains this share of (peak - spring low)
 HARVEST_FRAC = 0.5         # harvest = first day after peak NDVI falls below low + this share of amplitude
 PEAK_WINDOW = (170, 260)   # corn peak is searched only in summer, so a spring cover crop peak is ignored
+LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
+SECOND_FEATURE = "late_ndvi_neg"  # OR-rule: silage if FEATURE < t1 or SECOND_FEATURE < t2
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
 FEATURE = "drop_days"      # which feature the single threshold rule uses
 
@@ -48,6 +50,13 @@ def daily_ndvi(g: pd.DataFrame) -> pd.Series:
 
 
 def season_features(g: pd.DataFrame) -> dict:
+    late = g[(g["valid_frac"] >= MIN_VALID_FRAC) & g["doy"].between(*LATE_WINDOW)]["ndvi"]
+    feats = _season_features(g)
+    feats["late_ndvi_neg"] = -float(late.median()) if len(late) else np.nan  # negated: rules are "silage if x < thr"
+    return feats
+
+
+def _season_features(g: pd.DataFrame) -> dict:
     s = daily_ndvi(g)
     out = {"greenup_doy": np.nan, "harvest_doy": np.nan, "season_len": np.nan, "drop_days": np.nan}
     if s.empty:
@@ -89,7 +98,7 @@ def featurize(ts: pd.DataFrame, keys: pd.DataFrame) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# Model: one threshold on season length, fitted on training labels
+# Model: OR of two thresholds, fitted greedily on training labels
 # ---------------------------------------------------------------------------
 
 
@@ -100,23 +109,30 @@ def f1(y, p):
     return 2 * tp / (2 * tp + fp + fn) if tp else 0.0
 
 
-def fit_threshold(x, y):
-    """Best cut: silage if x < thr. Ties broken by the middle of the best range."""
+def fit_threshold(x, y, already=None):
+    """Best cut: silage if x < thr (OR-ed with `already`). Ties broken by the middle of the best range.
+    Returns -inf (rule off) when no cut beats `already` alone."""
     x, y = np.asarray(x, float), np.asarray(y, int)
-    ok = np.isfinite(x)
-    cands = np.unique(x[ok])
+    already = np.zeros(len(y), bool) if already is None else already
+    xf = np.where(np.isfinite(x), x, np.inf)
+    cands = np.unique(xf[np.isfinite(xf)])
     cands = (cands[:-1] + cands[1:]) / 2 if len(cands) > 1 else cands
-    scores = np.array([f1(y[ok], (x[ok] < c).astype(int)) for c in cands])
+    cands = np.concatenate([[-np.inf], cands])
+    scores = np.array([f1(y, (already | (xf < c)).astype(int)) for c in cands])
     best = np.flatnonzero(scores == scores.max())
-    return float(np.median(cands[best]))
+    return float(np.median(cands[best])) if 0 not in best else -np.inf
 
 
 def fit_predict(ts_tr, lab_tr, ts_te, keys_te):
     ftr = featurize(ts_tr, lab_tr).merge(lab_tr[["OBJECTID", "year", "y"]], on=["OBJECTID", "year"])
-    thr = fit_threshold(ftr[FEATURE], ftr["y"])
+    y = ftr["y"].to_numpy()
+    xa, xb = ftr[FEATURE].to_numpy(float), ftr[SECOND_FEATURE].to_numpy(float)
+    t1 = fit_threshold(xa, y)
+    t2 = fit_threshold(xb, y, already=np.nan_to_num(xa, nan=np.inf) < t1)
     fte = featurize(ts_te, keys_te)
-    x = fte[FEATURE].to_numpy(float)
-    return np.where(np.isfinite(x), x < thr, 0).astype(int)  # missing -> grain (majority class)
+    a = np.nan_to_num(fte[FEATURE].to_numpy(float), nan=np.inf)  # missing -> grain (majority class)
+    b = np.nan_to_num(fte[SECOND_FEATURE].to_numpy(float), nan=np.inf)
+    return ((a < t1) | (b < t2)).astype(int)
 
 
 # ---------------------------------------------------------------------------
