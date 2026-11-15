@@ -1,7 +1,8 @@
 # Data folder
 
-Public data only. Everything here travels with `git pull`, except what "Kept out of git" lists.
+Public data, tracked in git so a pull brings it (see "Data in git v1" in `CLAUDE.md`; the limit is 30 MB a file).
 `DATA_MANIFEST.tsv` has one row per file: bytes, sha256, source, who pulled it and when.
+The organizers' starter kit is tracked separately at `jupyter/workspace/`.
 
 ## What is where
 
@@ -14,39 +15,33 @@ Public data only. Everything here travels with `git pull`, except what "Kept out
 | `weather/county_season/` | Last spring frost, first fall frost, first hard freeze, May to September heat units and rain | county-year, 2000 to 2026 | NOAA nClimGrid-Daily | same |
 | `rma/cause_of_loss_corn/` | Corn insurance losses by cause (drought, hail, wind, frost and others) and month | county, 2000 to 2026 | RMA Summary of Business | `scripts/pull_data.py rma` |
 | `rma/insured_by_type_corn/` | Insured corn acres by type (grain, silage and others) and practice | county, 2000 to 2026 | RMA Summary of Business | same |
-| `nass/`, `panel/`, `models/` | cc-varun's tidy tables and model outputs (see `kernelag/`) | | | `kernelag` modules |
+| `nass/`, `labels/`, `s2_series/`, `panel/`, `models/` | cc-varun's tidy tables, labels, field series and model outputs; listed in the manifest | | | `kernelag` modules |
 
 ## How to read each set
 
 - **Quick Stats.** One row per published number, in the layout of the organizers' file. Keep `source_desc = SURVEY`
   and `domain_desc = TOTAL` for the plain yearly figures; the 2015 to 2025 files also carry census breakdowns by farm
-  size and type. The weekly files add `week_ending`.
+  size and type. The 2000 to 2026 files are state level and survey only, and add a `week_ending` column.
 - **Drought.** `None`, `D0` to `D4` are percent of area. The classes are cumulative: `D1` is the share in D1 or worse.
 - **Weather.** Built from NOAA's daily county averages of high, low and rain. Temperatures in degrees C, rain in mm.
   `gdd_c` is corn heat units with a 10 C base and a 30 C cap (50 F and 86 F). `hot_days` counts highs of 32 C or more,
   `frost_days` lows of 0 C or less. Frost dates are days of the year; a hard freeze is -2.2 C (28 F) or less.
   `data_through` is the last day with data, so 2026 is a part year. `fips` is the usual five-digit county code.
+  The lower 48 states only.
 - **RMA.** Corn rows (commodity code 0041) of RMA's yearly files, every column kept. Column names follow RMA's record
-  layouts: `COL_Summary_of_Business_with_Month_All_Years.pdf` and `SOBTPU_External_All_Years.pdf`. Type names in
-  `insured_by_type_corn` include `Grain` and `Silage`. RMA counts insured acres only, so it is a floor, not a total.
+  layouts: `COL_Summary_of_Business_with_Month_All_Years.pdf` and `SOBTPU_External_All_Years.pdf`. In
+  `insured_by_type_corn`, `type_code` 016 is grain and 026 is silage; filter on the code, because the names are upper
+  case before 2011. RMA counts insured acres only, so it is a floor, not a total.
 
-## Files above 5 MB
+## Gzipped files
 
-The repo rejects files above 5 MB, so larger tables are stored gzipped (`.csv.gz`). pandas reads them as they are.
-The six largest 2015 to 2025 Quick Stats files travel gzipped too; `kernelag.state_panel` reads the plain names, so after
-a fresh clone run:
+The per-state county drought files and the yearly RMA files are stored as `.csv.gz` to keep clones small, and so is
+any table above 25 MB. pandas reads `.csv.gz` as it is; `gunzip -k file.csv.gz` gives a plain copy to open in an editor.
 
-```
-python3 scripts/pull_data.py unpack
-```
+## Not stored
 
-`data/.gitignore` lists those plain copies. `python3 scripts/pull_data.py pack` keeps the list and the gzipped copies current.
-
-## Kept out of git
-
-- `labels/` and `s2_series/`: the organizers' field labels and per-field series built on them. This repo is public.
-- Daily county weather is not stored: `scripts/pull_data.py weather` reduces it to months and seasons as it downloads.
-  The daily files for 2000 to 2026 are about 1 GB; NOAA's folder is linked in the manifest.
+- Daily county weather: `scripts/pull_data.py weather` reduces it to months and seasons as it downloads. The daily files
+  for 2000 to 2026 are about 1 GB; NOAA's folder is linked in the manifest.
 
 ## Not pulled yet
 
@@ -58,7 +53,7 @@ python3 scripts/pull_data.py unpack
 ## Refreshing
 
 ```
-python3 scripts/pull_data.py all            # every pull, then pack and manifest; finished files are skipped
+python3 scripts/pull_data.py all            # every pull, then the manifest; finished files are skipped
 python3 scripts/pull_data.py weather --start-year 1979
 ```
 

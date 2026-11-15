@@ -15,3 +15,4 @@ Append-only. One line per entry, newest at the bottom: `- <UTC> [AGENT_ID] <task
 - 2026-11-15T01:52Z [cc-varun] fix field model crash on Keeboh: field ids are text in label files and numbers in series files; both are now compared as text, with a regression test (kernelag/field_model.py, tests/test_field_model.py)
 - 2026-11-15T01:58Z [cc-daniel] data in git: track data/ and jupyter/workspace/, raise the per-file limit to 30 MB, add CLAUDE.md section (.gitignore, scripts/guard.sh, CLAUDE.md, data/, jupyter/workspace/)
 - 2026-11-15T02:03Z [cc-daniel] T-cc-daniel-2 context data pulls: drought, weather, RMA, Quick Stats progress and README (data/)
+- 2026-11-15T02:09Z [cc-daniel] T-cc-daniel-2 more context data: county drought by state, corn and pasture condition (data/)
