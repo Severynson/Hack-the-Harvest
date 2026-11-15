@@ -1,0 +1,760 @@
+{
+  "generated_utc": "2026-11-15T09:00:45Z",
+  "preregistration": {
+    "sha256": "183e74c78fa2b64b9b3bee825b72cbfbc380ad6d2980aa0fd6c154f1fd809fc6",
+    "matches_readme": true,
+    "frozen_utc": "2026-11-15T09:00:00Z",
+    "evaluate_py_sha256_at_freeze": "9688c539a94565318968f0a7bbdf9b5817b9bc567514fcbd1703ce39c719e0b3",
+    "evaluate_py_sha256_at_score": "9688c539a94565318968f0a7bbdf9b5817b9bc567514fcbd1703ce39c719e0b3"
+  },
+  "decision_rule": "ADOPT the multi-year training set if pooled LOYO balanced accuracy (M) minus the 2023-only model's (S), over held-out years 2019, 2020, 2021, 2022, 2024, 2025, 2026, is > 0 and its 90% paired cell-bootstrap interval lies entirely above 0.",
+  "decision": "KEEP 2023-only: NO IMPROVEMENT SHOWN",
+  "gates": {
+    "G1": {
+      "what": "S leave-one-cell-out on 2023 alone = feature harness E2 base",
+      "expected": {
+        "TP": 877,
+        "FP": 345,
+        "FN": 390,
+        "TN": 1516
+      },
+      "observed": {
+        "TP": 877,
+        "FP": 345,
+        "FN": 390,
+        "TN": 1516
+      },
+      "reproduced": true
+    },
+    "G2": {
+      "what": "quebec_maize_2023 (318-parcel) fit on Maryland = data/models/field_model_report.csv",
+      "expected": {
+        "TP": 10,
+        "FP": 5,
+        "FN": 2,
+        "TN": 27
+      },
+      "observed": {
+        "TP": 10,
+        "FP": 5,
+        "FN": 2,
+        "TN": 27
+      },
+      "reproduced": true
+    },
+    "G3": {
+      "what": "qcm_2023 (2023 all-Quebec, 17 cells) fit on Maryland = feature harness E3b base",
+      "expected": {
+        "TP": 10,
+        "FP": 4,
+        "FN": 2,
+        "TN": 28
+      },
+      "observed": {
+        "TP": 10,
+        "FP": 4,
+        "FN": 2,
+        "TN": 28
+      },
+      "reproduced": true
+    }
+  },
+  "settings": {
+    "model": "kernelag.field_model.make_model()",
+    "features": [
+      "max_drop",
+      "max_drop_rate",
+      "fade_days",
+      "green_at_cut",
+      "ndmi_before_cut",
+      "ndti_post"
+    ],
+    "threshold": 0.5,
+    "not_assessable": "scored grain; not used for fitting",
+    "bootstrap": {
+      "unit": "cell",
+      "draws": 2000,
+      "seed": 0,
+      "interval": [
+        0.05,
+        0.95
+      ]
+    },
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "compare_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025,
+      2026
+    ],
+    "cells": [
+      "68_505",
+      "68_510",
+      "70_509",
+      "70_511",
+      "72_509",
+      "72_515",
+      "73_515",
+      "74_500",
+      "74_511",
+      "75_513",
+      "78_515",
+      "79_515",
+      "80_516",
+      "80_517",
+      "81_518",
+      "81_519",
+      "88_527"
+    ]
+  },
+  "roster": {
+    "quebec_field_years": 22026,
+    "by_year": {
+      "2019": {
+        "field_years": 2566,
+        "silage": 1030,
+        "grain": 1536,
+        "not_assessable": 3
+      },
+      "2020": {
+        "field_years": 2325,
+        "silage": 948,
+        "grain": 1377,
+        "not_assessable": 16
+      },
+      "2021": {
+        "field_years": 2598,
+        "silage": 1062,
+        "grain": 1536,
+        "not_assessable": 0
+      },
+      "2022": {
+        "field_years": 2839,
+        "silage": 1057,
+        "grain": 1782,
+        "not_assessable": 32
+      },
+      "2023": {
+        "field_years": 3128,
+        "silage": 1267,
+        "grain": 1861,
+        "not_assessable": 0
+      },
+      "2024": {
+        "field_years": 2938,
+        "silage": 1213,
+        "grain": 1725,
+        "not_assessable": 0
+      },
+      "2025": {
+        "field_years": 2826,
+        "silage": 1306,
+        "grain": 1520,
+        "not_assessable": 0
+      },
+      "2026": {
+        "field_years": 2806,
+        "silage": 1266,
+        "grain": 1540,
+        "not_assessable": 0
+      }
+    },
+    "maryland_field_years": 44
+  },
+  "primary": {
+    "M_pooled": {
+      "n": 18898,
+      "assessable": 18847,
+      "n_silage": 7882,
+      "n_grain": 11016,
+      "TP": 5381,
+      "FP": 2259,
+      "FN": 2501,
+      "TN": 8757,
+      "silage_precision": 0.704,
+      "silage_recall": 0.683,
+      "grain_recall": 0.795,
+      "balanced_accuracy": 0.739,
+      "silage_f1": 0.693,
+      "accuracy": 0.748,
+      "false_positive_rate": 0.205
+    },
+    "S_pooled": {
+      "n": 18898,
+      "assessable": 18847,
+      "n_silage": 7882,
+      "n_grain": 11016,
+      "TP": 5265,
+      "FP": 2151,
+      "FN": 2617,
+      "TN": 8865,
+      "silage_precision": 0.71,
+      "silage_recall": 0.668,
+      "grain_recall": 0.805,
+      "balanced_accuracy": 0.736,
+      "silage_f1": 0.688,
+      "accuracy": 0.748,
+      "false_positive_rate": 0.195
+    },
+    "units": 17,
+    "draws": 2000,
+    "seed": 0,
+    "d_balanced_accuracy": 0.0025,
+    "d_balanced_accuracy_ci90": [
+      -0.0043,
+      0.01
+    ],
+    "balanced_accuracy_draws_used": 2000,
+    "d_silage_f1": 0.005,
+    "d_silage_f1_ci90": [
+      -0.0023,
+      0.0129
+    ],
+    "silage_f1_draws_used": 2000,
+    "mcnemar": {
+      "S_only_right": 1028,
+      "M_only_right": 1036,
+      "p": 0.8776
+    }
+  },
+  "loyo": {
+    "M_pooled_all_8_years": {
+      "n": 22026,
+      "assessable": 21975,
+      "n_silage": 9149,
+      "n_grain": 12877,
+      "TP": 6337,
+      "FP": 2766,
+      "FN": 2812,
+      "TN": 10111,
+      "silage_precision": 0.696,
+      "silage_recall": 0.693,
+      "grain_recall": 0.785,
+      "balanced_accuracy": 0.739,
+      "silage_f1": 0.694,
+      "accuracy": 0.747,
+      "false_positive_rate": 0.215
+    },
+    "per_year_vs_S": {
+      "2019": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": -0.0076,
+        "d_balanced_accuracy_ci90": [
+          -0.0267,
+          0.0137
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0,
+        "d_silage_f1_ci90": [
+          -0.025,
+          0.0313
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2020": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0359,
+        "d_balanced_accuracy_ci90": [
+          0.0047,
+          0.0761
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0229,
+        "d_silage_f1_ci90": [
+          -0.0067,
+          0.0558
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2021": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": -0.0761,
+        "d_balanced_accuracy_ci90": [
+          -0.1019,
+          -0.0487
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": -0.0667,
+        "d_silage_f1_ci90": [
+          -0.1054,
+          -0.0319
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2022": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0217,
+        "d_balanced_accuracy_ci90": [
+          0.0097,
+          0.0323
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0247,
+        "d_silage_f1_ci90": [
+          0.0077,
+          0.0432
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2024": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0088,
+        "d_balanced_accuracy_ci90": [
+          0.0018,
+          0.0165
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0116,
+        "d_silage_f1_ci90": [
+          0.0026,
+          0.0219
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2025": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0256,
+        "d_balanced_accuracy_ci90": [
+          0.0138,
+          0.0384
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0267,
+        "d_silage_f1_ci90": [
+          0.0157,
+          0.0387
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2026": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0054,
+        "d_balanced_accuracy_ci90": [
+          -0.0094,
+          0.0193
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0083,
+        "d_silage_f1_ci90": [
+          -0.0054,
+          0.0223
+        ],
+        "silage_f1_draws_used": 2000
+      }
+    }
+  },
+  "loao": {
+    "M_pooled_all_8_years": {
+      "n": 22026,
+      "assessable": 21975,
+      "n_silage": 9149,
+      "n_grain": 12877,
+      "TP": 6326,
+      "FP": 2605,
+      "FN": 2823,
+      "TN": 10272,
+      "silage_precision": 0.708,
+      "silage_recall": 0.691,
+      "grain_recall": 0.798,
+      "balanced_accuracy": 0.745,
+      "silage_f1": 0.7,
+      "accuracy": 0.754,
+      "false_positive_rate": 0.202
+    }
+  },
+  "strict": {
+    "M_pooled": {
+      "n": 18898,
+      "assessable": 18847,
+      "n_silage": 7882,
+      "n_grain": 11016,
+      "TP": 5383,
+      "FP": 2265,
+      "FN": 2499,
+      "TN": 8751,
+      "silage_precision": 0.704,
+      "silage_recall": 0.683,
+      "grain_recall": 0.794,
+      "balanced_accuracy": 0.739,
+      "silage_f1": 0.693,
+      "accuracy": 0.748,
+      "false_positive_rate": 0.206
+    },
+    "S_pooled": {
+      "n": 18898,
+      "assessable": 18847,
+      "n_silage": 7882,
+      "n_grain": 11016,
+      "TP": 5260,
+      "FP": 2136,
+      "FN": 2622,
+      "TN": 8880,
+      "silage_precision": 0.711,
+      "silage_recall": 0.667,
+      "grain_recall": 0.806,
+      "balanced_accuracy": 0.737,
+      "silage_f1": 0.689,
+      "accuracy": 0.748,
+      "false_positive_rate": 0.194
+    },
+    "units": 17,
+    "draws": 2000,
+    "seed": 0,
+    "d_balanced_accuracy": 0.0019,
+    "d_balanced_accuracy_ci90": [
+      -0.005,
+      0.01
+    ],
+    "balanced_accuracy_draws_used": 2000,
+    "d_silage_f1": 0.0047,
+    "d_silage_f1_ci90": [
+      -0.0032,
+      0.0129
+    ],
+    "silage_f1_draws_used": 2000,
+    "mcnemar": {
+      "S_only_right": 1009,
+      "M_only_right": 1003,
+      "p": 0.9112
+    },
+    "per_year_vs_S": {
+      "2019": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": -0.0056,
+        "d_balanced_accuracy_ci90": [
+          -0.0233,
+          0.0144
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0031,
+        "d_silage_f1_ci90": [
+          -0.0221,
+          0.0338
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2020": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0342,
+        "d_balanced_accuracy_ci90": [
+          0.0042,
+          0.0736
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0217,
+        "d_silage_f1_ci90": [
+          -0.0078,
+          0.0548
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2021": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": -0.0727,
+        "d_balanced_accuracy_ci90": [
+          -0.0972,
+          -0.0462
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": -0.0634,
+        "d_silage_f1_ci90": [
+          -0.1007,
+          -0.0294
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2022": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0193,
+        "d_balanced_accuracy_ci90": [
+          0.0083,
+          0.0285
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0227,
+        "d_silage_f1_ci90": [
+          0.0082,
+          0.0384
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2024": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0082,
+        "d_balanced_accuracy_ci90": [
+          0.0011,
+          0.0159
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.011,
+        "d_silage_f1_ci90": [
+          0.0016,
+          0.021
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2025": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0221,
+        "d_balanced_accuracy_ci90": [
+          0.0094,
+          0.036
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.023,
+        "d_silage_f1_ci90": [
+          0.0117,
+          0.0355
+        ],
+        "silage_f1_draws_used": 2000
+      },
+      "2026": {
+        "units": 17,
+        "draws": 2000,
+        "seed": 0,
+        "d_balanced_accuracy": 0.0057,
+        "d_balanced_accuracy_ci90": [
+          -0.008,
+          0.0188
+        ],
+        "balanced_accuracy_draws_used": 2000,
+        "d_silage_f1": 0.0086,
+        "d_silage_f1_ci90": [
+          -0.005,
+          0.0227
+        ],
+        "silage_f1_draws_used": 2000
+      }
+    }
+  },
+  "maryland": {
+    "note": "information only, never used for selection",
+    "fits": [
+      {
+        "fit": "published_318",
+        "trained_on": "quebec_maize_2023 (cell 79_515)",
+        "n_fit_rows": 318,
+        "n": 44,
+        "assessable": 44,
+        "n_silage": 12,
+        "n_grain": 32,
+        "TP": 10,
+        "FP": 5,
+        "FN": 2,
+        "TN": 27,
+        "silage_precision": 0.667,
+        "silage_recall": 0.833,
+        "grain_recall": 0.844,
+        "balanced_accuracy": 0.839,
+        "silage_f1": 0.741,
+        "accuracy": 0.841,
+        "false_positive_rate": 0.156,
+        "reference": "TP10 FP5 FN2 TN27",
+        "reproduced": true,
+        "calls_differing_from_qcm_2023": 1
+      },
+      {
+        "fit": "qcm_2023",
+        "trained_on": "qcm_2023 (17 cells), = S",
+        "n_fit_rows": 3128,
+        "n": 44,
+        "assessable": 44,
+        "n_silage": 12,
+        "n_grain": 32,
+        "TP": 10,
+        "FP": 4,
+        "FN": 2,
+        "TN": 28,
+        "silage_precision": 0.714,
+        "silage_recall": 0.833,
+        "grain_recall": 0.875,
+        "balanced_accuracy": 0.854,
+        "silage_f1": 0.769,
+        "accuracy": 0.864,
+        "false_positive_rate": 0.125,
+        "reference": "TP10 FP4 FN2 TN28",
+        "reproduced": true,
+        "calls_differing_from_qcm_2023": 0
+      },
+      {
+        "fit": "multi_year",
+        "trained_on": "qcm_2019..qcm_2026 (17 cells)",
+        "n_fit_rows": 21975,
+        "n": 44,
+        "assessable": 44,
+        "n_silage": 12,
+        "n_grain": 32,
+        "TP": 10,
+        "FP": 1,
+        "FN": 2,
+        "TN": 31,
+        "silage_precision": 0.909,
+        "silage_recall": 0.833,
+        "grain_recall": 0.969,
+        "balanced_accuracy": 0.901,
+        "silage_f1": 0.87,
+        "accuracy": 0.932,
+        "false_positive_rate": 0.031,
+        "reference": "",
+        "reproduced": "",
+        "calls_differing_from_qcm_2023": 3
+      }
+    ],
+    "multi_year_vs_qcm_2023": {
+      "units": 34,
+      "draws": 2000,
+      "seed": 0,
+      "d_balanced_accuracy": 0.0469,
+      "d_balanced_accuracy_ci90": [
+        0.0135,
+        0.0962
+      ],
+      "balanced_accuracy_draws_used": 2000,
+      "d_silage_f1": 0.1003,
+      "d_silage_f1_ci90": [
+        0.0276,
+        0.2101
+      ],
+      "silage_f1_draws_used": 2000
+    }
+  },
+  "coefficients": {
+    "spread": {
+      "single_year_mean": {
+        "intercept": -0.0496,
+        "max_drop": 0.495,
+        "max_drop_rate": 0.324,
+        "fade_days": -0.2601,
+        "green_at_cut": 0.0672,
+        "ndmi_before_cut": 0.4673,
+        "ndti_post": -0.8323
+      },
+      "single_year_sd": {
+        "intercept": 0.1023,
+        "max_drop": 0.2722,
+        "max_drop_rate": 0.2643,
+        "fade_days": 0.1991,
+        "green_at_cut": 0.3288,
+        "ndmi_before_cut": 0.404,
+        "ndti_post": 0.3796
+      },
+      "single_year_min": {
+        "intercept": -0.2175,
+        "max_drop": 0.2059,
+        "max_drop_rate": -0.0809,
+        "fade_days": -0.5617,
+        "green_at_cut": -0.4254,
+        "ndmi_before_cut": -0.0872,
+        "ndti_post": -1.32
+      },
+      "single_year_max": {
+        "intercept": 0.0908,
+        "max_drop": 0.9071,
+        "max_drop_rate": 0.6711,
+        "fade_days": 0.0172,
+        "green_at_cut": 0.6925,
+        "ndmi_before_cut": 1.0498,
+        "ndti_post": -0.2421
+      },
+      "single_year_sign_matches_all_years": {
+        "intercept": 5.0,
+        "max_drop": 8.0,
+        "max_drop_rate": 6.0,
+        "fade_days": 7.0,
+        "green_at_cut": 4.0,
+        "ndmi_before_cut": 7.0,
+        "ndti_post": 8.0
+      },
+      "loyo_sd": {
+        "intercept": 0.0104,
+        "max_drop": 0.0525,
+        "max_drop_rate": 0.0433,
+        "fade_days": 0.0506,
+        "green_at_cut": 0.0289,
+        "ndmi_before_cut": 0.0448,
+        "ndti_post": 0.0668
+      }
+    }
+  },
+  "inputs": {
+    "qcm_2019": {
+      "labels": "1767ea1376f5476e",
+      "series": "be0e882aaf5b1f09"
+    },
+    "qcm_2020": {
+      "labels": "7df63ea9e5621242",
+      "series": "700cbf1f5c435f26"
+    },
+    "qcm_2021": {
+      "labels": "7683e4e65335682f",
+      "series": "a84b33c02a96dc73"
+    },
+    "qcm_2022": {
+      "labels": "e4e842908231a621",
+      "series": "c4ae238656b4fd98"
+    },
+    "qcm_2023": {
+      "labels": "2aae79b4150fd8d8",
+      "series": "4d4b1ad2ff2beb87"
+    },
+    "qcm_2024": {
+      "labels": "5464435f854b7253",
+      "series": "a13c6e2d47bd13a0"
+    },
+    "qcm_2025": {
+      "labels": "9da770e23fd012cb",
+      "series": "1b1932693dd86c25"
+    },
+    "qcm_2026": {
+      "labels": "ff38db3228d74fd6",
+      "series": "621619c7a75be473"
+    },
+    "quebec_maize_2023": {
+      "labels": "88498acc77c48829",
+      "series": "764cb821310b99bd"
+    },
+    "barc_2021_2023": {
+      "labels": "b283f871ad79bc6a",
+      "series": "02cebb14a162f3eb"
+    }
+  },
+  "runtime_s": 36.9
+}

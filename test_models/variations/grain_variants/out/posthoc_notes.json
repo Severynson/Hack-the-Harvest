@@ -1,0 +1,16 @@
+{
+ "fsa_2009_2010_history_patch": {
+  "2009": {
+   "zip": "2009_fsa_acres_detail_final_7.zip",
+   "internal_saved": "2011-09-09",
+   "assumed_published_posthoc": "2011-09-17",
+   "state_rows": 199
+  },
+  "2010": {
+   "zip": "2010_fsa_acres_detail_final_5.zip",
+   "internal_saved": "2011-09-09",
+   "assumed_published_posthoc": "2011-09-17",
+   "state_rows": 201
+  }
+ }
+}

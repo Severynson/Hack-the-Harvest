@@ -1,0 +1,236 @@
+{
+ "grain": {
+  "by_year": {
+   "2017": {
+    "states": 41,
+    "truth": "nass_quickstats",
+    "state_wape_pct": 1.05,
+    "last_year_state_wape_pct": 5.99,
+    "us_error_pct": 0.47,
+    "last_year_us_error_pct": 4.85
+   },
+   "2018": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.7,
+    "last_year_state_wape_pct": 3.68,
+    "us_error_pct": 0.74,
+    "last_year_us_error_pct": 1.93
+   },
+   "2019": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 2.03,
+    "last_year_state_wape_pct": 9.8,
+    "us_error_pct": 1.67,
+    "last_year_us_error_pct": 0.22
+   },
+   "2020": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.52,
+    "last_year_state_wape_pct": 8.53,
+    "us_error_pct": 1.18,
+    "last_year_us_error_pct": -1.43
+   },
+   "2021": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.2,
+    "last_year_state_wape_pct": 6.97,
+    "us_error_pct": 0.26,
+    "last_year_us_error_pct": -3.32
+   },
+   "2022": {
+    "states": 41,
+    "truth": "nass_quickstats",
+    "state_wape_pct": 3.24,
+    "last_year_state_wape_pct": 8.07,
+    "us_error_pct": 2.52,
+    "last_year_us_error_pct": 7.98
+   },
+   "2023": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.58,
+    "last_year_state_wape_pct": 9.05,
+    "us_error_pct": 0.31,
+    "last_year_us_error_pct": -9.02
+   },
+   "2024": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.16,
+    "last_year_state_wape_pct": 6.73,
+    "us_error_pct": -0.54,
+    "last_year_us_error_pct": 4.17
+   },
+   "2025": {
+    "states": 41,
+    "truth": "organizer_csv",
+    "state_wape_pct": 1.62,
+    "last_year_state_wape_pct": 9.23,
+    "us_error_pct": -0.88,
+    "last_year_us_error_pct": -8.69
+   }
+  },
+  "backtest_2017_2024": {
+   "state_wape_pct": 1.69,
+   "last_year_state_wape_pct": 7.35,
+   "us_error_pct": 0.96,
+   "last_year_us_error_pct": 4.12,
+   "us_within_3pct_years": 8,
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "us_error_signed_mean_pct": 0.83
+  },
+  "held_out_2025": {
+   "state_wape_pct": 1.62,
+   "last_year_state_wape_pct": 9.23,
+   "us_error_pct": 0.88,
+   "last_year_us_error_pct": 8.69,
+   "us_within_3pct_years": 1,
+   "years": [
+    2025
+   ],
+   "us_error_signed_mean_pct": -0.88
+  }
+ },
+ "silage": {
+  "by_year": {
+   "2017": {
+    "states": 48,
+    "truth": "nass_quickstats",
+    "state_wape_pct": 11.33,
+    "last_year_state_wape_pct": 12.33,
+    "us_error_pct": -2.87,
+    "last_year_us_error_pct": -2.8
+   },
+   "2018": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 17.76,
+    "last_year_state_wape_pct": 20.25,
+    "us_error_pct": 3.17,
+    "last_year_us_error_pct": 4.84
+   },
+   "2019": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 14.57,
+    "last_year_state_wape_pct": 17.2,
+    "us_error_pct": -6.78,
+    "last_year_us_error_pct": -7.24
+   },
+   "2020": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 8.78,
+    "last_year_state_wape_pct": 12.03,
+    "us_error_pct": -2.71,
+    "last_year_us_error_pct": 0.08
+   },
+   "2021": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 11.51,
+    "last_year_state_wape_pct": 14.43,
+    "us_error_pct": -0.34,
+    "last_year_us_error_pct": 1.69
+   },
+   "2022": {
+    "states": 48,
+    "truth": "nass_quickstats",
+    "state_wape_pct": 15.01,
+    "last_year_state_wape_pct": 14.16,
+    "us_error_pct": -6.45,
+    "last_year_us_error_pct": -5.84
+   },
+   "2023": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 9.4,
+    "last_year_state_wape_pct": 13.53,
+    "us_error_pct": 2.76,
+    "last_year_us_error_pct": 6.04
+   },
+   "2024": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 11.9,
+    "last_year_state_wape_pct": 12.34,
+    "us_error_pct": 4.4,
+    "last_year_us_error_pct": 4.09
+   },
+   "2025": {
+    "states": 48,
+    "truth": "organizer_csv",
+    "state_wape_pct": 13.56,
+    "last_year_state_wape_pct": 13.96,
+    "us_error_pct": 3.09,
+    "last_year_us_error_pct": 0.32
+   }
+  },
+  "backtest_2017_2024": {
+   "state_wape_pct": 12.53,
+   "last_year_state_wape_pct": 14.53,
+   "us_error_pct": 3.69,
+   "last_year_us_error_pct": 4.08,
+   "us_within_3pct_years": 4,
+   "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "us_error_signed_mean_pct": -1.1
+  },
+  "held_out_2025": {
+   "state_wape_pct": 13.56,
+   "last_year_state_wape_pct": 13.96,
+   "us_error_pct": 3.09,
+   "last_year_us_error_pct": 0.32,
+   "us_within_3pct_years": 0,
+   "years": [
+    2025
+   ],
+   "us_error_signed_mean_pct": 3.09
+  }
+ },
+ "combination": {
+  "name": "g9__v1_geo",
+  "grain": "g9",
+  "silage": "v1_geo",
+  "tier": "C",
+  "grain_tier": "A",
+  "silage_tier": "C",
+  "grain_model": "g9_national_reconciliation: A-G3's FSA states scaled to a national FSA x NASS/FSA ratio",
+  "silage_model": "sqrt(A-S3 x SC)",
+  "grain_sources": {
+   "2017-2024": "saved: test_models/variations/grain_variants/out/by_state_year.csv (model g9_national_reconciliation, asof nov)",
+   "2025": "recomputed here (grain folder's predict_fsa + grain_variants national_reconciliation, corrected FSA dates)",
+   "2026": "saved: test_models/variations/grain_variants/out/forecast_2026.csv (points checked against the recomputation; 80% intervals from that file)"
+  },
+  "silage_sources": {
+   "2017-2024": "saved: test_models/variations/silage_combos/out/backtest_by_state_year.csv (model v1_geo, asof nov)",
+   "2025": "recomputed here with silage_combos/run.py's pieces (not in its saved files)",
+   "2026": "saved: test_models/variations/silage_combos/out/forecast_2026.csv and test_models/variations/silage_combos/out/forecast_2026_us.csv (model v1_geo, asof nov)"
+  }
+ },
+ "truth_check": {
+  "organizer_rows_also_in_pipeline_copy": 979,
+  "rows_that_differ": 0
+ }
+}

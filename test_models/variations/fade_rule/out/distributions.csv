@@ -1,0 +1,13 @@
+region,feature,label,n,missing,p25,median,p75,share_le_17
+quebec,fade_days,silage,7433,1716,7.0,12.0,18.0,0.7469
+quebec,fade_days,grain,10356,2521,12.0,17.0,22.0,0.5243
+quebec,drydown_days,silage,9133,16,0.0,5.0,20.0,0.722
+quebec,drydown_days,grain,12842,35,3.0,15.0,27.0,0.5456
+quebec,cut_gap_days,silage,9133,16,5.0,10.0,15.0,0.8215
+quebec,cut_gap_days,grain,12842,35,7.0,12.0,17.0,0.7802
+maryland,fade_days,silage,11,1,5.0,13.0,20.0,0.5455
+maryland,fade_days,grain,31,1,13.0,20.0,25.0,0.4516
+maryland,drydown_days,silage,12,0,0.0,8.5,26.0,0.75
+maryland,drydown_days,grain,32,0,5.0,20.0,26.25,0.4375
+maryland,cut_gap_days,silage,12,0,5.0,5.0,20.0,0.6667
+maryland,cut_gap_days,grain,32,0,5.0,5.0,20.0,0.7188

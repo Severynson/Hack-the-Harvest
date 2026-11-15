@@ -1,0 +1,170 @@
+{
+ "step1_reproduce_current_deliverable": {
+  "deliverable_comparison_csv_text_identical": true,
+  "deliverable_2026_csv_text_identical": true,
+  "deliverable_summary_json_identical_except_notes": true,
+  "line_endings": {
+   "stored_files_have_crlf": {
+    "deliverable_comparison.csv": true,
+    "deliverable_2026.csv": true,
+    "deliverable_summary.json": true
+   },
+   "compared_after": "CRLF -> LF only (kernelag.deliverable writes LF); all other bytes equal"
+  },
+  "summary_keys_compared": [
+   "grain",
+   "grain_without_nass_forecast",
+   "silage",
+   "truth_check"
+  ],
+  "notes_not_regenerated": "the 'notes' list is static text inside kernelag.deliverable.run",
+  "lean_table": false,
+  "all_identical": true
+ },
+ "step2_grain_recomputation": {
+  "A-G3": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 328,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04955519665963948
+   },
+   "vs_grain_variants_forecast_2026": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0021828487515449524
+   },
+   "fsa_file_2025": "AwCPYHfbDXJx.zip",
+   "fsa_file_2025_data_as_of": "2025-09-02",
+   "fsa_file_2026": "Wrcdk92KC1587MaHom35213.zip",
+   "methods_2025": {
+    "fsa": 41
+   },
+   "recomputation_reproduces_saved": true,
+   "pre_fix_grain_forecast_2026_vs_recomputed": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 25.11781715042889
+   },
+   "pre_fix_grain_score_2025_vs_recomputed": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 49.344134679064155
+   },
+   "pre_fix_2026_vs_recomputed_at_6_significant_digits": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0
+   },
+   "pre_fix_2025_vs_recomputed_at_6_significant_digits": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0
+   }
+  },
+  "g9": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 328,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04964032326824963
+   },
+   "vs_grain_variants_forecast_2026": {
+    "rows_saved": 41,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0047865454107522964
+   },
+   "fsa_file_2025": "AwCPYHfbDXJx.zip",
+   "fsa_file_2025_data_as_of": "2025-09-02",
+   "fsa_file_2026": "Wrcdk92KC1587MaHom35213.zip",
+   "methods_2025": {
+    "fsa": 41
+   },
+   "recomputation_reproduces_saved": true
+  }
+ },
+ "step2_silage_recomputation": {
+  "SC": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04961328779700125
+   },
+   "vs_saved_2026": {
+    "rows_saved": 48,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.048612712416797876
+   },
+   "vs_deliverable_2017_2025": {
+    "rows_saved": 432,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0
+   },
+   "recomputation_reproduces_saved": true
+  },
+  "SC_A": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.049990864004939795
+   },
+   "vs_saved_2026": {
+    "rows_saved": 48,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.048612712416797876
+   },
+   "recomputation_reproduces_saved": true
+  },
+  "SC_B": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04995445816894062
+   },
+   "vs_saved_2026": {
+    "rows_saved": 48,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.0494034014409408
+   },
+   "recomputation_reproduces_saved": true
+  },
+  "A-S3": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.049980741256149486
+   },
+   "vs_saved_2026": {
+    "rows_saved": 48,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.049869789869262604
+   },
+   "vs_monthly_s3_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.049980741256149486
+   },
+   "recomputation_reproduces_saved": true
+  },
+  "v1_geo": {
+   "vs_saved_2017_2024": {
+    "rows_saved": 384,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04999053955543786
+   },
+   "vs_saved_2026": {
+    "rows_saved": 48,
+    "rows_missing_in_recomputation": 0,
+    "max_abs_diff_acres": 0.04530795104801655
+   },
+   "recomputation_reproduces_saved": true
+  }
+ },
+ "step3_baseline_combination_NASS__SC": {
+  "comparison_equals_stored_grain_and_silage_rows": true,
+  "summary_equals_stored_grain_and_silage": true,
+  "deliverable_2026_equals_stored": true
+ },
+ "step5_monthly_grid_nov_vs_scorecard_max_gap": {
+  "recommended = best overall, NASS__SC": 0.0030856261861638146,
+  "best Tier A, g9__SC_A": 0.004208277662636206
+ }
+}

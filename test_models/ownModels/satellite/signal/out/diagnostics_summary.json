@@ -1,0 +1,35 @@
+{
+  "nov": {
+    "sign_agree_share_demeaned": "33/90",
+    "sign_agree_silage_demeaned": "34/90",
+    "median_snr_d_share": 1.59,
+    "median_rms_se_d_share": 0.032,
+    "median_sd_d_share": 0.0558,
+    "median_se_d_log_over_sd_nass": 0.8,
+    "level_slope_sat_on_nass": 0.603,
+    "median_expected_snr": 0.39,
+    "max_expected_snr": 0.82
+  },
+  "oct": {
+    "sign_agree_share_demeaned": "31/90",
+    "sign_agree_silage_demeaned": "35/90",
+    "median_snr_d_share": 1.55,
+    "median_rms_se_d_share": 0.0335,
+    "median_sd_d_share": 0.0584,
+    "median_se_d_log_over_sd_nass": 0.82,
+    "level_slope_sat_on_nass": 0.543,
+    "median_expected_snr": 0.35,
+    "max_expected_snr": 0.7
+  },
+  "sep": {
+    "sign_agree_share_demeaned": "33/90",
+    "sign_agree_silage_demeaned": "36/90",
+    "median_snr_d_share": 2.05,
+    "median_rms_se_d_share": 0.0339,
+    "median_sd_d_share": 0.062,
+    "median_se_d_log_over_sd_nass": 0.73,
+    "level_slope_sat_on_nass": 0.242,
+    "median_expected_snr": 0.16,
+    "max_expected_snr": 0.41
+  }
+}

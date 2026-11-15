@@ -1,0 +1,820 @@
+year,series,state,predicted,actual,error_pct,last,last_year_error_pct,grain_method,truth_source
+2017,grain,ALABAMA,235000.0,235000,0.0,315000.0,34.04,nass_forecast,nass_quickstats
+2017,grain,ARIZONA,31000.0,32000,-3.12,50000.0,56.25,nass_forecast,nass_quickstats
+2017,grain,ARKANSAS,595000.0,595000,0.0,745000.0,25.21,nass_forecast,nass_quickstats
+2017,grain,CALIFORNIA,100000.0,80000,25.0,100000.0,25.0,nass_forecast,nass_quickstats
+2017,grain,COLORADO,1270000.0,1300000,-2.31,1170000.0,-10.0,nass_forecast,nass_quickstats
+2017,grain,DELAWARE,170000.0,171000,-0.58,164000.0,-4.09,nass_forecast,nass_quickstats
+2017,grain,FLORIDA,42000.0,37000,13.51,40000.0,8.11,nass_forecast,nass_quickstats
+2017,grain,GEORGIA,250000.0,245000,2.04,340000.0,38.78,nass_forecast,nass_quickstats
+2017,grain,IDAHO,100000.0,115000,-13.04,100000.0,-13.04,nass_forecast,nass_quickstats
+2017,grain,ILLINOIS,11050000.0,10950000,0.91,11450000.0,4.57,nass_forecast,nass_quickstats
+2017,grain,INDIANA,5220000.0,5200000,0.38,5470000.0,5.19,nass_forecast,nass_quickstats
+2017,grain,IOWA,12900000.0,12900000,0.0,13500000.0,4.65,nass_forecast,nass_quickstats
+2017,grain,KANSAS,5200000.0,5200000,0.0,4920000.0,-5.38,nass_forecast,nass_quickstats
+2017,grain,KENTUCKY,1240000.0,1220000,1.64,1400000.0,14.75,nass_forecast,nass_quickstats
+2017,grain,LOUISIANA,490000.0,490000,0.0,550000.0,12.24,nass_forecast,nass_quickstats
+2017,grain,MARYLAND,425000.0,420000,1.19,400000.0,-4.76,nass_forecast,nass_quickstats
+2017,grain,MICHIGAN,1950000.0,1890000,3.17,2040000.0,7.94,nass_forecast,nass_quickstats
+2017,grain,MINNESOTA,7650000.0,7630000,0.26,8000000.0,4.85,nass_forecast,nass_quickstats
+2017,grain,MISSISSIPPI,500000.0,500000,0.0,720000.0,44.0,nass_forecast,nass_quickstats
+2017,grain,MISSOURI,3250000.0,3250000,0.0,3500000.0,7.69,nass_forecast,nass_quickstats
+2017,grain,MONTANA,60000.0,65000,-7.69,55000.0,-15.38,nass_forecast,nass_quickstats
+2017,grain,NEBRASKA,9300000.0,9300000,0.0,9550000.0,2.69,nass_forecast,nass_quickstats
+2017,grain,NEW JERSEY,66000.0,70000,-5.71,71000.0,1.43,nass_forecast,nass_quickstats
+2017,grain,NEW MEXICO,46000.0,43000,6.98,41000.0,-4.65,nass_forecast,nass_quickstats
+2017,grain,NEW YORK,530000.0,485000,9.28,570000.0,17.53,nass_forecast,nass_quickstats
+2017,grain,NORTH CAROLINA,830000.0,840000,-1.19,940000.0,11.9,nass_forecast,nass_quickstats
+2017,grain,NORTH DAKOTA,3190000.0,3230000,-1.24,3270000.0,1.24,nass_forecast,nass_quickstats
+2017,grain,OHIO,3130000.0,3150000,-0.63,3300000.0,4.76,nass_forecast,nass_quickstats
+2017,grain,OKLAHOMA,320000.0,305000,4.92,350000.0,14.75,nass_forecast,nass_quickstats
+2017,grain,OREGON,49000.0,44000,11.36,39000.0,-11.36,nass_forecast,nass_quickstats
+2017,grain,PENNSYLVANIA,960000.0,920000,4.35,950000.0,3.26,nass_forecast,nass_quickstats
+2017,grain,SOUTH CAROLINA,325000.0,325000,0.0,350000.0,7.69,nass_forecast,nass_quickstats
+2017,grain,SOUTH DAKOTA,5250000.0,5080000,3.35,5130000.0,0.98,nass_forecast,nass_quickstats
+2017,grain,TENNESSEE,705000.0,710000,-0.7,830000.0,16.9,nass_forecast,nass_quickstats
+2017,grain,TEXAS,2190000.0,2240000,-2.23,2550000.0,13.84,nass_forecast,nass_quickstats
+2017,grain,US (sum of states),83119000.0,82733000,0.47,86748000.0,4.85,,nass_quickstats
+2017,grain,UTAH,32000.0,20000,60.0,29000.0,45.0,nass_forecast,nass_quickstats
+2017,grain,VIRGINIA,340000.0,340000,0.0,340000.0,0.0,nass_forecast,nass_quickstats
+2017,grain,WASHINGTON,80000.0,80000,0.0,85000.0,6.25,nass_forecast,nass_quickstats
+2017,grain,WEST VIRGINIA,35000.0,33000,6.06,35000.0,6.06,nass_forecast,nass_quickstats
+2017,grain,WISCONSIN,2950000.0,2930000,0.68,3220000.0,9.9,nass_forecast,nass_quickstats
+2017,grain,WYOMING,63000.0,63000,0.0,69000.0,9.52,nass_forecast,nass_quickstats
+2017,silage,ALABAMA,6700.0,7000,-3.77,7000.0,0.0,,nass_quickstats
+2017,silage,ARIZONA,41000.0,32000,28.18,44000.0,37.5,,nass_quickstats
+2017,silage,ARKANSAS,2100.0,2000,3.38,2000.0,0.0,,nass_quickstats
+2017,silage,CALIFORNIA,354900.0,345000,2.86,315000.0,-8.7,,nass_quickstats
+2017,silage,COLORADO,127100.0,130000,-2.2,140000.0,7.69,,nass_quickstats
+2017,silage,CONNECTICUT,21300.0,20000,6.56,21000.0,5.0,,nass_quickstats
+2017,silage,DELAWARE,4700.0,7000,-32.28,5000.0,-28.57,,nass_quickstats
+2017,silage,FLORIDA,31400.0,35000,-10.33,35000.0,0.0,,nass_quickstats
+2017,silage,GEORGIA,38800.0,35000,10.85,40000.0,14.29,,nass_quickstats
+2017,silage,IDAHO,225700.0,220000,2.61,235000.0,6.82,,nass_quickstats
+2017,silage,ILLINOIS,83900.0,190000,-55.84,80000.0,-57.89,,nass_quickstats
+2017,silage,INDIANA,99000.0,110000,-10.02,100000.0,-9.09,,nass_quickstats
+2017,silage,IOWA,328000.0,330000,-0.6,330000.0,0.0,,nass_quickstats
+2017,silage,KANSAS,161000.0,250000,-35.61,150000.0,-40.0,,nass_quickstats
+2017,silage,KENTUCKY,75700.0,85000,-10.93,80000.0,-5.88,,nass_quickstats
+2017,silage,LOUISIANA,1300.0,1000,27.57,1000.0,0.0,,nass_quickstats
+2017,silage,MAINE,27400.0,27000,1.34,28000.0,3.7,,nass_quickstats
+2017,silage,MARYLAND,50300.0,50000,0.57,50000.0,0.0,,nass_quickstats
+2017,silage,MASSACHUSETTS,13500.0,12000,12.59,14000.0,16.67,,nass_quickstats
+2017,silage,MICHIGAN,312500.0,340000,-8.08,340000.0,0.0,,nass_quickstats
+2017,silage,MINNESOTA,413900.0,360000,14.96,390000.0,8.33,,nass_quickstats
+2017,silage,MISSISSIPPI,9700.0,7000,38.42,10000.0,42.86,,nass_quickstats
+2017,silage,MISSOURI,84500.0,70000,20.66,80000.0,14.29,,nass_quickstats
+2017,silage,MONTANA,51300.0,25000,105.3,55000.0,120.0,,nass_quickstats
+2017,silage,NEBRASKA,241400.0,210000,14.97,240000.0,14.29,,nass_quickstats
+2017,silage,NEVADA,4500.0,10000,-54.9,7000.0,-30.0,,nass_quickstats
+2017,silage,NEW HAMPSHIRE,13900.0,13000,6.97,14000.0,7.69,,nass_quickstats
+2017,silage,NEW JERSEY,5800.0,6000,-2.99,5000.0,-16.67,,nass_quickstats
+2017,silage,NEW MEXICO,77200.0,80000,-3.53,75000.0,-6.25,,nass_quickstats
+2017,silage,NEW YORK,491400.0,495000,-0.73,510000.0,3.03,,nass_quickstats
+2017,silage,NORTH CAROLINA,43800.0,40000,9.53,40000.0,0.0,,nass_quickstats
+2017,silage,NORTH DAKOTA,157600.0,160000,-1.52,150000.0,-6.25,,nass_quickstats
+2017,silage,OHIO,202200.0,210000,-3.74,210000.0,0.0,,nass_quickstats
+2017,silage,OKLAHOMA,19600.0,20000,-1.91,20000.0,0.0,,nass_quickstats
+2017,silage,OREGON,38000.0,40000,-5.06,40000.0,0.0,,nass_quickstats
+2017,silage,PENNSYLVANIA,418200.0,420000,-0.43,440000.0,4.76,,nass_quickstats
+2017,silage,RHODE ISLAND,2000.0,2000,0.0,2000.0,0.0,,nass_quickstats
+2017,silage,SOUTH CAROLINA,12400.0,16000,-22.43,13000.0,-18.75,,nass_quickstats
+2017,silage,SOUTH DAKOTA,379500.0,510000,-25.59,420000.0,-17.65,,nass_quickstats
+2017,silage,TENNESSEE,43300.0,30000,44.43,40000.0,33.33,,nass_quickstats
+2017,silage,TEXAS,237800.0,150000,58.56,250000.0,66.67,,nass_quickstats
+2017,silage,US (sum of states),6200900.0,6385000,-2.88,6206000.0,-2.8,,nass_quickstats
+2017,silage,UTAH,47700.0,56000,-14.84,49000.0,-12.5,,nass_quickstats
+2017,silage,VERMONT,85600.0,76000,12.58,85000.0,11.84,,nass_quickstats
+2017,silage,VIRGINIA,127900.0,135000,-5.24,130000.0,-3.7,,nass_quickstats
+2017,silage,WASHINGTON,89100.0,90000,-1.04,85000.0,-5.56,,nass_quickstats
+2017,silage,WEST VIRGINIA,13700.0,16000,-14.45,13000.0,-18.75,,nass_quickstats
+2017,silage,WISCONSIN,856200.0,880000,-2.7,790000.0,-10.23,,nass_quickstats
+2017,silage,WYOMING,26500.0,30000,-11.81,26000.0,-13.33,,nass_quickstats
+2018,grain,ALABAMA,235000.0,245000,-4.08,235000.0,-4.08,nass_forecast,organizer_csv
+2018,grain,ARIZONA,27000.0,20000,35.0,32000.0,60.0,nass_forecast,organizer_csv
+2018,grain,ARKANSAS,650000.0,645000,0.78,595000.0,-7.75,nass_forecast,organizer_csv
+2018,grain,CALIFORNIA,75000.0,65000,15.38,80000.0,23.08,nass_forecast,organizer_csv
+2018,grain,COLORADO,1350000.0,1190000,13.45,1300000.0,9.24,nass_forecast,organizer_csv
+2018,grain,DELAWARE,159000.0,165000,-3.64,171000.0,3.64,nass_forecast,organizer_csv
+2018,grain,FLORIDA,60000.0,62000,-3.23,37000.0,-40.32,nass_forecast,organizer_csv
+2018,grain,GEORGIA,275000.0,285000,-3.51,245000.0,-14.04,nass_forecast,organizer_csv
+2018,grain,IDAHO,130000.0,125000,4.0,115000.0,-8.0,nass_forecast,organizer_csv
+2018,grain,ILLINOIS,10850000.0,10800000,0.46,10950000.0,1.39,nass_forecast,organizer_csv
+2018,grain,INDIANA,5170000.0,5120000,0.98,5200000.0,1.56,nass_forecast,organizer_csv
+2018,grain,IOWA,12750000.0,12750000,0.0,12900000.0,1.18,nass_forecast,organizer_csv
+2018,grain,KANSAS,5100000.0,4980000,2.41,5200000.0,4.42,nass_forecast,organizer_csv
+2018,grain,KENTUCKY,1240000.0,1220000,1.64,1220000.0,0.0,nass_forecast,organizer_csv
+2018,grain,LOUISIANA,450000.0,450000,0.0,490000.0,8.89,nass_forecast,organizer_csv
+2018,grain,MARYLAND,390000.0,380000,2.63,420000.0,10.53,nass_forecast,organizer_csv
+2018,grain,MICHIGAN,1900000.0,1860000,2.15,1890000.0,1.61,nass_forecast,organizer_csv
+2018,grain,MINNESOTA,7450000.0,7460000,-0.13,7630000.0,2.28,nass_forecast,organizer_csv
+2018,grain,MISSISSIPPI,460000.0,460000,0.0,500000.0,8.7,nass_forecast,organizer_csv
+2018,grain,MISSOURI,3350000.0,3300000,1.52,3250000.0,-1.52,nass_forecast,organizer_csv
+2018,grain,MONTANA,60000.0,68000,-11.76,65000.0,-4.41,nass_forecast,organizer_csv
+2018,grain,NEBRASKA,9250000.0,9300000,-0.54,9300000.0,0.0,nass_forecast,organizer_csv
+2018,grain,NEW JERSEY,67000.0,60000,11.67,70000.0,16.67,nass_forecast,organizer_csv
+2018,grain,NEW MEXICO,50000.0,35000,42.86,43000.0,22.86,nass_forecast,organizer_csv
+2018,grain,NEW YORK,630000.0,605000,4.13,485000.0,-19.83,nass_forecast,organizer_csv
+2018,grain,NORTH CAROLINA,840000.0,830000,1.2,840000.0,1.2,nass_forecast,organizer_csv
+2018,grain,NORTH DAKOTA,2920000.0,2930000,-0.34,3230000.0,10.24,nass_forecast,organizer_csv
+2018,grain,OHIO,3260000.0,3300000,-1.21,3150000.0,-4.55,nass_forecast,organizer_csv
+2018,grain,OKLAHOMA,280000.0,270000,3.7,305000.0,12.96,nass_forecast,organizer_csv
+2018,grain,OREGON,42000.0,40000,5.0,44000.0,10.0,nass_forecast,organizer_csv
+2018,grain,PENNSYLVANIA,910000.0,855000,6.43,920000.0,7.6,nass_forecast,organizer_csv
+2018,grain,SOUTH CAROLINA,310000.0,310000,0.0,325000.0,4.84,nass_forecast,organizer_csv
+2018,grain,SOUTH DAKOTA,4950000.0,4860000,1.85,5080000.0,4.53,nass_forecast,organizer_csv
+2018,grain,TENNESSEE,685000.0,670000,2.24,710000.0,5.97,nass_forecast,organizer_csv
+2018,grain,TEXAS,1910000.0,1750000,9.14,2240000.0,28.0,nass_forecast,organizer_csv
+2018,grain,US (sum of states),81767000.0,81169000,0.74,82733000.0,1.93,,organizer_csv
+2018,grain,UTAH,25000.0,22000,13.64,20000.0,-9.09,nass_forecast,organizer_csv
+2018,grain,VIRGINIA,330000.0,325000,1.54,340000.0,4.62,nass_forecast,organizer_csv
+2018,grain,WASHINGTON,71000.0,84000,-15.48,80000.0,-4.76,nass_forecast,organizer_csv
+2018,grain,WEST VIRGINIA,31000.0,33000,-6.06,33000.0,0.0,nass_forecast,organizer_csv
+2018,grain,WISCONSIN,3000000.0,3170000,-5.36,2930000.0,-7.57,nass_forecast,organizer_csv
+2018,grain,WYOMING,75000.0,70000,7.14,63000.0,-10.0,nass_forecast,organizer_csv
+2018,silage,ALABAMA,6900.0,5000,37.33,7000.0,40.0,,organizer_csv
+2018,silage,ARIZONA,36200.0,58000,-37.54,32000.0,-44.83,,organizer_csv
+2018,silage,ARKANSAS,2000.0,3000,-32.21,2000.0,-33.33,,organizer_csv
+2018,silage,CALIFORNIA,349900.0,360000,-2.8,345000.0,-4.17,,organizer_csv
+2018,silage,COLORADO,128600.0,190000,-32.34,130000.0,-31.58,,organizer_csv
+2018,silage,CONNECTICUT,20600.0,20000,3.23,20000.0,0.0,,organizer_csv
+2018,silage,DELAWARE,6900.0,3000,129.15,7000.0,133.33,,organizer_csv
+2018,silage,FLORIDA,33100.0,30000,10.47,35000.0,16.67,,organizer_csv
+2018,silage,GEORGIA,36800.0,30000,22.83,35000.0,16.67,,organizer_csv
+2018,silage,IDAHO,222900.0,220000,1.3,220000.0,0.0,,organizer_csv
+2018,silage,ILLINOIS,126300.0,100000,26.25,190000.0,90.0,,organizer_csv
+2018,silage,INDIANA,104300.0,100000,4.34,110000.0,10.0,,organizer_csv
+2018,silage,IOWA,329000.0,270000,21.86,330000.0,22.22,,organizer_csv
+2018,silage,KANSAS,200600.0,390000,-48.56,250000.0,-35.9,,organizer_csv
+2018,silage,KENTUCKY,80200.0,90000,-10.87,85000.0,-5.56,,organizer_csv
+2018,silage,LOUISIANA,1200.0,2000,-39.01,1000.0,-50.0,,organizer_csv
+2018,silage,MAINE,27200.0,27000,0.67,27000.0,0.0,,organizer_csv
+2018,silage,MARYLAND,51000.0,45000,13.31,50000.0,11.11,,organizer_csv
+2018,silage,MASSACHUSETTS,12700.0,12000,6.11,12000.0,0.0,,organizer_csv
+2018,silage,MICHIGAN,326000.0,340000,-4.12,340000.0,0.0,,organizer_csv
+2018,silage,MINNESOTA,386000.0,340000,13.53,360000.0,5.88,,organizer_csv
+2018,silage,MISSISSIPPI,8200.0,7000,17.65,7000.0,0.0,,organizer_csv
+2018,silage,MISSOURI,78700.0,100000,-21.29,70000.0,-30.0,,organizer_csv
+2018,silage,MONTANA,35800.0,37000,-3.19,25000.0,-32.43,,organizer_csv
+2018,silage,NEBRASKA,225200.0,220000,2.35,210000.0,-4.55,,organizer_csv
+2018,silage,NEVADA,6700.0,7000,-4.06,10000.0,42.86,,organizer_csv
+2018,silage,NEW HAMPSHIRE,13400.0,12000,12.04,13000.0,8.33,,organizer_csv
+2018,silage,NEW JERSEY,5900.0,6000,-1.51,6000.0,0.0,,organizer_csv
+2018,silage,NEW MEXICO,78600.0,95000,-17.29,80000.0,-15.79,,organizer_csv
+2018,silage,NEW YORK,493200.0,445000,10.83,495000.0,11.24,,organizer_csv
+2018,silage,NORTH CAROLINA,46000.0,50000,-8.08,40000.0,-20.0,,organizer_csv
+2018,silage,NORTH DAKOTA,158800.0,170000,-6.6,160000.0,-5.88,,organizer_csv
+2018,silage,OHIO,206000.0,160000,28.77,210000.0,31.25,,organizer_csv
+2018,silage,OKLAHOMA,19800.0,20000,-0.96,20000.0,0.0,,organizer_csv
+2018,silage,OREGON,39000.0,34000,14.63,40000.0,17.65,,organizer_csv
+2018,silage,PENNSYLVANIA,419100.0,360000,16.41,420000.0,16.67,,organizer_csv
+2018,silage,RHODE ISLAND,2000.0,2000,0.0,2000.0,0.0,,organizer_csv
+2018,silage,SOUTH CAROLINA,14400.0,19000,-24.25,16000.0,-15.79,,organizer_csv
+2018,silage,SOUTH DAKOTA,439900.0,360000,22.21,510000.0,41.67,,organizer_csv
+2018,silage,TENNESSEE,36100.0,38000,-5.12,30000.0,-21.05,,organizer_csv
+2018,silage,TEXAS,199900.0,270000,-25.97,150000.0,-44.44,,organizer_csv
+2018,silage,US (sum of states),6279400.0,6090000,3.11,6385000.0,4.84,,organizer_csv
+2018,silage,UTAH,51700.0,45000,14.84,56000.0,24.44,,organizer_csv
+2018,silage,VERMONT,80600.0,79000,2.07,76000.0,-3.8,,organizer_csv
+2018,silage,VIRGINIA,131400.0,135000,-2.66,135000.0,0.0,,organizer_csv
+2018,silage,WASHINGTON,89500.0,80000,11.91,90000.0,12.5,,organizer_csv
+2018,silage,WEST VIRGINIA,14800.0,11000,34.54,16000.0,45.45,,organizer_csv
+2018,silage,WISCONSIN,868000.0,670000,29.55,880000.0,31.34,,organizer_csv
+2018,silage,WYOMING,28200.0,23000,22.49,30000.0,30.43,,organizer_csv
+2019,grain,ALABAMA,305000.0,285000,7.02,245000.0,-14.04,nass_forecast,organizer_csv
+2019,grain,ARIZONA,41000.0,37000,10.81,20000.0,-45.95,nass_forecast,organizer_csv
+2019,grain,ARKANSAS,740000.0,735000,0.68,645000.0,-12.24,nass_forecast,organizer_csv
+2019,grain,CALIFORNIA,90000.0,60000,50.0,65000.0,8.33,nass_forecast,organizer_csv
+2019,grain,COLORADO,1260000.0,1300000,-3.08,1190000.0,-8.46,nass_forecast,organizer_csv
+2019,grain,DELAWARE,180000.0,180000,0.0,165000.0,-8.33,nass_forecast,organizer_csv
+2019,grain,FLORIDA,53000.0,54000,-1.85,62000.0,14.81,nass_forecast,organizer_csv
+2019,grain,GEORGIA,345000.0,350000,-1.43,285000.0,-18.57,nass_forecast,organizer_csv
+2019,grain,IDAHO,125000.0,150000,-16.67,125000.0,-16.67,nass_forecast,organizer_csv
+2019,grain,ILLINOIS,10250000.0,10200000,0.49,10800000.0,5.88,nass_forecast,organizer_csv
+2019,grain,INDIANA,4900000.0,4770000,2.73,5120000.0,7.34,nass_forecast,organizer_csv
+2019,grain,IOWA,13100000.0,12950000,1.16,12750000.0,-1.54,nass_forecast,organizer_csv
+2019,grain,KANSAS,6000000.0,6020000,-0.33,4980000.0,-17.28,nass_forecast,organizer_csv
+2019,grain,KENTUCKY,1450000.0,1450000,0.0,1220000.0,-15.86,nass_forecast,organizer_csv
+2019,grain,LOUISIANA,550000.0,545000,0.92,450000.0,-17.43,nass_forecast,organizer_csv
+2019,grain,MARYLAND,440000.0,460000,-4.35,380000.0,-17.39,nass_forecast,organizer_csv
+2019,grain,MICHIGAN,1740000.0,1610000,8.07,1860000.0,15.53,nass_forecast,organizer_csv
+2019,grain,MINNESOTA,7310000.0,7250000,0.83,7460000.0,2.9,nass_forecast,organizer_csv
+2019,grain,MISSISSIPPI,625000.0,615000,1.63,460000.0,-25.2,nass_forecast,organizer_csv
+2019,grain,MISSOURI,3050000.0,2980000,2.35,3300000.0,10.74,nass_forecast,organizer_csv
+2019,grain,MONTANA,62000.0,60000,3.33,68000.0,13.33,nass_forecast,organizer_csv
+2019,grain,NEBRASKA,9750000.0,9810000,-0.61,9300000.0,-5.2,nass_forecast,organizer_csv
+2019,grain,NEW JERSEY,63000.0,68000,-7.35,60000.0,-11.76,nass_forecast,organizer_csv
+2019,grain,NEW MEXICO,41000.0,48000,-14.58,35000.0,-27.08,nass_forecast,organizer_csv
+2019,grain,NEW YORK,530000.0,520000,1.92,605000.0,16.35,nass_forecast,organizer_csv
+2019,grain,NORTH CAROLINA,910000.0,930000,-2.15,830000.0,-10.75,nass_forecast,organizer_csv
+2019,grain,NORTH DAKOTA,3310000.0,3130000,5.75,2930000.0,-6.39,nass_forecast,organizer_csv
+2019,grain,OHIO,2590000.0,2570000,0.78,3300000.0,28.4,nass_forecast,organizer_csv
+2019,grain,OKLAHOMA,325000.0,330000,-1.52,270000.0,-18.18,nass_forecast,organizer_csv
+2019,grain,OREGON,52000.0,49000,6.12,40000.0,-18.37,nass_forecast,organizer_csv
+2019,grain,PENNSYLVANIA,960000.0,930000,3.23,855000.0,-8.06,nass_forecast,organizer_csv
+2019,grain,SOUTH CAROLINA,345000.0,350000,-1.43,310000.0,-11.43,nass_forecast,organizer_csv
+2019,grain,SOUTH DAKOTA,3920000.0,3870000,1.29,4860000.0,25.58,nass_forecast,organizer_csv
+2019,grain,TENNESSEE,920000.0,910000,1.1,670000.0,-26.37,nass_forecast,organizer_csv
+2019,grain,TEXAS,2050000.0,2150000,-4.65,1750000.0,-18.6,nass_forecast,organizer_csv
+2019,grain,US (sum of states),81815000.0,80991000,1.02,81169000.0,0.22,,organizer_csv
+2019,grain,UTAH,29000.0,26000,11.54,22000.0,-15.38,nass_forecast,organizer_csv
+2019,grain,VIRGINIA,375000.0,380000,-1.32,325000.0,-14.47,nass_forecast,organizer_csv
+2019,grain,WASHINGTON,85000.0,84000,1.19,84000.0,0.0,nass_forecast,organizer_csv
+2019,grain,WEST VIRGINIA,39000.0,38000,2.63,33000.0,-13.16,nass_forecast,organizer_csv
+2019,grain,WISCONSIN,2840000.0,2670000,6.37,3170000.0,18.73,nass_forecast,organizer_csv
+2019,grain,WYOMING,65000.0,67000,-2.99,70000.0,4.48,nass_forecast,organizer_csv
+2019,silage,ALABAMA,6000.0,7000,-13.73,5000.0,-28.57,,organizer_csv
+2019,silage,ARIZONA,44900.0,50000,-10.21,58000.0,16.0,,organizer_csv
+2019,silage,ARKANSAS,2400.0,7000,-65.19,3000.0,-57.14,,organizer_csv
+2019,silage,CALIFORNIA,356400.0,415000,-14.11,360000.0,-13.25,,organizer_csv
+2019,silage,COLORADO,152600.0,175000,-12.77,190000.0,8.57,,organizer_csv
+2019,silage,CONNECTICUT,20400.0,21000,-2.81,20000.0,-4.76,,organizer_csv
+2019,silage,DELAWARE,4400.0,4000,10.44,3000.0,-25.0,,organizer_csv
+2019,silage,FLORIDA,31600.0,35000,-9.84,30000.0,-14.29,,organizer_csv
+2019,silage,GEORGIA,33600.0,25000,34.57,30000.0,20.0,,organizer_csv
+2019,silage,IDAHO,221500.0,235000,-5.72,220000.0,-6.38,,organizer_csv
+2019,silage,ILLINOIS,133500.0,170000,-21.47,100000.0,-41.18,,organizer_csv
+2019,silage,INDIANA,102900.0,110000,-6.5,100000.0,-9.09,,organizer_csv
+2019,silage,IOWA,300500.0,360000,-16.54,270000.0,-25.0,,organizer_csv
+2019,silage,KANSAS,268600.0,250000,7.45,390000.0,56.0,,organizer_csv
+2019,silage,KENTUCKY,84200.0,80000,5.19,90000.0,12.5,,organizer_csv
+2019,silage,LOUISIANA,2200.0,3000,-27.14,2000.0,-33.33,,organizer_csv
+2019,silage,MAINE,27100.0,26000,4.14,27000.0,3.85,,organizer_csv
+2019,silage,MARYLAND,47500.0,40000,18.81,45000.0,12.5,,organizer_csv
+2019,silage,MASSACHUSETTS,12400.0,11000,12.99,12000.0,9.09,,organizer_csv
+2019,silage,MICHIGAN,330900.0,340000,-2.67,340000.0,0.0,,organizer_csv
+2019,silage,MINNESOTA,366400.0,460000,-20.35,340000.0,-26.09,,organizer_csv
+2019,silage,MISSISSIPPI,8300.0,7000,19.17,7000.0,0.0,,organizer_csv
+2019,silage,MISSOURI,86500.0,70000,23.53,100000.0,42.86,,organizer_csv
+2019,silage,MONTANA,36900.0,50000,-26.12,37000.0,-26.0,,organizer_csv
+2019,silage,NEBRASKA,224000.0,200000,12.0,220000.0,10.0,,organizer_csv
+2019,silage,NEVADA,6700.0,12000,-44.46,7000.0,-41.67,,organizer_csv
+2019,silage,NEW HAMPSHIRE,12800.0,11000,16.29,12000.0,9.09,,organizer_csv
+2019,silage,NEW JERSEY,6000.0,7000,-14.5,6000.0,-14.29,,organizer_csv
+2019,silage,NEW MEXICO,85500.0,93000,-8.02,95000.0,2.15,,organizer_csv
+2019,silage,NEW YORK,470300.0,435000,8.1,445000.0,2.3,,organizer_csv
+2019,silage,NORTH CAROLINA,47800.0,50000,-4.36,50000.0,0.0,,organizer_csv
+2019,silage,NORTH DAKOTA,163900.0,140000,17.1,170000.0,21.43,,organizer_csv
+2019,silage,OHIO,182800.0,170000,7.52,160000.0,-5.88,,organizer_csv
+2019,silage,OKLAHOMA,20000.0,20000,0.21,20000.0,0.0,,organizer_csv
+2019,silage,OREGON,36500.0,35000,4.36,34000.0,-2.86,,organizer_csv
+2019,silage,PENNSYLVANIA,390900.0,340000,14.97,360000.0,5.88,,organizer_csv
+2019,silage,RHODE ISLAND,2000.0,2000,0.0,2000.0,0.0,,organizer_csv
+2019,silage,SOUTH CAROLINA,17400.0,13000,33.89,19000.0,46.15,,organizer_csv
+2019,silage,SOUTH DAKOTA,397500.0,340000,16.9,360000.0,5.88,,organizer_csv
+2019,silage,TENNESSEE,37400.0,40000,-6.38,38000.0,-5.0,,organizer_csv
+2019,silage,TEXAS,220400.0,280000,-21.28,270000.0,-3.57,,organizer_csv
+2019,silage,US (sum of states),6162600.0,6565000,-6.13,6090000.0,-7.24,,organizer_csv
+2019,silage,UTAH,48400.0,55000,-12.09,45000.0,-18.18,,organizer_csv
+2019,silage,VERMONT,80100.0,77000,4.07,79000.0,2.6,,organizer_csv
+2019,silage,VIRGINIA,133400.0,135000,-1.2,135000.0,0.0,,organizer_csv
+2019,silage,WASHINGTON,85000.0,85000,0.04,80000.0,-5.88,,organizer_csv
+2019,silage,WEST VIRGINIA,12900.0,12000,7.74,11000.0,-8.33,,organizer_csv
+2019,silage,WISCONSIN,773200.0,1040000,-25.65,670000.0,-35.58,,organizer_csv
+2019,silage,WYOMING,25700.0,22000,16.75,23000.0,4.55,,organizer_csv
+2020,grain,ALABAMA,325000.0,310000,4.84,285000.0,-8.06,nass_forecast,organizer_csv
+2020,grain,ARIZONA,26000.0,29000,-10.34,37000.0,27.59,nass_forecast,organizer_csv
+2020,grain,ARKANSAS,605000.0,605000,0.0,735000.0,21.49,nass_forecast,organizer_csv
+2020,grain,CALIFORNIA,50000.0,60000,-16.67,60000.0,0.0,nass_forecast,organizer_csv
+2020,grain,COLORADO,1160000.0,1060000,9.43,1300000.0,22.64,nass_forecast,organizer_csv
+2020,grain,DELAWARE,170000.0,176000,-3.41,180000.0,2.27,nass_forecast,organizer_csv
+2020,grain,FLORIDA,56000.0,61000,-8.2,54000.0,-11.48,nass_forecast,organizer_csv
+2020,grain,GEORGIA,380000.0,390000,-2.56,350000.0,-10.26,nass_forecast,organizer_csv
+2020,grain,IDAHO,140000.0,130000,7.69,150000.0,15.38,nass_forecast,organizer_csv
+2020,grain,ILLINOIS,11200000.0,11100000,0.9,10200000.0,-8.11,nass_forecast,organizer_csv
+2020,grain,INDIANA,5250000.0,5250000,0.0,4770000.0,-9.14,nass_forecast,organizer_csv
+2020,grain,IOWA,12700000.0,12900000,-1.55,12950000.0,0.39,nass_forecast,organizer_csv
+2020,grain,KANSAS,5750000.0,5720000,0.52,6020000.0,5.24,nass_forecast,organizer_csv
+2020,grain,KENTUCKY,1360000.0,1360000,0.0,1450000.0,6.62,nass_forecast,organizer_csv
+2020,grain,LOUISIANA,490000.0,485000,1.03,545000.0,12.37,nass_forecast,organizer_csv
+2020,grain,MARYLAND,455000.0,420000,8.33,460000.0,9.52,nass_forecast,organizer_csv
+2020,grain,MICHIGAN,1980000.0,1980000,0.0,1610000.0,-18.69,nass_forecast,organizer_csv
+2020,grain,MINNESOTA,7550000.0,7510000,0.53,7250000.0,-3.46,nass_forecast,organizer_csv
+2020,grain,MISSISSIPPI,490000.0,490000,0.0,615000.0,25.51,nass_forecast,organizer_csv
+2020,grain,MISSOURI,3300000.0,3280000,0.61,2980000.0,-9.15,nass_forecast,organizer_csv
+2020,grain,MONTANA,66000.0,61000,8.2,60000.0,-1.64,nass_forecast,organizer_csv
+2020,grain,NEBRASKA,9830000.0,9840000,-0.1,9810000.0,-0.3,nass_forecast,organizer_csv
+2020,grain,NEW JERSEY,80000.0,73000,9.59,68000.0,-6.85,nass_forecast,organizer_csv
+2020,grain,NEW MEXICO,29000.0,37000,-21.62,48000.0,29.73,nass_forecast,organizer_csv
+2020,grain,NEW YORK,520000.0,550000,-5.45,520000.0,-5.45,nass_forecast,organizer_csv
+2020,grain,NORTH CAROLINA,940000.0,940000,0.0,930000.0,-1.06,nass_forecast,organizer_csv
+2020,grain,NORTH DAKOTA,1790000.0,1780000,0.56,3130000.0,75.84,nass_forecast,organizer_csv
+2020,grain,OHIO,3300000.0,3300000,0.0,2570000.0,-22.12,nass_forecast,organizer_csv
+2020,grain,OKLAHOMA,320000.0,320000,0.0,330000.0,3.12,nass_forecast,organizer_csv
+2020,grain,OREGON,53000.0,65000,-18.46,49000.0,-24.62,nass_forecast,organizer_csv
+2020,grain,PENNSYLVANIA,1000000.0,905000,10.5,930000.0,2.76,nass_forecast,organizer_csv
+2020,grain,SOUTH CAROLINA,370000.0,370000,0.0,350000.0,-5.41,nass_forecast,organizer_csv
+2020,grain,SOUTH DAKOTA,4560000.0,4450000,2.47,3870000.0,-13.03,nass_forecast,organizer_csv
+2020,grain,TENNESSEE,820000.0,815000,0.61,910000.0,11.66,nass_forecast,organizer_csv
+2020,grain,TEXAS,1870000.0,1810000,3.31,2150000.0,18.78,nass_forecast,organizer_csv
+2020,grain,US (sum of states),82527000.0,82168000,0.44,80991000.0,-1.43,,organizer_csv
+2020,grain,UTAH,28000.0,29000,-3.45,26000.0,-10.34,nass_forecast,organizer_csv
+2020,grain,VIRGINIA,410000.0,405000,1.23,380000.0,-6.17,nass_forecast,organizer_csv
+2020,grain,WASHINGTON,105000.0,85000,23.53,84000.0,-1.18,nass_forecast,organizer_csv
+2020,grain,WEST VIRGINIA,35000.0,33000,6.06,38000.0,15.15,nass_forecast,organizer_csv
+2020,grain,WISCONSIN,2900000.0,2930000,-1.02,2670000.0,-8.87,nass_forecast,organizer_csv
+2020,grain,WYOMING,64000.0,54000,18.52,67000.0,24.07,nass_forecast,organizer_csv
+2020,silage,ALABAMA,6400.0,5000,28.44,7000.0,40.0,,organizer_csv
+2020,silage,ARIZONA,47100.0,45000,4.72,50000.0,11.11,,organizer_csv
+2020,silage,ARKANSAS,3900.0,6000,-34.7,7000.0,16.67,,organizer_csv
+2020,silage,CALIFORNIA,381700.0,375000,1.78,415000.0,10.67,,organizer_csv
+2020,silage,COLORADO,162300.0,230000,-29.43,175000.0,-23.91,,organizer_csv
+2020,silage,CONNECTICUT,20700.0,22000,-6.03,21000.0,-4.55,,organizer_csv
+2020,silage,DELAWARE,3200.0,4000,-18.81,4000.0,0.0,,organizer_csv
+2020,silage,FLORIDA,33100.0,35000,-5.54,35000.0,0.0,,organizer_csv
+2020,silage,GEORGIA,29400.0,25000,17.74,25000.0,0.0,,organizer_csv
+2020,silage,IDAHO,227500.0,260000,-12.5,235000.0,-9.62,,organizer_csv
+2020,silage,ILLINOIS,124400.0,110000,13.08,170000.0,54.55,,organizer_csv
+2020,silage,INDIANA,105400.0,130000,-18.9,110000.0,-15.38,,organizer_csv
+2020,silage,IOWA,345000.0,260000,32.69,360000.0,38.46,,organizer_csv
+2020,silage,KANSAS,260000.0,250000,4.0,250000.0,0.0,,organizer_csv
+2020,silage,KENTUCKY,82200.0,95000,-13.47,80000.0,-15.79,,organizer_csv
+2020,silage,LOUISIANA,1700.0,3000,-42.41,3000.0,0.0,,organizer_csv
+2020,silage,MAINE,26600.0,27000,-1.53,26000.0,-3.7,,organizer_csv
+2020,silage,MARYLAND,45000.0,40000,12.43,40000.0,0.0,,organizer_csv
+2020,silage,MASSACHUSETTS,11800.0,12000,-1.96,11000.0,-8.33,,organizer_csv
+2020,silage,MICHIGAN,335000.0,350000,-4.3,340000.0,-2.86,,organizer_csv
+2020,silage,MINNESOTA,405400.0,420000,-3.47,460000.0,9.52,,organizer_csv
+2020,silage,MISSISSIPPI,7000.0,7000,0.57,7000.0,0.0,,organizer_csv
+2020,silage,MISSOURI,78500.0,100000,-21.52,70000.0,-30.0,,organizer_csv
+2020,silage,MONTANA,42300.0,51000,-17.0,50000.0,-1.96,,organizer_csv
+2020,silage,NEBRASKA,212800.0,260000,-18.14,200000.0,-23.08,,organizer_csv
+2020,silage,NEVADA,8700.0,13000,-33.2,12000.0,-7.69,,organizer_csv
+2020,silage,NEW HAMPSHIRE,12000.0,12000,-0.4,11000.0,-8.33,,organizer_csv
+2020,silage,NEW JERSEY,6400.0,6000,7.04,7000.0,16.67,,organizer_csv
+2020,silage,NEW MEXICO,88800.0,79000,12.43,93000.0,17.72,,organizer_csv
+2020,silage,NEW YORK,454000.0,470000,-3.39,435000.0,-7.45,,organizer_csv
+2020,silage,NORTH CAROLINA,45300.0,40000,13.22,50000.0,25.0,,organizer_csv
+2020,silage,NORTH DAKOTA,152700.0,145000,5.3,140000.0,-3.45,,organizer_csv
+2020,silage,OHIO,176900.0,200000,-11.56,170000.0,-15.0,,organizer_csv
+2020,silage,OKLAHOMA,20000.0,20000,0.06,20000.0,0.0,,organizer_csv
+2020,silage,OREGON,35800.0,34000,5.38,35000.0,2.94,,organizer_csv
+2020,silage,PENNSYLVANIA,367100.0,390000,-5.87,340000.0,-12.82,,organizer_csv
+2020,silage,RHODE ISLAND,2000.0,2000,0.0,2000.0,0.0,,organizer_csv
+2020,silage,SOUTH CAROLINA,13500.0,9000,50.01,13000.0,44.44,,organizer_csv
+2020,silage,SOUTH DAKOTA,370400.0,360000,2.9,340000.0,-5.56,,organizer_csv
+2020,silage,TENNESSEE,39700.0,35000,13.46,40000.0,14.29,,organizer_csv
+2020,silage,TEXAS,244900.0,270000,-9.28,280000.0,3.7,,organizer_csv
+2020,silage,US (sum of states),6307600.0,6560000,-3.85,6565000.0,0.08,,organizer_csv
+2020,silage,UTAH,51200.0,52000,-1.47,55000.0,5.77,,organizer_csv
+2020,silage,VERMONT,78700.0,80000,-1.61,77000.0,-3.75,,organizer_csv
+2020,silage,VIRGINIA,135800.0,115000,18.08,135000.0,17.39,,organizer_csv
+2020,silage,WASHINGTON,85000.0,110000,-22.71,85000.0,-22.73,,organizer_csv
+2020,silage,WEST VIRGINIA,12500.0,11000,13.66,12000.0,9.09,,organizer_csv
+2020,silage,WISCONSIN,883500.0,960000,-7.97,1040000.0,8.33,,organizer_csv
+2020,silage,WYOMING,24000.0,25000,-4.18,22000.0,-12.0,,organizer_csv
+2021,grain,ALABAMA,340000.0,320000,6.25,310000.0,-3.12,nass_forecast,organizer_csv
+2021,grain,ARIZONA,34000.0,18000,88.89,29000.0,61.11,nass_forecast,organizer_csv
+2021,grain,ARKANSAS,830000.0,830000,0.0,605000.0,-27.11,nass_forecast,organizer_csv
+2021,grain,CALIFORNIA,95000.0,50000,90.0,60000.0,20.0,nass_forecast,organizer_csv
+2021,grain,COLORADO,1110000.0,1140000,-2.63,1060000.0,-7.02,nass_forecast,organizer_csv
+2021,grain,DELAWARE,170000.0,167000,1.8,176000.0,5.39,nass_forecast,organizer_csv
+2021,grain,FLORIDA,60000.0,66000,-9.09,61000.0,-7.58,nass_forecast,organizer_csv
+2021,grain,GEORGIA,440000.0,435000,1.15,390000.0,-10.34,nass_forecast,organizer_csv
+2021,grain,IDAHO,105000.0,115000,-8.7,130000.0,13.04,nass_forecast,organizer_csv
+2021,grain,ILLINOIS,10800000.0,10850000,-0.46,11100000.0,2.3,nass_forecast,organizer_csv
+2021,grain,INDIANA,5250000.0,5270000,-0.38,5250000.0,-0.38,nass_forecast,organizer_csv
+2021,grain,IOWA,12450000.0,12450000,0.0,12900000.0,3.61,nass_forecast,organizer_csv
+2021,grain,KANSAS,5300000.0,5400000,-1.85,5720000.0,5.93,nass_forecast,organizer_csv
+2021,grain,KENTUCKY,1450000.0,1420000,2.11,1360000.0,-4.23,nass_forecast,organizer_csv
+2021,grain,LOUISIANA,565000.0,565000,0.0,485000.0,-14.16,nass_forecast,organizer_csv
+2021,grain,MARYLAND,390000.0,415000,-6.02,420000.0,1.2,nass_forecast,organizer_csv
+2021,grain,MICHIGAN,1970000.0,1990000,-1.01,1980000.0,-0.5,nass_forecast,organizer_csv
+2021,grain,MINNESOTA,7800000.0,7790000,0.13,7510000.0,-3.59,nass_forecast,organizer_csv
+2021,grain,MISSISSIPPI,700000.0,700000,0.0,490000.0,-30.0,nass_forecast,organizer_csv
+2021,grain,MISSOURI,3380000.0,3430000,-1.46,3280000.0,-4.37,nass_forecast,organizer_csv
+2021,grain,MONTANA,68000.0,60000,13.33,61000.0,1.67,nass_forecast,organizer_csv
+2021,grain,NEBRASKA,9600000.0,9560000,0.42,9840000.0,2.93,nass_forecast,organizer_csv
+2021,grain,NEW JERSEY,80000.0,69000,15.94,73000.0,5.8,nass_forecast,organizer_csv
+2021,grain,NEW MEXICO,36000.0,39000,-7.69,37000.0,-5.13,nass_forecast,organizer_csv
+2021,grain,NEW YORK,500000.0,575000,-13.04,550000.0,-4.35,nass_forecast,organizer_csv
+2021,grain,NORTH CAROLINA,910000.0,905000,0.55,940000.0,3.87,nass_forecast,organizer_csv
+2021,grain,NORTH DAKOTA,3820000.0,3630000,5.23,1780000.0,-50.96,nass_forecast,organizer_csv
+2021,grain,OHIO,3380000.0,3340000,1.2,3300000.0,-1.2,nass_forecast,organizer_csv
+2021,grain,OKLAHOMA,300000.0,295000,1.69,320000.0,8.47,nass_forecast,organizer_csv
+2021,grain,OREGON,45000.0,55000,-18.18,65000.0,18.18,nass_forecast,organizer_csv
+2021,grain,PENNSYLVANIA,870000.0,850000,2.35,905000.0,6.47,nass_forecast,organizer_csv
+2021,grain,SOUTH CAROLINA,390000.0,370000,5.41,370000.0,0.0,nass_forecast,organizer_csv
+2021,grain,SOUTH DAKOTA,5650000.0,5480000,3.1,4450000.0,-18.8,nass_forecast,organizer_csv
+2021,grain,TENNESSEE,970000.0,930000,4.3,815000.0,-12.37,nass_forecast,organizer_csv
+2021,grain,TEXAS,1700000.0,1850000,-8.11,1810000.0,-2.16,nass_forecast,organizer_csv
+2021,grain,US (sum of states),85085000.0,84988000,0.11,82168000.0,-3.32,,organizer_csv
+2021,grain,UTAH,22000.0,17000,29.41,29000.0,70.59,nass_forecast,organizer_csv
+2021,grain,VIRGINIA,390000.0,345000,13.04,405000.0,17.39,nass_forecast,organizer_csv
+2021,grain,WASHINGTON,75000.0,85000,-11.76,85000.0,0.0,nass_forecast,organizer_csv
+2021,grain,WEST VIRGINIA,38000.0,33000,15.15,33000.0,0.0,nass_forecast,organizer_csv
+2021,grain,WISCONSIN,2940000.0,3000000,-2.0,2930000.0,-2.33,nass_forecast,organizer_csv
+2021,grain,WYOMING,62000.0,79000,-21.52,54000.0,-31.65,nass_forecast,organizer_csv
+2021,silage,ALABAMA,5800.0,5000,15.07,5000.0,0.0,,organizer_csv
+2021,silage,ARIZONA,46200.0,76000,-39.27,45000.0,-40.79,,organizer_csv
+2021,silage,ARKANSAS,4700.0,5000,-5.08,6000.0,20.0,,organizer_csv
+2021,silage,CALIFORNIA,378700.0,345000,9.76,375000.0,8.7,,organizer_csv
+2021,silage,COLORADO,189900.0,180000,5.49,230000.0,27.78,,organizer_csv
+2021,silage,CONNECTICUT,21300.0,22000,-3.36,22000.0,0.0,,organizer_csv
+2021,silage,DELAWARE,3700.0,3000,22.63,4000.0,33.33,,organizer_csv
+2021,silage,FLORIDA,33900.0,25000,35.68,35000.0,40.0,,organizer_csv
+2021,silage,GEORGIA,27300.0,25000,9.4,25000.0,0.0,,organizer_csv
+2021,silage,IDAHO,241600.0,260000,-7.08,260000.0,0.0,,organizer_csv
+2021,silage,ILLINOIS,118800.0,80000,48.53,110000.0,37.5,,organizer_csv
+2021,silage,INDIANA,116000.0,110000,5.42,130000.0,18.18,,organizer_csv
+2021,silage,IOWA,286500.0,340000,-15.75,260000.0,-23.53,,organizer_csv
+2021,silage,KANSAS,255500.0,240000,6.45,250000.0,4.17,,organizer_csv
+2021,silage,KENTUCKY,87800.0,90000,-2.48,95000.0,5.56,,organizer_csv
+2021,silage,LOUISIANA,2300.0,3000,-24.58,3000.0,0.0,,organizer_csv
+2021,silage,MAINE,26800.0,25000,7.09,27000.0,8.0,,organizer_csv
+2021,silage,MARYLAND,41700.0,35000,19.27,40000.0,14.29,,organizer_csv
+2021,silage,MASSACHUSETTS,11900.0,11000,7.91,12000.0,9.09,,organizer_csv
+2021,silage,MICHIGAN,341700.0,340000,0.49,350000.0,2.94,,organizer_csv
+2021,silage,MINNESOTA,411900.0,450000,-8.46,420000.0,-6.67,,organizer_csv
+2021,silage,MISSISSIPPI,7100.0,8000,-11.66,7000.0,-12.5,,organizer_csv
+2021,silage,MISSOURI,89300.0,70000,27.55,100000.0,42.86,,organizer_csv
+2021,silage,MONTANA,46000.0,47000,-2.06,51000.0,8.51,,organizer_csv
+2021,silage,NEBRASKA,232900.0,260000,-10.42,260000.0,0.0,,organizer_csv
+2021,silage,NEVADA,10400.0,13000,-19.9,13000.0,0.0,,organizer_csv
+2021,silage,NEW HAMPSHIRE,12000.0,11000,8.85,12000.0,9.09,,organizer_csv
+2021,silage,NEW JERSEY,6200.0,5000,24.57,6000.0,20.0,,organizer_csv
+2021,silage,NEW MEXICO,84300.0,80000,5.32,79000.0,-1.25,,organizer_csv
+2021,silage,NEW YORK,461200.0,440000,4.81,470000.0,6.82,,organizer_csv
+2021,silage,NORTH CAROLINA,42500.0,35000,21.29,40000.0,14.29,,organizer_csv
+2021,silage,NORTH DAKOTA,163000.0,250000,-34.81,145000.0,-42.0,,organizer_csv
+2021,silage,OHIO,187000.0,160000,16.85,200000.0,25.0,,organizer_csv
+2021,silage,OKLAHOMA,20000.0,25000,-19.95,20000.0,-20.0,,organizer_csv
+2021,silage,OREGON,35000.0,39000,-10.27,34000.0,-12.82,,organizer_csv
+2021,silage,PENNSYLVANIA,377200.0,310000,21.69,390000.0,25.81,,organizer_csv
+2021,silage,RHODE ISLAND,2000.0,2000,0.0,2000.0,0.0,,organizer_csv
+2021,silage,SOUTH CAROLINA,11400.0,12000,-5.41,9000.0,-25.0,,organizer_csv
+2021,silage,SOUTH DAKOTA,380400.0,500000,-23.93,360000.0,-28.0,,organizer_csv
+2021,silage,TENNESSEE,36500.0,35000,4.25,35000.0,0.0,,organizer_csv
+2021,silage,TEXAS,256200.0,250000,2.49,270000.0,8.0,,organizer_csv
+2021,silage,US (sum of states),6417800.0,6451000,-0.51,6560000.0,1.69,,organizer_csv
+2021,silage,UTAH,51600.0,45000,14.62,52000.0,15.56,,organizer_csv
+2021,silage,VERMONT,79300.0,77000,2.97,80000.0,3.9,,organizer_csv
+2021,silage,VIRGINIA,123900.0,125000,-0.84,115000.0,-8.0,,organizer_csv
+2021,silage,WASHINGTON,95500.0,80000,19.34,110000.0,37.5,,organizer_csv
+2021,silage,WEST VIRGINIA,11800.0,10000,18.03,11000.0,10.0,,organizer_csv
+2021,silage,WISCONSIN,917200.0,880000,4.22,960000.0,9.09,,organizer_csv
+2021,silage,WYOMING,24400.0,12000,103.5,25000.0,108.33,,organizer_csv
+2022,grain,ALABAMA,290000.0,290000,0.0,320000.0,10.34,nass_forecast,nass_quickstats
+2022,grain,ARIZONA,30000.0,45000,-33.33,18000.0,-60.0,nass_forecast,nass_quickstats
+2022,grain,ARKANSAS,690000.0,695000,-0.72,830000.0,19.42,nass_forecast,nass_quickstats
+2022,grain,CALIFORNIA,20000.0,20000,0.0,50000.0,150.0,nass_forecast,nass_quickstats
+2022,grain,COLORADO,1100000.0,970000,13.4,1140000.0,17.53,nass_forecast,nass_quickstats
+2022,grain,DELAWARE,162000.0,156000,3.85,167000.0,7.05,nass_forecast,nass_quickstats
+2022,grain,FLORIDA,45000.0,56000,-19.64,66000.0,17.86,nass_forecast,nass_quickstats
+2022,grain,GEORGIA,385000.0,375000,2.67,435000.0,16.0,nass_forecast,nass_quickstats
+2022,grain,IDAHO,105000.0,105000,0.0,115000.0,9.52,nass_forecast,nass_quickstats
+2022,grain,ILLINOIS,10550000.0,10600000,-0.47,10850000.0,2.36,nass_forecast,nass_quickstats
+2022,grain,INDIANA,5050000.0,5130000,-1.56,5270000.0,2.73,nass_forecast,nass_quickstats
+2022,grain,IOWA,12450000.0,12350000,0.81,12450000.0,0.81,nass_forecast,nass_quickstats
+2022,grain,KANSAS,5150000.0,4440000,15.99,5400000.0,21.62,nass_forecast,nass_quickstats
+2022,grain,KENTUCKY,1330000.0,1330000,0.0,1420000.0,6.77,nass_forecast,nass_quickstats
+2022,grain,LOUISIANA,435000.0,435000,0.0,565000.0,29.89,nass_forecast,nass_quickstats
+2022,grain,MARYLAND,375000.0,360000,4.17,415000.0,15.28,nass_forecast,nass_quickstats
+2022,grain,MICHIGAN,1970000.0,1940000,1.55,1990000.0,2.58,nass_forecast,nass_quickstats
+2022,grain,MINNESOTA,7550000.0,7490000,0.8,7790000.0,4.01,nass_forecast,nass_quickstats
+2022,grain,MISSISSIPPI,550000.0,565000,-2.65,700000.0,23.89,nass_forecast,nass_quickstats
+2022,grain,MISSOURI,3200000.0,3110000,2.89,3430000.0,10.29,nass_forecast,nass_quickstats
+2022,grain,MONTANA,52000.0,69000,-24.64,60000.0,-13.04,nass_forecast,nass_quickstats
+2022,grain,NEBRASKA,9300000.0,8820000,5.44,9560000.0,8.39,nass_forecast,nass_quickstats
+2022,grain,NEW JERSEY,67000.0,58000,15.52,69000.0,18.97,nass_forecast,nass_quickstats
+2022,grain,NEW MEXICO,33000.0,36000,-8.33,39000.0,8.33,nass_forecast,nass_quickstats
+2022,grain,NEW YORK,515000.0,565000,-8.85,575000.0,1.77,nass_forecast,nass_quickstats
+2022,grain,NORTH CAROLINA,785000.0,775000,1.29,905000.0,16.77,nass_forecast,nass_quickstats
+2022,grain,NORTH DAKOTA,2700000.0,2650000,1.89,3630000.0,36.98,nass_forecast,nass_quickstats
+2022,grain,OHIO,3120000.0,3180000,-1.89,3340000.0,5.03,nass_forecast,nass_quickstats
+2022,grain,OKLAHOMA,305000.0,200000,52.5,295000.0,47.5,nass_forecast,nass_quickstats
+2022,grain,OREGON,40000.0,45000,-11.11,55000.0,22.22,nass_forecast,nass_quickstats
+2022,grain,PENNSYLVANIA,850000.0,645000,31.78,850000.0,31.78,nass_forecast,nass_quickstats
+2022,grain,SOUTH CAROLINA,300000.0,300000,0.0,370000.0,23.33,nass_forecast,nass_quickstats
+2022,grain,SOUTH DAKOTA,5250000.0,5010000,4.79,5480000.0,9.38,nass_forecast,nass_quickstats
+2022,grain,TENNESSEE,805000.0,785000,2.55,930000.0,18.47,nass_forecast,nass_quickstats
+2022,grain,TEXAS,1780000.0,1610000,10.56,1850000.0,14.91,nass_forecast,nass_quickstats
+2022,grain,US (sum of states),80830000.0,78705000,2.7,84988000.0,7.98,,nass_quickstats
+2022,grain,UTAH,26000.0,14000,85.71,17000.0,21.43,nass_forecast,nass_quickstats
+2022,grain,VIRGINIA,345000.0,325000,6.15,345000.0,6.15,nass_forecast,nass_quickstats
+2022,grain,WASHINGTON,70000.0,80000,-12.5,85000.0,6.25,nass_forecast,nass_quickstats
+2022,grain,WEST VIRGINIA,38000.0,30000,26.67,33000.0,10.0,nass_forecast,nass_quickstats
+2022,grain,WISCONSIN,2950000.0,2990000,-1.34,3000000.0,0.33,nass_forecast,nass_quickstats
+2022,grain,WYOMING,62000.0,56000,10.71,79000.0,41.07,nass_forecast,nass_quickstats
+2022,silage,ALABAMA,8100.0,4000,103.12,5000.0,25.0,,nass_quickstats
+2022,silage,ARIZONA,56000.0,44000,27.37,76000.0,72.73,,nass_quickstats
+2022,silage,ARKANSAS,4700.0,5000,-6.3,5000.0,0.0,,nass_quickstats
+2022,silage,CALIFORNIA,364500.0,335000,8.82,345000.0,2.99,,nass_quickstats
+2022,silage,COLORADO,182500.0,190000,-3.96,180000.0,-5.26,,nass_quickstats
+2022,silage,CONNECTICUT,21500.0,23000,-6.41,22000.0,-4.35,,nass_quickstats
+2022,silage,DELAWARE,3300.0,3000,11.6,3000.0,0.0,,nass_quickstats
+2022,silage,FLORIDA,29900.0,25000,19.67,25000.0,0.0,,nass_quickstats
+2022,silage,GEORGIA,26700.0,30000,-10.92,25000.0,-16.67,,nass_quickstats
+2022,silage,IDAHO,247500.0,205000,20.75,260000.0,26.83,,nass_quickstats
+2022,silage,ILLINOIS,100500.0,120000,-16.23,80000.0,-33.33,,nass_quickstats
+2022,silage,INDIANA,112700.0,100000,12.65,110000.0,10.0,,nass_quickstats
+2022,silage,IOWA,307600.0,390000,-21.13,340000.0,-12.82,,nass_quickstats
+2022,silage,KANSAS,273300.0,420000,-34.94,240000.0,-42.86,,nass_quickstats
+2022,silage,KENTUCKY,99200.0,70000,41.71,90000.0,28.57,,nass_quickstats
+2022,silage,LOUISIANA,2400.0,3000,-18.36,3000.0,0.0,,nass_quickstats
+2022,silage,MAINE,26000.0,24000,8.54,25000.0,4.17,,nass_quickstats
+2022,silage,MARYLAND,39200.0,40000,-2.07,35000.0,-12.5,,nass_quickstats
+2022,silage,MASSACHUSETTS,11500.0,11000,4.98,11000.0,0.0,,nass_quickstats
+2022,silage,MICHIGAN,339800.0,330000,2.98,340000.0,3.03,,nass_quickstats
+2022,silage,MINNESOTA,425500.0,450000,-5.45,450000.0,0.0,,nass_quickstats
+2022,silage,MISSISSIPPI,7500.0,5000,49.26,8000.0,60.0,,nass_quickstats
+2022,silage,MISSOURI,84300.0,150000,-43.81,70000.0,-53.33,,nass_quickstats
+2022,silage,MONTANA,46100.0,54000,-14.69,47000.0,-12.96,,nass_quickstats
+2022,silage,NEBRASKA,266700.0,430000,-37.97,260000.0,-39.53,,nass_quickstats
+2022,silage,NEVADA,11000.0,11000,0.43,13000.0,18.18,,nass_quickstats
+2022,silage,NEW HAMPSHIRE,11600.0,11000,5.66,11000.0,0.0,,nass_quickstats
+2022,silage,NEW JERSEY,5700.0,6000,-4.81,5000.0,-16.67,,nass_quickstats
+2022,silage,NEW MEXICO,82500.0,55000,50.03,80000.0,45.45,,nass_quickstats
+2022,silage,NEW YORK,453100.0,425000,6.6,440000.0,3.53,,nass_quickstats
+2022,silage,NORTH CAROLINA,39700.0,30000,32.22,35000.0,16.67,,nass_quickstats
+2022,silage,NORTH DAKOTA,179000.0,230000,-22.19,250000.0,8.7,,nass_quickstats
+2022,silage,OHIO,175400.0,170000,3.15,160000.0,-5.88,,nass_quickstats
+2022,silage,OKLAHOMA,22500.0,35000,-35.63,25000.0,-28.57,,nass_quickstats
+2022,silage,OREGON,36600.0,34000,7.77,39000.0,14.71,,nass_quickstats
+2022,silage,PENNSYLVANIA,349500.0,340000,2.78,310000.0,-8.82,,nass_quickstats
+2022,silage,RHODE ISLAND,2000.0,1000,100.0,2000.0,100.0,,nass_quickstats
+2022,silage,SOUTH CAROLINA,11700.0,8000,46.16,12000.0,50.0,,nass_quickstats
+2022,silage,SOUTH DAKOTA,441600.0,550000,-19.71,500000.0,-9.09,,nass_quickstats
+2022,silage,TENNESSEE,45900.0,30000,53.16,35000.0,16.67,,nass_quickstats
+2022,silage,TEXAS,264500.0,260000,1.75,250000.0,-3.85,,nass_quickstats
+2022,silage,US (sum of states),6487100.0,6851000,-5.31,6451000.0,-5.84,,nass_quickstats
+2022,silage,UTAH,48700.0,45000,8.28,45000.0,0.0,,nass_quickstats
+2022,silage,VERMONT,78500.0,82000,-4.32,77000.0,-6.1,,nass_quickstats
+2022,silage,VIRGINIA,124700.0,100000,24.74,125000.0,25.0,,nass_quickstats
+2022,silage,WASHINGTON,88300.0,55000,60.6,80000.0,45.45,,nass_quickstats
+2022,silage,WEST VIRGINIA,11100.0,9000,23.74,10000.0,11.11,,nass_quickstats
+2022,silage,WISCONSIN,897800.0,870000,3.19,880000.0,1.15,,nass_quickstats
+2022,silage,WYOMING,18400.0,33000,-44.1,12000.0,-63.64,,nass_quickstats
+2023,grain,ALABAMA,335000.0,320000,4.69,290000.0,-9.38,nass_forecast,organizer_csv
+2023,grain,ARIZONA,45000.0,38000,18.42,45000.0,18.42,nass_forecast,organizer_csv
+2023,grain,ARKANSAS,830000.0,830000,0.0,695000.0,-16.27,nass_forecast,organizer_csv
+2023,grain,CALIFORNIA,40000.0,40000,0.0,20000.0,-50.0,nass_forecast,organizer_csv
+2023,grain,COLORADO,1070000.0,1015000,5.42,970000.0,-4.43,nass_forecast,organizer_csv
+2023,grain,DELAWARE,172000.0,172000,0.0,156000.0,-9.3,nass_forecast,organizer_csv
+2023,grain,FLORIDA,60000.0,62000,-3.23,56000.0,-9.68,nass_forecast,organizer_csv
+2023,grain,GEORGIA,450000.0,440000,2.27,375000.0,-14.77,nass_forecast,organizer_csv
+2023,grain,IDAHO,120000.0,115000,4.35,105000.0,-8.7,nass_forecast,organizer_csv
+2023,grain,ILLINOIS,11000000.0,11050000,-0.45,10600000.0,-4.07,nass_forecast,organizer_csv
+2023,grain,INDIANA,5380000.0,5310000,1.32,5130000.0,-3.39,nass_forecast,organizer_csv
+2023,grain,IOWA,12600000.0,12550000,0.4,12350000.0,-1.59,nass_forecast,organizer_csv
+2023,grain,KANSAS,5330000.0,5150000,3.5,4440000.0,-13.79,nass_forecast,organizer_csv
+2023,grain,KENTUCKY,1500000.0,1500000,0.0,1330000.0,-11.33,nass_forecast,organizer_csv
+2023,grain,LOUISIANA,680000.0,680000,0.0,435000.0,-36.03,nass_forecast,organizer_csv
+2023,grain,MARYLAND,420000.0,440000,-4.55,360000.0,-18.18,nass_forecast,organizer_csv
+2023,grain,MICHIGAN,2050000.0,2060000,-0.49,1940000.0,-5.83,nass_forecast,organizer_csv
+2023,grain,MINNESOTA,8200000.0,8180000,0.24,7490000.0,-8.44,nass_forecast,organizer_csv
+2023,grain,MISSISSIPPI,770000.0,770000,0.0,565000.0,-26.62,nass_forecast,organizer_csv
+2023,grain,MISSOURI,3670000.0,3670000,0.0,3110000.0,-15.26,nass_forecast,organizer_csv
+2023,grain,MONTANA,69000.0,68000,1.47,69000.0,1.47,nass_forecast,organizer_csv
+2023,grain,NEBRASKA,9590000.0,9500000,0.95,8820000.0,-7.16,nass_forecast,organizer_csv
+2023,grain,NEW JERSEY,65000.0,65000,0.0,58000.0,-10.77,nass_forecast,organizer_csv
+2023,grain,NEW MEXICO,60000.0,47000,27.66,36000.0,-23.4,nass_forecast,organizer_csv
+2023,grain,NEW YORK,605000.0,600000,0.83,565000.0,-5.83,nass_forecast,organizer_csv
+2023,grain,NORTH CAROLINA,900000.0,900000,0.0,775000.0,-13.89,nass_forecast,organizer_csv
+2023,grain,NORTH DAKOTA,3740000.0,3800000,-1.58,2650000.0,-30.26,nass_forecast,organizer_csv
+2023,grain,OHIO,3370000.0,3400000,-0.88,3180000.0,-6.47,nass_forecast,organizer_csv
+2023,grain,OKLAHOMA,350000.0,340000,2.94,200000.0,-41.18,nass_forecast,organizer_csv
+2023,grain,OREGON,60000.0,55000,9.09,45000.0,-18.18,nass_forecast,organizer_csv
+2023,grain,PENNSYLVANIA,840000.0,680000,23.53,645000.0,-5.15,nass_forecast,organizer_csv
+2023,grain,SOUTH CAROLINA,355000.0,350000,1.43,300000.0,-14.29,nass_forecast,organizer_csv
+2023,grain,SOUTH DAKOTA,5590000.0,5620000,-0.53,5010000.0,-10.85,nass_forecast,organizer_csv
+2023,grain,TENNESSEE,895000.0,890000,0.56,785000.0,-11.8,nass_forecast,organizer_csv
+2023,grain,TEXAS,2200000.0,2100000,4.76,1610000.0,-23.33,nass_forecast,organizer_csv
+2023,grain,US (sum of states),87096000.0,86506000,0.68,78705000.0,-9.02,,organizer_csv
+2023,grain,UTAH,23000.0,27000,-14.81,14000.0,-48.15,nass_forecast,organizer_csv
+2023,grain,VIRGINIA,375000.0,370000,1.35,325000.0,-12.16,nass_forecast,organizer_csv
+2023,grain,WASHINGTON,90000.0,75000,20.0,80000.0,6.67,nass_forecast,organizer_csv
+2023,grain,WEST VIRGINIA,36000.0,30000,20.0,30000.0,0.0,nass_forecast,organizer_csv
+2023,grain,WISCONSIN,3100000.0,3140000,-1.27,2990000.0,-4.78,nass_forecast,organizer_csv
+2023,grain,WYOMING,61000.0,57000,7.02,56000.0,-1.75,nass_forecast,organizer_csv
+2023,silage,ALABAMA,2900.0,4000,-27.51,4000.0,0.0,,organizer_csv
+2023,silage,ARIZONA,51100.0,66000,-22.56,44000.0,-33.33,,organizer_csv
+2023,silage,ARKANSAS,4900.0,5000,-1.56,5000.0,0.0,,organizer_csv
+2023,silage,CALIFORNIA,350200.0,350000,0.05,335000.0,-4.29,,organizer_csv
+2023,silage,COLORADO,187400.0,235000,-20.24,190000.0,-19.15,,organizer_csv
+2023,silage,CONNECTICUT,22200.0,20000,11.07,23000.0,15.0,,organizer_csv
+2023,silage,DELAWARE,3200.0,2000,58.06,3000.0,50.0,,organizer_csv
+2023,silage,FLORIDA,27400.0,25000,9.67,25000.0,0.0,,organizer_csv
+2023,silage,GEORGIA,27900.0,35000,-20.33,30000.0,-14.29,,organizer_csv
+2023,silage,IDAHO,228500.0,240000,-4.79,205000.0,-14.58,,organizer_csv
+2023,silage,ILLINOIS,107900.0,90000,19.9,120000.0,33.33,,organizer_csv
+2023,silage,INDIANA,107000.0,120000,-10.79,100000.0,-16.67,,organizer_csv
+2023,silage,IOWA,342600.0,380000,-9.83,390000.0,2.63,,organizer_csv
+2023,silage,KANSAS,305800.0,330000,-7.33,420000.0,27.27,,organizer_csv
+2023,silage,KENTUCKY,73800.0,80000,-7.75,70000.0,-12.5,,organizer_csv
+2023,silage,LOUISIANA,2700.0,3000,-8.77,3000.0,0.0,,organizer_csv
+2023,silage,MAINE,25100.0,23000,8.95,24000.0,4.35,,organizer_csv
+2023,silage,MARYLAND,39200.0,30000,30.56,40000.0,33.33,,organizer_csv
+2023,silage,MASSACHUSETTS,11300.0,11000,2.33,11000.0,0.0,,organizer_csv
+2023,silage,MICHIGAN,336000.0,320000,4.99,330000.0,3.12,,organizer_csv
+2023,silage,MINNESOTA,438100.0,350000,25.18,450000.0,28.57,,organizer_csv
+2023,silage,MISSISSIPPI,6200.0,6000,3.74,5000.0,-16.67,,organizer_csv
+2023,silage,MISSOURI,103000.0,100000,2.95,150000.0,50.0,,organizer_csv
+2023,silage,MONTANA,49700.0,62000,-19.81,54000.0,-12.9,,organizer_csv
+2023,silage,NEBRASKA,307400.0,280000,9.77,430000.0,53.57,,organizer_csv
+2023,silage,NEVADA,11300.0,11000,2.51,11000.0,0.0,,organizer_csv
+2023,silage,NEW HAMPSHIRE,11300.0,12000,-5.95,11000.0,-8.33,,organizer_csv
+2023,silage,NEW JERSEY,5800.0,6000,-3.32,6000.0,0.0,,organizer_csv
+2023,silage,NEW MEXICO,68700.0,69000,-0.5,55000.0,-20.29,,organizer_csv
+2023,silage,NEW YORK,439400.0,430000,2.18,425000.0,-1.16,,organizer_csv
+2023,silage,NORTH CAROLINA,34300.0,30000,14.28,30000.0,0.0,,organizer_csv
+2023,silage,NORTH DAKOTA,202400.0,200000,1.18,230000.0,15.0,,organizer_csv
+2023,silage,OHIO,172300.0,160000,7.72,170000.0,6.25,,organizer_csv
+2023,silage,OKLAHOMA,27000.0,30000,-10.08,35000.0,16.67,,organizer_csv
+2023,silage,OREGON,35500.0,39000,-9.02,34000.0,-12.82,,organizer_csv
+2023,silage,PENNSYLVANIA,342900.0,345000,-0.6,340000.0,-1.45,,organizer_csv
+2023,silage,RHODE ISLAND,1500.0,1000,46.41,1000.0,0.0,,organizer_csv
+2023,silage,SOUTH CAROLINA,9800.0,8000,22.56,8000.0,0.0,,organizer_csv
+2023,silage,SOUTH DAKOTA,457800.0,520000,-11.95,550000.0,5.77,,organizer_csv
+2023,silage,TENNESSEE,27600.0,30000,-8.09,30000.0,0.0,,organizer_csv
+2023,silage,TEXAS,250300.0,280000,-10.61,260000.0,-7.14,,organizer_csv
+2023,silage,US (sum of states),6490000.0,6461000,0.45,6851000.0,6.04,,organizer_csv
+2023,silage,UTAH,46900.0,46000,1.95,45000.0,-2.17,,organizer_csv
+2023,silage,VERMONT,79900.0,80000,-0.11,82000.0,2.5,,organizer_csv
+2023,silage,VIRGINIA,112700.0,100000,12.7,100000.0,0.0,,organizer_csv
+2023,silage,WASHINGTON,71300.0,85000,-16.12,55000.0,-35.29,,organizer_csv
+2023,silage,WEST VIRGINIA,10000.0,9000,11.41,9000.0,0.0,,organizer_csv
+2023,silage,WISCONSIN,886500.0,780000,13.65,870000.0,11.54,,organizer_csv
+2023,silage,WYOMING,23500.0,23000,1.98,33000.0,43.48,,organizer_csv
+2024,grain,ALABAMA,270000.0,270000,0.0,320000.0,18.52,nass_forecast,organizer_csv
+2024,grain,ARIZONA,18000.0,19000,-5.26,38000.0,100.0,nass_forecast,organizer_csv
+2024,grain,ARKANSAS,485000.0,480000,1.04,830000.0,72.92,nass_forecast,organizer_csv
+2024,grain,CALIFORNIA,65000.0,55000,18.18,40000.0,-27.27,nass_forecast,organizer_csv
+2024,grain,COLORADO,1175000.0,1180000,-0.42,1015000.0,-13.98,nass_forecast,organizer_csv
+2024,grain,DELAWARE,162000.0,161000,0.62,172000.0,6.83,nass_forecast,organizer_csv
+2024,grain,FLORIDA,48000.0,47000,2.13,62000.0,31.91,nass_forecast,organizer_csv
+2024,grain,GEORGIA,340000.0,305000,11.48,440000.0,44.26,nass_forecast,organizer_csv
+2024,grain,IDAHO,125000.0,110000,13.64,115000.0,4.55,nass_forecast,organizer_csv
+2024,grain,ILLINOIS,10650000.0,10650000,0.0,11050000.0,3.76,nass_forecast,organizer_csv
+2024,grain,INDIANA,5060000.0,5050000,0.2,5310000.0,5.15,nass_forecast,organizer_csv
+2024,grain,IOWA,12350000.0,12450000,-0.8,12550000.0,0.8,nass_forecast,organizer_csv
+2024,grain,KANSAS,5800000.0,5800000,0.0,5150000.0,-11.21,nass_forecast,organizer_csv
+2024,grain,KENTUCKY,1280000.0,1280000,0.0,1500000.0,17.19,nass_forecast,organizer_csv
+2024,grain,LOUISIANA,445000.0,440000,1.14,680000.0,54.55,nass_forecast,organizer_csv
+2024,grain,MARYLAND,405000.0,380000,6.58,440000.0,15.79,nass_forecast,organizer_csv
+2024,grain,MICHIGAN,1900000.0,1950000,-2.56,2060000.0,5.64,nass_forecast,organizer_csv
+2024,grain,MINNESOTA,7650000.0,7730000,-1.03,8180000.0,5.82,nass_forecast,organizer_csv
+2024,grain,MISSISSIPPI,475000.0,470000,1.06,770000.0,63.83,nass_forecast,organizer_csv
+2024,grain,MISSOURI,3260000.0,3350000,-2.69,3670000.0,9.55,nass_forecast,organizer_csv
+2024,grain,MONTANA,72000.0,77000,-6.49,68000.0,-11.69,nass_forecast,organizer_csv
+2024,grain,NEBRASKA,9700000.0,9590000,1.15,9500000.0,-0.94,nass_forecast,organizer_csv
+2024,grain,NEW JERSEY,67000.0,61000,9.84,65000.0,6.56,nass_forecast,organizer_csv
+2024,grain,NEW MEXICO,36000.0,49000,-26.53,47000.0,-4.08,nass_forecast,organizer_csv
+2024,grain,NEW YORK,570000.0,555000,2.7,600000.0,8.11,nass_forecast,organizer_csv
+2024,grain,NORTH CAROLINA,840000.0,810000,3.7,900000.0,11.11,nass_forecast,organizer_csv
+2024,grain,NORTH DAKOTA,3640000.0,3640000,0.0,3800000.0,4.4,nass_forecast,organizer_csv
+2024,grain,OHIO,3170000.0,3200000,-0.94,3400000.0,6.25,nass_forecast,organizer_csv
+2024,grain,OKLAHOMA,390000.0,410000,-4.88,340000.0,-17.07,nass_forecast,organizer_csv
+2024,grain,OREGON,57000.0,63000,-9.52,55000.0,-12.7,nass_forecast,organizer_csv
+2024,grain,PENNSYLVANIA,675000.0,700000,-3.57,680000.0,-2.86,nass_forecast,organizer_csv
+2024,grain,SOUTH CAROLINA,325000.0,305000,6.56,350000.0,14.75,nass_forecast,organizer_csv
+2024,grain,SOUTH DAKOTA,5260000.0,5390000,-2.41,5620000.0,4.27,nass_forecast,organizer_csv
+2024,grain,TENNESSEE,660000.0,660000,0.0,890000.0,34.85,nass_forecast,organizer_csv
+2024,grain,TEXAS,1780000.0,1890000,-5.82,2100000.0,11.11,nass_forecast,organizer_csv
+2024,grain,US (sum of states),82710000.0,83046000,-0.4,86506000.0,4.17,,organizer_csv
+2024,grain,UTAH,34000.0,27000,25.93,27000.0,0.0,nass_forecast,organizer_csv
+2024,grain,VIRGINIA,350000.0,290000,20.69,370000.0,27.59,nass_forecast,organizer_csv
+2024,grain,WASHINGTON,89000.0,103000,-13.59,75000.0,-27.18,nass_forecast,organizer_csv
+2024,grain,WEST VIRGINIA,31000.0,24000,29.17,30000.0,25.0,nass_forecast,organizer_csv
+2024,grain,WISCONSIN,2940000.0,2960000,-0.68,3140000.0,6.08,nass_forecast,organizer_csv
+2024,grain,WYOMING,61000.0,65000,-6.15,57000.0,-12.31,nass_forecast,organizer_csv
+2024,silage,ALABAMA,7100.0,4000,78.18,4000.0,0.0,,organizer_csv
+2024,silage,ARIZONA,57300.0,50000,14.68,66000.0,32.0,,organizer_csv
+2024,silage,ARKANSAS,5000.0,5000,-0.86,5000.0,0.0,,organizer_csv
+2024,silage,CALIFORNIA,350100.0,380000,-7.87,350000.0,-7.89,,organizer_csv
+2024,silage,COLORADO,207500.0,200000,3.76,235000.0,17.5,,organizer_csv
+2024,silage,CONNECTICUT,21200.0,20000,5.94,20000.0,0.0,,organizer_csv
+2024,silage,DELAWARE,2600.0,2000,28.63,2000.0,0.0,,organizer_csv
+2024,silage,FLORIDA,26300.0,34000,-22.64,25000.0,-26.47,,organizer_csv
+2024,silage,GEORGIA,33100.0,45000,-26.42,35000.0,-22.22,,organizer_csv
+2024,silage,IDAHO,233600.0,265000,-11.85,240000.0,-9.43,,organizer_csv
+2024,silage,ILLINOIS,99400.0,90000,10.5,90000.0,0.0,,organizer_csv
+2024,silage,INDIANA,112700.0,130000,-13.31,120000.0,-7.69,,organizer_csv
+2024,silage,IOWA,359000.0,340000,5.58,380000.0,11.76,,organizer_csv
+2024,silage,KANSAS,316500.0,310000,2.09,330000.0,6.45,,organizer_csv
+2024,silage,KENTUCKY,76500.0,70000,9.32,80000.0,14.29,,organizer_csv
+2024,silage,LOUISIANA,2900.0,3000,-4.92,3000.0,0.0,,organizer_csv
+2024,silage,MAINE,24100.0,26000,-7.27,23000.0,-11.54,,organizer_csv
+2024,silage,MARYLAND,37000.0,40000,-7.55,30000.0,-25.0,,organizer_csv
+2024,silage,MASSACHUSETTS,11100.0,11000,1.27,11000.0,0.0,,organizer_csv
+2024,silage,MICHIGAN,328700.0,325000,1.13,320000.0,-1.54,,organizer_csv
+2024,silage,MINNESOTA,396000.0,380000,4.21,350000.0,-7.89,,organizer_csv
+2024,silage,MISSISSIPPI,6100.0,7000,-12.54,6000.0,-14.29,,organizer_csv
+2024,silage,MISSOURI,101600.0,100000,1.61,100000.0,0.0,,organizer_csv
+2024,silage,MONTANA,54900.0,37000,48.4,62000.0,67.57,,organizer_csv
+2024,silage,NEBRASKA,294700.0,280000,5.26,280000.0,0.0,,organizer_csv
+2024,silage,NEVADA,11200.0,17000,-34.41,11000.0,-35.29,,organizer_csv
+2024,silage,NEW HAMPSHIRE,11600.0,11000,5.47,12000.0,9.09,,organizer_csv
+2024,silage,NEW JERSEY,5900.0,5000,17.79,6000.0,20.0,,organizer_csv
+2024,silage,NEW MEXICO,68800.0,51000,34.92,69000.0,35.29,,organizer_csv
+2024,silage,NEW YORK,435100.0,455000,-4.37,430000.0,-5.49,,organizer_csv
+2024,silage,NORTH CAROLINA,44200.0,20000,121.01,30000.0,50.0,,organizer_csv
+2024,silage,NORTH DAKOTA,201300.0,260000,-22.58,200000.0,-23.08,,organizer_csv
+2024,silage,OHIO,166700.0,160000,4.17,160000.0,0.0,,organizer_csv
+2024,silage,OKLAHOMA,28300.0,20000,41.49,30000.0,50.0,,organizer_csv
+2024,silage,OREGON,37000.0,46000,-19.51,39000.0,-15.22,,organizer_csv
+2024,silage,PENNSYLVANIA,343900.0,320000,7.46,345000.0,7.81,,organizer_csv
+2024,silage,RHODE ISLAND,1200.0,1000,23.33,1000.0,0.0,,organizer_csv
+2024,silage,SOUTH CAROLINA,13600.0,7000,94.89,8000.0,14.29,,organizer_csv
+2024,silage,SOUTH DAKOTA,484800.0,410000,18.25,520000.0,26.83,,organizer_csv
+2024,silage,TENNESSEE,28600.0,25000,14.56,30000.0,20.0,,organizer_csv
+2024,silage,TEXAS,263200.0,160000,64.53,280000.0,75.0,,organizer_csv
+2024,silage,US (sum of states),6496000.0,6207000,4.66,6461000.0,4.09,,organizer_csv
+2024,silage,UTAH,46500.0,50000,-7.02,46000.0,-8.0,,organizer_csv
+2024,silage,VERMONT,80000.0,85000,-5.94,80000.0,-5.88,,organizer_csv
+2024,silage,VIRGINIA,112000.0,95000,17.94,100000.0,5.26,,organizer_csv
+2024,silage,WASHINGTON,77200.0,101000,-23.6,85000.0,-15.84,,organizer_csv
+2024,silage,WEST VIRGINIA,9600.0,9000,6.12,9000.0,0.0,,organizer_csv
+2024,silage,WISCONSIN,836900.0,730000,14.64,780000.0,6.85,,organizer_csv
+2024,silage,WYOMING,23200.0,15000,54.99,23000.0,53.33,,organizer_csv
+2025,grain,ALABAMA,340000.0,330000,3.03,270000.0,-18.18,nass_forecast,organizer_csv
+2025,grain,ARIZONA,27000.0,13000,107.69,19000.0,46.15,nass_forecast,organizer_csv
+2025,grain,ARKANSAS,790000.0,790000,0.0,480000.0,-39.24,nass_forecast,organizer_csv
+2025,grain,CALIFORNIA,28000.0,75000,-62.67,55000.0,-26.67,nass_forecast,organizer_csv
+2025,grain,COLORADO,1220000.0,1230000,-0.81,1180000.0,-4.07,nass_forecast,organizer_csv
+2025,grain,DELAWARE,167000.0,172000,-2.91,161000.0,-6.4,nass_forecast,organizer_csv
+2025,grain,FLORIDA,52000.0,57000,-8.77,47000.0,-17.54,nass_forecast,organizer_csv
+2025,grain,GEORGIA,495000.0,505000,-1.98,305000.0,-39.6,nass_forecast,organizer_csv
+2025,grain,IDAHO,160000.0,145000,10.34,110000.0,-24.14,nass_forecast,organizer_csv
+2025,grain,ILLINOIS,11000000.0,10950000,0.46,10650000.0,-2.74,nass_forecast,organizer_csv
+2025,grain,INDIANA,5250000.0,5240000,0.19,5050000.0,-3.63,nass_forecast,organizer_csv
+2025,grain,IOWA,13000000.0,13150000,-1.14,12450000.0,-5.32,nass_forecast,organizer_csv
+2025,grain,KANSAS,6290000.0,6450000,-2.48,5800000.0,-10.08,nass_forecast,organizer_csv
+2025,grain,KENTUCKY,1420000.0,1420000,0.0,1280000.0,-9.86,nass_forecast,organizer_csv
+2025,grain,LOUISIANA,770000.0,790000,-2.53,440000.0,-44.3,nass_forecast,organizer_csv
+2025,grain,MARYLAND,405000.0,410000,-1.22,380000.0,-7.32,nass_forecast,organizer_csv
+2025,grain,MICHIGAN,1990000.0,1980000,0.51,1950000.0,-1.52,nass_forecast,organizer_csv
+2025,grain,MINNESOTA,8380000.0,8440000,-0.71,7730000.0,-8.41,nass_forecast,organizer_csv
+2025,grain,MISSISSIPPI,880000.0,865000,1.73,470000.0,-45.66,nass_forecast,organizer_csv
+2025,grain,MISSOURI,3630000.0,3640000,-0.27,3350000.0,-7.97,nass_forecast,organizer_csv
+2025,grain,MONTANA,84000.0,77000,9.09,77000.0,0.0,nass_forecast,organizer_csv
+2025,grain,NEBRASKA,10300000.0,10390000,-0.87,9590000.0,-7.7,nass_forecast,organizer_csv
+2025,grain,NEW JERSEY,65000.0,67000,-2.99,61000.0,-8.96,nass_forecast,organizer_csv
+2025,grain,NEW MEXICO,43000.0,44000,-2.27,49000.0,11.36,nass_forecast,organizer_csv
+2025,grain,NEW YORK,555000.0,435000,27.59,555000.0,27.59,nass_forecast,organizer_csv
+2025,grain,NORTH CAROLINA,885000.0,905000,-2.21,810000.0,-10.5,nass_forecast,organizer_csv
+2025,grain,NORTH DAKOTA,4360000.0,4490000,-2.9,3640000.0,-18.93,nass_forecast,organizer_csv
+2025,grain,OHIO,3180000.0,3150000,0.95,3200000.0,1.59,nass_forecast,organizer_csv
+2025,grain,OKLAHOMA,460000.0,485000,-5.15,410000.0,-15.46,nass_forecast,organizer_csv
+2025,grain,OREGON,65000.0,75000,-13.33,63000.0,-16.0,nass_forecast,organizer_csv
+2025,grain,PENNSYLVANIA,640000.0,645000,-0.78,700000.0,8.53,nass_forecast,organizer_csv
+2025,grain,SOUTH CAROLINA,360000.0,370000,-2.7,305000.0,-17.57,nass_forecast,organizer_csv
+2025,grain,SOUTH DAKOTA,6110000.0,6350000,-3.78,5390000.0,-15.12,nass_forecast,organizer_csv
+2025,grain,TENNESSEE,870000.0,865000,0.58,660000.0,-23.7,nass_forecast,organizer_csv
+2025,grain,TEXAS,2050000.0,2140000,-4.21,1890000.0,-11.68,nass_forecast,organizer_csv
+2025,grain,US (sum of states),90047000.0,90948000,-0.99,83046000.0,-8.69,,organizer_csv
+2025,grain,UTAH,35000.0,33000,6.06,27000.0,-18.18,nass_forecast,organizer_csv
+2025,grain,VIRGINIA,335000.0,355000,-5.63,290000.0,-18.31,nass_forecast,organizer_csv
+2025,grain,WASHINGTON,100000.0,125000,-20.0,103000.0,-17.6,nass_forecast,organizer_csv
+2025,grain,WEST VIRGINIA,24000.0,31000,-22.58,24000.0,-22.58,nass_forecast,organizer_csv
+2025,grain,WISCONSIN,3170000.0,3210000,-1.25,2960000.0,-7.79,nass_forecast,organizer_csv
+2025,grain,WYOMING,62000.0,54000,14.81,65000.0,20.37,nass_forecast,organizer_csv
+2025,silage,ALABAMA,2100.0,4000,-47.22,4000.0,0.0,,organizer_csv
+2025,silage,ARIZONA,53900.0,50000,7.83,50000.0,0.0,,organizer_csv
+2025,silage,ARKANSAS,5000.0,3000,65.87,5000.0,66.67,,organizer_csv
+2025,silage,CALIFORNIA,363300.0,370000,-1.82,380000.0,2.7,,organizer_csv
+2025,silage,COLORADO,204100.0,200000,2.05,200000.0,0.0,,organizer_csv
+2025,silage,CONNECTICUT,20600.0,19000,8.66,20000.0,5.26,,organizer_csv
+2025,silage,DELAWARE,2300.0,2000,14.85,2000.0,0.0,,organizer_csv
+2025,silage,FLORIDA,29500.0,24000,23.01,34000.0,41.67,,organizer_csv
+2025,silage,GEORGIA,35800.0,35000,2.18,45000.0,28.57,,organizer_csv
+2025,silage,IDAHO,247200.0,280000,-11.7,265000.0,-5.36,,organizer_csv
+2025,silage,ILLINOIS,95100.0,90000,5.64,90000.0,0.0,,organizer_csv
+2025,silage,INDIANA,120200.0,110000,9.25,130000.0,18.18,,organizer_csv
+2025,silage,IOWA,350300.0,250000,40.12,340000.0,36.0,,organizer_csv
+2025,silage,KANSAS,313500.0,230000,36.32,310000.0,34.78,,organizer_csv
+2025,silage,KENTUCKY,73500.0,65000,13.1,70000.0,7.69,,organizer_csv
+2025,silage,LOUISIANA,2900.0,3000,-2.74,3000.0,0.0,,organizer_csv
+2025,silage,MAINE,24900.0,25000,-0.23,26000.0,4.0,,organizer_csv
+2025,silage,MARYLAND,36100.0,40000,-9.83,40000.0,0.0,,organizer_csv
+2025,silage,MASSACHUSETTS,11100.0,11000,0.7,11000.0,0.0,,organizer_csv
+2025,silage,MICHIGAN,327000.0,340000,-3.82,325000.0,-4.41,,organizer_csv
+2025,silage,MINNESOTA,388700.0,360000,7.98,380000.0,5.56,,organizer_csv
+2025,silage,MISSISSIPPI,6500.0,10000,-34.97,7000.0,-30.0,,organizer_csv
+2025,silage,MISSOURI,100900.0,100000,0.88,100000.0,0.0,,organizer_csv
+2025,silage,MONTANA,46000.0,57000,-19.35,37000.0,-35.09,,organizer_csv
+2025,silage,NEBRASKA,288000.0,220000,30.91,280000.0,27.27,,organizer_csv
+2025,silage,NEVADA,13500.0,24000,-43.83,17000.0,-29.17,,organizer_csv
+2025,silage,NEW HAMPSHIRE,11300.0,10000,13.27,11000.0,10.0,,organizer_csv
+2025,silage,NEW JERSEY,5500.0,6000,-8.81,5000.0,-16.67,,organizer_csv
+2025,silage,NEW MEXICO,60100.0,59000,1.92,51000.0,-13.56,,organizer_csv
+2025,silage,NEW YORK,446500.0,495000,-9.8,455000.0,-8.08,,organizer_csv
+2025,silage,NORTH CAROLINA,17300.0,30000,-42.3,20000.0,-33.33,,organizer_csv
+2025,silage,NORTH DAKOTA,225900.0,170000,32.86,260000.0,52.94,,organizer_csv
+2025,silage,OHIO,163600.0,200000,-18.18,160000.0,-20.0,,organizer_csv
+2025,silage,OKLAHOMA,24200.0,25000,-3.17,20000.0,-20.0,,organizer_csv
+2025,silage,OREGON,40800.0,34000,20.07,46000.0,35.29,,organizer_csv
+2025,silage,PENNSYLVANIA,332900.0,315000,5.69,320000.0,1.59,,organizer_csv
+2025,silage,RHODE ISLAND,1100.0,1000,12.22,1000.0,0.0,,organizer_csv
+2025,silage,SOUTH CAROLINA,4900.0,6000,-19.0,7000.0,16.67,,organizer_csv
+2025,silage,SOUTH DAKOTA,449600.0,390000,15.28,410000.0,5.13,,organizer_csv
+2025,silage,TENNESSEE,26900.0,35000,-23.03,25000.0,-28.57,,organizer_csv
+2025,silage,TEXAS,210400.0,245000,-14.12,160000.0,-34.69,,organizer_csv
+2025,silage,US (sum of states),6314600.0,6187000,2.06,6207000.0,0.32,,organizer_csv
+2025,silage,UTAH,48000.0,49000,-1.96,50000.0,2.04,,organizer_csv
+2025,silage,VERMONT,82200.0,84000,-2.16,85000.0,1.19,,organizer_csv
+2025,silage,VIRGINIA,98800.0,95000,3.96,95000.0,0.0,,organizer_csv
+2025,silage,WASHINGTON,87100.0,99000,-12.02,101000.0,2.02,,organizer_csv
+2025,silage,WEST VIRGINIA,9300.0,9000,3.32,9000.0,0.0,,organizer_csv
+2025,silage,WISCONSIN,787000.0,885000,-11.08,730000.0,-17.51,,organizer_csv
+2025,silage,WYOMING,19100.0,23000,-17.01,15000.0,-34.78,,organizer_csv

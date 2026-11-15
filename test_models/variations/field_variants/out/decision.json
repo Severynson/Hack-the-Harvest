@@ -1,0 +1,3564 @@
+{
+  "generated_utc": "2026-11-15T09:28:05Z",
+  "preregistration": {
+    "sha256": "c79786c543bf62cea29a9a27ec362250c73b9a88ac202324d8af252e8331431b",
+    "matches_readme": true,
+    "frozen_utc": "2026-11-15T09:21:49Z",
+    "variants_py_sha256": "50826f12c5a951cadc46a6d7766dc5ff83901d8ca2c5692288c9372568ef842d"
+  },
+  "inputs": {
+    "2019": "fe6c2638cf9db5ec",
+    "2020": "44d63d3ceb740daf",
+    "2021": "a0d24128332840ec",
+    "2022": "153f45d7950be2c6",
+    "2023": "1353c6acebd2048e",
+    "2024": "619b67ee04f93c59",
+    "2026": "ff7464cfd12f11e6"
+  },
+  "gates": {
+    "R1": {
+      "observed": {
+        "2019": 2566,
+        "2020": 2325,
+        "2021": 2598,
+        "2022": 2839,
+        "2023": 3128,
+        "2024": 2938,
+        "2026": 2806
+      },
+      "expected": {
+        "2019": 2566,
+        "2020": 2325,
+        "2021": 2598,
+        "2022": 2839,
+        "2023": 3128,
+        "2024": 2938,
+        "2026": 2806
+      },
+      "reproduced": true
+    },
+    "G1": {
+      "observed": {
+        "TP": 877,
+        "FP": 345,
+        "FN": 390,
+        "TN": 1516
+      },
+      "expected": {
+        "TP": 877,
+        "FP": 345,
+        "FN": 390,
+        "TN": 1516
+      },
+      "reproduced": true
+    },
+    "GS": {
+      "reproduced": true,
+      "by_year": {
+        "2019": {
+          "observed": {
+            "TP": 529,
+            "FP": 232,
+            "FN": 501,
+            "TN": 1304
+          },
+          "expected": {
+            "TP": 529,
+            "FP": 232,
+            "FN": 501,
+            "TN": 1304
+          },
+          "reproduced": true
+        },
+        "2020": {
+          "observed": {
+            "TP": 667,
+            "FP": 514,
+            "FN": 281,
+            "TN": 863
+          },
+          "expected": {
+            "TP": 667,
+            "FP": 514,
+            "FN": 281,
+            "TN": 863
+          },
+          "reproduced": true
+        },
+        "2021": {
+          "observed": {
+            "TP": 840,
+            "FP": 302,
+            "FN": 222,
+            "TN": 1234
+          },
+          "expected": {
+            "TP": 840,
+            "FP": 302,
+            "FN": 222,
+            "TN": 1234
+          },
+          "reproduced": true
+        },
+        "2022": {
+          "observed": {
+            "TP": 489,
+            "FP": 232,
+            "FN": 568,
+            "TN": 1550
+          },
+          "expected": {
+            "TP": 489,
+            "FP": 232,
+            "FN": 568,
+            "TN": 1550
+          },
+          "reproduced": true
+        },
+        "2024": {
+          "observed": {
+            "TP": 838,
+            "FP": 131,
+            "FN": 375,
+            "TN": 1594
+          },
+          "expected": {
+            "TP": 838,
+            "FP": 131,
+            "FN": 375,
+            "TN": 1594
+          },
+          "reproduced": true
+        },
+        "2026": {
+          "observed": {
+            "TP": 942,
+            "FP": 309,
+            "FN": 324,
+            "TN": 1231
+          },
+          "expected": {
+            "TP": 942,
+            "FP": 309,
+            "FN": 324,
+            "TN": 1231
+          },
+          "reproduced": true
+        }
+      }
+    },
+    "GL": {
+      "rows": 3128,
+      "same_nan_pattern": true,
+      "max_abs_diff": 0.0,
+      "reproduced": true
+    }
+  },
+  "decision": "ADOPT f1_xgb_mono",
+  "adopted": "f1_xgb_mono",
+  "eligibility": {
+    "f1_xgb_mono": {
+      "d_balanced_accuracy": 0.021,
+      "ci90_lo": 0.0147,
+      "ci90": [
+        0.0147,
+        0.0279
+      ],
+      "swing": 0.4172,
+      "swing_f0_all": 0.8173,
+      "eligible": true
+    },
+    "f2_lswi": {
+      "d_balanced_accuracy": -0.0029,
+      "ci90_lo": -0.0046,
+      "ci90": [
+        -0.0046,
+        -0.0011
+      ],
+      "swing": 0.8342,
+      "swing_f0_all": 0.8173,
+      "eligible": false
+    },
+    "f3_yearmed": {
+      "d_balanced_accuracy": 0.0109,
+      "ci90_lo": 0.0067,
+      "ci90": [
+        0.0067,
+        0.0154
+      ],
+      "swing": 0.4165,
+      "swing_f0_all": 0.8173,
+      "eligible": true
+    },
+    "f4_yearmed_lswi": {
+      "d_balanced_accuracy": 0.0086,
+      "ci90_lo": 0.0041,
+      "ci90": [
+        0.0041,
+        0.013
+      ],
+      "swing": 0.4293,
+      "swing_f0_all": 0.8173,
+      "eligible": true
+    },
+    "f6_yearcellmed": {
+      "d_balanced_accuracy": -0.0128,
+      "ci90_lo": -0.0232,
+      "ci90": [
+        -0.0232,
+        -0.0006
+      ],
+      "swing": 0.0789,
+      "swing_f0_all": 0.8173,
+      "eligible": false
+    },
+    "f7_xgb_yearmed_lswi": {
+      "d_balanced_accuracy": 0.0024,
+      "ci90_lo": -0.003,
+      "ci90": [
+        -0.003,
+        0.0077
+      ],
+      "swing": 0.3749,
+      "swing_f0_all": 0.8173,
+      "eligible": false
+    }
+  },
+  "pooled_loyo": {
+    "f0_2023": {
+      "split": "loyo",
+      "model": "f0_2023",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 16072,
+      "assessable": 16021,
+      "n_silage": 6576,
+      "decisive": 16072,
+      "coverage": 1.0,
+      "TP": 4305,
+      "FP": 1720,
+      "FN": 2271,
+      "TN": 7776,
+      "silage_precision": 0.7145,
+      "silage_recall": 0.6547,
+      "false_positive_rate": 0.1811,
+      "balanced_accuracy": 0.7368,
+      "silage_f1": 0.6833,
+      "accuracy": 0.7517,
+      "count_ratio": 0.9162,
+      "years_pooled": "2019+2020+2021+2022+2024+2026",
+      "count_ratio_swing": 0.5637
+    },
+    "f0_all": {
+      "split": "loyo",
+      "model": "f0_all",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5430,
+      "FP": 2517,
+      "FN": 2413,
+      "TN": 8840,
+      "silage_precision": 0.6833,
+      "silage_recall": 0.6923,
+      "false_positive_rate": 0.2216,
+      "balanced_accuracy": 0.7353,
+      "silage_f1": 0.6878,
+      "accuracy": 0.7432,
+      "count_ratio": 1.0133,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.8173
+    },
+    "f1_xgb_mono": {
+      "split": "loyo",
+      "model": "f1_xgb_mono",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5635,
+      "FP": 2337,
+      "FN": 2208,
+      "TN": 9020,
+      "silage_precision": 0.7068,
+      "silage_recall": 0.7185,
+      "false_positive_rate": 0.2058,
+      "balanced_accuracy": 0.7564,
+      "silage_f1": 0.7126,
+      "accuracy": 0.7633,
+      "count_ratio": 1.0164,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.4172
+    },
+    "f2_lswi": {
+      "split": "loyo",
+      "model": "f2_lswi",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5368,
+      "FP": 2492,
+      "FN": 2475,
+      "TN": 8865,
+      "silage_precision": 0.683,
+      "silage_recall": 0.6844,
+      "false_positive_rate": 0.2194,
+      "balanced_accuracy": 0.7325,
+      "silage_f1": 0.6837,
+      "accuracy": 0.7413,
+      "count_ratio": 1.0022,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.8342
+    },
+    "f3_yearmed": {
+      "split": "loyo",
+      "model": "f3_yearmed",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5432,
+      "FP": 2272,
+      "FN": 2411,
+      "TN": 9085,
+      "silage_precision": 0.7051,
+      "silage_recall": 0.6926,
+      "false_positive_rate": 0.2001,
+      "balanced_accuracy": 0.7463,
+      "silage_f1": 0.6988,
+      "accuracy": 0.7561,
+      "count_ratio": 0.9823,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.4165
+    },
+    "f4_yearmed_lswi": {
+      "split": "loyo",
+      "model": "f4_yearmed_lswi",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5422,
+      "FP": 2311,
+      "FN": 2421,
+      "TN": 9046,
+      "silage_precision": 0.7012,
+      "silage_recall": 0.6913,
+      "false_positive_rate": 0.2035,
+      "balanced_accuracy": 0.7439,
+      "silage_f1": 0.6962,
+      "accuracy": 0.7535,
+      "count_ratio": 0.986,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.4293
+    },
+    "f6_yearcellmed": {
+      "split": "loyo",
+      "model": "f6_yearcellmed",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5032,
+      "FP": 2232,
+      "FN": 2811,
+      "TN": 9125,
+      "silage_precision": 0.6927,
+      "silage_recall": 0.6416,
+      "false_positive_rate": 0.1965,
+      "balanced_accuracy": 0.7226,
+      "silage_f1": 0.6662,
+      "accuracy": 0.7373,
+      "count_ratio": 0.9262,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.0789
+    },
+    "f7_xgb_yearmed_lswi": {
+      "split": "loyo",
+      "model": "f7_xgb_yearmed_lswi",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5299,
+      "FP": 2273,
+      "FN": 2544,
+      "TN": 9084,
+      "silage_precision": 0.6998,
+      "silage_recall": 0.6756,
+      "false_positive_rate": 0.2001,
+      "balanced_accuracy": 0.7378,
+      "silage_f1": 0.6875,
+      "accuracy": 0.7491,
+      "count_ratio": 0.9654,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.3749
+    }
+  },
+  "comparisons": {
+    "f1_xgb_mono": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": 0.021,
+        "d_balanced_accuracy_ci90": [
+          0.0147,
+          0.0279
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0124,
+          0.031
+        ],
+        "d_silage_f1": 0.0248,
+        "d_silage_f1_ci90": [
+          0.0177,
+          0.0323
+        ],
+        "d_silage_precision": 0.0236,
+        "d_silage_precision_ci90": [
+          0.0138,
+          0.0335
+        ],
+        "d_silage_recall": 0.0261,
+        "d_silage_recall_ci90": [
+          0.0126,
+          0.0399
+        ],
+        "d_false_positive_rate": -0.0158,
+        "d_false_positive_rate_ci90": [
+          -0.0277,
+          -0.0045
+        ],
+        "mcnemar": {
+          "base_only_right": 1090,
+          "arm_only_right": 1475,
+          "p": 0.0
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0288,
+          "d_balanced_accuracy_ci90": [
+            0.0153,
+            0.0418
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.009,
+            0.0477
+          ],
+          "d_silage_f1": 0.0421,
+          "d_silage_f1_ci90": [
+            0.0248,
+            0.0603
+          ],
+          "d_silage_precision": 0.0218,
+          "d_silage_precision_ci90": [
+            -0.0049,
+            0.0481
+          ],
+          "d_silage_recall": 0.0583,
+          "d_silage_recall_ci90": [
+            0.0311,
+            0.0884
+          ],
+          "d_false_positive_rate": 0.0007,
+          "d_false_positive_rate_ci90": [
+            -0.0273,
+            0.0317
+          ],
+          "mcnemar": {
+            "base_only_right": 133,
+            "arm_only_right": 192,
+            "p": 0.0013
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0165,
+          "d_balanced_accuracy_ci90": [
+            -0.0074,
+            0.0438
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0187,
+            0.0553
+          ],
+          "d_silage_f1": 0.0234,
+          "d_silage_f1_ci90": [
+            -0.0061,
+            0.0526
+          ],
+          "d_silage_precision": 0.0047,
+          "d_silage_precision_ci90": [
+            -0.0295,
+            0.0399
+          ],
+          "d_silage_recall": 0.0475,
+          "d_silage_recall_ci90": [
+            0.0,
+            0.093
+          ],
+          "d_false_positive_rate": 0.0145,
+          "d_false_positive_rate_ci90": [
+            -0.0359,
+            0.0603
+          ],
+          "mcnemar": {
+            "base_only_right": 174,
+            "arm_only_right": 199,
+            "p": 0.2139
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0541,
+          "d_balanced_accuracy_ci90": [
+            0.0276,
+            0.0814
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.0171,
+            0.09
+          ],
+          "d_silage_f1": 0.0422,
+          "d_silage_f1_ci90": [
+            0.008,
+            0.0776
+          ],
+          "d_silage_precision": 0.1086,
+          "d_silage_precision_ci90": [
+            0.0689,
+            0.148
+          ],
+          "d_silage_recall": -0.065,
+          "d_silage_recall_ci90": [
+            -0.0888,
+            -0.0412
+          ],
+          "d_false_positive_rate": -0.1732,
+          "d_false_positive_rate_ci90": [
+            -0.217,
+            -0.132
+          ],
+          "mcnemar": {
+            "base_only_right": 141,
+            "arm_only_right": 338,
+            "p": 0.0
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0644,
+          "d_balanced_accuracy_ci90": [
+            0.0299,
+            0.1038
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.0167,
+            0.1211
+          ],
+          "d_silage_f1": 0.1104,
+          "d_silage_f1_ci90": [
+            0.0459,
+            0.191
+          ],
+          "d_silage_precision": -0.044,
+          "d_silage_precision_ci90": [
+            -0.0836,
+            0.0051
+          ],
+          "d_silage_recall": 0.1968,
+          "d_silage_recall_ci90": [
+            0.1034,
+            0.299
+          ],
+          "d_false_positive_rate": 0.0679,
+          "d_false_positive_rate_ci90": [
+            0.0337,
+            0.1081
+          ],
+          "mcnemar": {
+            "base_only_right": 182,
+            "arm_only_right": 269,
+            "p": 0.0
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0034,
+          "d_balanced_accuracy_ci90": [
+            -0.0269,
+            0.0227
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0382,
+            0.0329
+          ],
+          "d_silage_f1": -0.0023,
+          "d_silage_f1_ci90": [
+            -0.0268,
+            0.0197
+          ],
+          "d_silage_precision": -0.0087,
+          "d_silage_precision_ci90": [
+            -0.0552,
+            0.0329
+          ],
+          "d_silage_recall": 0.0071,
+          "d_silage_recall_ci90": [
+            -0.0231,
+            0.0408
+          ],
+          "d_false_positive_rate": 0.014,
+          "d_false_positive_rate_ci90": [
+            -0.0518,
+            0.0731
+          ],
+          "mcnemar": {
+            "base_only_right": 248,
+            "arm_only_right": 231,
+            "p": 0.4648
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": -0.007,
+          "d_balanced_accuracy_ci90": [
+            -0.0169,
+            0.0024
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0206,
+            0.0069
+          ],
+          "d_silage_f1": -0.0095,
+          "d_silage_f1_ci90": [
+            -0.023,
+            0.0027
+          ],
+          "d_silage_precision": 0.0,
+          "d_silage_precision_ci90": [
+            -0.0172,
+            0.0154
+          ],
+          "d_silage_recall": -0.0157,
+          "d_silage_recall_ci90": [
+            -0.0341,
+            0.0015
+          ],
+          "d_false_positive_rate": -0.0017,
+          "d_false_positive_rate_ci90": [
+            -0.0123,
+            0.0095
+          ],
+          "mcnemar": {
+            "base_only_right": 120,
+            "arm_only_right": 104,
+            "p": 0.3162
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0142,
+          "d_balanced_accuracy_ci90": [
+            0.0056,
+            0.0247
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.0015,
+            0.0305
+          ],
+          "d_silage_f1": 0.0096,
+          "d_silage_f1_ci90": [
+            0.0006,
+            0.0203
+          ],
+          "d_silage_precision": 0.0421,
+          "d_silage_precision_ci90": [
+            0.027,
+            0.0578
+          ],
+          "d_silage_recall": -0.0229,
+          "d_silage_recall_ci90": [
+            -0.0383,
+            -0.0071
+          ],
+          "d_false_positive_rate": -0.0513,
+          "d_false_positive_rate_ci90": [
+            -0.0717,
+            -0.0319
+          ],
+          "mcnemar": {
+            "base_only_right": 92,
+            "arm_only_right": 142,
+            "p": 0.0013
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0208,
+        "d_balanced_accuracy_ci90": [
+          0.0153,
+          0.0267
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0134,
+          0.0297
+        ],
+        "d_silage_f1": 0.0248,
+        "d_silage_f1_ci90": [
+          0.0185,
+          0.0317
+        ],
+        "d_silage_precision": 0.0221,
+        "d_silage_precision_ci90": [
+          0.0127,
+          0.0321
+        ],
+        "d_silage_recall": 0.0275,
+        "d_silage_recall_ci90": [
+          0.0139,
+          0.0413
+        ],
+        "d_false_positive_rate": -0.014,
+        "d_false_positive_rate_ci90": [
+          -0.026,
+          -0.0023
+        ],
+        "mcnemar": {
+          "base_only_right": 1109,
+          "arm_only_right": 1484,
+          "p": 0.0
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": -0.001,
+        "d_balanced_accuracy_ci90": [
+          -0.0091,
+          0.0087
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0123,
+          0.0136
+        ],
+        "d_silage_f1": 0.0029,
+        "d_silage_f1_ci90": [
+          -0.0068,
+          0.0135
+        ],
+        "d_silage_precision": -0.013,
+        "d_silage_precision_ci90": [
+          -0.0235,
+          0.0003
+        ],
+        "d_silage_recall": 0.0254,
+        "d_silage_recall_ci90": [
+          0.0131,
+          0.0379
+        ],
+        "d_false_positive_rate": 0.0274,
+        "d_false_positive_rate_ci90": [
+          0.0097,
+          0.0413
+        ],
+        "mcnemar": {
+          "base_only_right": 1065,
+          "arm_only_right": 969,
+          "p": 0.0351
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0258,
+        "d_balanced_accuracy_ci90": [
+          0.0097,
+          0.0431
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0013,
+          0.0472
+        ],
+        "d_silage_f1": 0.2368,
+        "d_silage_f1_ci90": [
+          0.1904,
+          0.2907
+        ],
+        "d_silage_precision": -0.0283,
+        "d_silage_precision_ci90": [
+          -0.0618,
+          0.0028
+        ],
+        "d_silage_recall": 0.4456,
+        "d_silage_recall_ci90": [
+          0.4137,
+          0.4832
+        ],
+        "d_false_positive_rate": 0.3941,
+        "d_false_positive_rate_ci90": [
+          0.3415,
+          0.4531
+        ],
+        "mcnemar": {
+          "base_only_right": 4653,
+          "arm_only_right": 3672,
+          "p": 0.0
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0164,
+        "d_balanced_accuracy_ci90": [
+          0.0082,
+          0.0243
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0047,
+          0.0288
+        ],
+        "d_silage_f1": 0.0244,
+        "d_silage_f1_ci90": [
+          0.013,
+          0.0354
+        ],
+        "d_silage_precision": -0.0011,
+        "d_silage_precision_ci90": [
+          -0.015,
+          0.0124
+        ],
+        "d_silage_recall": 0.05,
+        "d_silage_recall_ci90": [
+          0.0329,
+          0.065
+        ],
+        "d_false_positive_rate": 0.0171,
+        "d_false_positive_rate_ci90": [
+          0.001,
+          0.0335
+        ],
+        "mcnemar": {
+          "base_only_right": 1346,
+          "arm_only_right": 1544,
+          "p": 0.0002
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.021,
+        "d_balanced_accuracy_ci90": [
+          0.0147,
+          0.0279
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0124,
+          0.031
+        ],
+        "d_silage_f1": 0.0248,
+        "d_silage_f1_ci90": [
+          0.0177,
+          0.0323
+        ],
+        "d_silage_precision": 0.0236,
+        "d_silage_precision_ci90": [
+          0.0138,
+          0.0335
+        ],
+        "d_silage_recall": 0.0261,
+        "d_silage_recall_ci90": [
+          0.0126,
+          0.0399
+        ],
+        "d_false_positive_rate": -0.0158,
+        "d_false_positive_rate_ci90": [
+          -0.0277,
+          -0.0045
+        ],
+        "mcnemar": {
+          "base_only_right": 1090,
+          "arm_only_right": 1475,
+          "p": 0.0
+        }
+      },
+      "swing": 0.4172,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 5
+    },
+    "f2_lswi": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0029,
+        "d_balanced_accuracy_ci90": [
+          -0.0046,
+          -0.0011
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0055,
+          -0.0005
+        ],
+        "d_silage_f1": -0.0041,
+        "d_silage_f1_ci90": [
+          -0.0066,
+          -0.0018
+        ],
+        "d_silage_precision": -0.0003,
+        "d_silage_precision_ci90": [
+          -0.0027,
+          0.0021
+        ],
+        "d_silage_recall": -0.0079,
+        "d_silage_recall_ci90": [
+          -0.0116,
+          -0.004
+        ],
+        "d_false_positive_rate": -0.0022,
+        "d_false_positive_rate_ci90": [
+          -0.0051,
+          0.0005
+        ],
+        "mcnemar": {
+          "base_only_right": 162,
+          "arm_only_right": 125,
+          "p": 0.0334
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0108,
+          "d_balanced_accuracy_ci90": [
+            -0.0168,
+            -0.0042
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0196,
+            -0.0018
+          ],
+          "d_silage_f1": -0.0202,
+          "d_silage_f1_ci90": [
+            -0.0313,
+            -0.0093
+          ],
+          "d_silage_precision": -0.0003,
+          "d_silage_precision_ci90": [
+            -0.0104,
+            0.0104
+          ],
+          "d_silage_recall": -0.034,
+          "d_silage_recall_ci90": [
+            -0.0466,
+            -0.0202
+          ],
+          "d_false_positive_rate": -0.0124,
+          "d_false_positive_rate_ci90": [
+            -0.0224,
+            -0.0031
+          ],
+          "mcnemar": {
+            "base_only_right": 58,
+            "arm_only_right": 42,
+            "p": 0.1332
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0012,
+          "d_balanced_accuracy_ci90": [
+            -0.0023,
+            0.0052
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0038,
+            0.0077
+          ],
+          "d_silage_f1": 0.0025,
+          "d_silage_f1_ci90": [
+            -0.0009,
+            0.0064
+          ],
+          "d_silage_precision": -0.0015,
+          "d_silage_precision_ci90": [
+            -0.0068,
+            0.0054
+          ],
+          "d_silage_recall": 0.0074,
+          "d_silage_recall_ci90": [
+            0.0041,
+            0.0107
+          ],
+          "d_false_positive_rate": 0.0051,
+          "d_false_positive_rate_ci90": [
+            -0.0038,
+            0.0129
+          ],
+          "mcnemar": {
+            "base_only_right": 16,
+            "arm_only_right": 16,
+            "p": 1.0
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0001,
+          "d_balanced_accuracy_ci90": [
+            -0.0021,
+            0.0017
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0029,
+            0.0026
+          ],
+          "d_silage_f1": 0.0004,
+          "d_silage_f1_ci90": [
+            -0.0014,
+            0.0022
+          ],
+          "d_silage_precision": -0.0012,
+          "d_silage_precision_ci90": [
+            -0.0031,
+            0.0004
+          ],
+          "d_silage_recall": 0.0038,
+          "d_silage_recall_ci90": [
+            0.001,
+            0.0068
+          ],
+          "d_false_positive_rate": 0.0039,
+          "d_false_positive_rate_ci90": [
+            0.0009,
+            0.0072
+          ],
+          "mcnemar": {
+            "base_only_right": 9,
+            "arm_only_right": 7,
+            "p": 0.8036
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0053,
+          "d_balanced_accuracy_ci90": [
+            -0.0086,
+            -0.0022
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0102,
+            -0.0011
+          ],
+          "d_silage_f1": -0.009,
+          "d_silage_f1_ci90": [
+            -0.0152,
+            -0.0043
+          ],
+          "d_silage_precision": -0.0061,
+          "d_silage_precision_ci90": [
+            -0.0156,
+            0.0024
+          ],
+          "d_silage_recall": -0.0095,
+          "d_silage_recall_ci90": [
+            -0.0158,
+            -0.0038
+          ],
+          "d_false_positive_rate": 0.0011,
+          "d_false_positive_rate_ci90": [
+            -0.004,
+            0.0051
+          ],
+          "mcnemar": {
+            "base_only_right": 22,
+            "arm_only_right": 10,
+            "p": 0.0501
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0005,
+          "d_balanced_accuracy_ci90": [
+            -0.007,
+            0.0047
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0101,
+            0.006
+          ],
+          "d_silage_f1": -0.0014,
+          "d_silage_f1_ci90": [
+            -0.0097,
+            0.0047
+          ],
+          "d_silage_precision": 0.0032,
+          "d_silage_precision_ci90": [
+            -0.0009,
+            0.0068
+          ],
+          "d_silage_recall": -0.0079,
+          "d_silage_recall_ci90": [
+            -0.0226,
+            0.0026
+          ],
+          "d_false_positive_rate": -0.007,
+          "d_false_positive_rate_ci90": [
+            -0.0115,
+            -0.0031
+          ],
+          "mcnemar": {
+            "base_only_right": 19,
+            "arm_only_right": 22,
+            "p": 0.7552
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0018,
+          "d_balanced_accuracy_ci90": [
+            -0.0055,
+            0.002
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0077,
+            0.0034
+          ],
+          "d_silage_f1": -0.0027,
+          "d_silage_f1_ci90": [
+            -0.0078,
+            0.0022
+          ],
+          "d_silage_precision": 0.0057,
+          "d_silage_precision_ci90": [
+            0.0006,
+            0.0114
+          ],
+          "d_silage_recall": -0.0082,
+          "d_silage_recall_ci90": [
+            -0.0165,
+            0.0
+          ],
+          "d_false_positive_rate": -0.0046,
+          "d_false_positive_rate_ci90": [
+            -0.0092,
+            -0.001
+          ],
+          "mcnemar": {
+            "base_only_right": 24,
+            "arm_only_right": 22,
+            "p": 0.883
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0032,
+          "d_balanced_accuracy_ci90": [
+            -0.0062,
+            -0.0002
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0075,
+            0.0012
+          ],
+          "d_silage_f1": -0.0038,
+          "d_silage_f1_ci90": [
+            -0.0071,
+            -0.0006
+          ],
+          "d_silage_precision": -0.0016,
+          "d_silage_precision_ci90": [
+            -0.0049,
+            0.0021
+          ],
+          "d_silage_recall": -0.0063,
+          "d_silage_recall_ci90": [
+            -0.0106,
+            -0.0024
+          ],
+          "d_false_positive_rate": 0.0,
+          "d_false_positive_rate_ci90": [
+            -0.0036,
+            0.004
+          ],
+          "mcnemar": {
+            "base_only_right": 14,
+            "arm_only_right": 6,
+            "p": 0.1153
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0036,
+        "d_balanced_accuracy_ci90": [
+          -0.0054,
+          -0.0017
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0062,
+          -0.0011
+        ],
+        "d_silage_f1": -0.0051,
+        "d_silage_f1_ci90": [
+          -0.0076,
+          -0.0025
+        ],
+        "d_silage_precision": -0.001,
+        "d_silage_precision_ci90": [
+          -0.0037,
+          0.002
+        ],
+        "d_silage_recall": -0.0092,
+        "d_silage_recall_ci90": [
+          -0.0128,
+          -0.005
+        ],
+        "d_false_positive_rate": -0.0019,
+        "d_false_positive_rate_ci90": [
+          -0.0053,
+          0.0012
+        ],
+        "mcnemar": {
+          "base_only_right": 176,
+          "arm_only_right": 126,
+          "p": 0.0047
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0014,
+        "d_balanced_accuracy_ci90": [
+          -0.0019,
+          0.0043
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0039,
+          0.0056
+        ],
+        "d_silage_f1": -0.0007,
+        "d_silage_f1_ci90": [
+          -0.005,
+          0.0033
+        ],
+        "d_silage_precision": 0.0089,
+        "d_silage_precision_ci90": [
+          0.0029,
+          0.0139
+        ],
+        "d_silage_recall": -0.0132,
+        "d_silage_recall_ci90": [
+          -0.0186,
+          -0.0078
+        ],
+        "d_false_positive_rate": -0.0161,
+        "d_false_positive_rate_ci90": [
+          -0.0227,
+          -0.0081
+        ],
+        "mcnemar": {
+          "base_only_right": 240,
+          "arm_only_right": 308,
+          "p": 0.0042
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0007,
+        "d_balanced_accuracy_ci90": [
+          -0.0011,
+          0.0022
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.002,
+          0.0028
+        ],
+        "d_silage_f1": -0.0131,
+        "d_silage_f1_ci90": [
+          -0.0168,
+          -0.0093
+        ],
+        "d_silage_precision": 0.0086,
+        "d_silage_precision_ci90": [
+          0.0024,
+          0.0147
+        ],
+        "d_silage_recall": -0.0152,
+        "d_silage_recall_ci90": [
+          -0.0187,
+          -0.0116
+        ],
+        "d_false_positive_rate": -0.0166,
+        "d_false_positive_rate_ci90": [
+          -0.0205,
+          -0.0121
+        ],
+        "mcnemar": {
+          "base_only_right": 174,
+          "arm_only_right": 243,
+          "p": 0.0008
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0013,
+        "d_balanced_accuracy_ci90": [
+          -0.0031,
+          0.0004
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0039,
+          0.001
+        ],
+        "d_silage_f1": -0.0025,
+        "d_silage_f1_ci90": [
+          -0.0045,
+          -0.0007
+        ],
+        "d_silage_precision": 0.0017,
+        "d_silage_precision_ci90": [
+          -0.0018,
+          0.0051
+        ],
+        "d_silage_recall": -0.0064,
+        "d_silage_recall_ci90": [
+          -0.0091,
+          -0.0037
+        ],
+        "d_false_positive_rate": -0.0037,
+        "d_false_positive_rate_ci90": [
+          -0.0078,
+          0.0002
+        ],
+        "mcnemar": {
+          "base_only_right": 172,
+          "arm_only_right": 164,
+          "p": 0.7026
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0029,
+        "d_balanced_accuracy_ci90": [
+          -0.0046,
+          -0.0011
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0055,
+          -0.0005
+        ],
+        "d_silage_f1": -0.0041,
+        "d_silage_f1_ci90": [
+          -0.0066,
+          -0.0018
+        ],
+        "d_silage_precision": -0.0003,
+        "d_silage_precision_ci90": [
+          -0.0027,
+          0.0021
+        ],
+        "d_silage_recall": -0.0079,
+        "d_silage_recall_ci90": [
+          -0.0116,
+          -0.004
+        ],
+        "d_false_positive_rate": -0.0022,
+        "d_false_positive_rate_ci90": [
+          -0.0051,
+          0.0005
+        ],
+        "mcnemar": {
+          "base_only_right": 162,
+          "arm_only_right": 125,
+          "p": 0.0334
+        }
+      },
+      "swing": 0.8342,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 1
+    },
+    "f3_yearmed": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0109,
+        "d_balanced_accuracy_ci90": [
+          0.0067,
+          0.0154
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.005,
+          0.0171
+        ],
+        "d_silage_f1": 0.011,
+        "d_silage_f1_ci90": [
+          0.0055,
+          0.0166
+        ],
+        "d_silage_precision": 0.0218,
+        "d_silage_precision_ci90": [
+          0.0159,
+          0.0279
+        ],
+        "d_silage_recall": 0.0003,
+        "d_silage_recall_ci90": [
+          -0.0079,
+          0.009
+        ],
+        "d_false_positive_rate": -0.0216,
+        "d_false_positive_rate_ci90": [
+          -0.0256,
+          -0.0171
+        ],
+        "mcnemar": {
+          "base_only_right": 742,
+          "arm_only_right": 989,
+          "p": 0.0
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0462,
+          "d_balanced_accuracy_ci90": [
+            0.0292,
+            0.0623
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.022,
+            0.0704
+          ],
+          "d_silage_f1": 0.0793,
+          "d_silage_f1_ci90": [
+            0.0504,
+            0.1087
+          ],
+          "d_silage_precision": -0.0139,
+          "d_silage_precision_ci90": [
+            -0.0332,
+            0.0043
+          ],
+          "d_silage_recall": 0.1738,
+          "d_silage_recall_ci90": [
+            0.141,
+            0.2061
+          ],
+          "d_false_positive_rate": 0.0814,
+          "d_false_positive_rate_ci90": [
+            0.0642,
+            0.1016
+          ],
+          "mcnemar": {
+            "base_only_right": 142,
+            "arm_only_right": 196,
+            "p": 0.0039
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0093,
+          "d_balanced_accuracy_ci90": [
+            -0.0176,
+            0.0381
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0291,
+            0.0511
+          ],
+          "d_silage_f1": -0.023,
+          "d_silage_f1_ci90": [
+            -0.0537,
+            0.0095
+          ],
+          "d_silage_precision": 0.114,
+          "d_silage_precision_ci90": [
+            0.0734,
+            0.151
+          ],
+          "d_silage_recall": -0.1361,
+          "d_silage_recall_ci90": [
+            -0.1544,
+            -0.115
+          ],
+          "d_false_positive_rate": -0.1547,
+          "d_false_positive_rate_ci90": [
+            -0.2096,
+            -0.101
+          ],
+          "mcnemar": {
+            "base_only_right": 130,
+            "arm_only_right": 214,
+            "p": 0.0
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0408,
+          "d_balanced_accuracy_ci90": [
+            0.0167,
+            0.0652
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.009,
+            0.0766
+          ],
+          "d_silage_f1": 0.0259,
+          "d_silage_f1_ci90": [
+            -0.0065,
+            0.06
+          ],
+          "d_silage_precision": 0.1029,
+          "d_silage_precision_ci90": [
+            0.0676,
+            0.1387
+          ],
+          "d_silage_recall": -0.0942,
+          "d_silage_recall_ci90": [
+            -0.1197,
+            -0.0701
+          ],
+          "d_false_positive_rate": -0.1758,
+          "d_false_positive_rate_ci90": [
+            -0.2121,
+            -0.1398
+          ],
+          "mcnemar": {
+            "base_only_right": 119,
+            "arm_only_right": 289,
+            "p": 0.0
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0005,
+          "d_balanced_accuracy_ci90": [
+            -0.0159,
+            0.0179
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0228,
+            0.0284
+          ],
+          "d_silage_f1": 0.0181,
+          "d_silage_f1_ci90": [
+            -0.0118,
+            0.0511
+          ],
+          "d_silage_precision": -0.1002,
+          "d_silage_precision_ci90": [
+            -0.146,
+            -0.053
+          ],
+          "d_silage_recall": 0.0776,
+          "d_silage_recall_ci90": [
+            0.0474,
+            0.1096
+          ],
+          "d_false_positive_rate": 0.0786,
+          "d_false_positive_rate_ci90": [
+            0.0573,
+            0.0981
+          ],
+          "mcnemar": {
+            "base_only_right": 140,
+            "arm_only_right": 82,
+            "p": 0.0001
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0062,
+          "d_balanced_accuracy_ci90": [
+            -0.0151,
+            0.004
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.019,
+            0.0092
+          ],
+          "d_silage_f1": -0.0142,
+          "d_silage_f1_ci90": [
+            -0.027,
+            0.0002
+          ],
+          "d_silage_precision": 0.0226,
+          "d_silage_precision_ci90": [
+            0.0069,
+            0.0435
+          ],
+          "d_silage_recall": -0.0608,
+          "d_silage_recall_ci90": [
+            -0.072,
+            -0.0486
+          ],
+          "d_false_positive_rate": -0.0484,
+          "d_false_positive_rate_ci90": [
+            -0.0614,
+            -0.0376
+          ],
+          "mcnemar": {
+            "base_only_right": 87,
+            "arm_only_right": 100,
+            "p": 0.3803
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0006,
+          "d_balanced_accuracy_ci90": [
+            -0.0089,
+            0.0081
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.012,
+            0.0123
+          ],
+          "d_silage_f1": 0.0023,
+          "d_silage_f1_ci90": [
+            -0.0135,
+            0.0176
+          ],
+          "d_silage_precision": -0.0638,
+          "d_silage_precision_ci90": [
+            -0.0787,
+            -0.0488
+          ],
+          "d_silage_recall": 0.0544,
+          "d_silage_recall_ci90": [
+            0.0415,
+            0.0668
+          ],
+          "d_false_positive_rate": 0.0557,
+          "d_false_positive_rate_ci90": [
+            0.046,
+            0.0655
+          ],
+          "mcnemar": {
+            "base_only_right": 96,
+            "arm_only_right": 66,
+            "p": 0.0224
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0032,
+          "d_balanced_accuracy_ci90": [
+            -0.0019,
+            0.0081
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0038,
+            0.0105
+          ],
+          "d_silage_f1": 0.0006,
+          "d_silage_f1_ci90": [
+            -0.0058,
+            0.0071
+          ],
+          "d_silage_precision": 0.0154,
+          "d_silage_precision_ci90": [
+            0.009,
+            0.0232
+          ],
+          "d_silage_recall": -0.015,
+          "d_silage_recall_ci90": [
+            -0.023,
+            -0.0072
+          ],
+          "d_false_positive_rate": -0.0214,
+          "d_false_positive_rate_ci90": [
+            -0.0275,
+            -0.0153
+          ],
+          "mcnemar": {
+            "base_only_right": 28,
+            "arm_only_right": 42,
+            "p": 0.1196
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0267,
+        "d_balanced_accuracy_ci90": [
+          -0.0408,
+          -0.0111
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0481,
+          -0.0057
+        ],
+        "d_silage_f1": -0.0318,
+        "d_silage_f1_ci90": [
+          -0.0491,
+          -0.0159
+        ],
+        "d_silage_precision": -0.0302,
+        "d_silage_precision_ci90": [
+          -0.0583,
+          0.0027
+        ],
+        "d_silage_recall": -0.0334,
+        "d_silage_recall_ci90": [
+          -0.0627,
+          -0.0029
+        ],
+        "d_false_positive_rate": 0.0201,
+        "d_false_positive_rate_ci90": [
+          -0.0217,
+          0.053
+        ],
+        "mcnemar": {
+          "base_only_right": 1706,
+          "arm_only_right": 1216,
+          "p": 0.0
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0224,
+        "d_balanced_accuracy_ci90": [
+          0.0099,
+          0.0349
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.004,
+          0.04
+        ],
+        "d_silage_f1": 0.0135,
+        "d_silage_f1_ci90": [
+          -0.0071,
+          0.0356
+        ],
+        "d_silage_precision": 0.0733,
+        "d_silage_precision_ci90": [
+          0.0479,
+          0.0997
+        ],
+        "d_silage_recall": -0.0533,
+        "d_silage_recall_ci90": [
+          -0.065,
+          -0.0414
+        ],
+        "d_false_positive_rate": -0.0982,
+        "d_false_positive_rate_ci90": [
+          -0.1183,
+          -0.0765
+        ],
+        "mcnemar": {
+          "base_only_right": 759,
+          "arm_only_right": 1360,
+          "p": 0.0
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0018,
+        "d_balanced_accuracy_ci90": [
+          -0.0082,
+          0.006
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0117,
+          0.0092
+        ],
+        "d_silage_f1": 0.0859,
+        "d_silage_f1_ci90": [
+          0.0681,
+          0.1055
+        ],
+        "d_silage_precision": -0.0311,
+        "d_silage_precision_ci90": [
+          -0.0509,
+          -0.0122
+        ],
+        "d_silage_recall": 0.1207,
+        "d_silage_recall_ci90": [
+          0.0909,
+          0.156
+        ],
+        "d_false_positive_rate": 0.1244,
+        "d_false_positive_rate_ci90": [
+          0.0894,
+          0.1597
+        ],
+        "mcnemar": {
+          "base_only_right": 1510,
+          "arm_only_right": 1044,
+          "p": 0.0
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0026,
+        "d_balanced_accuracy_ci90": [
+          -0.0078,
+          0.0021
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0102,
+          0.0042
+        ],
+        "d_silage_f1": -0.0036,
+        "d_silage_f1_ci90": [
+          -0.0093,
+          0.0022
+        ],
+        "d_silage_precision": -0.0014,
+        "d_silage_precision_ci90": [
+          -0.011,
+          0.0074
+        ],
+        "d_silage_recall": -0.0056,
+        "d_silage_recall_ci90": [
+          -0.0136,
+          0.0024
+        ],
+        "d_false_positive_rate": -0.0004,
+        "d_false_positive_rate_ci90": [
+          -0.0094,
+          0.0099
+        ],
+        "mcnemar": {
+          "base_only_right": 714,
+          "arm_only_right": 675,
+          "p": 0.3079
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0109,
+        "d_balanced_accuracy_ci90": [
+          0.0067,
+          0.0154
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.005,
+          0.0171
+        ],
+        "d_silage_f1": 0.011,
+        "d_silage_f1_ci90": [
+          0.0055,
+          0.0166
+        ],
+        "d_silage_precision": 0.0218,
+        "d_silage_precision_ci90": [
+          0.0159,
+          0.0279
+        ],
+        "d_silage_recall": 0.0003,
+        "d_silage_recall_ci90": [
+          -0.0079,
+          0.009
+        ],
+        "d_false_positive_rate": -0.0216,
+        "d_false_positive_rate_ci90": [
+          -0.0256,
+          -0.0171
+        ],
+        "mcnemar": {
+          "base_only_right": 742,
+          "arm_only_right": 989,
+          "p": 0.0
+        }
+      },
+      "swing": 0.4165,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 4
+    },
+    "f4_yearmed_lswi": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0086,
+        "d_balanced_accuracy_ci90": [
+          0.0041,
+          0.013
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.002,
+          0.0151
+        ],
+        "d_silage_f1": 0.0084,
+        "d_silage_f1_ci90": [
+          0.0027,
+          0.0139
+        ],
+        "d_silage_precision": 0.0179,
+        "d_silage_precision_ci90": [
+          0.0125,
+          0.0233
+        ],
+        "d_silage_recall": -0.001,
+        "d_silage_recall_ci90": [
+          -0.0098,
+          0.0082
+        ],
+        "d_false_positive_rate": -0.0181,
+        "d_false_positive_rate_ci90": [
+          -0.0227,
+          -0.0134
+        ],
+        "mcnemar": {
+          "base_only_right": 797,
+          "arm_only_right": 995,
+          "p": 0.0
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0428,
+          "d_balanced_accuracy_ci90": [
+            0.0274,
+            0.0571
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.0204,
+            0.0651
+          ],
+          "d_silage_f1": 0.0768,
+          "d_silage_f1_ci90": [
+            0.0487,
+            0.106
+          ],
+          "d_silage_precision": -0.0217,
+          "d_silage_precision_ci90": [
+            -0.0395,
+            -0.0043
+          ],
+          "d_silage_recall": 0.1786,
+          "d_silage_recall_ci90": [
+            0.1458,
+            0.2105
+          ],
+          "d_false_positive_rate": 0.0931,
+          "d_false_positive_rate_ci90": [
+            0.0715,
+            0.118
+          ],
+          "mcnemar": {
+            "base_only_right": 158,
+            "arm_only_right": 199,
+            "p": 0.0341
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0051,
+          "d_balanced_accuracy_ci90": [
+            -0.0212,
+            0.0329
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0311,
+            0.0467
+          ],
+          "d_silage_f1": -0.0275,
+          "d_silage_f1_ci90": [
+            -0.0602,
+            0.006
+          ],
+          "d_silage_precision": 0.1035,
+          "d_silage_precision_ci90": [
+            0.0683,
+            0.1401
+          ],
+          "d_silage_recall": -0.1371,
+          "d_silage_recall_ci90": [
+            -0.1564,
+            -0.1151
+          ],
+          "d_false_positive_rate": -0.1474,
+          "d_false_positive_rate_ci90": [
+            -0.1982,
+            -0.099
+          ],
+          "mcnemar": {
+            "base_only_right": 133,
+            "arm_only_right": 206,
+            "p": 0.0001
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0413,
+          "d_balanced_accuracy_ci90": [
+            0.0164,
+            0.0655
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.01,
+            0.0773
+          ],
+          "d_silage_f1": 0.0255,
+          "d_silage_f1_ci90": [
+            -0.0073,
+            0.0596
+          ],
+          "d_silage_precision": 0.1087,
+          "d_silage_precision_ci90": [
+            0.0717,
+            0.1455
+          ],
+          "d_silage_recall": -0.1017,
+          "d_silage_recall_ci90": [
+            -0.1266,
+            -0.0771
+          ],
+          "d_false_positive_rate": -0.1842,
+          "d_false_positive_rate_ci90": [
+            -0.2227,
+            -0.1453
+          ],
+          "mcnemar": {
+            "base_only_right": 120,
+            "arm_only_right": 295,
+            "p": 0.0
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0076,
+          "d_balanced_accuracy_ci90": [
+            -0.0244,
+            0.0124
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0308,
+            0.0224
+          ],
+          "d_silage_f1": 0.0106,
+          "d_silage_f1_ci90": [
+            -0.023,
+            0.0475
+          ],
+          "d_silage_precision": -0.1197,
+          "d_silage_precision_ci90": [
+            -0.1703,
+            -0.0679
+          ],
+          "d_silage_recall": 0.0785,
+          "d_silage_recall_ci90": [
+            0.046,
+            0.1146
+          ],
+          "d_false_positive_rate": 0.0937,
+          "d_false_positive_rate_ci90": [
+            0.0699,
+            0.1153
+          ],
+          "mcnemar": {
+            "base_only_right": 168,
+            "arm_only_right": 84,
+            "p": 0.0
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0061,
+          "d_balanced_accuracy_ci90": [
+            -0.0151,
+            0.004
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0188,
+            0.0089
+          ],
+          "d_silage_f1": -0.0139,
+          "d_silage_f1_ci90": [
+            -0.0261,
+            -0.0008
+          ],
+          "d_silage_precision": 0.0223,
+          "d_silage_precision_ci90": [
+            0.008,
+            0.0418
+          ],
+          "d_silage_recall": -0.06,
+          "d_silage_recall_ci90": [
+            -0.0714,
+            -0.0486
+          ],
+          "d_false_positive_rate": -0.0478,
+          "d_false_positive_rate_ci90": [
+            -0.0612,
+            -0.0369
+          ],
+          "mcnemar": {
+            "base_only_right": 85,
+            "arm_only_right": 98,
+            "p": 0.3751
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": -0.001,
+          "d_balanced_accuracy_ci90": [
+            -0.0097,
+            0.0082
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.013,
+            0.0119
+          ],
+          "d_silage_f1": 0.0017,
+          "d_silage_f1_ci90": [
+            -0.0139,
+            0.0172
+          ],
+          "d_silage_precision": -0.0623,
+          "d_silage_precision_ci90": [
+            -0.0776,
+            -0.047
+          ],
+          "d_silage_recall": 0.0519,
+          "d_silage_recall_ci90": [
+            0.0395,
+            0.0646
+          ],
+          "d_false_positive_rate": 0.0539,
+          "d_false_positive_rate_ci90": [
+            0.0445,
+            0.0639
+          ],
+          "mcnemar": {
+            "base_only_right": 93,
+            "arm_only_right": 63,
+            "p": 0.0199
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0016,
+          "d_balanced_accuracy_ci90": [
+            -0.004,
+            0.0068
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0065,
+            0.0092
+          ],
+          "d_silage_f1": -0.0016,
+          "d_silage_f1_ci90": [
+            -0.0089,
+            0.0057
+          ],
+          "d_silage_precision": 0.0151,
+          "d_silage_precision_ci90": [
+            0.0062,
+            0.0252
+          ],
+          "d_silage_recall": -0.019,
+          "d_silage_recall_ci90": [
+            -0.0291,
+            -0.009
+          ],
+          "d_false_positive_rate": -0.0221,
+          "d_false_positive_rate_ci90": [
+            -0.0308,
+            -0.0135
+          ],
+          "mcnemar": {
+            "base_only_right": 40,
+            "arm_only_right": 50,
+            "p": 0.3428
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0284,
+        "d_balanced_accuracy_ci90": [
+          -0.0416,
+          -0.0136
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.049,
+          -0.008
+        ],
+        "d_silage_f1": -0.0336,
+        "d_silage_f1_ci90": [
+          -0.0506,
+          -0.0183
+        ],
+        "d_silage_precision": -0.0324,
+        "d_silage_precision_ci90": [
+          -0.0594,
+          -0.0007
+        ],
+        "d_silage_recall": -0.0348,
+        "d_silage_recall_ci90": [
+          -0.0641,
+          -0.0041
+        ],
+        "d_false_positive_rate": 0.0219,
+        "d_false_positive_rate_ci90": [
+          -0.0184,
+          0.0538
+        ],
+        "mcnemar": {
+          "base_only_right": 1740,
+          "arm_only_right": 1218,
+          "p": 0.0
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0185,
+        "d_balanced_accuracy_ci90": [
+          0.005,
+          0.032
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0008,
+          0.0372
+        ],
+        "d_silage_f1": 0.0101,
+        "d_silage_f1_ci90": [
+          -0.0093,
+          0.0316
+        ],
+        "d_silage_precision": 0.0625,
+        "d_silage_precision_ci90": [
+          0.0358,
+          0.0893
+        ],
+        "d_silage_recall": -0.0498,
+        "d_silage_recall_ci90": [
+          -0.0623,
+          -0.0365
+        ],
+        "d_false_positive_rate": -0.0868,
+        "d_false_positive_rate_ci90": [
+          -0.1094,
+          -0.0621
+        ],
+        "mcnemar": {
+          "base_only_right": 823,
+          "arm_only_right": 1336,
+          "p": 0.0
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0039,
+        "d_balanced_accuracy_ci90": [
+          -0.0094,
+          0.003
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0122,
+          0.0061
+        ],
+        "d_silage_f1": 0.0769,
+        "d_silage_f1_ci90": [
+          0.0601,
+          0.0961
+        ],
+        "d_silage_precision": -0.0331,
+        "d_silage_precision_ci90": [
+          -0.0531,
+          -0.015
+        ],
+        "d_silage_recall": 0.1082,
+        "d_silage_recall_ci90": [
+          0.0816,
+          0.1387
+        ],
+        "d_false_positive_rate": 0.1161,
+        "d_false_positive_rate_ci90": [
+          0.0853,
+          0.1449
+        ],
+        "mcnemar": {
+          "base_only_right": 1434,
+          "arm_only_right": 964,
+          "p": 0.0
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0047,
+        "d_balanced_accuracy_ci90": [
+          -0.0099,
+          0.0
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0124,
+          0.0021
+        ],
+        "d_silage_f1": -0.0058,
+        "d_silage_f1_ci90": [
+          -0.011,
+          -0.0004
+        ],
+        "d_silage_precision": -0.0048,
+        "d_silage_precision_ci90": [
+          -0.0147,
+          0.0046
+        ],
+        "d_silage_recall": -0.0068,
+        "d_silage_recall_ci90": [
+          -0.0137,
+          0.0002
+        ],
+        "d_false_positive_rate": 0.0026,
+        "d_false_positive_rate_ci90": [
+          -0.007,
+          0.0137
+        ],
+        "mcnemar": {
+          "base_only_right": 750,
+          "arm_only_right": 668,
+          "p": 0.0314
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0086,
+        "d_balanced_accuracy_ci90": [
+          0.0041,
+          0.013
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.002,
+          0.0151
+        ],
+        "d_silage_f1": 0.0084,
+        "d_silage_f1_ci90": [
+          0.0027,
+          0.0139
+        ],
+        "d_silage_precision": 0.0179,
+        "d_silage_precision_ci90": [
+          0.0125,
+          0.0233
+        ],
+        "d_silage_recall": -0.001,
+        "d_silage_recall_ci90": [
+          -0.0098,
+          0.0082
+        ],
+        "d_false_positive_rate": -0.0181,
+        "d_false_positive_rate_ci90": [
+          -0.0227,
+          -0.0134
+        ],
+        "mcnemar": {
+          "base_only_right": 797,
+          "arm_only_right": 995,
+          "p": 0.0
+        }
+      },
+      "swing": 0.4293,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 4
+    },
+    "f6_yearcellmed": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0128,
+        "d_balanced_accuracy_ci90": [
+          -0.0232,
+          -0.0006
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.029,
+          0.0038
+        ],
+        "d_silage_f1": -0.0216,
+        "d_silage_f1_ci90": [
+          -0.0367,
+          -0.0074
+        ],
+        "d_silage_precision": 0.0095,
+        "d_silage_precision_ci90": [
+          -0.0119,
+          0.034
+        ],
+        "d_silage_recall": -0.0507,
+        "d_silage_recall_ci90": [
+          -0.0762,
+          -0.0243
+        ],
+        "d_false_positive_rate": -0.0251,
+        "d_false_positive_rate_ci90": [
+          -0.0577,
+          0.0
+        ],
+        "mcnemar": {
+          "base_only_right": 1494,
+          "arm_only_right": 1381,
+          "p": 0.0367
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0041,
+          "d_balanced_accuracy_ci90": [
+            -0.0352,
+            0.0291
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0509,
+            0.044
+          ],
+          "d_silage_f1": 0.0026,
+          "d_silage_f1_ci90": [
+            -0.0387,
+            0.0438
+          ],
+          "d_silage_precision": -0.0241,
+          "d_silage_precision_ci90": [
+            -0.0804,
+            0.0312
+          ],
+          "d_silage_recall": 0.0243,
+          "d_silage_recall_ci90": [
+            -0.0326,
+            0.0785
+          ],
+          "d_false_positive_rate": 0.0326,
+          "d_false_positive_rate_ci90": [
+            -0.0248,
+            0.0828
+          ],
+          "mcnemar": {
+            "base_only_right": 207,
+            "arm_only_right": 182,
+            "p": 0.2236
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0141,
+          "d_balanced_accuracy_ci90": [
+            -0.0097,
+            0.0403
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.021,
+            0.0535
+          ],
+          "d_silage_f1": -0.0006,
+          "d_silage_f1_ci90": [
+            -0.0262,
+            0.0231
+          ],
+          "d_silage_precision": 0.0642,
+          "d_silage_precision_ci90": [
+            0.0109,
+            0.1174
+          ],
+          "d_silage_recall": -0.0654,
+          "d_silage_recall_ci90": [
+            -0.1093,
+            -0.0224
+          ],
+          "d_false_positive_rate": -0.0937,
+          "d_false_positive_rate_ci90": [
+            -0.1727,
+            -0.022
+          ],
+          "mcnemar": {
+            "base_only_right": 125,
+            "arm_only_right": 192,
+            "p": 0.0002
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0235,
+          "d_balanced_accuracy_ci90": [
+            -0.0097,
+            0.057
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.022,
+            0.0718
+          ],
+          "d_silage_f1": -0.006,
+          "d_silage_f1_ci90": [
+            -0.0651,
+            0.0507
+          ],
+          "d_silage_precision": 0.1436,
+          "d_silage_precision_ci90": [
+            0.0965,
+            0.1928
+          ],
+          "d_silage_recall": -0.1959,
+          "d_silage_recall_ci90": [
+            -0.2475,
+            -0.1405
+          ],
+          "d_false_positive_rate": -0.2428,
+          "d_false_positive_rate_ci90": [
+            -0.2984,
+            -0.1877
+          ],
+          "mcnemar": {
+            "base_only_right": 221,
+            "arm_only_right": 386,
+            "p": 0.0
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0206,
+          "d_balanced_accuracy_ci90": [
+            -0.044,
+            0.0033
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0566,
+            0.013
+          ],
+          "d_silage_f1": 0.0027,
+          "d_silage_f1_ci90": [
+            -0.0395,
+            0.0497
+          ],
+          "d_silage_precision": -0.1684,
+          "d_silage_precision_ci90": [
+            -0.2272,
+            -0.0974
+          ],
+          "d_silage_recall": 0.1041,
+          "d_silage_recall_ci90": [
+            0.0554,
+            0.1501
+          ],
+          "d_false_positive_rate": 0.1453,
+          "d_false_positive_rate_ci90": [
+            0.1,
+            0.1848
+          ],
+          "mcnemar": {
+            "base_only_right": 296,
+            "arm_only_right": 147,
+            "p": 0.0
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0209,
+          "d_balanced_accuracy_ci90": [
+            -0.0431,
+            0.0101
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0529,
+            0.024
+          ],
+          "d_silage_f1": -0.0429,
+          "d_silage_f1_ci90": [
+            -0.0694,
+            -0.016
+          ],
+          "d_silage_precision": 0.0492,
+          "d_silage_precision_ci90": [
+            -0.011,
+            0.1091
+          ],
+          "d_silage_recall": -0.1429,
+          "d_silage_recall_ci90": [
+            -0.2132,
+            -0.0692
+          ],
+          "d_false_positive_rate": -0.101,
+          "d_false_positive_rate_ci90": [
+            -0.206,
+            -0.0146
+          ],
+          "mcnemar": {
+            "base_only_right": 312,
+            "arm_only_right": 319,
+            "p": 0.8112
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0227,
+          "d_balanced_accuracy_ci90": [
+            -0.0424,
+            -0.0034
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0521,
+            0.0047
+          ],
+          "d_silage_f1": -0.0246,
+          "d_silage_f1_ci90": [
+            -0.0509,
+            0.0009
+          ],
+          "d_silage_precision": -0.0858,
+          "d_silage_precision_ci90": [
+            -0.1335,
+            -0.0454
+          ],
+          "d_silage_recall": 0.0231,
+          "d_silage_recall_ci90": [
+            -0.011,
+            0.057
+          ],
+          "d_false_positive_rate": 0.0684,
+          "d_false_positive_rate_ci90": [
+            0.0382,
+            0.1023
+          ],
+          "mcnemar": {
+            "base_only_right": 149,
+            "arm_only_right": 59,
+            "p": 0.0
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0363,
+          "d_balanced_accuracy_ci90": [
+            -0.0554,
+            -0.0148
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0643,
+            -0.0061
+          ],
+          "d_silage_f1": -0.0488,
+          "d_silage_f1_ci90": [
+            -0.0739,
+            -0.0261
+          ],
+          "d_silage_precision": -0.0101,
+          "d_silage_precision_ci90": [
+            -0.0454,
+            0.024
+          ],
+          "d_silage_recall": -0.0869,
+          "d_silage_recall_ci90": [
+            -0.1272,
+            -0.0424
+          ],
+          "d_false_positive_rate": -0.0143,
+          "d_false_positive_rate_ci90": [
+            -0.0625,
+            0.0296
+          ],
+          "mcnemar": {
+            "base_only_right": 184,
+            "arm_only_right": 96,
+            "p": 0.0
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": -0.016,
+        "d_balanced_accuracy_ci90": [
+          -0.0272,
+          -0.003
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0334,
+          0.0018
+        ],
+        "d_silage_f1": -0.0251,
+        "d_silage_f1_ci90": [
+          -0.0416,
+          -0.0104
+        ],
+        "d_silage_precision": 0.0037,
+        "d_silage_precision_ci90": [
+          -0.0203,
+          0.0313
+        ],
+        "d_silage_recall": -0.0524,
+        "d_silage_recall_ci90": [
+          -0.0789,
+          -0.0244
+        ],
+        "d_false_positive_rate": -0.0203,
+        "d_false_positive_rate_ci90": [
+          -0.0558,
+          0.0076
+        ],
+        "mcnemar": {
+          "base_only_right": 1545,
+          "arm_only_right": 1365,
+          "p": 0.0009
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0107,
+        "d_balanced_accuracy_ci90": [
+          -0.0058,
+          0.0274
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0136,
+          0.0339
+        ],
+        "d_silage_f1": -0.0011,
+        "d_silage_f1_ci90": [
+          -0.0251,
+          0.0225
+        ],
+        "d_silage_precision": 0.0614,
+        "d_silage_precision_ci90": [
+          0.0338,
+          0.0896
+        ],
+        "d_silage_recall": -0.0705,
+        "d_silage_recall_ci90": [
+          -0.0973,
+          -0.0432
+        ],
+        "d_false_positive_rate": -0.0919,
+        "d_false_positive_rate_ci90": [
+          -0.125,
+          -0.0596
+        ],
+        "mcnemar": {
+          "base_only_right": 1444,
+          "arm_only_right": 1867,
+          "p": 0.0
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0174,
+        "d_balanced_accuracy_ci90": [
+          0.0093,
+          0.0249
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          0.0061,
+          0.0293
+        ],
+        "d_silage_f1": 0.0704,
+        "d_silage_f1_ci90": [
+          0.0477,
+          0.0954
+        ],
+        "d_silage_precision": 0.018,
+        "d_silage_precision_ci90": [
+          -0.0053,
+          0.038
+        ],
+        "d_silage_recall": 0.0769,
+        "d_silage_recall_ci90": [
+          0.0567,
+          0.0972
+        ],
+        "d_false_positive_rate": 0.0422,
+        "d_false_positive_rate_ci90": [
+          0.0258,
+          0.0588
+        ],
+        "mcnemar": {
+          "base_only_right": 971,
+          "arm_only_right": 1095,
+          "p": 0.0068
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0105,
+        "d_balanced_accuracy_ci90": [
+          -0.0203,
+          0.0006
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0249,
+          0.0057
+        ],
+        "d_silage_f1": -0.0205,
+        "d_silage_f1_ci90": [
+          -0.0369,
+          -0.005
+        ],
+        "d_silage_precision": 0.0156,
+        "d_silage_precision_ci90": [
+          -0.0046,
+          0.0394
+        ],
+        "d_silage_recall": -0.0509,
+        "d_silage_recall_ci90": [
+          -0.0784,
+          -0.0227
+        ],
+        "d_false_positive_rate": -0.0299,
+        "d_false_positive_rate_ci90": [
+          -0.0602,
+          -0.0062
+        ],
+        "mcnemar": {
+          "base_only_right": 1334,
+          "arm_only_right": 1275,
+          "p": 0.2562
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0128,
+        "d_balanced_accuracy_ci90": [
+          -0.0232,
+          -0.0006
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.029,
+          0.0038
+        ],
+        "d_silage_f1": -0.0216,
+        "d_silage_f1_ci90": [
+          -0.0367,
+          -0.0074
+        ],
+        "d_silage_precision": 0.0095,
+        "d_silage_precision_ci90": [
+          -0.0119,
+          0.034
+        ],
+        "d_silage_recall": -0.0507,
+        "d_silage_recall_ci90": [
+          -0.0762,
+          -0.0243
+        ],
+        "d_false_positive_rate": -0.0251,
+        "d_false_positive_rate_ci90": [
+          -0.0577,
+          0.0
+        ],
+        "mcnemar": {
+          "base_only_right": 1494,
+          "arm_only_right": 1381,
+          "p": 0.0367
+        }
+      },
+      "swing": 0.0789,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 2
+    },
+    "f7_xgb_yearmed_lswi": {
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0024,
+        "d_balanced_accuracy_ci90": [
+          -0.003,
+          0.0077
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0054,
+          0.0103
+        ],
+        "d_silage_f1": -0.0003,
+        "d_silage_f1_ci90": [
+          -0.007,
+          0.0059
+        ],
+        "d_silage_precision": 0.0165,
+        "d_silage_precision_ci90": [
+          0.0068,
+          0.0259
+        ],
+        "d_silage_recall": -0.0167,
+        "d_silage_recall_ci90": [
+          -0.0261,
+          -0.0071
+        ],
+        "d_false_positive_rate": -0.0215,
+        "d_false_positive_rate_ci90": [
+          -0.0321,
+          -0.0112
+        ],
+        "mcnemar": {
+          "base_only_right": 1300,
+          "arm_only_right": 1413,
+          "p": 0.0315
+        }
+      },
+      "loyo_per_year": {
+        "2019": {
+          "units": 17,
+          "d_balanced_accuracy": 0.004,
+          "d_balanced_accuracy_ci90": [
+            -0.0166,
+            0.0257
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0261,
+            0.0334
+          ],
+          "d_silage_f1": 0.0121,
+          "d_silage_f1_ci90": [
+            -0.0126,
+            0.0376
+          ],
+          "d_silage_precision": -0.0125,
+          "d_silage_precision_ci90": [
+            -0.0536,
+            0.0295
+          ],
+          "d_silage_recall": 0.032,
+          "d_silage_recall_ci90": [
+            0.0,
+            0.0704
+          ],
+          "d_false_positive_rate": 0.0241,
+          "d_false_positive_rate_ci90": [
+            -0.0187,
+            0.0691
+          ],
+          "mcnemar": {
+            "base_only_right": 221,
+            "arm_only_right": 217,
+            "p": 0.886
+          }
+        },
+        "2020": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0184,
+          "d_balanced_accuracy_ci90": [
+            -0.0132,
+            0.0522
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0261,
+            0.0682
+          ],
+          "d_silage_f1": -0.0056,
+          "d_silage_f1_ci90": [
+            -0.0385,
+            0.0274
+          ],
+          "d_silage_precision": 0.1081,
+          "d_silage_precision_ci90": [
+            0.0559,
+            0.1566
+          ],
+          "d_silage_recall": -0.1055,
+          "d_silage_recall_ci90": [
+            -0.1457,
+            -0.0628
+          ],
+          "d_false_positive_rate": -0.1423,
+          "d_false_positive_rate_ci90": [
+            -0.2116,
+            -0.0773
+          ],
+          "mcnemar": {
+            "base_only_right": 171,
+            "arm_only_right": 267,
+            "p": 0.0
+          }
+        },
+        "2021": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0525,
+          "d_balanced_accuracy_ci90": [
+            0.0233,
+            0.0815
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            0.0127,
+            0.0938
+          ],
+          "d_silage_f1": 0.0334,
+          "d_silage_f1_ci90": [
+            -0.0101,
+            0.0784
+          ],
+          "d_silage_precision": 0.1571,
+          "d_silage_precision_ci90": [
+            0.1096,
+            0.2065
+          ],
+          "d_silage_recall": -0.1347,
+          "d_silage_recall_ci90": [
+            -0.1767,
+            -0.0933
+          ],
+          "d_false_positive_rate": -0.2396,
+          "d_false_positive_rate_ci90": [
+            -0.2874,
+            -0.1914
+          ],
+          "mcnemar": {
+            "base_only_right": 176,
+            "arm_only_right": 401,
+            "p": 0.0
+          }
+        },
+        "2022": {
+          "units": 17,
+          "d_balanced_accuracy": -0.0441,
+          "d_balanced_accuracy_ci90": [
+            -0.0705,
+            -0.0163
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0803,
+            -0.0011
+          ],
+          "d_silage_f1": -0.0239,
+          "d_silage_f1_ci90": [
+            -0.0722,
+            0.0214
+          ],
+          "d_silage_precision": -0.2058,
+          "d_silage_precision_ci90": [
+            -0.2821,
+            -0.121
+          ],
+          "d_silage_recall": 0.088,
+          "d_silage_recall_ci90": [
+            0.0551,
+            0.121
+          ],
+          "d_false_positive_rate": 0.1762,
+          "d_false_positive_rate_ci90": [
+            0.1135,
+            0.2307
+          ],
+          "mcnemar": {
+            "base_only_right": 336,
+            "arm_only_right": 115,
+            "p": 0.0
+          }
+        },
+        "2023": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0032,
+          "d_balanced_accuracy_ci90": [
+            -0.0135,
+            0.0179
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0222,
+            0.024
+          ],
+          "d_silage_f1": 0.0021,
+          "d_silage_f1_ci90": [
+            -0.0137,
+            0.0181
+          ],
+          "d_silage_precision": 0.0087,
+          "d_silage_precision_ci90": [
+            -0.0177,
+            0.0358
+          ],
+          "d_silage_recall": -0.0071,
+          "d_silage_recall_ci90": [
+            -0.0213,
+            0.0061
+          ],
+          "d_false_positive_rate": -0.0134,
+          "d_false_positive_rate_ci90": [
+            -0.0446,
+            0.0218
+          ],
+          "mcnemar": {
+            "base_only_right": 183,
+            "arm_only_right": 199,
+            "p": 0.4428
+          }
+        },
+        "2024": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0026,
+          "d_balanced_accuracy_ci90": [
+            -0.008,
+            0.0116
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0138,
+            0.0151
+          ],
+          "d_silage_f1": 0.0051,
+          "d_silage_f1_ci90": [
+            -0.0105,
+            0.0185
+          ],
+          "d_silage_precision": -0.0377,
+          "d_silage_precision_ci90": [
+            -0.056,
+            -0.0203
+          ],
+          "d_silage_recall": 0.0371,
+          "d_silage_recall_ci90": [
+            0.0217,
+            0.0509
+          ],
+          "d_false_positive_rate": 0.0319,
+          "d_false_positive_rate_ci90": [
+            0.0196,
+            0.0445
+          ],
+          "mcnemar": {
+            "base_only_right": 109,
+            "arm_only_right": 99,
+            "p": 0.5327
+          }
+        },
+        "2026": {
+          "units": 17,
+          "d_balanced_accuracy": 0.0001,
+          "d_balanced_accuracy_ci90": [
+            -0.006,
+            0.0066
+          ],
+          "d_balanced_accuracy_bonferroni": [
+            -0.0086,
+            0.0092
+          ],
+          "d_silage_f1": -0.0064,
+          "d_silage_f1_ci90": [
+            -0.0149,
+            0.0032
+          ],
+          "d_silage_precision": 0.0267,
+          "d_silage_precision_ci90": [
+            0.0135,
+            0.0409
+          ],
+          "d_silage_recall": -0.0395,
+          "d_silage_recall_ci90": [
+            -0.0536,
+            -0.0251
+          ],
+          "d_false_positive_rate": -0.0396,
+          "d_false_positive_rate_ci90": [
+            -0.0552,
+            -0.0248
+          ],
+          "mcnemar": {
+            "base_only_right": 104,
+            "arm_only_right": 115,
+            "p": 0.4993
+          }
+        }
+      },
+      "strict": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0169,
+        "d_balanced_accuracy_ci90": [
+          -0.0255,
+          -0.0069
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0297,
+          -0.0033
+        ],
+        "d_silage_f1": -0.0287,
+        "d_silage_f1_ci90": [
+          -0.0447,
+          -0.0135
+        ],
+        "d_silage_precision": 0.0119,
+        "d_silage_precision_ci90": [
+          -0.0053,
+          0.0318
+        ],
+        "d_silage_recall": -0.0658,
+        "d_silage_recall_ci90": [
+          -0.0932,
+          -0.0389
+        ],
+        "d_false_positive_rate": -0.032,
+        "d_false_positive_rate_ci90": [
+          -0.0605,
+          -0.0099
+        ],
+        "mcnemar": {
+          "base_only_right": 1656,
+          "arm_only_right": 1503,
+          "p": 0.0068
+        }
+      },
+      "expanding": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0129,
+        "d_balanced_accuracy_ci90": [
+          0.0001,
+          0.0239
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0066,
+          0.028
+        ],
+        "d_silage_f1": 0.0151,
+        "d_silage_f1_ci90": [
+          0.0052,
+          0.0259
+        ],
+        "d_silage_precision": 0.0097,
+        "d_silage_precision_ci90": [
+          -0.0122,
+          0.0319
+        ],
+        "d_silage_recall": 0.0222,
+        "d_silage_recall_ci90": [
+          0.0077,
+          0.0373
+        ],
+        "d_false_positive_rate": -0.0037,
+        "d_false_positive_rate_ci90": [
+          -0.0332,
+          0.0307
+        ],
+        "mcnemar": {
+          "base_only_right": 1430,
+          "arm_only_right": 1617,
+          "p": 0.0008
+        }
+      },
+      "asof_09-15": {
+        "units": 17,
+        "d_balanced_accuracy": -0.0088,
+        "d_balanced_accuracy_ci90": [
+          -0.0145,
+          -0.0016
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0173,
+          0.0009
+        ],
+        "d_silage_f1": 0.019,
+        "d_silage_f1_ci90": [
+          0.0026,
+          0.0348
+        ],
+        "d_silage_precision": -0.0312,
+        "d_silage_precision_ci90": [
+          -0.0457,
+          -0.014
+        ],
+        "d_silage_recall": 0.0295,
+        "d_silage_recall_ci90": [
+          0.0087,
+          0.0511
+        ],
+        "d_false_positive_rate": 0.047,
+        "d_false_positive_rate_ci90": [
+          0.0231,
+          0.067
+        ],
+        "mcnemar": {
+          "base_only_right": 1089,
+          "arm_only_right": 786,
+          "p": 0.0
+        }
+      },
+      "asof_10-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0092,
+        "d_balanced_accuracy_ci90": [
+          0.0015,
+          0.0173
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0014,
+          0.0207
+        ],
+        "d_silage_f1": 0.0086,
+        "d_silage_f1_ci90": [
+          -0.0018,
+          0.0197
+        ],
+        "d_silage_precision": 0.0221,
+        "d_silage_precision_ci90": [
+          0.0119,
+          0.032
+        ],
+        "d_silage_recall": -0.0036,
+        "d_silage_recall_ci90": [
+          -0.0201,
+          0.0148
+        ],
+        "d_false_positive_rate": -0.0219,
+        "d_false_positive_rate_ci90": [
+          -0.0316,
+          -0.0116
+        ],
+        "mcnemar": {
+          "base_only_right": 1139,
+          "arm_only_right": 1360,
+          "p": 0.0
+        }
+      },
+      "asof_11-15": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0024,
+        "d_balanced_accuracy_ci90": [
+          -0.003,
+          0.0077
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0054,
+          0.0103
+        ],
+        "d_silage_f1": -0.0003,
+        "d_silage_f1_ci90": [
+          -0.007,
+          0.0059
+        ],
+        "d_silage_precision": 0.0165,
+        "d_silage_precision_ci90": [
+          0.0068,
+          0.0259
+        ],
+        "d_silage_recall": -0.0167,
+        "d_silage_recall_ci90": [
+          -0.0261,
+          -0.0071
+        ],
+        "d_false_positive_rate": -0.0215,
+        "d_false_positive_rate_ci90": [
+          -0.0321,
+          -0.0112
+        ],
+        "mcnemar": {
+          "base_only_right": 1300,
+          "arm_only_right": 1413,
+          "p": 0.0315
+        }
+      },
+      "swing": 0.3749,
+      "swing_f0_all": 0.8173,
+      "years_better_than_f0_all": 6
+    },
+    "f0_2023_vs_f0_all": {
+      "note": "information: f0_2023 minus f0_all over the six selection years other than 2023",
+      "loyo": {
+        "units": 17,
+        "d_balanced_accuracy": 0.0021,
+        "d_balanced_accuracy_ci90": [
+          -0.0062,
+          0.0092
+        ],
+        "d_balanced_accuracy_bonferroni": [
+          -0.0105,
+          0.012
+        ],
+        "d_silage_f1": -0.0018,
+        "d_silage_f1_ci90": [
+          -0.0115,
+          0.0074
+        ],
+        "d_silage_precision": 0.0218,
+        "d_silage_precision_ci90": [
+          0.0026,
+          0.0405
+        ],
+        "d_silage_recall": -0.023,
+        "d_silage_recall_ci90": [
+          -0.0354,
+          -0.0115
+        ],
+        "d_false_positive_rate": -0.0271,
+        "d_false_positive_rate_ci90": [
+          -0.0439,
+          -0.0085
+        ],
+        "mcnemar": {
+          "base_only_right": 818,
+          "arm_only_right": 924,
+          "p": 0.0119
+        }
+      }
+    }
+  },
+  "f5": {
+    "base": "f1_xgb_mono",
+    "decision": "ADOPT f5 as the selective mode of f1_xgb_mono",
+    "pooled": {
+      "split": "loyo",
+      "model": "f5_cal_abstain",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 16622,
+      "coverage": 0.8657,
+      "TP": 2919,
+      "FP": 366,
+      "FN": 3179,
+      "TN": 10158,
+      "silage_precision": 0.8886,
+      "silage_recall": 0.4787,
+      "false_positive_rate": 0.0348,
+      "balanced_accuracy": 0.7219,
+      "silage_f1": 0.6222,
+      "accuracy": 0.7867,
+      "count_ratio": 0.5387,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.3982
+    },
+    "base_pooled": {
+      "split": "loyo",
+      "model": "f1_xgb_mono",
+      "held_out": "pooled",
+      "in_sample": false,
+      "n": 19200,
+      "assessable": 19149,
+      "n_silage": 7843,
+      "decisive": 19200,
+      "coverage": 1.0,
+      "TP": 5635,
+      "FP": 2337,
+      "FN": 2208,
+      "TN": 9020,
+      "silage_precision": 0.7068,
+      "silage_recall": 0.7185,
+      "false_positive_rate": 0.2058,
+      "balanced_accuracy": 0.7564,
+      "silage_f1": 0.7126,
+      "accuracy": 0.7633,
+      "count_ratio": 1.0164,
+      "years_pooled": "2019+2020+2021+2022+2023+2024+2026",
+      "count_ratio_swing": 0.4172
+    },
+    "vs_base": {
+      "units": 17,
+      "d_balanced_accuracy": -0.0344,
+      "d_balanced_accuracy_ci90": [
+        -0.0438,
+        -0.0236
+      ],
+      "d_balanced_accuracy_bonferroni": [
+        -0.048,
+        -0.0186
+      ],
+      "d_silage_f1": -0.0904,
+      "d_silage_f1_ci90": [
+        -0.1354,
+        -0.0471
+      ],
+      "d_silage_precision": 0.1817,
+      "d_silage_precision_ci90": [
+        0.1558,
+        0.2077
+      ],
+      "d_silage_recall": -0.2398,
+      "d_silage_recall_ci90": [
+        -0.2785,
+        -0.2011
+      ],
+      "d_false_positive_rate": -0.171,
+      "d_false_positive_rate_ci90": [
+        -0.1974,
+        -0.1494
+      ]
+    },
+    "abstain_as_grain_vs_f0_all": {
+      "units": 17,
+      "d_balanced_accuracy": -0.0654,
+      "d_balanced_accuracy_ci90": [
+        -0.0729,
+        -0.0568
+      ],
+      "d_balanced_accuracy_bonferroni": [
+        -0.0767,
+        -0.052
+      ],
+      "d_silage_f1": -0.1632,
+      "d_silage_f1_ci90": [
+        -0.2073,
+        -0.1194
+      ],
+      "d_silage_precision": 0.2053,
+      "d_silage_precision_ci90": [
+        0.1768,
+        0.2345
+      ],
+      "d_silage_recall": -0.3202,
+      "d_silage_recall_ci90": [
+        -0.3475,
+        -0.2918
+      ],
+      "d_false_positive_rate": -0.1894,
+      "d_false_positive_rate_ci90": [
+        -0.2179,
+        -0.1673
+      ],
+      "mcnemar": {
+        "base_only_right": 2513,
+        "arm_only_right": 2153,
+        "p": 0.0
+      }
+    },
+    "bands_by_fold": [
+      {
+        "held_out": 2019,
+        "lo": 0.5,
+        "hi": 0.76,
+        "coverage": 0.8577,
+        "precision": 0.8891
+      },
+      {
+        "held_out": 2020,
+        "lo": 0.5,
+        "hi": 0.8,
+        "coverage": 0.8692,
+        "precision": 0.8993
+      },
+      {
+        "held_out": 2021,
+        "lo": 0.5,
+        "hi": 0.76,
+        "coverage": 0.8689,
+        "precision": 0.8789
+      },
+      {
+        "held_out": 2022,
+        "lo": 0.5,
+        "hi": 0.8,
+        "coverage": 0.8542,
+        "precision": 0.8903
+      },
+      {
+        "held_out": 2023,
+        "lo": 0.5,
+        "hi": 0.76,
+        "coverage": 0.8576,
+        "precision": 0.8821
+      },
+      {
+        "held_out": 2024,
+        "lo": 0.5,
+        "hi": 0.78,
+        "coverage": 0.8513,
+        "precision": 0.878
+      },
+      {
+        "held_out": 2026,
+        "lo": 0.5,
+        "hi": 0.78,
+        "coverage": 0.8509,
+        "precision": 0.8842
+      }
+    ]
+  },
+  "runtime_s": 41.1
+}

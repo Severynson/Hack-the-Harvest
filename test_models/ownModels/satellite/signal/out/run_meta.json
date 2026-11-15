@@ -1,0 +1,38 @@
+{
+  "n_train_field_years": 3128,
+  "n_train_assessable": 3128,
+  "train_sets": [
+    "quebec_maize_2023",
+    "qc_regions_2023"
+  ],
+  "features": [
+    "max_drop",
+    "max_drop_rate",
+    "fade_days",
+    "green_at_cut",
+    "ndmi_before_cut",
+    "ndti_post"
+  ],
+  "decision_threshold": 0.5,
+  "state_files": 15,
+  "asof": {
+    "nov": {
+      "state_years": 105,
+      "states": 15,
+      "field_years": 148900,
+      "assessable_field_years": 148611
+    },
+    "oct": {
+      "state_years": 105,
+      "states": 15,
+      "field_years": 148900,
+      "assessable_field_years": 148559
+    },
+    "sep": {
+      "state_years": 105,
+      "states": 15,
+      "field_years": 148900,
+      "assessable_field_years": 144240
+    }
+  }
+}

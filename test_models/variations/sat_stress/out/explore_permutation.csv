@@ -1,0 +1,5 @@
+base,asof,b,shuffle,n_perm,obs_wape15_diff,p_wape15,obs_abs_total15_diff,p_abs_total15
+AS3,nov,0.0500,all_state_years,2000,-0.1431,0.0135,-0.6614,0.0810
+AS3,nov,0.0500,within_year_across_states,2000,-0.1431,0.0610,-0.6614,0.4535
+SC,nov,0.0500,all_state_years,2000,-0.4281,0.0215,-0.9283,0.0140
+SC,nov,0.0500,within_year_across_states,2000,-0.4281,0.0570,-0.9283,0.6765

@@ -1,0 +1,937 @@
+model,tier,crop,asof,year,n_states,state_wape_pct,us_error_pct,fallback,fsa_file,detail
+g3_fsa_ratio_multi,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2014,41,6.724316263,5.18966637,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2015,41,4.010996495,2.963357398,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2017,41,5.986728391,4.852960729,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2018,41,3.678744348,1.926843992,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2022,41,8.074455244,7.982974398,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,jul,2024,41,6.731209209,4.166365629,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,aug,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2014,41,5.02997846,-4.982190975,False,aug 2014-08-01 (published 2014-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2015,41,2.354740755,-1.83086892,False,aug 2015-08-03 (published 2015-08-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2016,41,1.278545135,-0.6867600491,False,aug 2016-08-01 (published 2016-08-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2017,41,1.095937117,-0.1090412468,False,aug 2017-08-01 (published 2017-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2018,41,1.695828583,0.3434610411,False,aug 2018-08-01 (published 2018-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2019,41,1.999498397,0.7663466897,False,aug 2019-08-01 (published 2019-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2020,41,6.731545873,-6.474273901,False,aug 2020-07-31 (published 2020-08-08),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2021,41,1.238277988,-0.4128107931,False,aug 2021-08-02 (published 2021-08-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,aug,2022,41,8.074455244,7.982974398,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,aug,2024,41,6.731209209,4.166365629,True,,states on the guard fallback: 41
+g3_fsa_ratio_multi,A,grain,sep,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2014,41,3.741082583,-3.45540214,False,sep 2014-09-01 (published 2014-09-13),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2015,41,2.354740755,-1.83086892,False,aug 2015-08-03 (published 2015-08-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2016,41,1.193986752,-0.130884906,False,sep 2016-09-01 (published 2016-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2017,41,1.027822849,0.3359737536,False,sep 2017-08-31 (published 2017-09-12),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2018,41,1.682940073,0.6895376689,False,sep 2018-09-06 (published 2018-09-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2019,41,2.065526811,1.702983211,False,sep 2019-09-04 (published 2019-09-12),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2020,41,1.597561349,0.3847865215,False,sep 2020-09-01 (published 2020-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2022,41,3.248531475,2.637469541,False,sep 2022-09-02 (published 2022-09-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2023,41,1.577310137,0.008103541676,False,sep 2023-09-01 (published 2023-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,sep,2024,41,1.560724417,-1.135404882,False,sep 2024-09-03 (published 2024-09-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2012,41,3.533218756,1.862925802,False,oct 2012-10-02 (published 2012-10-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2013,41,2.646503006,-2.154114987,False,sep 2013-09-01 (published 2013-09-18),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2014,41,3.510729894,-3.113639988,False,oct 2014-10-01 (published 2014-10-15),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2015,41,1.063092012,-0.1171712104,False,oct 2015-10-01 (published 2015-10-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2016,41,1.183418803,-0.06529298882,False,oct 2016-10-03 (published 2016-10-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2017,41,1.038431144,0.382708909,False,oct 2017-10-02 (published 2017-10-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2018,41,1.744056923,0.7808408681,False,oct 2018-10-01 (published 2018-10-12),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2019,41,2.12597248,1.802643902,False,oct 2019-10-01 (published 2019-10-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2020,41,1.477120832,1.036767607,False,oct 2020-10-01 (published 2020-10-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2022,41,3.27555267,2.676397344,False,oct 2022-10-03 (published 2022-10-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2023,41,1.559238452,0.04180328908,False,oct 2023-10-02 (published 2023-10-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,oct,2024,41,1.509269987,-1.077291048,False,oct 2024-10-01 (published 2024-10-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2013,41,2.406822058,-1.338728984,False,nov 2013-11-01 (published 2013-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2014,41,2.914151539,-2.443644349,False,nov 2014-11-01 (published 2014-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2015,41,1.115518311,0.1195419785,False,nov 2015-11-02 (published 2015-11-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2016,41,1.190306686,-0.02933889116,False,nov 2016-11-01 (published 2016-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2017,41,1.049602529,0.4035775309,False,nov 2017-11-01 (published 2017-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2018,41,1.761670365,0.822883096,False,nov 2018-11-01 (published 2018-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2019,41,2.176425061,1.878324104,False,nov 2019-11-01 (published 2019-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2020,41,1.550950881,1.216043476,False,nov 2020-11-02 (published 2020-11-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2021,41,1.239038485,0.4831462685,False,sep 2021-09-01 (published 2021-09-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2022,41,3.283619561,2.685074079,False,nov 2022-11-01 (published 2022-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2023,41,1.558232138,0.04746864813,False,nov 2023-11-01 (published 2023-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,nov,2024,41,1.505192266,-1.070681774,False,nov 2024-11-01 (published 2024-11-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2013,41,2.423631613,-1.262614456,False,dec 2013-12-01 (published 2013-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2014,41,2.513867884,-1.994727627,False,dec 2014-12-01 (published 2014-12-13),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2015,41,1.147253719,0.1809909514,False,dec 2015-12-01 (published 2015-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2016,41,1.190134216,-0.02161400649,False,dec 2016-12-02 (published 2016-12-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2017,41,1.055130323,0.4313557158,False,dec 2017-12-01 (published 2017-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2018,41,1.776781116,0.8831931452,False,dec 2018-12-03 (published 2018-12-11),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2019,41,2.201698556,1.917784035,False,dec 2019-12-02 (published 2019-12-10),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2020,41,1.584561594,1.313436466,False,dec 2020-12-01 (published 2020-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2021,41,1.214080465,0.5782138445,False,dec 2021-12-01 (published 2021-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2022,41,3.291252048,2.69339503,False,dec 2022-12-01 (published 2022-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2023,41,1.556427066,0.05259664137,False,dec 2023-12-01 (published 2023-12-09),states on the guard fallback: 0
+g3_fsa_ratio_multi,A,grain,dec,2024,41,1.502579319,-1.065222768,False,dec 2024-12-02 (published 2024-12-10),states on the guard fallback: 0
+b7_blend_b5_fsa_level,B,grain,jul,2012,41,4.967422885,-1.713650164,True,,"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2013,41,4.110067933,-0.1188493689,True,,"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2014,41,4.615329615,3.025543432,True,,"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2015,41,3.063614372,2.011656365,True,,"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2016,41,4.623238521,-3.854183292,True,,"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2017,41,4.158560366,3.01151598,True,,"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2018,41,2.80621566,1.251726612,True,,"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2019,41,7.778819578,1.761782276,True,,"NASS planted: acrg0619.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2020,41,6.088888035,-0.1209339626,True,,"NASS planted: acrg0620.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2021,41,4.442462246,-2.318541059,True,,"NASS planted: acrg0621.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2022,41,6.219203005,6.093850284,True,,"NASS planted: acrg0622.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2023,41,6.348902624,-6.109324332,True,,"NASS planted: acrg0623.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,jul,2024,41,4.072598965,2.313829142,True,,"NASS planted: acrg0624.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,aug,2012,41,3.552340929,1.028279121,False,aug 2012-07-31 (published 2012-08-14),"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2013,41,3.10676189,-2.087093594,False,aug 2013-08-01 (published 2013-08-09),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2014,41,3.377368978,-2.150222455,False,aug 2014-08-01 (published 2014-08-09),"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2015,41,2.032670106,-0.4470452294,False,aug 2015-08-03 (published 2015-08-11),"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2016,41,1.721643097,-0.5168823546,False,aug 2016-08-01 (published 2016-08-10),"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2017,41,1.823287828,0.3673540467,False,aug 2017-08-01 (published 2017-08-09),"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2018,41,1.929531594,0.5643887925,False,aug 2018-08-01 (published 2018-08-09),"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2019,41,2.366371935,1.507920295,False,aug 2019-08-01 (published 2019-08-09),"NASS planted: crop0819.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2020,41,4.019600574,-2.232006235,False,aug 2020-07-31 (published 2020-08-08),"NASS planted: acrg0620.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2021,41,1.712300129,-0.37856249,False,aug 2021-08-02 (published 2021-08-10),"NASS planted: acrg0621.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,aug,2022,41,6.219203005,6.093850284,True,,"NASS planted: acrg0622.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,aug,2023,41,6.348902624,-6.109324332,True,,"NASS planted: acrg0623.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,aug,2024,41,3.501785706,1.830735692,True,,"NASS planted: crop0824.txt; b5 part on b0 fallback in 41 states, FSA-level part on persistence in 41 states"
+b7_blend_b5_fsa_level,B,grain,sep,2012,41,3.552340929,1.028279121,False,aug 2012-07-31 (published 2012-08-14),"NASS planted: Acre-06-29-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2013,41,3.10676189,-2.087093594,False,aug 2013-08-01 (published 2013-08-09),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2014,41,3.018158392,-1.379202975,False,sep 2014-09-01 (published 2014-09-13),"NASS planted: Acre-06-30-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2015,41,2.032670106,-0.4470452294,False,aug 2015-08-03 (published 2015-08-11),"NASS planted: Acre-06-30-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2016,41,1.748998581,-0.2436630251,False,sep 2016-09-01 (published 2016-09-09),"NASS planted: Acre-06-30-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2017,41,1.939400438,0.6010666432,False,sep 2017-08-31 (published 2017-09-12),"NASS planted: Acre-06-30-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2018,41,1.925344841,0.7336272236,False,sep 2018-09-06 (published 2018-09-14),"NASS planted: Acre-06-29-2018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2019,41,2.447493465,1.944917716,False,sep 2019-09-04 (published 2019-09-12),"NASS planted: crop0819.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2020,41,2.900899384,1.304230916,False,sep 2020-09-01 (published 2020-09-09),"NASS planted: acrg0620.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2021,41,1.191398013,0.4298877961,False,sep 2021-09-01 (published 2021-09-09),"NASS planted: crop0921.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2022,41,3.251839199,2.630743451,False,sep 2022-09-02 (published 2022-09-10),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2023,41,1.47951268,0.01415867022,False,sep 2023-09-01 (published 2023-09-09),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,sep,2024,41,1.485772874,-1.00277619,False,sep 2024-09-03 (published 2024-09-11),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2012,41,3.47744656,1.746929575,False,oct 2012-10-02 (published 2012-10-10),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2013,41,2.662599623,-0.7551531581,False,sep 2013-09-01 (published 2013-09-18),"NASS planted: Acre-06-28-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2014,41,2.67362961,-1.611569883,False,oct 2014-10-01 (published 2014-10-15),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2015,41,1.256115476,0.1446161725,False,oct 2015-10-01 (published 2015-10-14),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2016,41,1.239831973,-0.01059758487,False,oct 2016-10-03 (published 2016-10-11),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2017,41,0.9671649691,0.4258478037,False,oct 2017-10-02 (published 2017-10-11),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2018,41,1.759278721,0.8085567557,False,oct 2018-10-01 (published 2018-10-12),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2019,41,2.180074441,1.876527638,False,oct 2019-10-01 (published 2019-10-09),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2020,41,1.506025107,1.107026836,False,oct 2020-10-01 (published 2020-10-09),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2021,41,1.191398013,0.4298877961,False,sep 2021-09-01 (published 2021-09-09),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2022,41,3.26324091,2.646080423,False,oct 2022-10-03 (published 2022-10-11),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2023,41,1.477875184,0.03001550136,False,oct 2023-10-02 (published 2023-10-10),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,oct,2024,41,1.462101037,-0.9725676395,False,oct 2024-10-01 (published 2024-10-09),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2012,41,3.465018978,1.769963266,False,nov 2012-11-05 (published 2012-11-14),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2013,41,2.359678312,-1.389278639,False,nov 2013-11-01 (published 2013-11-09),"NASS planted: CropProd-11-08-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2014,41,2.442508124,-1.271107749,False,nov 2014-11-01 (published 2014-11-09),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2015,41,1.311081153,0.2627785002,False,nov 2015-11-02 (published 2015-11-14),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2016,41,1.230857768,0.01038043117,False,nov 2016-11-01 (published 2016-11-09),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2017,41,0.9750264471,0.4382701002,False,nov 2017-11-01 (published 2017-11-09),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2018,41,1.765222481,0.8280685376,False,nov 2018-11-01 (published 2018-11-09),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2019,41,2.206261038,1.909936436,False,nov 2019-11-01 (published 2019-11-09),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2020,41,1.538106542,1.181997997,False,nov 2020-11-02 (published 2020-11-10),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2021,41,1.191398013,0.4298877961,False,sep 2021-09-01 (published 2021-09-09),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2022,41,3.267052551,2.649598805,False,nov 2022-11-01 (published 2022-11-09),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2023,41,1.480219915,0.03065254507,False,nov 2023-11-01 (published 2023-11-09),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,nov,2024,41,1.462575339,-0.970717435,False,nov 2024-11-01 (published 2024-11-09),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2012,41,3.465018978,1.769963266,False,nov 2012-11-05 (published 2012-11-14),"NASS planted: CropProd-10-11-2012.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2013,41,2.368729474,-1.353836518,False,dec 2013-12-01 (published 2013-12-09),"NASS planted: CropProd-11-08-2013.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2014,41,2.298788391,-1.053104458,False,dec 2014-12-01 (published 2014-12-13),"NASS planted: CropProd-10-10-2014.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2015,41,1.327558542,0.291506457,False,dec 2015-12-01 (published 2015-12-09),"NASS planted: CropProd-10-09-2015.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2016,41,1.231056227,0.01348577799,False,dec 2016-12-02 (published 2016-12-10),"NASS planted: CropProd-10-12-2016.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2017,41,0.9760017143,0.4558481747,False,dec 2017-12-01 (published 2017-12-09),"NASS planted: CropProd-10-12-2017.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2018,41,1.771376528,0.8603663684,False,dec 2018-12-03 (published 2018-12-11),"NASS planted: crop1018.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2019,41,2.216837229,1.927887834,False,dec 2019-12-02 (published 2019-12-10),"NASS planted: crop1019.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2020,41,1.551884754,1.226396259,False,dec 2020-12-01 (published 2020-12-09),"NASS planted: crop1020.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2021,41,1.178528183,0.4723882454,False,dec 2021-12-01 (published 2021-12-09),"NASS planted: crop1021.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2022,41,3.271751297,2.654545781,False,dec 2022-12-01 (published 2022-12-09),"NASS planted: crop0922.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2023,41,1.482512328,0.03089599946,False,dec 2023-12-01 (published 2023-12-09),"NASS planted: crop0923.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+b7_blend_b5_fsa_level,B,grain,dec,2024,41,1.462532107,-0.9682009551,False,dec 2024-12-02 (published 2024-12-10),"NASS planted: crop0924.txt; b5 part on b0 fallback in 0 states, FSA-level part on persistence in 0 states"
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2012,41,3.761231614,1.700909975,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2013,41,3.626759356,1.913995952,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2014,41,2.65196161,0.8334736488,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2015,41,2.550988818,0.430943742,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2016,41,2.303223129,-0.2282473371,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2017,41,3.43393809,0.9222438447,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2018,41,2.223755375,0.7404304599,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2019,41,6.605672235,3.215172056,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2020,41,4.837649693,2.257569857,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2021,41,2.987480585,-0.5800818939,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2022,41,5.497744743,4.110285242,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2023,41,3.359304557,-0.2127020091,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,jul,2024,41,3.097078727,0.472027551,False,,jun (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2012,41,2.215990385,-0.004578492531,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2013,41,3.626759356,1.913995952,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2014,41,2.65196161,0.8334736488,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2015,41,2.550988818,0.430943742,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2016,41,2.303223129,-0.2282473371,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2017,41,3.43393809,0.9222438447,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2018,41,2.223755375,0.7404304599,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2019,41,2.610166562,1.266807423,False,,aug (35 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2020,41,4.837649693,2.257569857,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2021,41,2.987480585,-0.5800818939,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2022,41,5.370688012,3.983228512,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2023,41,3.359304557,-0.2127020091,False,,aug (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,aug,2024,41,1.28844255,-0.4045950437,False,,aug (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2012,41,2.215990385,-0.004578492531,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2013,41,3.626759356,1.913995952,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2014,41,2.65196161,0.8334736488,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2015,41,2.550988818,0.430943742,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2016,41,2.303223129,-0.2282473371,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2017,41,3.43393809,0.9222438447,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2018,41,2.223755375,0.7404304599,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2019,41,2.610166562,1.266807423,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2020,41,4.168289358,1.588209522,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2021,41,1.610815645,0.1141337601,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2022,41,3.617305127,2.69995553,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2023,41,1.250780293,0.6820336162,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,sep,2024,41,1.28844255,-0.4045950437,False,,sep (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2012,41,1.405597207,0.4074858353,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2013,41,3.626759356,1.913995952,False,,sep (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2014,41,1.882231256,-0.05652707286,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2015,41,1.502111377,-0.1102126237,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2016,41,1.190805552,0.08876285332,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2017,41,0.9041132317,0.4665611062,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2018,41,1.552316771,0.7367344676,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2019,41,1.807608253,1.017396995,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2020,41,1.22797196,0.4369097459,False,,oct (41 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2021,41,1.610815645,0.1141337601,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2022,41,3.617305127,2.69995553,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2023,41,1.250780293,0.6820336162,False,,oct (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,oct,2024,41,1.28844255,-0.4045950437,False,,oct (31 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2012,41,1.405597207,0.4074858353,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2013,41,1.608717028,-0.2526840535,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2014,41,1.882231256,-0.05652707286,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2015,41,1.502111377,-0.1102126237,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2016,41,1.190805552,0.08876285332,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2017,41,0.9041132317,0.4665611062,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2018,41,1.552316771,0.7367344676,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2019,41,1.807608253,1.017396995,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2020,41,1.22797196,0.4369097459,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2021,41,1.610815645,0.1141337601,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2022,41,3.617305127,2.69995553,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2023,41,1.250780293,0.6820336162,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,nov,2024,41,1.28844255,-0.4045950437,False,,nov (31 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2012,41,1.405597207,0.4074858353,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2013,41,1.608717028,-0.2526840535,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2014,41,1.882231256,-0.05652707286,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2015,41,1.502111377,-0.1102126237,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2016,41,1.190805552,0.08876285332,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2017,41,0.9041132317,0.4665611062,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2018,41,1.552316771,0.7367344676,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2019,41,1.807608253,1.017396995,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2020,41,1.22797196,0.4369097459,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2021,41,1.610815645,0.1141337601,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2022,41,3.617305127,2.69995553,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2023,41,1.250780293,0.6820336162,False,,nov (32 states with a NASS grain forecast)
+nass_latest,benchmark: NASS forecast (not independent),grain,dec,2024,41,1.28844255,-0.4045950437,False,,nov (31 states with a NASS grain forecast)
+g0_persistence,benchmark: same as last year,grain,jul,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,jul,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,aug,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,sep,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,oct,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,nov,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2012,41,6.849424827,-3.990156241,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2013,41,5.527034907,-0.1097632087,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2014,41,6.724316263,5.18966637,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2015,41,4.010996495,2.963357398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2016,41,7.189791119,-6.910822152,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2017,41,5.986728391,4.852960729,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2018,41,3.678744348,1.926843992,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2019,41,9.80355842,0.2197775061,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2020,41,8.530084705,-1.432431117,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2021,41,6.970395821,-3.318115499,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2022,41,8.074455244,7.982974398,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2023,41,9.047927311,-9.017871593,False,,NASS final of last year
+g0_persistence,benchmark: same as last year,grain,dec,2024,41,6.731209209,4.166365629,False,,NASS final of last year
+g6_net_failed,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g6_net_failed,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g6_net_failed,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g6_net_failed,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g6_net_failed,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g6_net_failed,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g6_net_failed,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g6_net_failed,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g6_net_failed,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g6_net_failed,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g6_net_failed,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g6_net_failed,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g6_net_failed,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g6_net_failed,A,grain,aug,2012,41,3.796890056,1.431668916,False,aug 2012-07-31 (published 2012-08-14),
+g6_net_failed,A,grain,aug,2013,41,4.879034805,-4.793292715,False,aug 2013-08-01 (published 2013-08-09),
+g6_net_failed,A,grain,aug,2014,41,4.862479255,-4.812497384,False,aug 2014-08-01 (published 2014-08-09),
+g6_net_failed,A,grain,aug,2015,41,2.429671183,-1.839566212,False,aug 2015-08-03 (published 2015-08-11),
+g6_net_failed,A,grain,aug,2016,41,1.316161408,-0.6086132471,False,aug 2016-08-01 (published 2016-08-10),
+g6_net_failed,A,grain,aug,2017,41,1.016844009,-0.01664565707,False,aug 2017-08-01 (published 2017-08-09),
+g6_net_failed,A,grain,aug,2018,41,1.760433537,0.4391844522,False,aug 2018-08-01 (published 2018-08-09),
+g6_net_failed,A,grain,aug,2019,41,2.145721264,0.3788704649,False,aug 2019-08-01 (published 2019-08-09),
+g6_net_failed,A,grain,aug,2020,41,6.671167339,-6.280633074,False,aug 2020-07-31 (published 2020-08-08),
+g6_net_failed,A,grain,aug,2021,41,1.152886893,-0.277775066,False,aug 2021-08-02 (published 2021-08-10),
+g6_net_failed,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g6_net_failed,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g6_net_failed,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g6_net_failed,A,grain,sep,2012,41,3.796890056,1.431668916,False,aug 2012-07-31 (published 2012-08-14),
+g6_net_failed,A,grain,sep,2013,41,4.879034805,-4.793292715,False,aug 2013-08-01 (published 2013-08-09),
+g6_net_failed,A,grain,sep,2014,41,3.620298201,-3.292363488,False,sep 2014-09-01 (published 2014-09-13),
+g6_net_failed,A,grain,sep,2015,41,2.429671183,-1.839566212,False,aug 2015-08-03 (published 2015-08-11),
+g6_net_failed,A,grain,sep,2016,41,1.33984206,-0.05941722596,False,sep 2016-09-01 (published 2016-09-09),
+g6_net_failed,A,grain,sep,2017,41,0.955475547,0.4262389148,False,sep 2017-08-31 (published 2017-09-12),
+g6_net_failed,A,grain,sep,2018,41,1.761776446,0.7754912811,False,sep 2018-09-06 (published 2018-09-14),
+g6_net_failed,A,grain,sep,2019,41,2.137834428,1.292777599,False,sep 2019-09-04 (published 2019-09-12),
+g6_net_failed,A,grain,sep,2020,41,1.684727115,0.5800438097,False,sep 2020-09-01 (published 2020-09-09),
+g6_net_failed,A,grain,sep,2021,41,1.221769525,0.6128722459,False,sep 2021-09-01 (published 2021-09-09),
+g6_net_failed,A,grain,sep,2022,41,3.312216701,2.70370882,False,sep 2022-09-02 (published 2022-09-10),
+g6_net_failed,A,grain,sep,2023,41,1.613504217,0.06403543513,False,sep 2023-09-01 (published 2023-09-09),
+g6_net_failed,A,grain,sep,2024,41,1.607955319,-1.19349563,False,sep 2024-09-03 (published 2024-09-11),
+g6_net_failed,A,grain,oct,2012,41,3.721251757,2.23581598,False,oct 2012-10-02 (published 2012-10-10),
+g6_net_failed,A,grain,oct,2013,41,2.575690697,-2.137194795,False,sep 2013-09-01 (published 2013-09-18),
+g6_net_failed,A,grain,oct,2014,41,3.460866382,-2.951165504,False,oct 2014-10-01 (published 2014-10-15),
+g6_net_failed,A,grain,oct,2015,41,1.171579151,-0.1474747045,False,oct 2015-10-01 (published 2015-10-14),
+g6_net_failed,A,grain,oct,2016,41,1.343440141,0.003321304562,False,oct 2016-10-03 (published 2016-10-11),
+g6_net_failed,A,grain,oct,2017,41,0.9702470674,0.4730472333,False,oct 2017-10-02 (published 2017-10-11),
+g6_net_failed,A,grain,oct,2018,41,1.819947611,0.8610546612,False,oct 2018-10-01 (published 2018-10-12),
+g6_net_failed,A,grain,oct,2019,41,2.183111758,1.38875389,False,oct 2019-10-01 (published 2019-10-09),
+g6_net_failed,A,grain,oct,2020,41,1.619153522,1.230632293,False,oct 2020-10-01 (published 2020-10-09),
+g6_net_failed,A,grain,oct,2021,41,1.221769525,0.6128722459,False,sep 2021-09-01 (published 2021-09-09),
+g6_net_failed,A,grain,oct,2022,41,3.332544444,2.735225066,False,oct 2022-10-03 (published 2022-10-11),
+g6_net_failed,A,grain,oct,2023,41,1.610163126,0.09367135309,False,oct 2023-10-02 (published 2023-10-10),
+g6_net_failed,A,grain,oct,2024,41,1.556760623,-1.137489041,False,oct 2024-10-01 (published 2024-10-09),
+g6_net_failed,A,grain,nov,2012,41,3.698697615,2.285735472,False,nov 2012-11-05 (published 2012-11-14),
+g6_net_failed,A,grain,nov,2013,41,2.341812453,-1.327868364,False,nov 2013-11-01 (published 2013-11-09),
+g6_net_failed,A,grain,nov,2014,41,2.9154277,-2.28190309,False,nov 2014-11-01 (published 2014-11-09),
+g6_net_failed,A,grain,nov,2015,41,1.212023756,0.08871158082,False,nov 2015-11-02 (published 2015-11-14),
+g6_net_failed,A,grain,nov,2016,41,1.349793324,0.0399764605,False,nov 2016-11-01 (published 2016-11-09),
+g6_net_failed,A,grain,nov,2017,41,0.9815014582,0.493232873,False,nov 2017-11-01 (published 2017-11-09),
+g6_net_failed,A,grain,nov,2018,41,1.834356202,0.8998246944,False,nov 2018-11-01 (published 2018-11-09),
+g6_net_failed,A,grain,nov,2019,41,2.227785833,1.460171051,False,nov 2019-11-01 (published 2019-11-09),
+g6_net_failed,A,grain,nov,2020,41,1.697421688,1.406437849,False,nov 2020-11-02 (published 2020-11-10),
+g6_net_failed,A,grain,nov,2021,41,1.221769525,0.6128722459,False,sep 2021-09-01 (published 2021-09-09),
+g6_net_failed,A,grain,nov,2022,41,3.340287431,2.743754923,False,nov 2022-11-01 (published 2022-11-09),
+g6_net_failed,A,grain,nov,2023,41,1.61353015,0.09605000452,False,nov 2023-11-01 (published 2023-11-09),
+g6_net_failed,A,grain,nov,2024,41,1.555413238,-1.13372868,False,nov 2024-11-01 (published 2024-11-09),
+g6_net_failed,A,grain,dec,2012,41,3.698697615,2.285735472,False,nov 2012-11-05 (published 2012-11-14),
+g6_net_failed,A,grain,dec,2013,41,2.361349319,-1.255091369,False,dec 2013-12-01 (published 2013-12-09),
+g6_net_failed,A,grain,dec,2014,41,2.515945183,-1.833589857,False,dec 2014-12-01 (published 2014-12-13),
+g6_net_failed,A,grain,dec,2015,41,1.228940024,0.1500522969,False,dec 2015-12-01 (published 2015-12-09),
+g6_net_failed,A,grain,dec,2016,41,1.349246404,0.04751084392,False,dec 2016-12-02 (published 2016-12-10),
+g6_net_failed,A,grain,dec,2017,41,0.9891350882,0.5206470339,False,dec 2017-12-01 (published 2017-12-09),
+g6_net_failed,A,grain,dec,2018,41,1.852753662,0.9594284336,False,dec 2018-12-03 (published 2018-12-11),
+g6_net_failed,A,grain,dec,2019,41,2.250745628,1.498901702,False,dec 2019-12-02 (published 2019-12-10),
+g6_net_failed,A,grain,dec,2020,41,1.737782019,1.50246823,False,dec 2020-12-01 (published 2020-12-09),
+g6_net_failed,A,grain,dec,2021,41,1.21342299,0.7062725638,False,dec 2021-12-01 (published 2021-12-09),
+g6_net_failed,A,grain,dec,2022,41,3.347556422,2.751432903,False,dec 2022-12-01 (published 2022-12-09),
+g6_net_failed,A,grain,dec,2023,41,1.616794726,0.09711268382,False,dec 2023-12-01 (published 2023-12-09),
+g6_net_failed,A,grain,dec,2024,41,1.553287419,-1.128756307,False,dec 2024-12-02 (published 2024-12-10),
+g7_net_failed_prevented,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g7_net_failed_prevented,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g7_net_failed_prevented,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g7_net_failed_prevented,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g7_net_failed_prevented,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g7_net_failed_prevented,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g7_net_failed_prevented,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g7_net_failed_prevented,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g7_net_failed_prevented,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g7_net_failed_prevented,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g7_net_failed_prevented,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g7_net_failed_prevented,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g7_net_failed_prevented,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g7_net_failed_prevented,A,grain,aug,2012,41,8.2415116,6.575567691,False,aug 2012-07-31 (published 2012-08-14),
+g7_net_failed_prevented,A,grain,aug,2013,41,6.388172097,-6.074672706,False,aug 2013-08-01 (published 2013-08-09),
+g7_net_failed_prevented,A,grain,aug,2014,41,4.971321947,-4.297261965,False,aug 2014-08-01 (published 2014-08-09),
+g7_net_failed_prevented,A,grain,aug,2015,41,4.962135375,-2.630330795,False,aug 2015-08-03 (published 2015-08-11),
+g7_net_failed_prevented,A,grain,aug,2016,41,2.621667417,1.269889379,False,aug 2016-08-01 (published 2016-08-10),
+g7_net_failed_prevented,A,grain,aug,2017,41,1.837716948,0.7586590197,False,aug 2017-08-01 (published 2017-08-09),
+g7_net_failed_prevented,A,grain,aug,2018,41,2.140895886,1.046398448,False,aug 2018-08-01 (published 2018-08-09),
+g7_net_failed_prevented,A,grain,aug,2019,41,12.42463973,-12.2635242,False,aug 2019-08-01 (published 2019-08-09),
+g7_net_failed_prevented,A,grain,aug,2020,41,10.30459951,-6.076866793,False,aug 2020-07-31 (published 2020-08-08),
+g7_net_failed_prevented,A,grain,aug,2021,41,5.997505809,5.582891755,False,aug 2021-08-02 (published 2021-08-10),
+g7_net_failed_prevented,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g7_net_failed_prevented,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g7_net_failed_prevented,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g7_net_failed_prevented,A,grain,sep,2012,41,8.2415116,6.575567691,False,aug 2012-07-31 (published 2012-08-14),
+g7_net_failed_prevented,A,grain,sep,2013,41,6.388172097,-6.074672706,False,aug 2013-08-01 (published 2013-08-09),
+g7_net_failed_prevented,A,grain,sep,2014,41,3.950048984,-2.78473162,False,sep 2014-09-01 (published 2014-09-13),
+g7_net_failed_prevented,A,grain,sep,2015,41,4.962135375,-2.630330795,False,aug 2015-08-03 (published 2015-08-11),
+g7_net_failed_prevented,A,grain,sep,2016,41,2.822795299,1.845342525,False,sep 2016-09-01 (published 2016-09-09),
+g7_net_failed_prevented,A,grain,sep,2017,41,1.984109214,1.21455255,False,sep 2017-08-31 (published 2017-09-12),
+g7_net_failed_prevented,A,grain,sep,2018,41,2.234244826,1.378393139,False,sep 2018-09-06 (published 2018-09-14),
+g7_net_failed_prevented,A,grain,sep,2019,41,11.84217556,-11.57991559,False,sep 2019-09-04 (published 2019-09-12),
+g7_net_failed_prevented,A,grain,sep,2020,41,5.927871896,0.001231111775,False,sep 2020-09-01 (published 2020-09-09),
+g7_net_failed_prevented,A,grain,sep,2021,41,6.697252094,6.565517664,False,sep 2021-09-01 (published 2021-09-09),
+g7_net_failed_prevented,A,grain,sep,2022,41,7.052190965,4.203211853,False,sep 2022-09-02 (published 2022-09-10),
+g7_net_failed_prevented,A,grain,sep,2023,41,3.009215922,2.273777461,False,sep 2023-09-01 (published 2023-09-09),
+g7_net_failed_prevented,A,grain,sep,2024,41,3.044922157,-2.488427421,False,sep 2024-09-03 (published 2024-09-11),
+g7_net_failed_prevented,A,grain,oct,2012,41,8.510046727,7.452580007,False,oct 2012-10-02 (published 2012-10-10),
+g7_net_failed_prevented,A,grain,oct,2013,41,5.092610212,-3.447198146,False,sep 2013-09-01 (published 2013-09-18),
+g7_net_failed_prevented,A,grain,oct,2014,41,3.779034021,-2.441114894,False,oct 2014-10-01 (published 2014-10-15),
+g7_net_failed_prevented,A,grain,oct,2015,41,3.826598359,-0.9828200048,False,oct 2015-10-01 (published 2015-10-14),
+g7_net_failed_prevented,A,grain,oct,2016,41,2.857602378,1.906587661,False,oct 2016-10-03 (published 2016-10-11),
+g7_net_failed_prevented,A,grain,oct,2017,41,2.040728953,1.248524915,False,oct 2017-10-02 (published 2017-10-11),
+g7_net_failed_prevented,A,grain,oct,2018,41,2.292072991,1.465381237,False,oct 2018-10-01 (published 2018-10-12),
+g7_net_failed_prevented,A,grain,oct,2019,41,11.80121736,-11.49113767,False,oct 2019-10-01 (published 2019-10-09),
+g7_net_failed_prevented,A,grain,oct,2020,41,5.835373133,0.5352213067,False,oct 2020-10-01 (published 2020-10-09),
+g7_net_failed_prevented,A,grain,oct,2021,41,6.697252094,6.565517664,False,sep 2021-09-01 (published 2021-09-09),
+g7_net_failed_prevented,A,grain,oct,2022,41,7.06761682,4.230480186,False,oct 2022-10-03 (published 2022-10-11),
+g7_net_failed_prevented,A,grain,oct,2023,41,3.013587225,2.301117928,False,oct 2023-10-02 (published 2023-10-10),
+g7_net_failed_prevented,A,grain,oct,2024,41,3.003481963,-2.435030136,False,oct 2024-10-01 (published 2024-10-09),
+g7_net_failed_prevented,A,grain,nov,2012,41,8.498972145,7.503475293,False,nov 2012-11-05 (published 2012-11-14),
+g7_net_failed_prevented,A,grain,nov,2013,41,4.806090527,-2.665401828,False,nov 2013-11-01 (published 2013-11-09),
+g7_net_failed_prevented,A,grain,nov,2014,41,3.303676164,-1.774082708,False,nov 2014-11-01 (published 2014-11-09),
+g7_net_failed_prevented,A,grain,nov,2015,41,3.775022092,-0.748246316,False,nov 2015-11-02 (published 2015-11-14),
+g7_net_failed_prevented,A,grain,nov,2016,41,2.871799602,1.944847286,False,nov 2016-11-01 (published 2016-11-09),
+g7_net_failed_prevented,A,grain,nov,2017,41,2.051876131,1.267649789,False,nov 2017-11-01 (published 2017-11-09),
+g7_net_failed_prevented,A,grain,nov,2018,41,2.310683687,1.503764069,False,nov 2018-11-01 (published 2018-11-09),
+g7_net_failed_prevented,A,grain,nov,2019,41,11.76063526,-11.43064963,False,nov 2019-11-01 (published 2019-11-09),
+g7_net_failed_prevented,A,grain,nov,2020,41,5.903806764,0.7044415738,False,nov 2020-11-02 (published 2020-11-10),
+g7_net_failed_prevented,A,grain,nov,2021,41,6.697252094,6.565517664,False,sep 2021-09-01 (published 2021-09-09),
+g7_net_failed_prevented,A,grain,nov,2022,41,7.074477107,4.238386615,False,nov 2022-11-01 (published 2022-11-09),
+g7_net_failed_prevented,A,grain,nov,2023,41,3.026562119,2.301863726,False,nov 2023-11-01 (published 2023-11-09),
+g7_net_failed_prevented,A,grain,nov,2024,41,3.00607013,-2.432263821,False,nov 2024-11-01 (published 2024-11-09),
+g7_net_failed_prevented,A,grain,dec,2012,41,8.498972145,7.503475293,False,nov 2012-11-05 (published 2012-11-14),
+g7_net_failed_prevented,A,grain,dec,2013,41,4.792357232,-2.585728904,False,dec 2013-12-01 (published 2013-12-09),
+g7_net_failed_prevented,A,grain,dec,2014,41,2.959644901,-1.333240831,False,dec 2014-12-01 (published 2014-12-13),
+g7_net_failed_prevented,A,grain,dec,2015,41,3.759274578,-0.6871225975,False,dec 2015-12-01 (published 2015-12-09),
+g7_net_failed_prevented,A,grain,dec,2016,41,2.875855311,1.952615894,False,dec 2016-12-02 (published 2016-12-10),
+g7_net_failed_prevented,A,grain,dec,2017,41,2.053554421,1.295527791,False,dec 2017-12-01 (published 2017-12-09),
+g7_net_failed_prevented,A,grain,dec,2018,41,2.329464283,1.565454281,False,dec 2018-12-03 (published 2018-12-11),
+g7_net_failed_prevented,A,grain,dec,2019,41,11.74565163,-11.39153154,False,dec 2019-12-02 (published 2019-12-10),
+g7_net_failed_prevented,A,grain,dec,2020,41,5.944817457,0.8000355212,False,dec 2020-12-01 (published 2020-12-09),
+g7_net_failed_prevented,A,grain,dec,2021,41,6.758103644,6.659920755,False,dec 2021-12-01 (published 2021-12-09),
+g7_net_failed_prevented,A,grain,dec,2022,41,7.079924293,4.246962131,False,dec 2022-12-01 (published 2022-12-09),
+g7_net_failed_prevented,A,grain,dec,2023,41,3.035105007,2.302314309,False,dec 2023-12-01 (published 2023-12-09),
+g7_net_failed_prevented,A,grain,dec,2024,41,3.003240961,-2.427338054,False,dec 2024-12-02 (published 2024-12-10),
+g8_vintage_growth,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g8_vintage_growth,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g8_vintage_growth,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g8_vintage_growth,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g8_vintage_growth,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g8_vintage_growth,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g8_vintage_growth,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g8_vintage_growth,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g8_vintage_growth,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g8_vintage_growth,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g8_vintage_growth,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g8_vintage_growth,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g8_vintage_growth,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g8_vintage_growth,A,grain,aug,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g8_vintage_growth,A,grain,aug,2013,41,4.03485659,-3.925452874,False,aug 2013-08-01 (published 2013-08-09),
+g8_vintage_growth,A,grain,aug,2014,41,4.002311031,-2.935415347,False,aug 2014-08-01 (published 2014-08-09),
+g8_vintage_growth,A,grain,aug,2015,41,1.746828517,-0.008260228718,False,aug 2015-08-03 (published 2015-08-11),
+g8_vintage_growth,A,grain,aug,2016,41,2.289249226,1.648626296,False,aug 2016-08-01 (published 2016-08-10),
+g8_vintage_growth,A,grain,aug,2017,41,2.001280579,1.64152284,False,aug 2017-08-01 (published 2017-08-09),
+g8_vintage_growth,A,grain,aug,2018,41,2.032660912,1.033528406,False,aug 2018-08-01 (published 2018-08-09),
+g8_vintage_growth,A,grain,aug,2019,41,2.115670663,1.271429489,False,aug 2019-08-01 (published 2019-08-09),
+g8_vintage_growth,A,grain,aug,2020,41,6.355380017,-5.95332104,False,aug 2020-07-31 (published 2020-08-08),
+g8_vintage_growth,A,grain,aug,2021,41,1.372512223,0.749726506,False,aug 2021-08-02 (published 2021-08-10),
+g8_vintage_growth,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g8_vintage_growth,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g8_vintage_growth,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g8_vintage_growth,A,grain,sep,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g8_vintage_growth,A,grain,sep,2013,41,4.03485659,-3.925452874,False,aug 2013-08-01 (published 2013-08-09),
+g8_vintage_growth,A,grain,sep,2014,41,3.357557297,-2.683372099,False,sep 2014-09-01 (published 2014-09-13),
+g8_vintage_growth,A,grain,sep,2015,41,1.746828517,-0.008260228718,False,aug 2015-08-03 (published 2015-08-11),
+g8_vintage_growth,A,grain,sep,2016,41,1.541936935,0.6194287998,False,sep 2016-09-01 (published 2016-09-09),
+g8_vintage_growth,A,grain,sep,2017,41,1.188800283,0.8250695328,False,sep 2017-08-31 (published 2017-09-12),
+g8_vintage_growth,A,grain,sep,2018,41,1.760529892,0.8158079853,False,sep 2018-09-06 (published 2018-09-14),
+g8_vintage_growth,A,grain,sep,2019,41,2.11896689,1.798055574,False,sep 2019-09-04 (published 2019-09-12),
+g8_vintage_growth,A,grain,sep,2020,41,1.582958408,0.5079768983,False,sep 2020-09-01 (published 2020-09-09),
+g8_vintage_growth,A,grain,sep,2021,41,1.244431395,0.665423346,False,sep 2021-09-01 (published 2021-09-09),
+g8_vintage_growth,A,grain,sep,2022,41,3.336960523,2.811666705,False,sep 2022-09-02 (published 2022-09-10),
+g8_vintage_growth,A,grain,sep,2023,41,1.518947025,0.1142816181,False,sep 2023-09-01 (published 2023-09-09),
+g8_vintage_growth,A,grain,sep,2024,41,1.525814763,-1.086810096,False,sep 2024-09-03 (published 2024-09-11),
+g8_vintage_growth,A,grain,oct,2012,41,3.533218756,1.862925802,False,oct 2012-10-02 (published 2012-10-10),
+g8_vintage_growth,A,grain,oct,2013,41,2.646503006,-2.154114987,False,sep 2013-09-01 (published 2013-09-18),
+g8_vintage_growth,A,grain,oct,2014,41,3.510729894,-3.113639988,False,oct 2014-10-01 (published 2014-10-15),
+g8_vintage_growth,A,grain,oct,2015,41,1.063092012,-0.1171712104,False,oct 2015-10-01 (published 2015-10-14),
+g8_vintage_growth,A,grain,oct,2016,41,1.183418803,-0.06529298882,False,oct 2016-10-03 (published 2016-10-11),
+g8_vintage_growth,A,grain,oct,2017,41,1.038431144,0.382708909,False,oct 2017-10-02 (published 2017-10-11),
+g8_vintage_growth,A,grain,oct,2018,41,1.744056923,0.7808408681,False,oct 2018-10-01 (published 2018-10-12),
+g8_vintage_growth,A,grain,oct,2019,41,2.12597248,1.802643902,False,oct 2019-10-01 (published 2019-10-09),
+g8_vintage_growth,A,grain,oct,2020,41,1.477120832,1.036767607,False,oct 2020-10-01 (published 2020-10-09),
+g8_vintage_growth,A,grain,oct,2021,41,1.244431395,0.665423346,False,sep 2021-09-01 (published 2021-09-09),
+g8_vintage_growth,A,grain,oct,2022,41,3.27555267,2.676397344,False,oct 2022-10-03 (published 2022-10-11),
+g8_vintage_growth,A,grain,oct,2023,41,1.559238452,0.04180328908,False,oct 2023-10-02 (published 2023-10-10),
+g8_vintage_growth,A,grain,oct,2024,41,1.509269987,-1.077291048,False,oct 2024-10-01 (published 2024-10-09),
+g8_vintage_growth,A,grain,nov,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g8_vintage_growth,A,grain,nov,2013,41,2.406822058,-1.338728984,False,nov 2013-11-01 (published 2013-11-09),
+g8_vintage_growth,A,grain,nov,2014,41,2.914151539,-2.443644349,False,nov 2014-11-01 (published 2014-11-09),
+g8_vintage_growth,A,grain,nov,2015,41,1.115518311,0.1195419785,False,nov 2015-11-02 (published 2015-11-14),
+g8_vintage_growth,A,grain,nov,2016,41,1.190306686,-0.02933889116,False,nov 2016-11-01 (published 2016-11-09),
+g8_vintage_growth,A,grain,nov,2017,41,1.049602529,0.4035775309,False,nov 2017-11-01 (published 2017-11-09),
+g8_vintage_growth,A,grain,nov,2018,41,1.761670365,0.822883096,False,nov 2018-11-01 (published 2018-11-09),
+g8_vintage_growth,A,grain,nov,2019,41,2.176425061,1.878324104,False,nov 2019-11-01 (published 2019-11-09),
+g8_vintage_growth,A,grain,nov,2020,41,1.550950881,1.216043476,False,nov 2020-11-02 (published 2020-11-10),
+g8_vintage_growth,A,grain,nov,2021,41,1.244431395,0.665423346,False,sep 2021-09-01 (published 2021-09-09),
+g8_vintage_growth,A,grain,nov,2022,41,3.283619561,2.685074079,False,nov 2022-11-01 (published 2022-11-09),
+g8_vintage_growth,A,grain,nov,2023,41,1.558232138,0.04746864813,False,nov 2023-11-01 (published 2023-11-09),
+g8_vintage_growth,A,grain,nov,2024,41,1.505192266,-1.070681774,False,nov 2024-11-01 (published 2024-11-09),
+g8_vintage_growth,A,grain,dec,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g8_vintage_growth,A,grain,dec,2013,41,2.423631613,-1.262614456,False,dec 2013-12-01 (published 2013-12-09),
+g8_vintage_growth,A,grain,dec,2014,41,2.513867884,-1.994727627,False,dec 2014-12-01 (published 2014-12-13),
+g8_vintage_growth,A,grain,dec,2015,41,1.147253719,0.1809909514,False,dec 2015-12-01 (published 2015-12-09),
+g8_vintage_growth,A,grain,dec,2016,41,1.190134216,-0.02161400649,False,dec 2016-12-02 (published 2016-12-10),
+g8_vintage_growth,A,grain,dec,2017,41,1.055130323,0.4313557158,False,dec 2017-12-01 (published 2017-12-09),
+g8_vintage_growth,A,grain,dec,2018,41,1.776781116,0.8831931452,False,dec 2018-12-03 (published 2018-12-11),
+g8_vintage_growth,A,grain,dec,2019,41,2.201698556,1.917784035,False,dec 2019-12-02 (published 2019-12-10),
+g8_vintage_growth,A,grain,dec,2020,41,1.584561594,1.313436466,False,dec 2020-12-01 (published 2020-12-09),
+g8_vintage_growth,A,grain,dec,2021,41,1.214080465,0.5782138445,False,dec 2021-12-01 (published 2021-12-09),
+g8_vintage_growth,A,grain,dec,2022,41,3.291252048,2.69339503,False,dec 2022-12-01 (published 2022-12-09),
+g8_vintage_growth,A,grain,dec,2023,41,1.556427066,0.05259664137,False,dec 2023-12-01 (published 2023-12-09),
+g8_vintage_growth,A,grain,dec,2024,41,1.502579319,-1.065222768,False,dec 2024-12-02 (published 2024-12-10),
+g9_national_reconciliation,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g9_national_reconciliation,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g9_national_reconciliation,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g9_national_reconciliation,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g9_national_reconciliation,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g9_national_reconciliation,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g9_national_reconciliation,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g9_national_reconciliation,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g9_national_reconciliation,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g9_national_reconciliation,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g9_national_reconciliation,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g9_national_reconciliation,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g9_national_reconciliation,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g9_national_reconciliation,A,grain,aug,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),
+g9_national_reconciliation,A,grain,aug,2013,41,4.953795068,-4.871826848,False,aug 2013-08-01 (published 2013-08-09),
+g9_national_reconciliation,A,grain,aug,2014,41,4.832275086,-4.770684803,False,aug 2014-08-01 (published 2014-08-09),
+g9_national_reconciliation,A,grain,aug,2015,41,2.35465188,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),
+g9_national_reconciliation,A,grain,aug,2016,41,1.366688815,-0.8368023547,False,aug 2016-08-01 (published 2016-08-10),
+g9_national_reconciliation,A,grain,aug,2017,41,1.072729045,-0.01386372689,False,aug 2017-08-01 (published 2017-08-09),
+g9_national_reconciliation,A,grain,aug,2018,41,1.676815068,0.2600651685,False,aug 2018-08-01 (published 2018-08-09),
+g9_national_reconciliation,A,grain,aug,2019,41,1.940986093,0.5683766757,False,aug 2019-08-01 (published 2019-08-09),
+g9_national_reconciliation,A,grain,aug,2020,41,6.773724767,-6.547803059,False,aug 2020-07-31 (published 2020-08-08),
+g9_national_reconciliation,A,grain,aug,2021,41,1.359140259,-0.6489284625,False,aug 2021-08-02 (published 2021-08-10),
+g9_national_reconciliation,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g9_national_reconciliation,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g9_national_reconciliation,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g9_national_reconciliation,A,grain,sep,2012,41,3.543840443,0.9121950802,False,aug 2012-07-31 (published 2012-08-14),
+g9_national_reconciliation,A,grain,sep,2013,41,4.953795068,-4.871826848,False,aug 2013-08-01 (published 2013-08-09),
+g9_national_reconciliation,A,grain,sep,2014,41,3.572841361,-3.239971552,False,sep 2014-09-01 (published 2014-09-13),
+g9_national_reconciliation,A,grain,sep,2015,41,2.35465188,-1.830588686,False,aug 2015-08-03 (published 2015-08-11),
+g9_national_reconciliation,A,grain,sep,2016,41,1.22190562,-0.2961230675,False,sep 2016-09-01 (published 2016-09-09),
+g9_national_reconciliation,A,grain,sep,2017,41,1.022704685,0.4094635905,False,sep 2017-08-31 (published 2017-09-12),
+g9_national_reconciliation,A,grain,sep,2018,41,1.64129808,0.6076038943,False,sep 2018-09-06 (published 2018-09-14),
+g9_national_reconciliation,A,grain,sep,2019,41,1.925875354,1.501123312,False,sep 2019-09-04 (published 2019-09-12),
+g9_national_reconciliation,A,grain,sep,2020,41,1.5948625,0.3494438485,False,sep 2020-09-01 (published 2020-09-09),
+g9_national_reconciliation,A,grain,sep,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),
+g9_national_reconciliation,A,grain,sep,2022,41,3.209391544,2.477060841,False,sep 2022-09-02 (published 2022-09-10),
+g9_national_reconciliation,A,grain,sep,2023,41,1.582765318,0.2733346639,False,sep 2023-09-01 (published 2023-09-09),
+g9_national_reconciliation,A,grain,sep,2024,41,1.202523589,-0.5990638691,False,sep 2024-09-03 (published 2024-09-11),
+g9_national_reconciliation,A,grain,oct,2012,41,3.484528088,1.771153413,False,oct 2012-10-02 (published 2012-10-10),
+g9_national_reconciliation,A,grain,oct,2013,41,2.666227206,-2.203733446,False,sep 2013-09-01 (published 2013-09-18),
+g9_national_reconciliation,A,grain,oct,2014,41,3.361259851,-2.905396821,False,oct 2014-10-01 (published 2014-10-15),
+g9_national_reconciliation,A,grain,oct,2015,41,1.063102436,-0.1179493201,False,oct 2015-10-01 (published 2015-10-14),
+g9_national_reconciliation,A,grain,oct,2016,41,1.206129499,-0.2312871955,False,oct 2016-10-03 (published 2016-10-11),
+g9_national_reconciliation,A,grain,oct,2017,41,1.035810505,0.4490751038,False,oct 2017-10-02 (published 2017-10-11),
+g9_national_reconciliation,A,grain,oct,2018,41,1.687286679,0.6994610143,False,oct 2018-10-01 (published 2018-10-12),
+g9_national_reconciliation,A,grain,oct,2019,41,1.982279119,1.600180927,False,oct 2019-10-01 (published 2019-10-09),
+g9_national_reconciliation,A,grain,oct,2020,41,1.452895929,1.00297657,False,oct 2020-10-01 (published 2020-10-09),
+g9_national_reconciliation,A,grain,oct,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),
+g9_national_reconciliation,A,grain,oct,2022,41,3.230341812,2.514971957,False,oct 2022-10-03 (published 2022-10-11),
+g9_national_reconciliation,A,grain,oct,2023,41,1.583552495,0.3061992129,False,oct 2023-10-02 (published 2023-10-10),
+g9_national_reconciliation,A,grain,oct,2024,41,1.162362622,-0.5423458308,False,oct 2024-10-01 (published 2024-10-09),
+g9_national_reconciliation,A,grain,nov,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),
+g9_national_reconciliation,A,grain,nov,2013,41,2.409056795,-1.392146552,False,nov 2013-11-01 (published 2013-11-09),
+g9_national_reconciliation,A,grain,nov,2014,41,2.813381477,-2.23457757,False,nov 2014-11-01 (published 2014-11-09),
+g9_national_reconciliation,A,grain,nov,2015,41,1.115260209,0.1187770918,False,nov 2015-11-02 (published 2015-11-14),
+g9_national_reconciliation,A,grain,nov,2016,41,1.199143317,-0.1967298172,False,nov 2016-11-01 (published 2016-11-09),
+g9_national_reconciliation,A,grain,nov,2017,41,1.047831659,0.4677986501,False,nov 2017-11-01 (published 2017-11-09),
+g9_national_reconciliation,A,grain,nov,2018,41,1.701810881,0.740578656,False,nov 2018-11-01 (published 2018-11-09),
+g9_national_reconciliation,A,grain,nov,2019,41,2.029536342,1.674039902,False,nov 2019-11-01 (published 2019-11-09),
+g9_national_reconciliation,A,grain,nov,2020,41,1.521814911,1.177478062,False,nov 2020-11-02 (published 2020-11-10),
+g9_national_reconciliation,A,grain,nov,2021,41,1.204847682,0.2600344459,False,sep 2021-09-01 (published 2021-09-09),
+g9_national_reconciliation,A,grain,nov,2022,41,3.237306173,2.523525152,False,nov 2022-11-01 (published 2022-11-09),
+g9_national_reconciliation,A,grain,nov,2023,41,1.584981262,0.3117780133,False,nov 2023-11-01 (published 2023-11-09),
+g9_national_reconciliation,A,grain,nov,2024,41,1.159897718,-0.5356367963,False,nov 2024-11-01 (published 2024-11-09),
+g9_national_reconciliation,A,grain,dec,2012,41,3.4677955,1.830502959,False,nov 2012-11-05 (published 2012-11-14),
+g9_national_reconciliation,A,grain,dec,2013,41,2.425868835,-1.316351507,False,dec 2013-12-01 (published 2013-12-09),
+g9_national_reconciliation,A,grain,dec,2014,41,2.44200024,-1.783928535,False,dec 2014-12-01 (published 2014-12-13),
+g9_national_reconciliation,A,grain,dec,2015,41,1.146595505,0.179040974,False,dec 2015-12-01 (published 2015-12-09),
+g9_national_reconciliation,A,grain,dec,2016,41,1.198192816,-0.1890752035,False,dec 2016-12-02 (published 2016-12-10),
+g9_national_reconciliation,A,grain,dec,2017,41,1.05443182,0.4957498143,False,dec 2017-12-01 (published 2017-12-09),
+g9_national_reconciliation,A,grain,dec,2018,41,1.710107801,0.7999842271,False,dec 2018-12-03 (published 2018-12-11),
+g9_national_reconciliation,A,grain,dec,2019,41,2.053833211,1.7121329,False,dec 2019-12-02 (published 2019-12-10),
+g9_national_reconciliation,A,grain,dec,2020,41,1.551593235,1.271798386,False,dec 2020-12-01 (published 2020-12-09),
+g9_national_reconciliation,A,grain,dec,2021,41,1.163698978,0.3565997127,False,dec 2021-12-01 (published 2021-12-09),
+g9_national_reconciliation,A,grain,dec,2022,41,3.244373089,2.530784243,False,dec 2022-12-01 (published 2022-12-09),
+g9_national_reconciliation,A,grain,dec,2023,41,1.585921797,0.3166795674,False,dec 2023-12-01 (published 2023-12-09),
+g9_national_reconciliation,A,grain,dec,2024,41,1.1591494,-0.5303505136,False,dec 2024-12-02 (published 2024-12-10),
+g10_geo_blend_g3_b7,B,grain,jul,2012,41,5.913967051,-2.879669713,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2013,41,4.754478788,-0.1308550244,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2014,41,5.635202019,4.07722489,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2015,41,3.523839944,2.481292336,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2016,41,5.879996899,-5.412400863,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2017,41,4.978977626,3.915923487,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2018,41,3.16971243,1.584111471,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2019,41,8.747960991,0.9719471847,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2020,41,7.292404936,-0.8162451445,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2021,41,5.740126395,-2.862553689,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2022,41,7.115245694,7.017504692,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2023,41,7.639549809,-7.588815561,True,,
+g10_geo_blend_g3_b7,B,grain,jul,2024,41,5.386687505,3.220713268,True,,
+g10_geo_blend_g3_b7,B,grain,aug,2012,41,3.544870991,1.017556739,False,aug 2012-07-31 (published 2012-08-14),
+g10_geo_blend_g3_b7,B,grain,aug,2013,41,3.875768304,-3.467313888,False,aug 2013-08-01 (published 2013-08-09),
+g10_geo_blend_g3_b7,B,grain,aug,2014,41,3.999074569,-3.589980992,False,aug 2014-08-01 (published 2014-08-09),
+g10_geo_blend_g3_b7,B,grain,aug,2015,41,1.982365547,-1.145933404,False,aug 2015-08-03 (published 2015-08-11),
+g10_geo_blend_g3_b7,B,grain,aug,2016,41,1.44383554,-0.6054462742,False,aug 2016-08-01 (published 2016-08-10),
+g10_geo_blend_g3_b7,B,grain,aug,2017,41,1.135530373,0.1217394472,False,aug 2017-08-01 (published 2017-08-09),
+g10_geo_blend_g3_b7,B,grain,aug,2018,41,1.78195443,0.4514968515,False,aug 2018-08-01 (published 2018-08-09),
+g10_geo_blend_g3_b7,B,grain,aug,2019,41,2.15228431,1.13558458,False,aug 2019-08-01 (published 2019-08-09),
+g10_geo_blend_g3_b7,B,grain,aug,2020,41,5.308488909,-4.403727671,False,aug 2020-07-31 (published 2020-08-08),
+g10_geo_blend_g3_b7,B,grain,aug,2021,41,1.333295522,-0.3994231199,False,aug 2021-08-02 (published 2021-08-10),
+g10_geo_blend_g3_b7,B,grain,aug,2022,41,7.115245694,7.017504692,True,,
+g10_geo_blend_g3_b7,B,grain,aug,2023,41,7.639549809,-7.588815561,True,,
+g10_geo_blend_g3_b7,B,grain,aug,2024,41,5.088860733,2.965931936,True,,
+g10_geo_blend_g3_b7,B,grain,sep,2012,41,3.544870991,1.017556739,False,aug 2012-07-31 (published 2012-08-14),
+g10_geo_blend_g3_b7,B,grain,sep,2013,41,3.875768304,-3.467313888,False,aug 2013-08-01 (published 2013-08-09),
+g10_geo_blend_g3_b7,B,grain,sep,2014,41,3.279097734,-2.43039606,False,sep 2014-09-01 (published 2014-09-13),
+g10_geo_blend_g3_b7,B,grain,sep,2015,41,1.982365547,-1.145933404,False,aug 2015-08-03 (published 2015-08-11),
+g10_geo_blend_g3_b7,B,grain,sep,2016,41,1.439776151,-0.1907205025,False,sep 2016-09-01 (published 2016-09-09),
+g10_geo_blend_g3_b7,B,grain,sep,2017,41,1.262822722,0.4622032795,False,sep 2017-08-31 (published 2017-09-12),
+g10_geo_blend_g3_b7,B,grain,sep,2018,41,1.782047029,0.7093253763,False,sep 2018-09-06 (published 2018-09-14),
+g10_geo_blend_g3_b7,B,grain,sep,2019,41,2.220009815,1.823146776,False,sep 2019-09-04 (published 2019-09-12),
+g10_geo_blend_g3_b7,B,grain,sep,2020,41,2.045037626,0.8342871833,False,sep 2020-09-01 (published 2020-09-09),
+g10_geo_blend_g3_b7,B,grain,sep,2021,41,1.205639686,0.4562354175,False,sep 2021-09-01 (published 2021-09-09),
+g10_geo_blend_g3_b7,B,grain,sep,2022,41,3.241730962,2.633860942,False,sep 2022-09-02 (published 2022-09-10),
+g10_geo_blend_g3_b7,B,grain,sep,2023,41,1.51740282,0.01088313505,False,sep 2023-09-01 (published 2023-09-09),
+g10_geo_blend_g3_b7,B,grain,sep,2024,41,1.511525698,-1.069225763,False,sep 2024-09-03 (published 2024-09-11),
+g10_geo_blend_g3_b7,B,grain,oct,2012,41,3.505287605,1.804729987,False,oct 2012-10-02 (published 2012-10-10),
+g10_geo_blend_g3_b7,B,grain,oct,2013,41,2.558650174,-1.46026905,False,sep 2013-09-01 (published 2013-09-18),
+g10_geo_blend_g3_b7,B,grain,oct,2014,41,2.960884204,-2.369771995,False,oct 2014-10-01 (published 2014-10-15),
+g10_geo_blend_g3_b7,B,grain,oct,2015,41,1.146315951,0.01305665431,False,oct 2015-10-01 (published 2015-10-14),
+g10_geo_blend_g3_b7,B,grain,oct,2016,41,1.197598181,-0.03846702349,False,oct 2016-10-03 (published 2016-10-11),
+g10_geo_blend_g3_b7,B,grain,oct,2017,41,1.002193211,0.4041381244,False,oct 2017-10-02 (published 2017-10-11),
+g10_geo_blend_g3_b7,B,grain,oct,2018,41,1.749495403,0.7945263658,False,oct 2018-10-01 (published 2018-10-12),
+g10_geo_blend_g3_b7,B,grain,oct,2019,41,2.150249467,1.839364829,False,oct 2019-10-01 (published 2019-10-09),
+g10_geo_blend_g3_b7,B,grain,oct,2020,41,1.489988254,1.071470141,False,oct 2020-10-01 (published 2020-10-09),
+g10_geo_blend_g3_b7,B,grain,oct,2021,41,1.205639686,0.4562354175,False,sep 2021-09-01 (published 2021-09-09),
+g10_geo_blend_g3_b7,B,grain,oct,2022,41,3.261450769,2.660996376,False,oct 2022-10-03 (published 2022-10-11),
+g10_geo_blend_g3_b7,B,grain,oct,2023,41,1.509772715,0.035657497,False,oct 2023-10-02 (published 2023-10-10),
+g10_geo_blend_g3_b7,B,grain,oct,2024,41,1.476189282,-1.02506789,False,oct 2024-10-01 (published 2024-10-09),
+g10_geo_blend_g3_b7,B,grain,nov,2012,41,3.488911703,1.845995373,False,nov 2012-11-05 (published 2012-11-14),
+g10_geo_blend_g3_b7,B,grain,nov,2013,41,2.382731306,-1.364121634,False,nov 2013-11-01 (published 2013-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2014,41,2.611539748,-1.862186993,False,nov 2014-11-01 (published 2014-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2015,41,1.21288426,0.1906081151,False,nov 2015-11-02 (published 2015-11-14),
+g10_geo_blend_g3_b7,B,grain,nov,2016,41,1.200655367,-0.009988835259,False,nov 2016-11-01 (published 2016-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2017,41,1.012182815,0.4207811958,False,nov 2017-11-01 (published 2017-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2018,41,1.760415443,0.8253101167,False,nov 2018-11-01 (published 2018-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2019,41,2.187498547,1.893906994,False,nov 2019-11-01 (published 2019-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2020,41,1.5402316,1.198700789,False,nov 2020-11-02 (published 2020-11-10),
+g10_geo_blend_g3_b7,B,grain,nov,2021,41,1.205639686,0.4562354175,False,sep 2021-09-01 (published 2021-09-09),
+g10_geo_blend_g3_b7,B,grain,nov,2022,41,3.267395757,2.667092142,False,nov 2022-11-01 (published 2022-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2023,41,1.511593857,0.03880693807,False,nov 2023-11-01 (published 2023-11-09),
+g10_geo_blend_g3_b7,B,grain,nov,2024,41,1.475118057,-1.020837934,False,nov 2024-11-01 (published 2024-11-09),
+g10_geo_blend_g3_b7,B,grain,dec,2012,41,3.488911703,1.845995373,False,nov 2012-11-05 (published 2012-11-14),
+g10_geo_blend_g3_b7,B,grain,dec,2013,41,2.395709796,-1.308358439,False,dec 2013-12-01 (published 2013-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2014,41,2.395602933,-1.527538393,False,dec 2014-12-01 (published 2014-12-13),
+g10_geo_blend_g3_b7,B,grain,dec,2015,41,1.23699879,0.2357161276,False,dec 2015-12-01 (published 2015-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2016,41,1.199927897,-0.004571609159,False,dec 2016-12-02 (published 2016-12-10),
+g10_geo_blend_g3_b7,B,grain,dec,2017,41,1.015415956,0.4434419798,False,dec 2017-12-01 (published 2017-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2018,41,1.768228245,0.8716149303,False,dec 2018-12-03 (published 2018-12-11),
+g10_geo_blend_g3_b7,B,grain,dec,2019,41,2.205530546,1.922578913,False,dec 2019-12-02 (published 2019-12-10),
+g10_geo_blend_g3_b7,B,grain,dec,2020,41,1.561401826,1.269613764,False,dec 2020-12-01 (published 2020-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2021,41,1.187173035,0.5249617396,False,dec 2021-12-01 (published 2021-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2022,41,3.273091498,2.67372883,False,dec 2022-12-01 (published 2022-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2023,41,1.511193156,0.04148931833,False,dec 2023-12-01 (published 2023-12-09),
+g10_geo_blend_g3_b7,B,grain,dec,2024,41,1.474195418,-1.016849496,False,dec 2024-12-02 (published 2024-12-10),
+g11_drought_abandonment,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g11_drought_abandonment,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g11_drought_abandonment,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g11_drought_abandonment,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g11_drought_abandonment,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g11_drought_abandonment,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g11_drought_abandonment,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g11_drought_abandonment,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g11_drought_abandonment,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g11_drought_abandonment,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g11_drought_abandonment,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g11_drought_abandonment,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g11_drought_abandonment,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g11_drought_abandonment,A,grain,aug,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g11_drought_abandonment,A,grain,aug,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),
+g11_drought_abandonment,A,grain,aug,2014,41,5.02997846,-4.982190975,False,aug 2014-08-01 (published 2014-08-09),
+g11_drought_abandonment,A,grain,aug,2015,41,1.867638381,-0.7368327364,False,aug 2015-08-03 (published 2015-08-11),
+g11_drought_abandonment,A,grain,aug,2016,41,1.12641265,-0.3440465932,False,aug 2016-08-01 (published 2016-08-10),
+g11_drought_abandonment,A,grain,aug,2017,41,1.040848921,-0.2933673401,False,aug 2017-08-01 (published 2017-08-09),
+g11_drought_abandonment,A,grain,aug,2018,41,1.409113916,0.1387579679,False,aug 2018-08-01 (published 2018-08-09),
+g11_drought_abandonment,A,grain,aug,2019,41,2.059682568,1.000299615,False,aug 2019-08-01 (published 2019-08-09),
+g11_drought_abandonment,A,grain,aug,2020,41,6.601534202,-6.482037723,False,aug 2020-07-31 (published 2020-08-08),
+g11_drought_abandonment,A,grain,aug,2021,41,2.168017139,-1.477642423,False,aug 2021-08-02 (published 2021-08-10),
+g11_drought_abandonment,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g11_drought_abandonment,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g11_drought_abandonment,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g11_drought_abandonment,A,grain,sep,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g11_drought_abandonment,A,grain,sep,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),
+g11_drought_abandonment,A,grain,sep,2014,41,3.741082583,-3.45540214,False,sep 2014-09-01 (published 2014-09-13),
+g11_drought_abandonment,A,grain,sep,2015,41,1.937703195,-0.793716435,False,aug 2015-08-03 (published 2015-08-11),
+g11_drought_abandonment,A,grain,sep,2016,41,1.200200365,0.1748467217,False,sep 2016-09-01 (published 2016-09-09),
+g11_drought_abandonment,A,grain,sep,2017,41,1.006466604,0.1508911786,False,sep 2017-08-31 (published 2017-09-12),
+g11_drought_abandonment,A,grain,sep,2018,41,1.492561458,0.5230276139,False,sep 2018-09-06 (published 2018-09-14),
+g11_drought_abandonment,A,grain,sep,2019,41,2.191467076,1.914151078,False,sep 2019-09-04 (published 2019-09-12),
+g11_drought_abandonment,A,grain,sep,2020,41,1.449003924,0.2746071203,False,sep 2020-09-01 (published 2020-09-09),
+g11_drought_abandonment,A,grain,sep,2021,41,1.294118577,-0.4122307911,False,sep 2021-09-01 (published 2021-09-09),
+g11_drought_abandonment,A,grain,sep,2022,41,2.873355169,2.295929287,False,sep 2022-09-02 (published 2022-09-10),
+g11_drought_abandonment,A,grain,sep,2023,41,1.728302975,-0.6184179537,False,sep 2023-09-01 (published 2023-09-09),
+g11_drought_abandonment,A,grain,sep,2024,41,1.425559198,-0.132943232,False,sep 2024-09-03 (published 2024-09-11),
+g11_drought_abandonment,A,grain,oct,2012,41,3.533218756,1.862925802,False,oct 2012-10-02 (published 2012-10-10),
+g11_drought_abandonment,A,grain,oct,2013,41,2.646503006,-2.154114987,False,sep 2013-09-01 (published 2013-09-18),
+g11_drought_abandonment,A,grain,oct,2014,41,3.510729894,-3.113639988,False,oct 2014-10-01 (published 2014-10-15),
+g11_drought_abandonment,A,grain,oct,2015,41,1.547124213,1.008791112,False,oct 2015-10-01 (published 2015-10-14),
+g11_drought_abandonment,A,grain,oct,2016,41,1.194450055,0.2029031665,False,oct 2016-10-03 (published 2016-10-11),
+g11_drought_abandonment,A,grain,oct,2017,41,1.022014717,0.2250944627,False,oct 2017-10-02 (published 2017-10-11),
+g11_drought_abandonment,A,grain,oct,2018,41,1.599374841,0.649287589,False,oct 2018-10-01 (published 2018-10-12),
+g11_drought_abandonment,A,grain,oct,2019,41,2.230930014,1.976484407,False,oct 2019-10-01 (published 2019-10-09),
+g11_drought_abandonment,A,grain,oct,2020,41,1.330185136,0.9116944737,False,oct 2020-10-01 (published 2020-10-09),
+g11_drought_abandonment,A,grain,oct,2021,41,1.215816772,-0.28323361,False,sep 2021-09-01 (published 2021-09-09),
+g11_drought_abandonment,A,grain,oct,2022,41,2.913703276,2.348800406,False,oct 2022-10-03 (published 2022-10-11),
+g11_drought_abandonment,A,grain,oct,2023,41,1.783567793,-0.54893058,False,oct 2023-10-02 (published 2023-10-10),
+g11_drought_abandonment,A,grain,oct,2024,41,1.406710894,-0.1767217623,False,oct 2024-10-01 (published 2024-10-09),
+g11_drought_abandonment,A,grain,nov,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g11_drought_abandonment,A,grain,nov,2013,41,2.406822058,-1.338728984,False,nov 2013-11-01 (published 2013-11-09),
+g11_drought_abandonment,A,grain,nov,2014,41,2.914151539,-2.443644349,False,nov 2014-11-01 (published 2014-11-09),
+g11_drought_abandonment,A,grain,nov,2015,41,1.615232506,1.133401891,False,nov 2015-11-02 (published 2015-11-14),
+g11_drought_abandonment,A,grain,nov,2016,41,1.19954085,0.2085631033,False,nov 2016-11-01 (published 2016-11-09),
+g11_drought_abandonment,A,grain,nov,2017,41,1.036067355,0.2637901757,False,nov 2017-11-01 (published 2017-11-09),
+g11_drought_abandonment,A,grain,nov,2018,41,1.633006786,0.7059214356,False,nov 2018-11-01 (published 2018-11-09),
+g11_drought_abandonment,A,grain,nov,2019,41,2.272807378,2.034688601,False,nov 2019-11-01 (published 2019-11-09),
+g11_drought_abandonment,A,grain,nov,2020,41,1.419530654,1.103937746,False,nov 2020-11-02 (published 2020-11-10),
+g11_drought_abandonment,A,grain,nov,2021,41,1.177596401,-0.2091079619,False,sep 2021-09-01 (published 2021-09-09),
+g11_drought_abandonment,A,grain,nov,2022,41,2.94953188,2.386241319,False,nov 2022-11-01 (published 2022-11-09),
+g11_drought_abandonment,A,grain,nov,2023,41,1.769246106,-0.504599283,False,nov 2023-11-01 (published 2023-11-09),
+g11_drought_abandonment,A,grain,nov,2024,41,1.385990558,-0.2270151363,False,nov 2024-11-01 (published 2024-11-09),
+g11_drought_abandonment,A,grain,dec,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g11_drought_abandonment,A,grain,dec,2013,41,2.423631613,-1.262614456,False,dec 2013-12-01 (published 2013-12-09),
+g11_drought_abandonment,A,grain,dec,2014,41,2.513867884,-1.994727627,False,dec 2014-12-01 (published 2014-12-13),
+g11_drought_abandonment,A,grain,dec,2015,41,1.602139052,1.115282254,False,dec 2015-12-01 (published 2015-12-09),
+g11_drought_abandonment,A,grain,dec,2016,41,1.197620063,0.1975605931,False,dec 2016-12-02 (published 2016-12-10),
+g11_drought_abandonment,A,grain,dec,2017,41,1.043502913,0.3023788913,False,dec 2017-12-01 (published 2017-12-09),
+g11_drought_abandonment,A,grain,dec,2018,41,1.657906816,0.7751741633,False,dec 2018-12-03 (published 2018-12-11),
+g11_drought_abandonment,A,grain,dec,2019,41,2.291803284,2.06340999,False,dec 2019-12-02 (published 2019-12-10),
+g11_drought_abandonment,A,grain,dec,2020,41,1.462797924,1.209201011,False,dec 2020-12-01 (published 2020-12-09),
+g11_drought_abandonment,A,grain,dec,2021,41,1.109035035,-0.06996436811,False,dec 2021-12-01 (published 2021-12-09),
+g11_drought_abandonment,A,grain,dec,2022,41,2.970790314,2.409962787,False,dec 2022-12-01 (published 2022-12-09),
+g11_drought_abandonment,A,grain,dec,2023,41,1.759515817,-0.4787872925,False,dec 2023-12-01 (published 2023-12-09),
+g11_drought_abandonment,A,grain,dec,2024,41,1.375823053,-0.2518649085,False,dec 2024-12-02 (published 2024-12-10),
+g12_us_bias_corrected,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g12_us_bias_corrected,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g12_us_bias_corrected,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g12_us_bias_corrected,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g12_us_bias_corrected,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g12_us_bias_corrected,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g12_us_bias_corrected,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g12_us_bias_corrected,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g12_us_bias_corrected,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g12_us_bias_corrected,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g12_us_bias_corrected,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g12_us_bias_corrected,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g12_us_bias_corrected,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g12_us_bias_corrected,A,grain,aug,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g12_us_bias_corrected,A,grain,aug,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),
+g12_us_bias_corrected,A,grain,aug,2014,41,5.02997846,-4.982190975,False,aug 2014-08-01 (published 2014-08-09),
+g12_us_bias_corrected,A,grain,aug,2015,41,3.727043504,3.137224284,False,aug 2015-08-03 (published 2015-08-11),
+g12_us_bias_corrected,A,grain,aug,2016,41,3.129906311,2.740085535,False,aug 2016-08-01 (published 2016-08-10),
+g12_us_bias_corrected,A,grain,aug,2017,41,2.079702371,1.753940016,False,aug 2017-08-01 (published 2017-08-09),
+g12_us_bias_corrected,A,grain,aug,2018,41,2.550952323,1.62440783,False,aug 2018-08-01 (published 2018-08-09),
+g12_us_bias_corrected,A,grain,aug,2019,41,2.236271065,1.463155104,False,aug 2019-08-01 (published 2019-08-09),
+g12_us_bias_corrected,A,grain,aug,2020,41,6.516994349,-6.100252884,False,aug 2020-07-31 (published 2020-08-08),
+g12_us_bias_corrected,A,grain,aug,2021,41,1.255143451,0.2758436399,False,aug 2021-08-02 (published 2021-08-10),
+g12_us_bias_corrected,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g12_us_bias_corrected,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g12_us_bias_corrected,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g12_us_bias_corrected,A,grain,sep,2012,41,3.586044881,1.011483075,False,aug 2012-07-31 (published 2012-08-14),
+g12_us_bias_corrected,A,grain,sep,2013,41,4.903187768,-4.816973928,False,aug 2013-08-01 (published 2013-08-09),
+g12_us_bias_corrected,A,grain,sep,2014,41,3.741082583,-3.45540214,False,sep 2014-09-01 (published 2014-09-13),
+g12_us_bias_corrected,A,grain,sep,2015,41,2.921960516,1.682676458,False,aug 2015-08-03 (published 2015-08-11),
+g12_us_bias_corrected,A,grain,sep,2016,41,2.973237741,2.584025999,False,sep 2016-09-01 (published 2016-09-09),
+g12_us_bias_corrected,A,grain,sep,2017,41,2.323732443,2.207254612,False,sep 2017-08-31 (published 2017-09-12),
+g12_us_bias_corrected,A,grain,sep,2018,41,2.481290066,1.690708315,False,sep 2018-09-06 (published 2018-09-14),
+g12_us_bias_corrected,A,grain,sep,2019,41,2.16076509,1.83627152,False,sep 2019-09-04 (published 2019-09-12),
+g12_us_bias_corrected,A,grain,sep,2020,41,1.58972956,0.2822256267,False,sep 2020-09-01 (published 2020-09-09),
+g12_us_bias_corrected,A,grain,sep,2021,41,1.218823994,0.1466797096,False,sep 2021-09-01 (published 2021-09-09),
+g12_us_bias_corrected,A,grain,sep,2022,41,3.176744149,2.268915717,False,sep 2022-09-02 (published 2022-09-10),
+g12_us_bias_corrected,A,grain,sep,2023,41,1.745315395,-0.3752391103,False,sep 2023-09-01 (published 2023-09-09),
+g12_us_bias_corrected,A,grain,sep,2024,41,1.889409957,-1.490410951,False,sep 2024-09-03 (published 2024-09-11),
+g12_us_bias_corrected,A,grain,oct,2012,41,3.533218756,1.862925802,False,oct 2012-10-02 (published 2012-10-10),
+g12_us_bias_corrected,A,grain,oct,2013,41,2.646503006,-2.154114987,False,sep 2013-09-01 (published 2013-09-18),
+g12_us_bias_corrected,A,grain,oct,2014,41,3.510729894,-3.113639988,False,oct 2014-10-01 (published 2014-10-15),
+g12_us_bias_corrected,A,grain,oct,2015,41,2.446792673,2.081787881,False,oct 2015-10-01 (published 2015-10-14),
+g12_us_bias_corrected,A,grain,oct,2016,41,1.752640784,1.08800923,False,oct 2016-10-03 (published 2016-10-11),
+g12_us_bias_corrected,A,grain,oct,2017,41,1.051494055,0.5004665221,False,oct 2017-10-02 (published 2017-10-11),
+g12_us_bias_corrected,A,grain,oct,2018,41,1.817844841,0.8728727045,False,oct 2018-10-01 (published 2018-10-12),
+g12_us_bias_corrected,A,grain,oct,2019,41,2.173704141,1.869157319,False,oct 2019-10-01 (published 2019-10-09),
+g12_us_bias_corrected,A,grain,oct,2020,41,1.373290263,0.8769205858,False,oct 2020-10-01 (published 2020-10-09),
+g12_us_bias_corrected,A,grain,oct,2021,41,1.224572755,0.1000544422,False,sep 2021-09-01 (published 2021-09-09),
+g12_us_bias_corrected,A,grain,oct,2022,41,3.184427929,2.233811804,False,oct 2022-10-03 (published 2022-10-11),
+g12_us_bias_corrected,A,grain,oct,2023,41,1.770069883,-0.4392209,False,oct 2023-10-02 (published 2023-10-10),
+g12_us_bias_corrected,A,grain,oct,2024,41,1.902809627,-1.503696354,False,oct 2024-10-01 (published 2024-10-09),
+g12_us_bias_corrected,A,grain,nov,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g12_us_bias_corrected,A,grain,nov,2013,41,2.406822058,-1.338728984,False,nov 2013-11-01 (published 2013-11-09),
+g12_us_bias_corrected,A,grain,nov,2014,41,2.914151539,-2.443644349,False,nov 2014-11-01 (published 2014-11-09),
+g12_us_bias_corrected,A,grain,nov,2015,41,1.903498226,1.478058156,False,nov 2015-11-02 (published 2015-11-14),
+g12_us_bias_corrected,A,grain,nov,2016,41,1.375031263,0.5865202199,False,nov 2016-11-01 (published 2016-11-09),
+g12_us_bias_corrected,A,grain,nov,2017,41,1.046558905,0.4330434722,False,nov 2017-11-01 (published 2017-11-09),
+g12_us_bias_corrected,A,grain,nov,2018,41,1.725258012,0.7774588161,False,nov 2018-11-01 (published 2018-11-09),
+g12_us_bias_corrected,A,grain,nov,2019,41,2.088959509,1.756682152,False,nov 2019-11-01 (published 2019-11-09),
+g12_us_bias_corrected,A,grain,nov,2020,41,1.366342063,0.9520949639,False,nov 2020-11-02 (published 2020-11-10),
+g12_us_bias_corrected,A,grain,nov,2021,41,1.227138018,0.07924890681,False,sep 2021-09-01 (published 2021-09-09),
+g12_us_bias_corrected,A,grain,nov,2022,41,3.189832423,2.231825171,False,nov 2022-11-01 (published 2022-11-09),
+g12_us_bias_corrected,A,grain,nov,2023,41,1.769068408,-0.4335827813,False,nov 2023-11-01 (published 2023-11-09),
+g12_us_bias_corrected,A,grain,nov,2024,41,1.908107542,-1.507352885,False,nov 2024-11-01 (published 2024-11-09),
+g12_us_bias_corrected,A,grain,dec,2012,41,3.516641443,1.922494201,False,nov 2012-11-05 (published 2012-11-14),
+g12_us_bias_corrected,A,grain,dec,2013,41,2.423631613,-1.262614456,False,dec 2013-12-01 (published 2013-12-09),
+g12_us_bias_corrected,A,grain,dec,2014,41,2.513867884,-1.994727627,False,dec 2014-12-01 (published 2014-12-13),
+g12_us_bias_corrected,A,grain,dec,2015,41,1.887268851,1.46206566,False,dec 2015-12-01 (published 2015-12-09),
+g12_us_bias_corrected,A,grain,dec,2016,41,1.351972106,0.5246681498,False,dec 2016-12-02 (published 2016-12-10),
+g12_us_bias_corrected,A,grain,dec,2017,41,1.052822258,0.4530676483,False,dec 2017-12-01 (published 2017-12-09),
+g12_us_bias_corrected,A,grain,dec,2018,41,1.712457379,0.8029165227,False,dec 2018-12-03 (published 2018-12-11),
+g12_us_bias_corrected,A,grain,dec,2019,41,2.069308062,1.733655324,False,dec 2019-12-02 (published 2019-12-10),
+g12_us_bias_corrected,A,grain,dec,2020,41,1.366504828,1.004267233,False,dec 2020-12-01 (published 2020-12-09),
+g12_us_bias_corrected,A,grain,dec,2021,41,1.188934438,0.1462273686,False,dec 2021-12-01 (published 2021-12-09),
+g12_us_bias_corrected,A,grain,dec,2022,41,3.188935914,2.177645236,False,dec 2022-12-01 (published 2022-12-09),
+g12_us_bias_corrected,A,grain,dec,2023,41,1.807689111,-0.5225954836,False,dec 2023-12-01 (published 2023-12-09),
+g12_us_bias_corrected,A,grain,dec,2024,41,1.961219092,-1.562095921,False,dec 2024-12-02 (published 2024-12-10),
+g13_vintage_matched_ratio,A,grain,jul,2012,41,6.849424827,-3.990156241,True,,
+g13_vintage_matched_ratio,A,grain,jul,2013,41,5.527034907,-0.1097632087,True,,
+g13_vintage_matched_ratio,A,grain,jul,2014,41,6.724316263,5.18966637,True,,
+g13_vintage_matched_ratio,A,grain,jul,2015,41,4.010996495,2.963357398,True,,
+g13_vintage_matched_ratio,A,grain,jul,2016,41,7.189791119,-6.910822152,True,,
+g13_vintage_matched_ratio,A,grain,jul,2017,41,5.986728391,4.852960729,True,,
+g13_vintage_matched_ratio,A,grain,jul,2018,41,3.678744348,1.926843992,True,,
+g13_vintage_matched_ratio,A,grain,jul,2019,41,9.80355842,0.2197775061,True,,
+g13_vintage_matched_ratio,A,grain,jul,2020,41,8.530084705,-1.432431117,True,,
+g13_vintage_matched_ratio,A,grain,jul,2021,41,6.970395821,-3.318115499,True,,
+g13_vintage_matched_ratio,A,grain,jul,2022,41,8.074455244,7.982974398,True,,
+g13_vintage_matched_ratio,A,grain,jul,2023,41,9.047927311,-9.017871593,True,,
+g13_vintage_matched_ratio,A,grain,jul,2024,41,6.731209209,4.166365629,True,,
+g13_vintage_matched_ratio,A,grain,aug,2012,41,3.496619328,1.496493568,False,aug 2012-07-31 (published 2012-08-14),
+g13_vintage_matched_ratio,A,grain,aug,2013,41,4.232261867,-4.127513617,False,aug 2013-08-01 (published 2013-08-09),
+g13_vintage_matched_ratio,A,grain,aug,2014,41,4.108964057,-3.623140786,False,aug 2014-08-01 (published 2014-08-09),
+g13_vintage_matched_ratio,A,grain,aug,2015,41,1.668012852,0.336233341,False,aug 2015-08-03 (published 2015-08-11),
+g13_vintage_matched_ratio,A,grain,aug,2016,41,2.237094559,1.839471064,False,aug 2016-08-01 (published 2016-08-10),
+g13_vintage_matched_ratio,A,grain,aug,2017,41,2.287424994,1.906252351,False,aug 2017-08-01 (published 2017-08-09),
+g13_vintage_matched_ratio,A,grain,aug,2018,41,2.140859605,1.144032151,False,aug 2018-08-01 (published 2018-08-09),
+g13_vintage_matched_ratio,A,grain,aug,2019,41,2.085559912,1.36002523,False,aug 2019-08-01 (published 2019-08-09),
+g13_vintage_matched_ratio,A,grain,aug,2020,41,6.225034062,-5.800258418,False,aug 2020-07-31 (published 2020-08-08),
+g13_vintage_matched_ratio,A,grain,aug,2021,41,2.0012796,1.697978701,False,aug 2021-08-02 (published 2021-08-10),
+g13_vintage_matched_ratio,A,grain,aug,2022,41,8.074455244,7.982974398,True,,
+g13_vintage_matched_ratio,A,grain,aug,2023,41,9.047927311,-9.017871593,True,,
+g13_vintage_matched_ratio,A,grain,aug,2024,41,6.731209209,4.166365629,True,,
+g13_vintage_matched_ratio,A,grain,sep,2012,41,3.496619328,1.496493568,False,aug 2012-07-31 (published 2012-08-14),
+g13_vintage_matched_ratio,A,grain,sep,2013,41,4.232261867,-4.127513617,False,aug 2013-08-01 (published 2013-08-09),
+g13_vintage_matched_ratio,A,grain,sep,2014,41,3.514620255,-3.047488291,False,sep 2014-09-01 (published 2014-09-13),
+g13_vintage_matched_ratio,A,grain,sep,2015,41,1.668012852,0.336233341,False,aug 2015-08-03 (published 2015-08-11),
+g13_vintage_matched_ratio,A,grain,sep,2016,41,1.56106828,0.7841486721,False,sep 2016-09-01 (published 2016-09-09),
+g13_vintage_matched_ratio,A,grain,sep,2017,41,1.445288568,1.13827345,False,sep 2017-08-31 (published 2017-09-12),
+g13_vintage_matched_ratio,A,grain,sep,2018,41,1.81823286,0.8853496615,False,sep 2018-09-06 (published 2018-09-14),
+g13_vintage_matched_ratio,A,grain,sep,2019,41,2.124281391,1.809687544,False,sep 2019-09-04 (published 2019-09-12),
+g13_vintage_matched_ratio,A,grain,sep,2020,41,1.628475488,0.5976187635,False,sep 2020-09-01 (published 2020-09-09),
+g13_vintage_matched_ratio,A,grain,sep,2021,41,1.435515033,1.067388149,False,sep 2021-09-01 (published 2021-09-09),
+g13_vintage_matched_ratio,A,grain,sep,2022,41,3.423729851,3.068147601,False,sep 2022-09-02 (published 2022-09-10),
+g13_vintage_matched_ratio,A,grain,sep,2023,41,1.527367196,0.2074212793,False,sep 2023-09-01 (published 2023-09-09),
+g13_vintage_matched_ratio,A,grain,sep,2024,41,1.534843352,-1.087487835,False,sep 2024-09-03 (published 2024-09-11),
+g13_vintage_matched_ratio,A,grain,oct,2012,41,3.503190375,1.913467839,False,oct 2012-10-02 (published 2012-10-10),
+g13_vintage_matched_ratio,A,grain,oct,2013,41,2.653032979,-2.04089282,False,sep 2013-09-01 (published 2013-09-18),
+g13_vintage_matched_ratio,A,grain,oct,2014,41,3.477369151,-3.002612073,False,oct 2014-10-01 (published 2014-10-15),
+g13_vintage_matched_ratio,A,grain,oct,2015,41,1.060697533,0.1083648632,False,oct 2015-10-01 (published 2015-10-14),
+g13_vintage_matched_ratio,A,grain,oct,2016,41,1.362067246,0.3261271704,False,oct 2016-10-03 (published 2016-10-11),
+g13_vintage_matched_ratio,A,grain,oct,2017,41,1.184024699,0.7409666101,False,oct 2017-10-02 (published 2017-10-11),
+g13_vintage_matched_ratio,A,grain,oct,2018,41,1.793254843,0.8586059777,False,oct 2018-10-01 (published 2018-10-12),
+g13_vintage_matched_ratio,A,grain,oct,2019,41,2.157492471,1.856717834,False,oct 2019-10-01 (published 2019-10-09),
+g13_vintage_matched_ratio,A,grain,oct,2020,41,1.531767302,1.166119242,False,oct 2020-10-01 (published 2020-10-09),
+g13_vintage_matched_ratio,A,grain,oct,2021,41,1.435515033,1.067388149,False,sep 2021-09-01 (published 2021-09-09),
+g13_vintage_matched_ratio,A,grain,oct,2022,41,3.384796569,2.915010321,False,oct 2022-10-03 (published 2022-10-11),
+g13_vintage_matched_ratio,A,grain,oct,2023,41,1.515309287,0.1714147374,False,oct 2023-10-02 (published 2023-10-10),
+g13_vintage_matched_ratio,A,grain,oct,2024,41,1.496698173,-1.053534,False,oct 2024-10-01 (published 2024-10-09),
+g13_vintage_matched_ratio,A,grain,nov,2012,41,3.516321197,1.923068679,False,nov 2012-11-05 (published 2012-11-14),
+g13_vintage_matched_ratio,A,grain,nov,2013,41,2.413859189,-1.325104386,False,nov 2013-11-01 (published 2013-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2014,41,2.915516714,-2.41032095,False,nov 2014-11-01 (published 2014-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2015,41,1.131907134,0.2154092502,False,nov 2015-11-02 (published 2015-11-14),
+g13_vintage_matched_ratio,A,grain,nov,2016,41,1.278111975,0.1544301259,False,nov 2016-11-01 (published 2016-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2017,41,1.045098945,0.5594918109,False,nov 2017-11-01 (published 2017-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2018,41,1.786938711,0.858767294,False,nov 2018-11-01 (published 2018-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2019,41,2.201955908,1.917056659,False,nov 2019-11-01 (published 2019-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2020,41,1.589069384,1.306850008,False,nov 2020-11-02 (published 2020-11-10),
+g13_vintage_matched_ratio,A,grain,nov,2021,41,1.435515033,1.067388149,False,sep 2021-09-01 (published 2021-09-09),
+g13_vintage_matched_ratio,A,grain,nov,2022,41,3.312694588,2.788381605,False,nov 2022-11-01 (published 2022-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2023,41,1.523072895,0.09619587382,False,nov 2023-11-01 (published 2023-11-09),
+g13_vintage_matched_ratio,A,grain,nov,2024,41,1.506898266,-1.066748169,False,nov 2024-11-01 (published 2024-11-09),
+g13_vintage_matched_ratio,A,grain,dec,2012,41,3.516321197,1.923068679,False,nov 2012-11-05 (published 2012-11-14),
+g13_vintage_matched_ratio,A,grain,dec,2013,41,2.424796655,-1.261154878,False,dec 2013-12-01 (published 2013-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2014,41,2.512710035,-1.982338716,False,dec 2014-12-01 (published 2014-12-13),
+g13_vintage_matched_ratio,A,grain,dec,2015,41,1.157287317,0.2117661492,False,dec 2015-12-01 (published 2015-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2016,41,1.249008683,0.06836017439,False,dec 2016-12-02 (published 2016-12-10),
+g13_vintage_matched_ratio,A,grain,dec,2017,41,1.011347291,0.524565148,False,dec 2017-12-01 (published 2017-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2018,41,1.795807032,0.904667325,False,dec 2018-12-03 (published 2018-12-11),
+g13_vintage_matched_ratio,A,grain,dec,2019,41,2.20797544,1.929002682,False,dec 2019-12-02 (published 2019-12-10),
+g13_vintage_matched_ratio,A,grain,dec,2020,41,1.606212461,1.367185978,False,dec 2020-12-01 (published 2020-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2021,41,1.226743525,0.6324070122,False,dec 2021-12-01 (published 2021-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2022,41,3.303444776,2.745399337,False,dec 2022-12-01 (published 2022-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2023,41,1.539597473,0.07464858626,False,dec 2023-12-01 (published 2023-12-09),
+g13_vintage_matched_ratio,A,grain,dec,2024,41,1.506579635,-1.067113008,False,dec 2024-12-02 (published 2024-12-10),

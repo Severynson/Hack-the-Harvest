@@ -1,0 +1,7 @@
+feature,weight_per_std
+max_drop,0.9071
+max_drop_rate,0.6711
+fade_days,-0.1725
+green_at_cut,-0.0443
+ndmi_before_cut,0.3799
+ndti_post,-0.2976
