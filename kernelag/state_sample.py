@@ -29,7 +29,7 @@ import argparse
 import os
 import subprocess
 import sys
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import numpy as np
@@ -186,8 +186,9 @@ def pull_series(workers: int, read_threads: int = 16) -> None:
     print(f"{len(tasks)} areas, {expected} area-years expected, {area_years_on_disk()} already on disk, "
           f"{workers} areas at a time", flush=True)
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        for line in pool.map(run, tasks):
-            print(" ", line, flush=True)
+        # Print each area as it finishes; in task order one slow area would hold back the whole log.
+        for finished in as_completed([pool.submit(run, task) for task in tasks]):
+            print(" ", finished.result(), flush=True)
     print(f"pull finished: {area_years_on_disk()} of {expected} area-years on disk", flush=True)
 
 
