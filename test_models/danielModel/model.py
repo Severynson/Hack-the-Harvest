@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Corn acres harvested for silage and for grain, by state and for the US, from what is public in mid-November.
 
-    python3 test_models/model/model.py                  backtest, selection and the 2026 forecast
-    python3 test_models/model/model.py --score-2025     held-out comparison with NASS's 2025 acres (written once)
-    python3 test_models/model/model.py --earliness      the chosen models scored as of 15 Aug, Sep, Oct and Nov
+    python3 test_models/danielModel/model.py                  backtest, selection and the 2026 forecast
+    python3 test_models/danielModel/model.py --score-2025     held-out comparison with NASS's 2025 acres (written once)
+    python3 test_models/danielModel/model.py --earliness      the chosen models scored as of 15 Aug, Sep, Oct and Nov
 
 Needs numpy and out/panel_<asof>.csv from build_panel.py.
 

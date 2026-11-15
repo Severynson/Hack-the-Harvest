@@ -3,7 +3,7 @@
 
 Every input is a file under data/ (see data/README.md). Standard library only.
 
-    python3 test_models/model/build_panel.py [--asof nov]      writes out/panel_<asof>.csv
+    python3 test_models/danielModel/build_panel.py [--asof nov]      writes out/panel_<asof>.csv
 
 "As of" means public on the 15th of that month (aug, sep, oct or nov) of the same year. A figure that
 was not public yet is left blank, so the same code replays an earlier forecast date.
