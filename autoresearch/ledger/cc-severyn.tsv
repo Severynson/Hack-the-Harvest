@@ -11,3 +11,4 @@ ccc9af7	0.800000	0.8333	discard	drop clock on absolute NDVI 0.7 -> 0.35 instead 
 ec57c26	0.727273	0.8021	discard	single rule on late-season regreen: median NDVI DOY 300-355
 be6ba92	0.869565	0.9010	keep	OR rule: fast drop_days OR late Nov-Dec regreen (greedy thresholds)
 41c4f4b	0.800000	0.8698	discard	OR rule + despike obs >0.1 below both neighbours
+696b10f	0.727273	0.8021	discard	min clear-pixel share 0.6 -> 0.8
