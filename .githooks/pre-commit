@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Refuses commits that change existing lines of append-only files, touch the frozen
+# evaluation harness, or add an obvious secret. Activated per clone by scripts/bootstrap.sh.
+set -eu
+while IFS=$'\t' read -r added deleted path; do
+  case "$path" in
+    CLAUDE.md|AGENTS.md|CHANGELOG.md|autoresearch/ledger/*.tsv|DOCS/coord/status/*.md|DOCS/coord/handoff/*.md|DOCS/coord/handshake/*.md)
+      git cat-file -e "HEAD:$path" 2>/dev/null || continue        # new file: nothing to protect yet
+      [ "$deleted" = "0" ] && continue
+      old=$(git show "HEAD:$path")
+      new=$(git show ":$path" 2>/dev/null || true)
+      case "$new" in
+        "$old"*) ;;                                                # only a missing final newline changed
+        *)
+          echo "ERROR pre-commit: $path is append-only ($deleted existing line(s) deleted or changed). Keep every existing line and add yours at the end." >&2
+          exit 1
+          ;;
+      esac
+      ;;
+  esac
+done < <(git -c core.quotepath=false diff --cached --numstat --no-renames)
+
+if git cat-file -e "HEAD:autoresearch/prepare.sha256" 2>/dev/null && [ "${ALLOW_EVAL_CHANGE:-0}" != "1" ] \
+   && git diff --cached --name-only | grep -qE '^autoresearch/prepare\.(py|sha256)$'; then
+  echo "ERROR pre-commit: the evaluation harness is frozen (autoresearch/prepare.sha256 exists). An intended change needs ALLOW_EVAL_CHANGE=1 and [eval-change] in the commit subject." >&2
+  exit 1
+fi
+
+if git diff --cached | grep -qE '^\+.*(nvapi-[A-Za-z0-9_-]{16,}|BEGIN [A-Z ]*PRIVATE KEY|"private_key"[[:space:]]*:)'; then
+  echo "ERROR pre-commit: possible secret in staged changes." >&2
+  exit 1
+fi

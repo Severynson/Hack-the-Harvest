@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Runs scripts/guard.sh on everything about to be pushed. Activated per clone by scripts/bootstrap.sh.
+set -eu
+top=$(git rev-parse --show-toplevel)
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ "$local_sha" =~ ^0+$ ]]; then continue; fi                         # deleting a remote branch
+  if [[ "$remote_sha" =~ ^0+$ ]]; then
+    base=$(git merge-base "$local_sha" origin/main 2>/dev/null || true)   # new remote branch
+  else
+    base=$remote_sha
+  fi
+  if [ -z "$base" ] || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+    echo "pre-push: the remote has commits you do not have. Run: git fetch origin && git rebase origin/main" >&2
+    exit 1
+  fi
+  bash "$top/scripts/guard.sh" "$base" "$local_sha"
+done
