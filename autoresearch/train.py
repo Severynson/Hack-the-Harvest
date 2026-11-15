@@ -28,9 +28,8 @@ MIN_VALID_FRAC = 0.4       # scene kept for a field if >= this share of its pixe
 SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolated NDVI
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
-SECOND_FEATURE = "late_ndvi_neg"  # OR-rule: silage if FEATURE < t1 or SECOND_FEATURE < t2
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
-FEATURE = "drop_days"      # which feature the single threshold rule uses
+RULES = ["drop_days", "late_ndvi_neg"]  # silage if ANY feature < its cut-off; cut-offs fitted greedily in this order
 
 # ---------------------------------------------------------------------------
 # Features
@@ -70,12 +69,15 @@ def season_features(g: pd.DataFrame) -> dict:
 
 
 def featurize(ts: pd.DataFrame, keys: pd.DataFrame) -> pd.DataFrame:
+    """One row per key. `group` (region-year) defaults to the year; relative features compare a field
+    with the other fields of its group (no labels involved)."""
     rows = []
     groups = dict(tuple(ts.groupby(["OBJECTID", "year"])))
-    for oid, yr in zip(keys["OBJECTID"], keys["year"]):
+    grp = keys["group"] if "group" in keys else keys["year"].astype(str)
+    for oid, yr, gr in zip(keys["OBJECTID"], keys["year"], grp):
         g = groups.get((oid, yr))
         f = season_features(g) if g is not None else {}
-        rows.append({"OBJECTID": oid, "year": yr, **f})
+        rows.append({"OBJECTID": oid, "year": yr, "group": gr, **f})
     return pd.DataFrame(rows)
 
 
@@ -105,29 +107,42 @@ def fit_threshold(x, y, already=None):
     return float(np.median(cands[best])) if 0 not in best else -np.inf
 
 
+def fit(ts, lab):
+    f = featurize(ts, lab).merge(lab[["OBJECTID", "year", "y"]], on=["OBJECTID", "year"])
+    y = f["y"].to_numpy()
+    fired = np.zeros(len(y), bool)
+    cuts = {}
+    for r in RULES:
+        x = np.nan_to_num(f[r].to_numpy(float), nan=np.inf)  # missing -> rule does not fire
+        cuts[r] = fit_threshold(x, y, already=fired)
+        fired |= x < cuts[r]
+    return cuts
+
+
+def predict(ts, keys, cuts):
+    f = featurize(ts, keys)
+    fired = np.zeros(len(f), bool)
+    for r, c in cuts.items():
+        fired |= np.nan_to_num(f[r].to_numpy(float), nan=np.inf) < c
+    return fired.astype(int)
+
+
 def fit_predict(ts_tr, lab_tr, ts_te, keys_te):
-    ftr = featurize(ts_tr, lab_tr).merge(lab_tr[["OBJECTID", "year", "y"]], on=["OBJECTID", "year"])
-    y = ftr["y"].to_numpy()
-    xa, xb = ftr[FEATURE].to_numpy(float), ftr[SECOND_FEATURE].to_numpy(float)
-    t1 = fit_threshold(xa, y)
-    t2 = fit_threshold(xb, y, already=np.nan_to_num(xa, nan=np.inf) < t1)
-    fte = featurize(ts_te, keys_te)
-    a = np.nan_to_num(fte[FEATURE].to_numpy(float), nan=np.inf)  # missing -> grain (majority class)
-    b = np.nan_to_num(fte[SECOND_FEATURE].to_numpy(float), nan=np.inf)
-    return ((a < t1) | (b < t2)).astype(int)
+    return predict(ts_te, keys_te, fit(ts_tr, lab_tr))
 
 
 # ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
 
-overall, per_year, oof = evaluate(fit_predict)
-print("---")
-print(f"val_f1:           {overall['silage_f1']:.6f}")
-print(f"precision:        {overall['silage_precision']:.4f}")
-print(f"recall:           {overall['silage_recall']:.4f}")
-print(f"balanced_acc:     {overall['balanced_acc']:.4f}")
-print(f"accuracy:         {overall['accuracy']:.4f}")
-print(f"confusion:        tp={overall['tp']} fp={overall['fp']} fn={overall['fn']} tn={overall['tn']}")
-print("per_year_f1:      " + " ".join(f"{y}={v:.3f}" for y, v in per_year.items()))
-print(f"total_seconds:    {time.time() - t0:.1f}")
+if __name__ == "__main__":
+    overall, per_year, oof = evaluate(fit_predict)
+    print("---")
+    print(f"val_f1:           {overall['silage_f1']:.6f}")
+    print(f"precision:        {overall['silage_precision']:.4f}")
+    print(f"recall:           {overall['silage_recall']:.4f}")
+    print(f"balanced_acc:     {overall['balanced_acc']:.4f}")
+    print(f"accuracy:         {overall['accuracy']:.4f}")
+    print(f"confusion:        tp={overall['tp']} fp={overall['fp']} fn={overall['fn']} tn={overall['tn']}")
+    print("per_year_f1:      " + " ".join(f"{y}={v:.3f}" for y, v in per_year.items()))
+    print(f"total_seconds:    {time.time() - t0:.1f}")

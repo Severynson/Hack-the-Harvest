@@ -79,18 +79,20 @@ def scores(y, p):
 
 
 def fit(ts, lab):
-    f = T.featurize(ts, lab).merge(lab[["OBJECTID", "year", "y"]], on=["OBJECTID", "year"])
-    xa, xb, y = f[T.FEATURE].to_numpy(float), f[T.SECOND_FEATURE].to_numpy(float), f["y"].to_numpy()
-    t1 = T.fit_threshold(xa, y)
-    t2 = T.fit_threshold(xb, y, already=np.nan_to_num(xa, nan=np.inf) < t1)
-    return t1, t2
+    return T.fit(ts, lab)
 
 
-def predict(ts, keys, t1, t2):
+def predict(ts, keys, cuts):
+    """Prediction plus which rules fired, for the per-rule report."""
     f = T.featurize(ts, keys)
-    a = np.nan_to_num(f[T.FEATURE].to_numpy(float), nan=np.inf)
-    b = np.nan_to_num(f[T.SECOND_FEATURE].to_numpy(float), nan=np.inf)
-    return f.assign(r_drop=a < t1, r_late=b < t2, pred=((a < t1) | (b < t2)).astype(int))
+    out = f[["OBJECTID", "year"]].copy()
+    fired = np.zeros(len(f), bool)
+    for r, c in cuts.items():
+        hit = np.nan_to_num(f[r].to_numpy(float), nan=np.inf) < c
+        out[f"r_{r}"] = hit
+        fired |= hit
+    out["pred"] = fired.astype(int)
+    return out
 
 
 def line(name, s):
@@ -108,26 +110,26 @@ if __name__ == "__main__":
     print(parcels.groupby("cell")["y"].agg(parcels="size", silage="sum").to_string())
     ts = pd.concat([pull_cell(n, g) for n, g in parcels.groupby("cell")], ignore_index=True)
     lab = pd.DataFrame(parcels[["OBJECTID", "year", "y", "cell"]])
+    lab["group"] = lab["cell"]
 
     # A. transfer from BARC
     bts, blab = P.load_data()
-    t1, t2 = fit(bts, blab)
-    pa = predict(ts, lab, t1, t2).merge(lab, on=["OBJECTID", "year"])
-    print(f"\nA. BARC cut-offs (drop_days < {t1:.1f} OR Nov-Dec NDVI > {-t2:.2f}) applied to Quebec")
+    cuts = fit(bts, blab)
+    pa = predict(ts, lab, cuts).merge(lab, on=["OBJECTID", "year"])
+    print(f"\nA. BARC cut-offs {cuts} applied to Quebec")
     print(line("all cells", scores(pa["y"], pa["pred"])))
     for c, g in pa.groupby("cell"):
         print(line(c, scores(g["y"], g["pred"])))
-    print("rule firing (share of parcels):", {k: round(float(pa[k].mean()), 3) for k in ["r_drop", "r_late"]},
-          "| no drop measured:", round(float(T.featurize(ts, lab)[T.FEATURE].isna().mean()), 3))
+    print("rule firing (share of parcels):", {k: round(float(pa[k].mean()), 3) for k in pa.columns if k.startswith("r_")})
 
     # B. refit on Quebec, leave one cell out
     preds = []
     for c in CELLS:
         tr, te = lab[lab["cell"] != c], lab[lab["cell"] == c]
-        u1, u2 = fit(ts[ts["OBJECTID"].isin(tr["OBJECTID"])], tr)
-        p = predict(ts[ts["OBJECTID"].isin(te["OBJECTID"])], te, u1, u2).merge(te, on=["OBJECTID", "year"])
+        u = fit(ts[ts["OBJECTID"].isin(tr["OBJECTID"])], tr)
+        p = predict(ts[ts["OBJECTID"].isin(te["OBJECTID"])], te, u).merge(te, on=["OBJECTID", "year"])
         preds.append(p)
-        print(f"   held out {c}: drop_days < {u1:.1f} OR Nov-Dec NDVI > {(-u2 if np.isfinite(u2) else float('nan')):.2f}")
+        print(f"   held out {c}: {u}")
     pb = pd.concat(preds)
     print("\nB. Cut-offs refit on Quebec (leave one cell out)")
     print(line("all cells", scores(pb["y"], pb["pred"])))
