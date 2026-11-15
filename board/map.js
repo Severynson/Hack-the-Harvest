@@ -235,6 +235,10 @@ function applyT() {
   document.querySelectorAll("#markers text").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dx", 9 / M.k); });
   document.querySelectorAll("#ov-roads .road").forEach(p => p.setAttribute("stroke-width", (p.classList.contains("interstate") ? 1.6 : 0.9) / M.k));
   document.querySelectorAll("#ov-sats .track").forEach(p => p.setAttribute("stroke-width", 1.5 / M.k));
+  document.querySelectorAll("#ov-trade .river").forEach(p => p.setAttribute("stroke-width", 3 / M.k));
+  document.querySelectorAll("#ov-trade .flow").forEach(p => p.setAttribute("stroke-width", 2.5 / M.k));
+  document.querySelectorAll("#ov-trade .port").forEach(c => { c.setAttribute("r", 7 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
+  document.querySelectorAll("#ov-trade .flowl").forEach(t => t.style.fontSize = (11.5 / M.k) + "px");
   document.querySelectorAll("#ov-sats .sat").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
   document.querySelectorAll("#ov-sats .satl").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dy", -10 / M.k); });
   document.querySelectorAll("#states .st").forEach(p => p.setAttribute("stroke-width", 0.5 / M.k));
@@ -304,7 +308,7 @@ function extraBlocks(code) {
 }
 function panel() {
   const box = $("#sp"), crop = M.crop, code = M.sel, id = M.fcModel[crop];
-  const kids = [];
+  const kids = [...tradeBlock()];
   if (!code) {
     const years = [...new Set(MAP.history.map(r => r.year))].sort((a, b) => a - b);
     const us = years.map(y => [y, MAP.history.filter(r => r.year == y).reduce((a, r) => a + (r[crop] || 0), 0)]).filter(p => p[1] > 0);
@@ -454,9 +458,9 @@ function helpCard() {
   $(".stage").append(card);
 }
 
-// ---------------------------------------------------------------- overlays: highways, live satellites, day / night
-const OV = {roads: false, sats: true, night: false}, OVDATA = {roads: null, tle: null, satrecs: null};
-let satTimer = null, nightTimer = null;
+// ---------------------------------------------------------------- overlays: highways, export routes, live satellites
+const OV = {roads: false, trade: false, sats: true}, OVDATA = {roads: null, tle: null, satrecs: null, trade: null};
+let satTimer = null;
 const US_BOX = {lon0: -125, lon1: -66, lat0: 24, lat1: 50};
 const inUS = (lon, lat) => lon > US_BOX.lon0 && lon < US_BOX.lon1 && lat > US_BOX.lat0 && lat < US_BOX.lat1;
 const KM_PX = 1300 / 6371;                     // Albers USA scale: map units per km, near the middle of the map
@@ -464,10 +468,10 @@ const SWATH = {"Sentinel-2": 290, "Landsat": 185};
 
 function overlayControls() {
   const box = $("#ovctl"); if (!box) return;
-  const items = [["roads", "Highways"], ["sats", "Satellites (live)"], ["night", "Day / night (live)"]];
+  const items = [["roads", "Highways"], ["trade", "Export routes"], ["sats", "Satellites (live)"]];
   box.replaceChildren(el("div", {className: "ovt", textContent: "Overlays"}), ...items.map(([k, l]) => {
     const b = el("button", {className: "chip", textContent: l}); b.setAttribute("aria-pressed", OV[k]);
-    b.onclick = () => { OV[k] = !OV[k]; drawOverlays(); }; return b; }));
+    b.onclick = () => { OV[k] = !OV[k]; if (k == "trade" && OV.trade && M.k == 1 && !M.sel) tween({k: 0.94, tx: 25, ty: -26}); drawOverlays(); }; return b; }));
 }
 async function drawOverlays() {
   overlayControls();
@@ -482,10 +486,13 @@ async function drawOverlays() {
         t.hidden = false; t.style.left = e.clientX + 14 + "px"; t.style.top = e.clientY + 14 + "px"; });
       p.addEventListener("pointerleave", () => $("#tip").hidden = true); rg.append(p); }); }
   if (rg) rg.style.display = OV.roads ? "" : "none";
-  // day / night
-  clearInterval(nightTimer); let ng = $("#ov-night");
-  if (OV.night) { if (!ng) { ng = svgEl("g", {id: "ov-night"}); $("#states").after(ng); } ng.style.display = ""; drawNight(); nightTimer = setInterval(drawNight, 60000); }
-  else if (ng) ng.style.display = "none";
+  $("#states").classList.toggle("dim", OV.trade || OV.roads);
+  // export routes: barge rivers, export ports, where the corn goes
+  if (OV.trade && !OVDATA.trade) OVDATA.trade = await fetch("/api/trade").then(r => r.json());
+  let tg = $("#ov-trade");
+  if (OV.trade && !tg) { tg = svgEl("g", {id: "ov-trade"}); g.prepend(tg); drawTrade(tg); }
+  if (tg) tg.style.display = OV.trade ? "" : "none";
+  tradeCard();
   // satellites
   clearInterval(satTimer); let sg = $("#ov-sats");
   if (OV.sats) {
@@ -497,25 +504,24 @@ async function drawOverlays() {
   applyT();
 }
 
-// sun altitude (degrees) at a place and time: NOAA's simple solar position formulas
-function sunAlt(lon, lat, d) {
-  const rad = Math.PI / 180, day = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - Date.UTC(d.getUTCFullYear(), 0, 0)) / 864e5;
-  const hr = d.getUTCHours() + d.getUTCMinutes() / 60 + d.getUTCSeconds() / 3600, g = 2 * Math.PI / 365 * (day - 1 + (hr - 12) / 24);
-  const eot = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
-  const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
-  const ha = ((hr * 60 + eot + 4 * lon) / 4 - 180) * rad, la = lat * rad;
-  return Math.asin(Math.sin(la) * Math.sin(decl) + Math.cos(la) * Math.cos(decl) * Math.cos(ha)) / rad;
+function drawTrade(tg) {
+  const T = OVDATA.trade, defs = svgEl("defs"), mk = svgEl("marker", {id: "arrowhead", viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: "auto-start-reverse"});
+  mk.append(svgEl("path", {d: "M0,0L10,5L0,10z", fill: "#8fd19e"})); defs.append(mk); tg.append(defs);
+  T.rivers.forEach(rv => { const p = svgEl("path", {d: rv.d, class: "river"}); p.addEventListener("pointermove", e => tipText(e, rv.n + " River", "Barge route: grain floats down to the Gulf ports"));
+    p.addEventListener("pointerleave", () => $("#tip").hidden = true); tg.append(p); });
+  T.ports.forEach(pt => { const [x, y] = ALB(pt.lon, pt.lat), [ex, ey] = [x + pt.to[0], y + pt.to[1]];
+    const a = svgEl("path", {d: `M${x},${y}Q${(x + ex) / 2 + pt.to[1] * 0.25},${(y + ey) / 2 - pt.to[0] * 0.25} ${ex},${ey}`, class: "flow", "marker-end": "url(#arrowhead)"}); tg.append(a);
+    const c = svgEl("circle", {cx: x, cy: y, class: "port"}); c.addEventListener("pointermove", e => tipText(e, pt.name, pt.detail)); c.addEventListener("pointerleave", () => $("#tip").hidden = true); tg.append(c);
+    if (pt.label) { const lx = pt.lx != null ? x + pt.lx : ex, ly = pt.ly != null ? y + pt.ly : ey + (pt.to[1] > 0 ? 14 : -8);
+      const t = svgEl("text", {x: lx, y: ly, class: "flowl", "text-anchor": pt.anchor || "middle"}); t.textContent = pt.label; tg.append(t); } });
 }
-function drawNight() {
-  const ng = $("#ov-night"); if (!ng) return; const now = new Date(), step = 1;
-  const buckets = {twilight: [], night: []};
-  for (let lat = US_BOX.lat0; lat < US_BOX.lat1; lat += step) for (let lon = US_BOX.lon0; lon < US_BOX.lon1; lon += step) {
-    const a = sunAlt(lon + step / 2, lat + step / 2, now); const b = a < -6 ? "night" : a < 0 ? "twilight" : null; if (!b) continue;
-    const q = [[lon, lat], [lon + step, lat], [lon + step, lat + step], [lon, lat + step]].map(([x, y]) => ALB(x, y));
-    buckets[b].push("M" + q.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") + "Z"); }
-  ng.replaceChildren(svgEl("path", {d: buckets.twilight.join(""), class: "twilight"}), svgEl("path", {d: buckets.night.join(""), class: "night"}));
-  const center = sunAlt(-96, 38, now);
-  $("#nightnote") && ($("#nightnote").textContent = `Sun over the middle of the US: ${center > 0 ? "up, " + center.toFixed(0) + "° high" : center > -6 ? "twilight" : "night"} · ${now.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"})} your time`);
+function tipText(e, title, body) { const t = $("#tip"); t.replaceChildren(el("b", {textContent: title}), el("div", {textContent: body})); t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 300) + "px"; t.style.top = e.clientY + 14 + "px"; }
+function tradeCard() { $("#states").classList.toggle("dim", OV.trade || OV.roads); if (CUR) panel(); }
+function tradeBlock() {
+  if (!OV.trade || !OVDATA.trade) return [];
+  return [el("div", {className: "tradebox"}, el("div", {className: "eyebrow", textContent: "Export routes · where US corn goes"}),
+    el("ul", {}, OVDATA.trade.facts.map(f => el("li", {}, f.text, " ", el("a", {href: f.url, target: "_blank", rel: "noopener", className: "src", textContent: "(" + f.src + ")"})))),
+    el("div", {className: "note", textContent: "On the map: blue lines are the rivers barges use; green arrows are the main export gateways. Hover a port for details. The US imports very little corn, so only exports are shown."}))];
 }
 function satPos(rec, d) {
   const pv = satellite.propagate(rec, d); if (!pv || !pv.position) return null;
@@ -541,12 +547,15 @@ function drawSats(full) {
 }
 function satCard(now) {
   let card = $("#satcard"); if (!card) { card = el("div", {id: "satcard"}); $(".stage").append(card); } card.hidden = false;
-  const rows = OVDATA.satrecs.map(s => { const p = satPos(s.rec, now), age = Math.round((now - epochOf(s.l1)) / 864e5), m = nextPass[s.name];
-    const where = p && inUS(...p) ? "over the US now" : m == null ? "not over the US in the next 24 h" : m == 0 ? "over the US now" : `over the US in ${m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min"}`;
-    return el("tr", {}, el("td", {}, el("b", {textContent: s.name})), el("td", {textContent: where}), el("td", {className: "muted", title: "Age of the orbit data. Older data means a less exact position.", textContent: age <= 3 ? "exact" : `approx. (${age} d old)`})); });
-  card.replaceChildren(el("div", {className: "ovt", textContent: "Imaging satellites, live"}), el("table", {className: "mini"}, rows),
-    el("div", {className: "note", textContent: "Computed in your browser from published orbit data. Shaded band = the strip each one photographs (290 km Sentinel-2, 185 km Landsat)."}),
-    ...(OV.night ? [el("div", {className: "note", id: "nightnote"})] : []));
-  if (OV.night) drawNight();
+  const info = OVDATA.satrecs.map(s => { const p = satPos(s.rec, now), age = Math.round((now - epochOf(s.l1)) / 864e5), m = p && inUS(...p) ? 0 : nextPass[s.name];
+    return {s, m, age}; }).sort((a, b) => (a.m ?? 1e9) - (b.m ?? 1e9));
+  const when = m => m == null ? "not in the next 24 h" : m == 0 ? "over the US now" : `in ${m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min"}`;
+  const top = info[0], tog = el("button", {className: "ghost", textContent: OV.satOpen ? "Less" : "All 5"}); tog.onclick = () => { OV.satOpen = !OV.satOpen; satCard(new Date()); };
+  const head = el("div", {className: "sathead"}, el("span", {}, el("b", {textContent: "Next satellite over the US: "}), `${top.s.name} ${when(top.m)}`), tog);
+  const kids = [head];
+  if (OV.satOpen) kids.push(el("table", {className: "mini"}, info.map(({s, m, age}) => el("tr", {}, el("td", {}, el("b", {textContent: s.name})), el("td", {textContent: when(m)}),
+      el("td", {className: "muted", title: "Age of the orbit data. Older data means a less exact position.", textContent: age <= 3 ? "exact" : `approx. (${age} d old)`})))),
+    el("div", {className: "note", textContent: "Live from published orbit data. During a pass, the shaded band is the strip it photographs (290 km Sentinel-2, 185 km Landsat)."}));
+  card.replaceChildren(...kids);
 }
 function epochOf(l1) { const yy = +l1.slice(18, 20), doy = parseFloat(l1.slice(20, 32)); return Date.UTC(2000 + yy, 0, 1) + (doy - 1) * 864e5; }

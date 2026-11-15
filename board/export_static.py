@@ -29,6 +29,7 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
         "/api/counties": json.loads((HERE / "us_counties.topo.json").read_text()),
         "/api/roads": json.loads((HERE / "roads.json").read_text()),
         "/api/tle": json.loads((HERE / "tle.json").read_text()),
+        "/api/trade": json.loads((HERE / "trade.json").read_text()),
     }
     taken = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     shim = ("<script>window.__SNAP=" + json.dumps(snap, separators=(",", ":")).replace("</", "<\\/") + ";"

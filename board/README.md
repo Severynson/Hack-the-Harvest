@@ -105,6 +105,9 @@ the BARC field file). County outlines: `board/us_counties.topo.json` from `us-at
   verified) with `satellite.js` (MIT, bundled as `board/satellite.min.js`). The shaded band is the strip
   each one images. Elements older than a few days give an approximate position; the card says how old.
   Refresh `tle.json` for exact positions.
-- **Day / night (live)**: where the sun is up, setting or down right now, from the clock in the browser.
+- **Export routes**: the navigable rivers barges use (Natural Earth 10m rivers, public domain), the main
+  grain export gateways (Mississippi Gulf, Texas Gulf, Pacific Northwest, rail to Mexico, Great Lakes)
+  and sourced facts on where US corn goes, in `board/trade.json` (US Grains Council, Illinois Corn,
+  USDA AMS Grain Transportation Report). Update the facts there; each carries its source link.
 
 Plain-English model and folder names: `board/names.json`.

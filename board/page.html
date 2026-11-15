@@ -64,10 +64,16 @@ tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text
 #legend-map .what{font-size:12px;line-height:1.45;margin-bottom:8px;color:var(--text)}#legend-map .what b{color:var(--accent)}
 #ovctl{position:absolute;top:150px;right:12px;display:flex;flex-direction:column;gap:4px;align-items:stretch;background:rgba(14,17,22,.88);border:1px solid var(--line);border-radius:8px;padding:8px}
 #ovctl .chip{text-align:left}.ovt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
-#satcard{position:absolute;right:12px;bottom:34px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
+#satcard{position:absolute;right:12px;top:300px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
 #satcard td{padding:3px 6px;font-size:12px}#satcard[hidden]{display:none}
 #usmap .road{fill:none;stroke-linecap:round;stroke-linejoin:round}#usmap .road.interstate{stroke:#f2c14e;stroke-opacity:.9}#usmap .road.us{stroke:#c9ced6;stroke-opacity:.55}
-#usmap .night{fill:#02040a;fill-opacity:.55;pointer-events:none}#usmap .twilight{fill:#02040a;fill-opacity:.28;pointer-events:none}
+#usmap .river{fill:none;stroke:#5fd0ff;stroke-opacity:1;stroke-linecap:round;stroke-linejoin:round}
+#usmap .flow{fill:none;stroke:#8fd19e;stroke-linecap:round}#usmap .port{fill:#8fd19e;stroke:#0b0e13;cursor:help}
+#usmap .flowl{fill:#e6f6ea;font-family:var(--sans);font-weight:600;paint-order:stroke;stroke:#0b0e13;stroke-width:.5}
+.tradebox{border:1px solid #8fd19e;border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:12px}
+.tradebox ul{margin:6px 0;padding-left:16px}.tradebox li{margin:5px 0}.tradebox .src{color:var(--muted)}
+#usmap #states.dim .st{fill-opacity:.55}
+.sathead{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:12px}.sathead .ghost{padding:3px 8px;font-size:11px}
 #usmap .swath{fill:none;stroke:#7fd1ff;stroke-opacity:.16;stroke-linecap:round;pointer-events:none}#usmap .track{fill:none;stroke:#7fd1ff;stroke-dasharray:4 3;pointer-events:none}
 #usmap .sat{fill:#7fd1ff;stroke:#0b0e13}#usmap .satl{fill:#e6f6ff;font-family:var(--sans);font-weight:600;text-anchor:middle;paint-order:stroke;stroke:#0b0e13;stroke-width:.4}
 #help{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(14,17,22,.96);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;max-width:420px;z-index:5}

@@ -111,6 +111,11 @@ def roads():
     return Response(Path(__file__).with_name("roads.json").read_bytes(), media_type="application/json")
 
 
+@app.get("/api/trade")
+def trade():
+    return Response(Path(__file__).with_name("trade.json").read_bytes(), media_type="application/json")
+
+
 @app.get("/api/tle")
 def tle():
     return Response(Path(__file__).with_name("tle.json").read_bytes(), media_type="application/json")
