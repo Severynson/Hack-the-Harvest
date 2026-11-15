@@ -1,6 +1,6 @@
 """Where Kernel reads organizer files and writes its own cached outputs.
 
-The same code runs on a laptop (organizer kit copied to ``workspace/``) and on
+The same code runs on a laptop (organizer kit at ``workspace/`` or ``jupyter/workspace/``) and on
 Keeboh (kit at ``/workspace``). Set ``KERNEL_KIT_DIR`` or ``KERNEL_DATA_DIR`` to override.
 """
 
@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -16,7 +16,7 @@ REPO = Path(__file__).resolve().parent.parent
 
 def kit_dir() -> Path:
     """Folder that holds the organizer starter kit (``02_QuickStats``, ``04_Evaluation``)."""
-    candidates = [os.environ.get("KERNEL_KIT_DIR"), REPO / "workspace", "/workspace", REPO]
+    candidates = [os.environ.get("KERNEL_KIT_DIR"), REPO / "workspace", REPO / "jupyter" / "workspace", "/workspace", REPO]
     for candidate in candidates:
         if candidate and (Path(candidate) / "02_QuickStats").is_dir():
             return Path(candidate)
@@ -62,7 +62,7 @@ def record_in_manifest(path: Path, source_url: str) -> None:
     except ValueError:
         relative = path.as_posix()
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+    stamp = datetime.now(UTC).strftime("%Y-%m-%dT%H:%MZ")
     agent = os.environ.get("AGENT_ID", "unknown")
     row = f"{relative}\t{path.stat().st_size}\t{digest}\t{source_url}\t{agent}\t{stamp}"
 

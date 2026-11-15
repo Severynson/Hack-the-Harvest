@@ -1,9 +1,6 @@
 path	bytes	sha256	source_url	made_by	utc
 data/nass/quickstats_2025_corn_grain_silage_state.csv	14859	78db6757cf3e90d03468134595b04144c74a23f5d294a8cf48250c3386576972	https://quickstats.nass.usda.gov/results/ACC45317-B978-3390-B0A1-BE0EC02A9D63	cc-varun	2026-11-15T00:16Z
 data/nass/quickstats_state_fill.csv	106695	d7e7cf92f4457598e4e051aa1af73dc9de06baa3212ec763192efc02aa92b6ed	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T00:58Z
-data/nass/corn_acres_state.csv	212953	27c12b71a7a2ffa9951ce73c7bef37068f05ad7c40114ad71f90263bf9a6bc7f	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
-data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
-data/nass/baselines.csv	4647	08102a80fc4607e2905f22eb4c36b4cc7ecdd7388dda8b6b8d8ac57b34789bc4	https://quickstats.nass.usda.gov/	cc-varun	2026-11-15T00:58Z
 data/labels/quebec_maize_2023.parquet	27617652	88498acc77c48829c2df74fd865000ce4a5850f3f7f3eab4f781ce32a031b3ce	http://www.fadq.qc.ca/documents/donnees/base-de-donnees-des-parcelles-et-productions-agricoles-declarees/	cc-varun	2026-11-15T00:59Z
 data/s2_series/barc/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:07Z
 data/s2_series/barc/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:14Z
@@ -216,3 +213,18 @@ data/panel/state_year.csv	58098	b97a430ae2249f04dea19ab230058c7ce5c625e793828b43
 data/models/state_model_backtest.csv	1728	bf42b04c50112f33b51847837d046d016922db1546d4e6281f04cd08b09b7766	derived: kernelag.state_model	cc-varun	2026-11-15T02:51Z
 data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T02:51Z
 data/raw/quebec/BDPPAD_V03_2023.zip	172750925	9258447ac941b23efc78bf582c8555f66d1eb0a732c5949fa2f169697c139f82	https://www.fadq.qc.ca/fileadmin/geo4tb/BDPPAD/BDPPAD_V03_2023.zip	cc-varun (local only, over the size limit)	2026-11-15T03:00Z
+data/nass/corn_acres_state.csv	202311	0ffc915e612996387aed106255a73a45c8f9557277167a78247aa88883b078b4	https://quickstats.nass.usda.gov/	unknown	2026-11-15T02:33Z
+data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	unknown	2026-11-15T02:33Z
+data/nass/baselines.csv	4341	95750af5081de0da60dac5f126270ae2347018378c35c717bd3ad18eb57ca4fe	https://quickstats.nass.usda.gov/	unknown	2026-11-15T02:33Z
+data/models/state_model_backtest_asof_sep.csv	2231	4da014b8816d660e68d3a248cbff16cd87f53a60edeaa01db1e244a6b3c0ebed	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
+data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
+data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a7a866312a5846501933aa66ece3494	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
+data/models/state_model_metrics_asof_sep.json	1198	31f59a745376698424de0c0c343560925efec84e27d352e9ece299f35910975a	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
+data/models/state_forecast_2026.csv	6350	9af852056d71371c0ff36a1be2586367c85431c6974e090180aec4910954f81c	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
+data/models/state_score_2025.csv	7628	1beae9271e202f01bdc509889f40506e899ab635cd13913123beea939d0f5c62	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
+data/models/state_score_2025.json	474	ff033c61e7f188acd2e12c5953dd5143c31a54fe130966205d74509db01c8def	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
+data/panel/state_year.csv	124032	a05f833b02b9cbfd1e95505d4757ffa900e0a26aa8fe8bdd6b15ca1644425ead	https://quickstats.nass.usda.gov/api	unknown	2026-11-15T03:02Z
+data/models/state_model_backtest.csv	2850	af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
+data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
+data/models/state_model_bias.csv	997	9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
+data/models/state_model_metrics.json	1240	ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b	derived: kernelag.state_model	unknown	2026-11-15T03:02Z

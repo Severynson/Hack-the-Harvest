@@ -55,3 +55,26 @@ def test_baselines_never_touch_the_scoring_year():
                        + [_row(y, "A", GRAIN, "YEAR", "100") for y in (2024, 2025)])
     table = nass.baselines(nass.tidy_state(raw))
     assert table.empty or table["year"].max() <= nass.LAST_BASELINE_YEAR
+
+
+def test_other_states_row_is_not_a_state():
+    raw = pd.DataFrame([_row(2023, "OTHER STATES", GRAIN, "YEAR", "0"),
+                        _row(2023, "OTHER STATES", GRAIN, "YEAR - NOV FORECAST", "480,000"),
+                        _row(2023, "A", GRAIN, "YEAR", "100")])
+    assert nass.tidy_state(raw)["state"].tolist() == ["A"]
+
+
+def test_team_folder_rows_fill_years_but_kit_rows_win(tmp_path, monkeypatch):
+    folder = tmp_path / nass.TEAM_FOLDER
+    folder.mkdir()
+    api_row = {"year": "2017", "agg_level_desc": "STATE", "state_name": "A", "state_fips_code": "01",
+               "short_desc": SILAGE, "reference_period_desc": "YEAR", "Value": "70",
+               "source_desc": "SURVEY", "domain_desc": "TOTAL"}
+    rows = [api_row, {**api_row, "year": "2016", "Value": "999"}, {**api_row, "source_desc": "CENSUS", "Value": "1"}]
+    pd.DataFrame(rows).to_csv(folder / "corn_silage_harvested_acres_state_2015_2025.csv", index=False)
+    monkeypatch.setattr(nass, "data_dir", lambda: tmp_path)
+    monkeypatch.setattr(nass, "load_kit", lambda: pd.DataFrame([_row(2016, "A", SILAGE, "YEAR", "60")]))
+    monkeypatch.setattr(nass, "secret", lambda name: "")
+
+    table = nass.tidy_state(nass.load_with_missing_years()).set_index("year")["acres"]
+    assert table.to_dict() == {2016: 60, 2017: 70}     # 2017 filled; the kit's 2016 kept; census ignored

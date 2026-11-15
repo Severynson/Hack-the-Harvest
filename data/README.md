@@ -34,6 +34,21 @@ The organizers' starter kit is tracked separately at `jupyter/workspace/`.
   `insured_by_type_corn`, `type_code` 016 is grain and 026 is silage; filter on the code, because the names are upper
   case before 2011. RMA counts insured acres only, so it is a floor, not a total.
 
+## Known gaps (checked 2026-11-15)
+
+- The hay production, hay stocks, hay price, milk price and cattle-on-feed series named in the table are not in `Quickstats Data/`.
+- `drought/county_weekly/` has no file for Texas, Virginia, West Virginia, Wisconsin or Wyoming; the state file covers all states.
+- State silage acres for 2021, grain acres for 2018 and county planted acres for 2021 are missing from the `*_2015_2025.csv`
+  files; `kernelag.nass` takes those years from the organizers' file.
+- No file holds 2026 planted acres or NASS's 2026 grain forecasts.
+- `scripts/pull_data.py` is not in the repository.
+
+## Built by `kernelag` (rebuild with the commands in each module's docstring)
+
+- `nass/`: tidy state and county acreage and the baselines table (`python -m kernelag.nass`).
+- `panel/state_year.csv`: one row per state and year with acreage, herd, yield, price and season context (`python -m kernelag.state_panel`).
+- `models/`: backtest, weights, bias table, metrics, the 2026 forecast and the 2025 score (`python -m kernelag.state_model`).
+
 ## Gzipped files
 
 The per-state county drought files and the yearly RMA files are stored as `.csv.gz` to keep clones small, and so is

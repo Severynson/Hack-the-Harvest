@@ -1,0 +1,14 @@
+feature,weight_per_std,expected_sign,sign_ok,in_selected_set
+reversion,-0.0872,-1,True,True
+d_planted,0.0357,1,True,False
+d_not_grain,0.0213,1,True,False
+d_cows,0.0318,1,True,False
+d_cattle,0.0134,1,True,False
+yield_shock,-0.0401,-1,True,False
+d_price,0.0,-1,True,False
+d_drought,0.006,1,True,False
+d_poor,0.0135,1,True,False
+d_loss,-0.0203,1,False,False
+rain_anom,-0.0028,-1,True,False
+early_frost,0.0,1,True,False
+d_mature,0.0,-1,True,False
