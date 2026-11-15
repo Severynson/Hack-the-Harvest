@@ -25,6 +25,7 @@ import argparse
 
 import pandas as pd
 
+from kernelag.nass_reports import season_rows
 from kernelag.paths import data_dir, kit_dir, record_in_manifest, secret
 
 KIT_FILE = "02_QuickStats/corn_grain_silage_acres_2012_2025.csv"
@@ -179,6 +180,15 @@ def tidy_state(raw: pd.DataFrame) -> pd.DataFrame:
     return table.sort_values(["year", "state", "series", "period"]).reset_index(drop=True)
 
 
+def with_season_rows(state: pd.DataFrame, season: pd.DataFrame) -> pd.DataFrame:
+    """Add the open season's rows from NASS's text reports; a figure already in the table wins."""
+    ansi = state.drop_duplicates("state").set_index("state")["state_ansi"]
+    season = season.assign(state_ansi=season["state"].map(ansi)).dropna(subset=["state_ansi"])
+    table = pd.concat([state, season[state.columns]], ignore_index=True)
+    table = table.drop_duplicates(["year", "state", "series", "period"], keep="first")
+    return table.sort_values(["year", "state", "series", "period"]).reset_index(drop=True)
+
+
 def tidy_county(raw: pd.DataFrame) -> pd.DataFrame:
     """County figures from the Census of Agriculture years (2012, 2017, 2022)."""
     rows = _plain_totals(raw, "COUNTY")
@@ -259,7 +269,7 @@ def main() -> None:
         return
 
     raw = load_with_missing_years(force=args.force)
-    state = tidy_state(raw)
+    state = with_season_rows(tidy_state(raw), season_rows())
     tables = {
         "corn_acres_state": state,
         "corn_acres_county": tidy_county(raw),

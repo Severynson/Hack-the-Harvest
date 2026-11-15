@@ -78,3 +78,26 @@ def test_team_folder_rows_fill_years_but_kit_rows_win(tmp_path, monkeypatch):
 
     table = nass.tidy_state(nass.load_with_missing_years()).set_index("year")["acres"]
     assert table.to_dict() == {2016: 60, 2017: 70}     # 2017 filled; the kit's 2016 kept; census ignored
+
+
+def test_report_table_is_read_past_the_table_of_contents():
+    from kernelag.nass_reports import table_rows
+
+    text = "\n".join([
+        "Corn Area Planted - States: 2025 and 2026......  5",
+        "",
+        "Corn Area Planted - States:",
+        "2025 and 2026",
+        "--------------------",
+        "        State       :   2025   :   2026",
+        "--------------------",
+        "Alabama ............:    350      355",
+        "Connecticut 2/ .....:     23     (NA)",
+        "United States ......: 98,788   96,777",
+        "Wyoming ............:      1        1",
+    ])
+    rows = table_rows(text, "Corn Area Planted")
+    assert rows["ALABAMA"] == [350.0, 355.0]
+    assert rows["CONNECTICUT"][0] == 23.0 and rows["CONNECTICUT"][1] != rows["CONNECTICUT"][1]
+    assert rows["UNITED STATES"] == [98788.0, 96777.0]
+    assert "WYOMING" not in rows          # nothing is read after the US total
