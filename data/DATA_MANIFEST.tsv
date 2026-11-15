@@ -16,3 +16,4 @@ data/s2_series/barc_2021_2023/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac7
 data/s2_series/barc_2021_2023/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
 data/s2_series/barc_2021_2023/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
 data/s2_series/barc_2021_2023/34_432_2023.csv	27157	7bfdbe341609d2957f12afda0656982080d433e10b937807691026b2ce09b466	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
+data/s2_series/barc_2021_2023/33_432_2021.csv	27222	3ba57eb9ab63b40c179545575e4eed5a6926cdbd69bfaec271e3a696c87e3164	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:38Z
