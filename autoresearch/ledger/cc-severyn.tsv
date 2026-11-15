@@ -25,3 +25,4 @@ fc86244	0.726307	1.0000	keep	[multi] baseline run 2: barc 1.000 q2b 0.444 b2q 0.
 82d4b24	0.831518	1.0000	discard	[multi] add rule: harvest day relative to region-year median: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.6782
 6457f0e	0.846520	1.0000	keep	[multi] secondary rules need >=70% precision on fields they add, else off: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.7382
 420ed1e	0.846520	1.0000	discard	[multi] add gated rule: harvest day relative to region-year median: barc 1.0000 q2b 0.9231 b2q 0.7248 qloco 0.7382
+75ccc24	0.834974	0.9565	discard	[multi] winter green as robust z-score within region-year: barc 0.9565 q2b 0.9091 b2q 0.7298 qloco 0.7445
