@@ -106,6 +106,21 @@ def geo():
     return Response(GEO.read_bytes(), media_type="application/json")
 
 
+@app.get("/api/roads")
+def roads():
+    return Response(Path(__file__).with_name("roads.json").read_bytes(), media_type="application/json")
+
+
+@app.get("/api/tle")
+def tle():
+    return Response(Path(__file__).with_name("tle.json").read_bytes(), media_type="application/json")
+
+
+@app.get("/satellite.min.js")
+def satellite_js():
+    return Response(Path(__file__).with_name("satellite.min.js").read_bytes(), media_type="text/javascript")
+
+
 @app.get("/map.js")
 def map_js():
     return Response(Path(__file__).with_name("map.js").read_bytes(), media_type="text/javascript")

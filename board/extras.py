@@ -7,8 +7,6 @@ is simply left out and the reason is reported.
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
 
@@ -114,13 +112,13 @@ def harvest_timing(problems: list) -> dict:
                 if before.empty or after["v"] == before.iloc[0]["v"]:
                     return int(after["doy"])
                 b = before.iloc[0]
-                return int(round(b["doy"] + (50 - b["v"]) * (after["doy"] - b["doy"]) / (after["v"] - b["v"])))
+                return int(round(b["doy"] + (50 - b["v"]) * (after["doy"] - b["doy"]) / (after["v"] - b["v"])))  # noqa: RUF046 (numpy float)
             past = [half(gy) for y, gy in g.groupby("year") if latest - 5 <= y < latest]
             past = [d for d in past if d is not None]
             avg = g[(g["year"] >= latest - 5) & (g["year"] < latest)].assign(wk=lambda d: (d["doy"] // 7) * 7)
             avg_curve = avg.groupby("wk")["v"].mean().round(0)
             now = g[g["year"] == latest].sort_values("doy")
-            out[st] = {"typical_half_doy": int(round(np.mean(past))) if past else None, "years_used": len(past),
+            out[st] = {"typical_half_doy": int(round(np.mean(past))) if past else None, "years_used": len(past),  # noqa: RUF046
                        "latest_year": latest, "half_doy": half(now) if len(now) else None,
                        "latest_pct": _i(now["v"].iloc[-1]) if len(now) else None,
                        "latest_week": now["week_ending"].iloc[-1] if len(now) else None,
@@ -128,6 +126,24 @@ def harvest_timing(problems: list) -> dict:
                        "avg_curve": [[int(d), int(v)] for d, v in avg_curve.items()]}
     except Exception as error:  # noqa: BLE001
         problems.append(f"harvest timing: {error}")
+    return out
+
+
+MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+
+
+def milk_prices(problems: list) -> dict:
+    """Monthly price farmers received for milk ($/cwt) by state, 2016 on: {state: [["2026-09", 18.3], ...]}."""
+    out = {}
+    try:
+        t = _qs("milk_price_received_state_2000_2026.csv")
+        t = t[(t["agg_level_desc"] == "STATE") & (t["short_desc"] == "MILK - PRICE RECEIVED, MEASURED IN $ / CWT")
+              & t["reference_period_desc"].isin(MONTHS) & (t["year"] >= 2016)].dropna(subset=["v"])
+        t["ym"] = t["year"].astype(int).astype(str) + "-" + (t["reference_period_desc"].map(MONTHS.index) + 1).astype(str).str.zfill(2)
+        for st, g in t.sort_values("ym").groupby("state_alpha"):
+            out[st] = [[ym, float(v)] for ym, v in zip(g["ym"], g["v"])]
+    except Exception as error:  # noqa: BLE001
+        problems.append(f"milk prices: {error}")
     return out
 
 
@@ -164,12 +180,15 @@ def satellite(problems: list, history: pd.DataFrame) -> dict:
 def build(history: pd.DataFrame) -> dict:
     problems: list = []
     return {"county": county_layers(problems), "money": state_money(problems), "harvest": harvest_timing(problems),
+            "milk": milk_prices(problems),
             "satellite": satellite(problems, history), "problems": problems}
 
 
 if __name__ == "__main__":
+    import json
+    import time
+
     from board.sources import state_history
-    import json, time  # noqa: E401
     t = time.time()
     d = build(state_history())
     print(round(time.time() - t, 1), "s", d["problems"])

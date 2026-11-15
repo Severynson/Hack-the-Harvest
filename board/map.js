@@ -27,7 +27,8 @@ const LAYER_GROUPS = [
     ["context", "Drought, crop condition and losses (states)", "Season signals by state: drought, corn rated poor, insurance weather losses, rain, heat and milk cows."],
     ["harvest", "When silage gets chopped", "The usual date by which half of a state's silage is chopped. Some states are half done by late August, others not until October, so one harvest calendar does not fit every state."],
     ["money", "What the corn crop is worth", "Corn harvested for grain times the price farmers received: the dollar value of each state's grain crop."],
-    ["price", "Corn price farmers got", "The average price per bushel farmers received over the marketing year."]]],
+    ["price", "Corn price farmers got", "The average price per bushel farmers received over the marketing year."],
+    ["milk", "Milk price farmers got (latest month)", "What dairy farmers were paid for milk, in dollars per 100 pounds, in the latest month USDA has published. A better milk price can mean more cows to feed, and more silage."]]],
   ["Satellite", [
     ["satellite", "Where the satellite looks", "Highlighted states are where the satellite sample is being drawn: the 15 states with the most silage. Dots mark the fields with known answers used to test the satellite model."]]],
   ["How good are the models", [
@@ -75,7 +76,7 @@ function defaultModel(crop) {
   return bench ? bench.model_id : fcModels(crop)[0]?.model_id;
 }
 function modelLabel(id) { const m = MODELS[id]; if (!m) return id; const b = (CAT.benchmarks || []).find(b => b.model_id == id);
-  return b ? `${b.label} (${m.source})` : `${m.model} (${m.source})`; }
+  return b && b.label != m.label ? `${m.label}: ${b.label}` : `${m.label} \u00b7 ${m.source_label}`; }
 
 // ---------------------------------------------------------------- layer values
 function layerValues() {
@@ -96,7 +97,7 @@ function layerValues() {
     MAP.history.filter(r => r.year == M.year && r[crop] != null).forEach(r => vals[r.state] = r[crop]);
   } else if (M.layer == "error") {
     const id = M.errModel[crop]; ramp = SEQ2; fmt = v => v.toFixed(1) + "%";
-    title = id ? `Mean miss by state, ${S.y0}–${S.y1} · ${MODELS[id] ? MODELS[id].model + " (" + MODELS[id].source + ")" : id}` : `No state-level backtest for ${crop} yet`;
+    title = id ? `Average miss by state, ${S.y0}–${S.y1} · ${MODELS[id] ? MODELS[id].label + " (" + MODELS[id].source_label + ")" : id}` : `No state-level backtest for ${crop} yet`;
     if (id) { const e = stateErrors(id); for (const k in e) vals[k] = e[k].v; }
     note = "Average |predicted − actual| / actual per state. Only folders that keep state-level predictions appear here.";
   } else if (M.layer == "context") {
@@ -127,6 +128,11 @@ function layerValues() {
     const key = M.layer == "money" ? "value" : "price"; ramp = SEQ; fmt = M.layer == "money" ? money : v => "$" + v.toFixed(2) + "/bu";
     title = M.layer == "money" ? `Value of the corn-for-grain crop, ${M.myear}` : `Corn price received, ${M.myear} marketing year`;
     for (const st in EXT.money) { const r = EXT.money[st][M.myear]; if (r && r[key] != null) vals[st] = r[key]; }
+  } else if (M.layer == "milk") {
+    const latest = Object.values(EXT.milk).map(a => a.at(-1)?.[0]).filter(Boolean).sort().at(-1); ramp = SEQ; fmt = v => "$" + v.toFixed(2) + "/cwt";
+    title = `Milk price received, ${latest ? new Date(latest + "-15").toLocaleDateString("en-US", {month: "long", year: "numeric"}) : ""}`;
+    for (const st in EXT.milk) { const r = EXT.milk[st].find(x => x[0] == latest); if (r) vals[st] = r[1]; }
+    note = "USDA publishes monthly milk prices for the main dairy states only; the rest show as no data.";
   } else if (M.layer == "satellite") {
     title = "Where the satellite looks"; fmt = v => v ? "in the satellite sample" : ""; ramp = SEQ;
     (EXT.satellite.sample_states || []).forEach(st => vals[st] = 1);
@@ -195,6 +201,7 @@ function buildMap() {
     states.append(p);
   });
   g.append(svgEl("path", {d: GEO.borders, class: "borders"}));
+  g.append(svgEl("g", {id: "overlays"}));
   const sel = svgEl("path", {id: "selpath", class: "selpath"}); g.append(sel);
   g.append(svgEl("g", {id: "markers"}));
   const labels = svgEl("g", {id: "labels"}); g.append(labels);
@@ -226,6 +233,10 @@ function applyT() {
   $("#selpath").setAttribute("stroke-width", 2.2 / M.k);
   document.querySelectorAll("#markers circle").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
   document.querySelectorAll("#markers text").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dx", 9 / M.k); });
+  document.querySelectorAll("#ov-roads .road").forEach(p => p.setAttribute("stroke-width", (p.classList.contains("interstate") ? 1.6 : 0.9) / M.k));
+  document.querySelectorAll("#ov-sats .track").forEach(p => p.setAttribute("stroke-width", 1.5 / M.k));
+  document.querySelectorAll("#ov-sats .sat").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
+  document.querySelectorAll("#ov-sats .satl").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dy", -10 / M.k); });
   document.querySelectorAll("#states .st").forEach(p => p.setAttribute("stroke-width", 0.5 / M.k));
   $("#zoomlvl").textContent = M.k.toFixed(1) + "×";
 }
@@ -316,7 +327,7 @@ function panel() {
     const fcs = fcModels(crop).map(m => ({m, r: fcValue(m.model_id, code)})).filter(x => x.r);
     kids.push(close, el("div", {className: "eyebrow", style: "margin-top:12px", textContent: `${name} · ${crop}`}),
       el("div", {className: "hero", textContent: v == null ? "—" : CUR.fmt(v)}), el("div", {className: "note", textContent: CUR.title}));
-    const extrasFirst = ["harvest", "money", "price", "satellite"].includes(M.layer);
+    const extrasFirst = ["harvest", "money", "price", "milk", "satellite"].includes(M.layer);
     if (extrasFirst) kids.push(...extraBlocks(code));
     kids.push(el("h3", {textContent: `${crop[0].toUpperCase() + crop.slice(1)} acres: history and 2026 forecasts`}),
       miniLine([{kind: "line", color: "var(--s1)", pts: rows},
@@ -331,7 +342,7 @@ function panel() {
     const errs = errModels(crop).map(mid => ({mid, e: stateErrors(mid)[code]})).filter(x => x.e).sort((a, b) => a.e.v - b.e.v);
     if (errs.length) { kids.push(el("h3", {textContent: `Who has called ${code} best, ${S.y0}–${S.y1}`}));
       const t = el("table", {className: "mini"}); const mx = Math.max(...errs.map(x => x.e.v));
-      errs.slice(0, 8).forEach(x => t.append(el("tr", {}, el("td", {textContent: MODELS[x.mid]?.model || x.mid}),
+      errs.slice(0, 8).forEach(x => t.append(el("tr", {}, el("td", {textContent: MODELS[x.mid]?.label || x.mid}),
         el("td", {className: "barcell"}, el("i", {style: `width:${100 * x.e.v / mx}%`})), el("td", {className: "n", textContent: x.e.v.toFixed(1) + "%"}))));
       kids.push(t, el("p", {className: "note", textContent: "Average miss per year in this state. Only folders that keep state-level predictions appear."})); }
     if (!extrasFirst) kids.push(...extraBlocks(code));
@@ -355,7 +366,7 @@ function kpis() {
     el("div", {className: "note", textContent: pub ? "filling in as results land" : "training · results to follow"})));
   const best = Object.values(MODELS).filter(m => m.target == "silage").map(m => ({m, s: stats(m.model_id)})).filter(x => x.s.state != null && x.s.years >= 8).sort((a, b) => a.s.state - b.s.state)[0];
   tiles.push(el("div", {className: "kpi"}, el("div", {className: "eyebrow", textContent: `Best silage backtest, ${S.y0}–${S.y1}`}), el("div", {className: "big", textContent: best ? best.s.state.toFixed(2) + "%" : "—"}),
-    el("div", {className: "note", textContent: best ? `${best.m.model} (${best.m.source}) · ${best.s.years} years · avg state miss` : ""})));
+    el("div", {className: "note", textContent: best ? `${best.m.label} (${best.m.source_label}) · ${best.s.years} years · avg state miss` : ""})));
   $("#kpis").replaceChildren(...tiles);
 }
 function controls() {
@@ -378,7 +389,7 @@ function controls() {
   if (["forecast", "change"].includes(M.layer)) { const s = el("select", {"aria-label": "Model"}, fcModels(crop).map(m => el("option", {value: m.model_id, textContent: modelLabel(m.model_id), selected: m.model_id == M.fcModel[crop]})));
     s.onchange = e => { M.fcModel[crop] = e.target.value; draw(); }; parts.push(s); }
   if (M.layer == "error") { const ids = errModels(crop); if (!M.errModel[crop] || !ids.includes(M.errModel[crop])) M.errModel[crop] = ids[0];
-    if (ids.length) { const s = el("select", {"aria-label": "Model"}, ids.map(id => el("option", {value: id, textContent: (MODELS[id]?.model || id) + " (" + (MODELS[id]?.source || "") + ")", selected: id == M.errModel[crop]})));
+    if (ids.length) { const s = el("select", {"aria-label": "Model"}, ids.map(id => el("option", {value: id, textContent: (MODELS[id]?.label || id) + " \u00b7 " + (MODELS[id]?.source_label || ""), selected: id == M.errModel[crop]})));
       s.onchange = e => { M.errModel[crop] = e.target.value; draw(); }; parts.push(s); } }
   if (M.layer == "context") { const s = el("select", {"aria-label": "Signal"}, Object.entries(SIGNALS).map(([k, sg]) => el("option", {value: k, textContent: sg.label, selected: k == M.signal})));
     s.onchange = e => { M.signal = e.target.value; draw(); }; parts.push(s); }
@@ -430,6 +441,7 @@ async function mapTab() {
     c.addEventListener("pointerleave", () => $("#tip").hidden = true); const t = svgEl("text", {x, y, class: "mkl", dy: 4}); t.textContent = pt.label; mk.append(c, t); });
   const s = GEO.states.find(s => s.code == M.sel); $("#selpath").setAttribute("d", s ? s.d : "");
   kpis(); controls(); legend(cls); panel(); applyT(); helpCard();
+  if (!mapTab.ovStarted) { mapTab.ovStarted = true; drawOverlays(); } else overlayControls();
 }
 function helpCard() {
   let seen = false; try { seen = localStorage.getItem("board-help") == "1"; } catch (e) { seen = true; }
@@ -441,3 +453,100 @@ function helpCard() {
   ok.onclick = () => { card.remove(); try { localStorage.setItem("board-help", "1"); } catch (e) { /* storage off */ } };
   $(".stage").append(card);
 }
+
+// ---------------------------------------------------------------- overlays: highways, live satellites, day / night
+const OV = {roads: false, sats: true, night: false}, OVDATA = {roads: null, tle: null, satrecs: null};
+let satTimer = null, nightTimer = null;
+const US_BOX = {lon0: -125, lon1: -66, lat0: 24, lat1: 50};
+const inUS = (lon, lat) => lon > US_BOX.lon0 && lon < US_BOX.lon1 && lat > US_BOX.lat0 && lat < US_BOX.lat1;
+const KM_PX = 1300 / 6371;                     // Albers USA scale: map units per km, near the middle of the map
+const SWATH = {"Sentinel-2": 290, "Landsat": 185};
+
+function overlayControls() {
+  const box = $("#ovctl"); if (!box) return;
+  const items = [["roads", "Highways"], ["sats", "Satellites (live)"], ["night", "Day / night (live)"]];
+  box.replaceChildren(el("div", {className: "ovt", textContent: "Overlays"}), ...items.map(([k, l]) => {
+    const b = el("button", {className: "chip", textContent: l}); b.setAttribute("aria-pressed", OV[k]);
+    b.onclick = () => { OV[k] = !OV[k]; drawOverlays(); }; return b; }));
+}
+async function drawOverlays() {
+  overlayControls();
+  const g = $("#overlays"); if (!g) return;
+  // highways
+  if (OV.roads && !OVDATA.roads) OVDATA.roads = await fetch("/api/roads").then(r => r.json());
+  let rg = $("#ov-roads");
+  if (OV.roads && !rg) { rg = svgEl("g", {id: "ov-roads"}); g.prepend(rg);
+    OVDATA.roads.roads.sort((a, b) => (a.c == "interstate") - (b.c == "interstate")).forEach(r => {
+      const p = svgEl("path", {d: r.d, class: "road " + r.c});
+      p.addEventListener("pointermove", e => { const t = $("#tip"); t.replaceChildren(el("b", {textContent: r.n}), el("div", {className: "muted", textContent: r.c == "interstate" ? "Interstate: the main truck corridors" : "US highway"}));
+        t.hidden = false; t.style.left = e.clientX + 14 + "px"; t.style.top = e.clientY + 14 + "px"; });
+      p.addEventListener("pointerleave", () => $("#tip").hidden = true); rg.append(p); }); }
+  if (rg) rg.style.display = OV.roads ? "" : "none";
+  // day / night
+  clearInterval(nightTimer); let ng = $("#ov-night");
+  if (OV.night) { if (!ng) { ng = svgEl("g", {id: "ov-night"}); $("#states").after(ng); } ng.style.display = ""; drawNight(); nightTimer = setInterval(drawNight, 60000); }
+  else if (ng) ng.style.display = "none";
+  // satellites
+  clearInterval(satTimer); let sg = $("#ov-sats");
+  if (OV.sats) {
+    if (!OVDATA.tle) { OVDATA.tle = await fetch("/api/tle").then(r => r.json());
+      OVDATA.satrecs = (typeof satellite == "undefined") ? [] : OVDATA.tle.sats.map(s => ({...s, rec: satellite.twoline2satrec(s.l1, s.l2)})); }
+    if (!sg) { sg = svgEl("g", {id: "ov-sats"}); g.append(sg); }
+    sg.style.display = ""; drawSats(true); satTimer = setInterval(() => drawSats(false), 2000);
+  } else { if (sg) sg.style.display = "none"; const card = $("#satcard"); if (card) card.hidden = true; }
+  applyT();
+}
+
+// sun altitude (degrees) at a place and time: NOAA's simple solar position formulas
+function sunAlt(lon, lat, d) {
+  const rad = Math.PI / 180, day = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - Date.UTC(d.getUTCFullYear(), 0, 0)) / 864e5;
+  const hr = d.getUTCHours() + d.getUTCMinutes() / 60 + d.getUTCSeconds() / 3600, g = 2 * Math.PI / 365 * (day - 1 + (hr - 12) / 24);
+  const eot = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+  const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+  const ha = ((hr * 60 + eot + 4 * lon) / 4 - 180) * rad, la = lat * rad;
+  return Math.asin(Math.sin(la) * Math.sin(decl) + Math.cos(la) * Math.cos(decl) * Math.cos(ha)) / rad;
+}
+function drawNight() {
+  const ng = $("#ov-night"); if (!ng) return; const now = new Date(), step = 1;
+  const buckets = {twilight: [], night: []};
+  for (let lat = US_BOX.lat0; lat < US_BOX.lat1; lat += step) for (let lon = US_BOX.lon0; lon < US_BOX.lon1; lon += step) {
+    const a = sunAlt(lon + step / 2, lat + step / 2, now); const b = a < -6 ? "night" : a < 0 ? "twilight" : null; if (!b) continue;
+    const q = [[lon, lat], [lon + step, lat], [lon + step, lat + step], [lon, lat + step]].map(([x, y]) => ALB(x, y));
+    buckets[b].push("M" + q.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") + "Z"); }
+  ng.replaceChildren(svgEl("path", {d: buckets.twilight.join(""), class: "twilight"}), svgEl("path", {d: buckets.night.join(""), class: "night"}));
+  const center = sunAlt(-96, 38, now);
+  $("#nightnote") && ($("#nightnote").textContent = `Sun over the middle of the US: ${center > 0 ? "up, " + center.toFixed(0) + "° high" : center > -6 ? "twilight" : "night"} · ${now.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"})} your time`);
+}
+function satPos(rec, d) {
+  const pv = satellite.propagate(rec, d); if (!pv || !pv.position) return null;
+  const gd = satellite.eciToGeodetic(pv.position, satellite.gstime(d));
+  return [satellite.degreesLong(gd.longitude), satellite.degreesLat(gd.latitude)];
+}
+let nextPass = {};
+function drawSats(full) {
+  const sg = $("#ov-sats"); if (!sg || !OVDATA.satrecs) return; const now = new Date();
+  if (full || !drawSats.t || now - drawSats.t > 30000) { drawSats.t = now; nextPass = {};
+    OVDATA.satrecs.forEach(s => { for (let m = 0; m <= 24 * 60; m += 1) { const p = satPos(s.rec, new Date(+now + m * 6e4)); if (p && inUS(...p)) { nextPass[s.name] = m; break; } } }); }
+  const kids = [];
+  OVDATA.satrecs.forEach(s => {
+    const p = satPos(s.rec, now); if (!p) return; const sw = (s.name.startsWith("Landsat") ? SWATH.Landsat : SWATH["Sentinel-2"]) * KM_PX;
+    const track = []; for (let sec = -900; sec <= 900; sec += 20) { const q = satPos(s.rec, new Date(+now + sec * 1000)); if (q && inUS(...q)) track.push(ALB(...q)); else if (track.length && track.at(-1) !== null) track.push(null); }
+    const segs = []; let cur = []; track.forEach(pt => { if (pt) cur.push(pt); else if (cur.length) { segs.push(cur); cur = []; } }); if (cur.length) segs.push(cur);
+    segs.forEach(sgm => { if (sgm.length < 2) return; const d = "M" + sgm.map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join("L");
+      kids.push(svgEl("path", {d, class: "swath", "stroke-width": sw}), svgEl("path", {d, class: "track"})); });
+    if (inUS(...p)) { const [x, y] = ALB(...p); const c = svgEl("circle", {cx: x, cy: y, class: "sat"}); const t = svgEl("text", {x, y, class: "satl", dy: -10}); t.textContent = s.name; kids.push(c, t); }
+  });
+  sg.replaceChildren(...kids);
+  satCard(now);
+}
+function satCard(now) {
+  let card = $("#satcard"); if (!card) { card = el("div", {id: "satcard"}); $(".stage").append(card); } card.hidden = false;
+  const rows = OVDATA.satrecs.map(s => { const p = satPos(s.rec, now), age = Math.round((now - epochOf(s.l1)) / 864e5), m = nextPass[s.name];
+    const where = p && inUS(...p) ? "over the US now" : m == null ? "not over the US in the next 24 h" : m == 0 ? "over the US now" : `over the US in ${m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min"}`;
+    return el("tr", {}, el("td", {}, el("b", {textContent: s.name})), el("td", {textContent: where}), el("td", {className: "muted", title: "Age of the orbit data. Older data means a less exact position.", textContent: age <= 3 ? "exact" : `approx. (${age} d old)`})); });
+  card.replaceChildren(el("div", {className: "ovt", textContent: "Imaging satellites, live"}), el("table", {className: "mini"}, rows),
+    el("div", {className: "note", textContent: "Computed in your browser from published orbit data. Shaded band = the strip each one photographs (290 km Sentinel-2, 185 km Landsat)."}),
+    ...(OV.night ? [el("div", {className: "note", id: "nightnote"})] : []));
+  if (OV.night) drawNight();
+}
+function epochOf(l1) { const yy = +l1.slice(18, 20), doy = parseFloat(l1.slice(20, 32)); return Date.UTC(2000 + yy, 0, 1) + (doy - 1) * 864e5; }

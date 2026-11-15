@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from board import app  # noqa: E402
+from board import app
 
 HERE = Path(__file__).resolve().parent
 
@@ -27,6 +27,8 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
         "/api/extras": app.extras_data(fresh=1),
         "/api/geo": json.loads((HERE / "us_states.json").read_text()),
         "/api/counties": json.loads((HERE / "us_counties.topo.json").read_text()),
+        "/api/roads": json.loads((HERE / "roads.json").read_text()),
+        "/api/tle": json.loads((HERE / "tle.json").read_text()),
     }
     taken = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     shim = ("<script>window.__SNAP=" + json.dumps(snap, separators=(",", ":")).replace("</", "<\\/") + ";"
@@ -36,6 +38,8 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
             "{headers:{'Content-Type':'application/json'}}));return real(u,o)}})();</script>")
     page = (HERE / "page.html").read_text()
     map_js = (HERE / "map.js").read_text().replace("</script", "<\\/script")
+    sat_js = (HERE / "satellite.min.js").read_text().replace("</script", "<\\/script")
+    page = page.replace('<script src="/satellite.min.js"></script>', "<script>" + sat_js + "</script>")
     page = page.replace('<script src="/map.js"></script>', shim + "<script>" + map_js + "</script>")
     out.write_text(page)
     print(f"wrote {out} ({out.stat().st_size // 1024} KB), data as of {taken}")

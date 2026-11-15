@@ -95,3 +95,16 @@ moment. Open it in any browser or host it anywhere. Rerun after new results land
 
 County and harvest layers come from `board/extras.py` (Quick Stats exports, `data/weather/county_season`,
 the BARC field file). County outlines: `board/us_counties.topo.json` from `us-atlas@3` (ISC).
+
+## Overlays (top right of the map)
+
+- **Highways**: Interstates (gold) and US highways from Natural Earth 10m roads (public domain),
+  `board/roads.json`.
+- **Satellites (live)**: Sentinel-2A/2B/2C and Landsat 8/9, positioned in the browser every 2 seconds
+  from their published orbital elements (`board/tle.json`, fetched 2026-11-15 from n2yo.com; checksums
+  verified) with `satellite.js` (MIT, bundled as `board/satellite.min.js`). The shaded band is the strip
+  each one images. Elements older than a few days give an approximate position; the card says how old.
+  Refresh `tle.json` for exact positions.
+- **Day / night (live)**: where the sun is up, setting or down right now, from the clock in the browser.
+
+Plain-English model and folder names: `board/names.json`.

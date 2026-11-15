@@ -50,6 +50,8 @@ METHODS = [("xgb", "gradient boosting"), ("gbt", "gradient boosting"), ("ridge",
 
 # Feature sets the code defines, so the board can show inputs, not just names.
 KNOWN_FEATURES = {
+    "kernel/smoothed_chopping": ["smoothed state level (EWMA in logs)", "yield shortfall vs 10-year trend (drought)",
+                                 "grain acres"],
     "kernel/reversion_only": ["reversion"],
     "kernel/nass_acres": ["reversion", "d_planted", "d_not_grain"],
     "kernel/stress": ["reversion", "d_drought", "d_poor", "yield_shock", "d_loss"],
@@ -84,6 +86,14 @@ def method(name: str) -> str:
     if found:
         return found
     return "rule (no fitting)" if any(key in low for key in RULES) else "not recorded"
+
+
+def person(tag: str | None) -> str | None:
+    """'cc-daniel' or 'codex-manraj-brev1' -> 'Daniel' / 'Manraj' (the protocol's AGENT_ID is tool-human[-host])."""
+    if not tag:
+        return None
+    parts = tag.split("-")
+    return parts[1].capitalize() if len(parts) > 1 else tag
 
 
 def owner(folder: Path) -> str | None:
@@ -402,6 +412,22 @@ def state_history() -> pd.DataFrame:
     return t
 
 
+def display_names() -> dict:
+    path = Path(__file__).with_name("names.json")
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+ABBR = {"gbt": "boosted trees", "xgb": "boosted trees", "nass": "NASS", "us": "US", "lad": "median regression",
+        "fsa": "FSA", "rma": "RMA", "sat": "satellite", "ewma": "smoothed"}
+
+
+def prettify(name: str) -> str:
+    """A readable fallback for a code name: silage_gbt_small -> 'Silage boosted trees small'."""
+    words = [ABBR.get(w.lower(), w) for w in re.split(r"[_\s.:]+", name) if w]
+    text = " ".join(words)
+    return text[:1].upper() + text[1:] if text else name
+
+
 def catalog() -> dict:
     """Planned models (board/catalog.json): shown as 'awaiting results' until someone publishes them."""
     path = Path(__file__).with_name("catalog.json")
@@ -422,6 +448,8 @@ def collect() -> dict:
     except Exception as error:  # noqa: BLE001
         problems.append(f"plugins: {type(error).__name__}: {error}")
 
+    labels = display_names()
+    tier = {c["id"]: f'{c["id"]} · {c["name"]}' for c in catalog().get("models", [])}
     for result in results:
         source, folder, bt, fc, notes = result[:5]
         feats = result[5] if len(result) > 5 else {}
@@ -444,9 +472,12 @@ def collect() -> dict:
             features = card.get("features") or feats.get(name) or KNOWN_FEATURES.get(f"{source}/{name}")
             models[mid] = {
                 "model_id": mid, "model": name, "target": target, "source": source, "folder": rel,
-                "owner": card.get("owner") or who,
+                "label": card.get("label") or labels.get("models", {}).get(mid) or tier.get(name) or prettify(name),
+                "source_label": labels.get("folders", {}).get(source) or source,
+                "owner": card.get("owner") or person(who),
                 "signals": card.get("signals") or families(name, features),
-                "method": card.get("method") or ("ridge regression" if f"{source}/{name}" in KNOWN_FEATURES
+                "method": card.get("method") or ("smoothed level + drought term" if name == "smoothed_chopping"
+                                                  else "ridge regression" if f"{source}/{name}" in KNOWN_FEATURES
                                                   else method(name)),
                 "features": features or [], "description": card.get("description") or notes.get(f"{target}/{name}", ""),
             }

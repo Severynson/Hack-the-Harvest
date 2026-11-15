@@ -18,7 +18,7 @@ h2{font-size:15px;margin:0 0 8px;font-weight:600}.muted{color:var(--muted)}.note
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .seg button{background:none;border:0;color:var(--muted);padding:6px 12px;font:inherit;cursor:pointer}.seg button[aria-pressed=true]{background:var(--line);color:var(--text)}
 .chip{border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:none;color:var(--muted);font:inherit;font-size:12px;cursor:pointer}
-.chip[aria-pressed=true]{color:var(--text);border-color:var(--muted)}
+.chip[aria-pressed=true]{color:#111;background:var(--accent);border-color:var(--accent);font-weight:600}
 .tag{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 6px;margin:1px 2px 1px 0;font-size:11px;color:var(--muted);white-space:nowrap}
 input,select{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit}
 button.act{background:var(--accent);color:#111;border:0;border-radius:6px;padding:6px 12px;font:inherit;font-weight:600;cursor:pointer}
@@ -62,6 +62,14 @@ tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text
 #usmap .cty:hover{filter:brightness(1.35)}#usmap.countymode .borders{stroke:#e6e9ee;stroke-opacity:.5}
 #usmap .mk{fill:var(--accent);stroke:#0b0e13}#usmap .mkl{fill:var(--text);font-family:var(--sans);font-weight:600;paint-order:stroke;stroke:#0b0e13;stroke-width:.4}
 #legend-map .what{font-size:12px;line-height:1.45;margin-bottom:8px;color:var(--text)}#legend-map .what b{color:var(--accent)}
+#ovctl{position:absolute;top:150px;right:12px;display:flex;flex-direction:column;gap:4px;align-items:stretch;background:rgba(14,17,22,.88);border:1px solid var(--line);border-radius:8px;padding:8px}
+#ovctl .chip{text-align:left}.ovt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+#satcard{position:absolute;right:12px;bottom:34px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
+#satcard td{padding:3px 6px;font-size:12px}#satcard[hidden]{display:none}
+#usmap .road{fill:none;stroke-linecap:round;stroke-linejoin:round}#usmap .road.interstate{stroke:#f2c14e;stroke-opacity:.9}#usmap .road.us{stroke:#c9ced6;stroke-opacity:.55}
+#usmap .night{fill:#02040a;fill-opacity:.55;pointer-events:none}#usmap .twilight{fill:#02040a;fill-opacity:.28;pointer-events:none}
+#usmap .swath{fill:none;stroke:#7fd1ff;stroke-opacity:.16;stroke-linecap:round;pointer-events:none}#usmap .track{fill:none;stroke:#7fd1ff;stroke-dasharray:4 3;pointer-events:none}
+#usmap .sat{fill:#7fd1ff;stroke:#0b0e13}#usmap .satl{fill:#e6f6ff;font-family:var(--sans);font-weight:600;text-anchor:middle;paint-order:stroke;stroke:#0b0e13;stroke-width:.4}
 #help{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(14,17,22,.96);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;max-width:420px;z-index:5}
 #help ol{margin:8px 0 12px;padding-left:18px}#help li{margin:3px 0}
 #mapctl{position:absolute;top:12px;left:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;max-width:calc(100% - 140px)}
@@ -97,7 +105,7 @@ td.barcell{width:40%}td.barcell i{display:block;height:6px;border-radius:3px;bac
   <div class="stage"><svg id="usmap" role="img" aria-label="Map of US states"></svg>
    <div id="mapctl"></div>
    <div class="zoom"><button id="zin" title="Zoom in">+</button><button id="zout" title="Zoom out">−</button><button id="zreset" title="Reset view">↺</button><span id="zoomlvl">1.0×</span></div>
-   <div id="legend-map"></div><div class="hint">Drag to pan · scroll to zoom · click a state</div></div>
+   <div id="ovctl"></div><div id="legend-map"></div><div class="hint">Drag to pan · scroll to zoom · click a state</div></div>
   <aside id="sp" aria-label="State details"></aside>
  </div>
 </section>
@@ -160,6 +168,7 @@ publish("test_models/myModel/out",
 </main>
 <aside class="drawer" id="drawer" hidden aria-label="Model details"></aside>
 <div class="tip" id="tip" hidden></div>
+<script src="/satellite.min.js"></script>
 <script src="/map.js"></script>
 <script>
 const $=s=>document.querySelector(s),el=(t,p={},...k)=>{const e=document.createElement(t);for(const a in p){if(a.includes("-"))e.setAttribute(a,p[a]);else e[a]=p[a]}k.flat().forEach(c=>c!=null&&c!==false&&e.append(c));return e};
@@ -193,11 +202,11 @@ function leader(){
  $("#lb thead").replaceChildren(el("tr",{},head.map(([k,l,c])=>{const th=el("th",{textContent:l+(S.sort==k&&k?(S.dir>0?" ↑":" ↓"):""),className:c});
   if(k&&k!="#")th.onclick=()=>{S.dir=S.sort==k?-S.dir:1;S.sort=k;draw()};return th})));
  $("#lb tbody").replaceChildren(...rows.map((r,i)=>{const m=r.m,s=r.s,id=m.model_id;
-  const cb=el("input",{type:"checkbox",className:"check",checked:S.sel.has(id),title:"Compare"});cb.setAttribute("aria-label","Compare "+m.model);
+  const cb=el("input",{type:"checkbox",className:"check",checked:S.sel.has(id),title:"Compare"});cb.setAttribute("aria-label","Compare "+m.label);
   cb.onclick=e=>{e.stopPropagation();toggle(id)};
   const tr=el("tr",{className:S.sel.has(id)?"sel":"",tabIndex:0},el("td",{},cb),el("td",{className:"n muted",textContent:i+1}),
-   el("td",{},el("b",{textContent:m.model}),m.description?el("div",{className:"note",textContent:m.description}):null),
-   el("td",{className:"muted",textContent:m.source}),el("td",{className:"muted",textContent:m.owner||dash}),
+   el("td",{},el("b",{textContent:m.label}),el("div",{className:"note mono",textContent:m.model}),m.description?el("div",{className:"note",textContent:m.description}):null),
+   el("td",{className:"muted",textContent:m.source_label}),el("td",{className:"muted",textContent:m.owner||dash}),
    el("td",{},m.signals.map(f=>el("span",{className:"tag",textContent:f}))),el("td",{className:"muted",textContent:m.method}),
    el("td",{className:"n",textContent:`${s.years} (${s.first}–${String(s.last).slice(2)})`}),
    el("td",{className:"n"+(s.state===bestState?" best":""),textContent:pct(s.state)}),
@@ -214,7 +223,7 @@ function toggle(id){if(S.sel.has(id))S.sel.delete(id);else{if(S.sel.size>=8){$("
 function details(id){const m=MODELS[id],d=$("#drawer"),rows=BT[id]||[];
  const close=el("button",{className:"ghost x",textContent:"Close"});close.onclick=()=>{d.hidden=true};
  const cmp=el("button",{className:"act",textContent:S.sel.has(id)?"Remove from compare":"Add to compare"});cmp.onclick=()=>{toggle(id);details(id)};
- d.replaceChildren(...[close,el("h2",{textContent:m.model}),el("p",{className:"muted",textContent:`${m.target} · ${m.folder} · ${m.owner||"owner unknown"} · ${m.method}`}),
+ d.replaceChildren(...[close,el("h2",{textContent:m.label}),el("p",{className:"muted",textContent:`${m.model} · ${m.target} · ${m.source_label} · ${m.owner||"owner unknown"} · ${m.method}`}),
   m.description?el("p",{textContent:m.description}):null,
   el("p",{},m.signals.map(f=>el("span",{className:"tag",textContent:f}))),
   el("p",{className:"note",textContent:m.features.length?"Inputs: "+m.features.join(", "):"Inputs not recorded in the folder."}),cmp,
@@ -257,7 +266,7 @@ function swatch(slot){const ns="http://www.w3.org/2000/svg",s=document.createEle
  add("line",{x1:0,x2:22,y1:6,y2:6,stroke:`var(${SLOTS[slot]})`,"stroke-width":2});marker(add,SHAPES[slot],11,6,`var(${SLOTS[slot]})`);return s}
 
 function compare(){const ids=[...S.sel.keys()].filter(id=>MODELS[id]);$("#cmp-empty").hidden=ids.length>0;$("#cmp-body").hidden=!ids.length;if(!ids.length)return;
- const series=ids.map(id=>({id,slot:S.sel.get(id),label:`${MODELS[id].model} (${MODELS[id].source}, ${MODELS[id].target})`,rows:atDate(id)}));
+ const series=ids.map(id=>({id,slot:S.sel.get(id),label:`${MODELS[id].label} (${MODELS[id].source_label}, ${MODELS[id].target})`,rows:atDate(id)}));
  $("#legend").replaceChildren(...series.map(s=>el("span",{},swatch(s.slot),s.label)));
  lineChart($("#ch-state"),series,"state_error_pct");lineChart($("#ch-us"),series,"us_error_pct",{signed:true});
  const years=[...new Set(series.flatMap(s=>s.rows.map(r=>r.year)))].sort();
@@ -278,17 +287,17 @@ function forecast(){seg($("#ftarget"),"ftarget",[["silage","Silage"],["grain","G
  const X=v=>L+(v-(lo-pad))/((hi+pad)-(lo-pad))*(W-L-R);const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("width","100%");
  const add=(t,a,txt)=>{const n=document.createElementNS(ns,t);for(const k in a)n.setAttribute(k,a[k]);if(txt!=null)n.textContent=txt;svg.append(n);return n};
  for(let i=0;i<=4;i++){const v=lo-pad+i*((hi+pad)-(lo-pad))/4;add("line",{x1:X(v),x2:X(v),y1:4,y2:H-22,class:"grid"});add("text",{x:X(v),y:H-6,"text-anchor":"middle"},kac(v)+"k")}
- us.forEach((u,i)=>{const y=26+i*rowH;add("text",{x:L-10,y:y+4,"text-anchor":"end"},`${u.m.model} (${u.m.source})`);
+ us.forEach((u,i)=>{const y=26+i*rowH;add("text",{x:L-10,y:y+4,"text-anchor":"end"},`${u.m.label} (${u.m.source_label})`);
   if(u.lo!=null&&u.hi!=null)add("line",{x1:X(u.lo),x2:X(u.hi),y1:y,y2:y,stroke:"var(--s1)","stroke-width":2,"stroke-linecap":"round"});
   const c=add("circle",{cx:X(u.v),cy:y,r:5,fill:"var(--s1)",stroke:"var(--panel)","stroke-width":2});
   add("text",{x:X(u.v),y:y-9,"text-anchor":"middle"},kac(u.v));
   const hit=add("rect",{x:0,y:y-rowH/2,width:W,height:rowH,fill:"transparent"});
-  hit.addEventListener("mousemove",e=>{const t=$("#tip");t.replaceChildren(el("b",{textContent:u.m.model}),el("div",{textContent:`${kac(u.v)}k acres (${u.how=="own"?"model's US row":u.how+" states"})`}),
+  hit.addEventListener("mousemove",e=>{const t=$("#tip");t.replaceChildren(el("b",{textContent:u.m.label}),el("div",{textContent:`${kac(u.v)}k acres (${u.how=="own"?"model's US row":u.how+" states"})`}),
    u.lo!=null?el("div",{className:"muted",textContent:`80% range ${kac(u.lo)}k to ${kac(u.hi)}k`}):el("div",{className:"muted",textContent:"No US range given"}));
    t.hidden=false;t.style.left=Math.min(e.clientX+14,innerWidth-320)+"px";t.style.top=e.clientY+14+"px"});hit.addEventListener("mouseleave",()=>$("#tip").hidden=true)});
  box.replaceChildren(svg)}
  const states=[...new Set(D.forecast.filter(r=>r.target==S.ftarget&&r.state!="US").map(r=>r.state))].sort();
- $("#fc-table").replaceChildren(...[el("tr",{},el("th",{textContent:"State"}),ms.map(m=>el("th",{className:"n",textContent:m.model,title:m.source}))),
+ $("#fc-table").replaceChildren(...[el("tr",{},el("th",{textContent:"State"}),ms.map(m=>el("th",{className:"n",textContent:m.label,title:m.source_label+" \u00b7 "+m.model}))),
   el("tr",{},el("td",{},el("b",{textContent:"US"})),us.map(u=>el("td",{className:"n"},el("b",{textContent:kac(u.v)+"k"}),el("div",{className:"note",textContent:u.how=="own"?"own":u.how})))),
   states.map(st=>el("tr",{},el("td",{textContent:st}),ms.map(m=>{const r=(by[m.model_id]||{})[st];return el("td",{className:"n",title:r&&r.lo80!=null?`80%: ${kac(r.lo80)}k to ${kac(r.hi80)}k`:"",textContent:r?kac(r.predicted)+"k":dash})})))].flat())}
 
@@ -319,7 +328,7 @@ function tiers(){const C=CAT,pct=v=>v==null||Number.isNaN(v)?dash:v.toFixed(2);$
    const base=list.find(m=>m.baseline),basePub=base?published(base):null;
    const t=el("table");t.append(el("tr",{},cols.map((c,i)=>el("th",{className:i>3?"n":"",textContent:c}))));
    (C.benchmarks||[]).filter(b=>b.crop==crop&&MODELS[b.model_id]).forEach(b=>{const s=stats(b.model_id),h=atDate(b.model_id).find(r=>r.year==C.holdout_year);
-    const tr=el("tr",{className:"bench"},el("td",{textContent:"bar"}),el("td",{},el("b",{textContent:b.label})),el("td",{className:"note",textContent:MODELS[b.model_id].source+" / "+MODELS[b.model_id].model}),
+    const tr=el("tr",{className:"bench"},el("td",{textContent:"bar"}),el("td",{},el("b",{textContent:b.label})),el("td",{className:"note",textContent:MODELS[b.model_id].source_label+" \u00b7 "+MODELS[b.model_id].label}),
      el("td",{textContent:"measured"}),el("td",{className:"n",textContent:s.years?`${s.years} (${s.first}–${String(s.last).slice(2)})`:dash}),
      el("td",{className:"n",textContent:pct(s.state)}),el("td",{className:"n",textContent:pct(s.us)}),el("td",{className:"n",textContent:h?pct(h.state_error_pct):dash}),el("td",{className:"n",textContent:""}),el("td",{className:"n",textContent:""}));
     tr.onclick=()=>details(b.model_id);t.append(tr)});
@@ -329,7 +338,7 @@ function tiers(){const C=CAT,pct=v=>v==null||Number.isNaN(v)?dash:v.toFixed(2);$
      el("span",{className:r.pass?"pass":"fail",title:`Gain over ${base.id}: ${r.gain.toFixed(2)} points; needs more than ${r.two.toFixed(2)} (2 × SE over ${r.n} years)`,textContent:`${r.pass?"✓ passes":"✗ not enough"} (${r.gain>=0?"+":""}${r.gain.toFixed(1)} vs ${r.two.toFixed(1)})`})}
     const tr=el("tr",{tabIndex:0},el("td",{className:"mono",style:"white-space:nowrap",textContent:c.id}),el("td",{},el("b",{textContent:c.name}),el("div",{className:"note",textContent:c.how})),
      el("td",{},c.features.map(f=>el("span",{className:"tag",textContent:f}))),
-     el("td",{},id?el("span",{textContent:"published · "+m.source}):el("span",{className:"await",textContent:"awaiting results"})),
+     el("td",{},id?el("span",{textContent:"published · "+m.source_label}):el("span",{className:"await",textContent:"awaiting results"})),
      el("td",{className:"n",textContent:s&&s.years?`${s.years} (${s.first}–${String(s.last).slice(2)})`:dash}),
      el("td",{className:"n",textContent:s?pct(s.state):dash}),el("td",{className:"n",textContent:s?pct(s.us):dash}),
      el("td",{className:"n",textContent:h?pct(h.state_error_pct):dash}),el("td",{className:"n"},ruleCell),
@@ -356,7 +365,7 @@ async function load(){$("#summary").textContent="Reading model folders…";
  if(S.y0==null){const bty=CAT.backtest_years||[years[0],years.at(-1)];S.y0=Math.max(years[0],bty[0]);S.y1=Math.min(years.at(-1),bty[1])}
  $("#holdout-note").textContent=CAT.holdout_year?`${CAT.holdout_year} is held out by default`:"";
  [["#y0","y0"],["#y1","y1"]].forEach(([s,k])=>{$(s).replaceChildren(...years.map(y=>el("option",{value:y,textContent:y,selected:y==S[k]})));$(s).onchange=e=>{S[k]=+e.target.value;draw()}});
- const srcs=[...new Set(D.models.map(m=>m.source))].sort();$("#src").replaceChildren(el("option",{value:"",textContent:"All folders"}),...srcs.map(s=>el("option",{value:s,textContent:s,selected:s==S.src})));
+ const srcs=[...new Set(D.models.map(m=>m.source))].sort();$("#src").replaceChildren(el("option",{value:"",textContent:"All folders"}),...srcs.map(s=>el("option",{value:s,textContent:(D.models.find(m=>m.source==s)||{}).source_label||s,selected:s==S.src})));
  const owners=new Set(D.models.map(m=>m.owner).filter(Boolean));
  $("#summary").textContent=`${D.models.length} models from ${srcs.length} folders, ${owners.size} people · ${D.field.length} field-model runs · ${window.__SNAP?"snapshot of":"read"} ${D.read_at}`;
  $("#problems").replaceChildren(...D.problems.map(p=>el("div",{className:"callout",textContent:"Could not read: "+p})));draw()}
