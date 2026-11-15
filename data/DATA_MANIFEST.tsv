@@ -220,11 +220,14 @@ data/models/state_model_backtest_asof_sep.csv	2231	4da014b8816d660e68d3a248cbff1
 data/models/state_model_weights_asof_sep.csv	443	119152d724654996a729c0489f6d91164c2fb605f5fbf95ee3ec9c6b4048decf	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
 data/models/state_model_bias_asof_sep.csv	998	ce17c701eba4dfea28cd164697f89f530a7a866312a5846501933aa66ece3494	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
 data/models/state_model_metrics_asof_sep.json	1198	31f59a745376698424de0c0c343560925efec84e27d352e9ece299f35910975a	derived: kernelag.state_model	unknown	2026-11-15T02:34Z
-data/models/state_forecast_2026.csv	6350	9af852056d71371c0ff36a1be2586367c85431c6974e090180aec4910954f81c	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
 data/models/state_score_2025.csv	7628	1beae9271e202f01bdc509889f40506e899ab635cd13913123beea939d0f5c62	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
 data/models/state_score_2025.json	474	ff033c61e7f188acd2e12c5953dd5143c31a54fe130966205d74509db01c8def	derived: kernelag.state_model	cc-manraj	2026-11-15T02:39Z
-data/panel/state_year.csv	124032	a05f833b02b9cbfd1e95505d4757ffa900e0a26aa8fe8bdd6b15ca1644425ead	https://quickstats.nass.usda.gov/api	unknown	2026-11-15T03:02Z
-data/models/state_model_backtest.csv	2850	af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
-data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
-data/models/state_model_bias.csv	997	9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
-data/models/state_model_metrics.json	1240	ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b	derived: kernelag.state_model	unknown	2026-11-15T03:02Z
+data/nass/corn_acres_state.csv	206573	3c134eab35b05e6ae09b8e92c05e86b9583a3c8f0848e5b3b8539e74518d8dd2	https://quickstats.nass.usda.gov/	unknown	2026-11-15T03:05Z
+data/nass/corn_acres_county.csv	374039	439f5442991f16a718062919468f27ffec7332ee2e720c4166eab15b4fe9c0ce	https://quickstats.nass.usda.gov/	unknown	2026-11-15T03:05Z
+data/nass/baselines.csv	4341	95750af5081de0da60dac5f126270ae2347018378c35c717bd3ad18eb57ca4fe	https://quickstats.nass.usda.gov/	unknown	2026-11-15T03:05Z
+data/panel/state_year.csv	124758	032943b783f4ed175843c1bfaf166d3907278e49dff382517470499f6cb70aef	https://quickstats.nass.usda.gov/api	unknown	2026-11-15T03:05Z
+data/models/state_model_backtest.csv	2850	af7aa01871ade612cda480ea9d7e736ab22f16f8d32147a69be67eb724814e38	derived: kernelag.state_model	unknown	2026-11-15T03:05Z
+data/models/state_model_weights.csv	451	5e4b723f65bbeca079852d3c8f757a2423d7886cf7651028aad1fa88a53efe19	derived: kernelag.state_model	unknown	2026-11-15T03:05Z
+data/models/state_model_bias.csv	997	9b5ffed779732f6095b02ca593a9eb71d55dec47d32ca050b806c03508c4396a	derived: kernelag.state_model	unknown	2026-11-15T03:05Z
+data/models/state_model_metrics.json	1240	ce9560b663fce1202a2ca2b5d285e835e91d7238e7a2080271bee812393f460b	derived: kernelag.state_model	unknown	2026-11-15T03:05Z
+data/models/state_forecast_2026.csv	6175	48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a515a514b74538c81a13d2a779a	derived: kernelag.state_model	unknown	2026-11-15T03:05Z
