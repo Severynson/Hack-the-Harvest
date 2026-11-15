@@ -20,7 +20,7 @@ Outputs:
 
 Run:
     python -m kernelag.state_sample                    choose the sample (minutes)
-    python -m kernelag.state_sample --pull --workers 6 pull Sentinel-2 series for it, states in parallel
+    python -m kernelag.state_sample --pull             pull Sentinel-2 series for it, 40 areas at a time
 """
 
 from __future__ import annotations
@@ -147,26 +147,48 @@ def choose_sample(dataset: Path, states: pd.DataFrame, cells_per_state: int, lay
     return summary
 
 
-def pull_series(workers: int) -> None:
-    """Pull Sentinel-2 series for every state file, several states at once. Safe to rerun: it resumes."""
-    samples = data_dir() / "samples"
-    logs = samples / "logs"
+def pull_tasks() -> list[tuple[Path, str, int]]:
+    """(state file, area, number of years) for every sampled area, ordered so states advance together.
+
+    The first area of every state comes first, then the second of every state, and so on. A pull
+    that is stopped early therefore leaves each state with a similar number of complete areas.
+    """
+    per_state = []
+    for path in sorted((data_dir() / "samples").glob("corn_*.parquet")):
+        sample = pd.read_parquet(path, columns=["cell", "year"]).drop_duplicates()
+        per_state.append([(path, cell, len(years)) for cell, years in sample.groupby("cell", sort=True)])
+    tasks = []
+    for position in range(max(len(areas) for areas in per_state)):
+        tasks += [areas[position] for areas in per_state if position < len(areas)]
+    return tasks
+
+
+def area_years_on_disk() -> int:
+    return len(list((data_dir() / "s2_series").glob("corn_*/*.csv")))
+
+
+def pull_series(workers: int, read_threads: int = 16) -> None:
+    """Pull Sentinel-2 series for the sample, many areas at once. Safe to rerun: finished files are kept."""
+    logs = data_dir() / "samples" / "logs"
     logs.mkdir(parents=True, exist_ok=True)
-    files = sorted(samples.glob("corn_*.parquet"))
-    environment = {**os.environ, "KERNEL_NO_MANIFEST": "1"}
+    tasks = pull_tasks()
+    expected = sum(n_years for _, _, n_years in tasks)
+    environment = {**os.environ, "KERNEL_NO_MANIFEST": "1", "KERNEL_READ_THREADS": str(read_threads)}
 
-    def run(path: Path) -> str:
-        log = logs / f"{path.stem}.log"
-        with open(log, "w") as handle:
-            code = subprocess.run([sys.executable, "-m", "kernelag.s2_series", "--fields", str(path), "--cells", "0"],
-                                  stdout=handle, stderr=subprocess.STDOUT, env=environment).returncode
-        done = len(list((data_dir() / "s2_series" / path.stem).glob("*.csv")))
-        return f"{path.stem}: exit {code}, {done} area-years on disk (log: {log})"
+    def run(task: tuple[Path, str, int]) -> str:
+        path, cell, _ = task
+        with open(logs / f"{path.stem}_{cell}.log", "w") as handle:
+            code = subprocess.run(
+                [sys.executable, "-m", "kernelag.s2_series", "--fields", str(path), f"--only-cells={cell}"],
+                stdout=handle, stderr=subprocess.STDOUT, env=environment).returncode
+        return f"{path.stem} area {cell}: exit {code} | {area_years_on_disk()} of {expected} area-years on disk"
 
-    print(f"pulling {len(files)} states with {workers} at a time...", flush=True)
+    print(f"{len(tasks)} areas, {expected} area-years expected, {area_years_on_disk()} already on disk, "
+          f"{workers} areas at a time", flush=True)
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        for line in pool.map(run, files):
+        for line in pool.map(run, tasks):
             print(" ", line, flush=True)
+    print(f"pull finished: {area_years_on_disk()} of {expected} area-years on disk", flush=True)
 
 
 def main() -> None:
@@ -174,7 +196,7 @@ def main() -> None:
     parser.add_argument("--states", type=int, default=15, help="how many top silage states to sample")
     parser.add_argument("--cells", type=int, default=10, help="sample areas per state")
     parser.add_argument("--pull", action="store_true", help="pull satellite series for the chosen sample")
-    parser.add_argument("--workers", type=int, default=6, help="states pulled at the same time")
+    parser.add_argument("--workers", type=int, default=40, help="sample areas pulled at the same time")
     args = parser.parse_args()
 
     if args.pull:

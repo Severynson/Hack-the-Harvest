@@ -62,3 +62,23 @@ def test_state_share_weights_each_area_by_one_over_its_size():
     })
     assert share(areas) == 0.30                  # the plain mean of the two area shares
     assert round(jackknife_se(areas), 3) == 0.2  # half the gap between them, for two areas
+
+
+def test_only_complete_areas_are_used(tmp_path):
+    from kernelag.state_signal import complete_areas
+
+    sample = pd.DataFrame({"cell": ["a", "a", "b", "b"], "year": [2019, 2020, 2019, 2020]})
+    for name in ["a_2019", "a_2020", "b_2019"]:      # area b is still missing 2020
+        (tmp_path / f"{name}.csv").write_text("field_id")
+    assert complete_areas(sample, tmp_path) == ["a"]
+
+
+def test_pull_tasks_take_one_area_per_state_in_turn(tmp_path, monkeypatch):
+    monkeypatch.setenv("KERNEL_DATA_DIR", str(tmp_path))
+    (tmp_path / "samples").mkdir()
+    for fips, cells in [("19", ["a", "b"]), ("55", ["c", "d", "e"])]:
+        pd.DataFrame({"cell": [c for c in cells for _ in (0, 1)], "year": [2019, 2020] * len(cells)}
+                     ).to_parquet(tmp_path / "samples" / f"corn_{fips}.parquet")
+    tasks = state_sample.pull_tasks()
+    assert [(path.stem, cell, years) for path, cell, years in tasks] == [
+        ("corn_19", "a", 2), ("corn_55", "c", 2), ("corn_19", "b", 2), ("corn_55", "d", 2), ("corn_55", "e", 2)]

@@ -17,6 +17,7 @@ Run (pilot): ``python -m kernelag.s2_series --fields data/labels/quebec_maize_20
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 import numpy as np
@@ -34,7 +35,8 @@ RESOLUTION_M = 20             # native for B8A, B11 and B12
 INNER_BUFFER_M = 20           # shrink fields by one pixel so roads and tree lines do not mix in
 CELL_KM = 10
 DATES_PER_BATCH = 12          # dates fetched together; about 30 MB of memory per batch
-READ_THREADS = 32             # remote reads are waiting, not computing, so many threads help
+READ_THREADS = int(os.environ.get("KERNEL_READ_THREADS", 32))   # reads wait on the network
+COLUMNS = ["field_id", "date", "year", "valid_frac", "ndvi", "ndmi", "ndti", "s2_offset"]
 
 
 def _s2_offset(item) -> int:
@@ -74,7 +76,7 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
         query={"eo:cloud_cover": {"lt": MAX_SCENE_CLOUD}},
     ).item_collection())
     if not items:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=COLUMNS)
 
     configure_rio(cloud_defaults=True)  # skip directory listings on every remote file open
     cube = load(items, bands=BANDS, bbox=bbox, crs=fields_utm.crs, resolution=RESOLUTION_M,
@@ -85,7 +87,7 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
     core = fields_utm.geometry.buffer(-INNER_BUFFER_M)
     numbered = [(geom, n + 1) for n, geom in enumerate(core) if not geom.is_empty]
     if not numbered:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=COLUMNS)
     zones = rasterize(numbered, out_shape=tuple(gbox.shape), transform=gbox.transform, fill=0, dtype="int32").ravel()
     in_field = zones > 0
     field_ids = fields_utm["field_id"].to_numpy()
@@ -102,9 +104,8 @@ def cell_series(fields_utm, year: int) -> pd.DataFrame:
                                        pd.Timestamp(t).normalize(), year, offsets))
     rows = [r for r in rows if r is not None]
     if not rows:
-        return pd.DataFrame()
-    columns = ["field_id", "date", "year", "valid_frac", "ndvi", "ndmi", "ndti", "s2_offset"]
-    return pd.concat(rows, ignore_index=True)[columns].round({"valid_frac": 3, "ndvi": 4, "ndmi": 4, "ndti": 4})
+        return pd.DataFrame(columns=COLUMNS)
+    return pd.concat(rows, ignore_index=True)[COLUMNS].round({"valid_frac": 3, "ndvi": 4, "ndmi": 4, "ndti": 4})
 
 
 def _field_medians(scene, zones, in_field, field_ids, date, year, offsets):
@@ -147,9 +148,13 @@ def series_for_fields(fields, name: str, cells: list[str] | None = None, force: 
             part = pd.read_csv(part_file, parse_dates=["date"])
         else:
             part = cell_series(group, int(year))
-            part.to_csv(part_file, index=False, lineterminator="\n")
+            if len(part) == 0:
+                part = pd.DataFrame(columns=COLUMNS)   # keep the header so the file reads back
+            unfinished = part_file.with_suffix(".part")
+            part.to_csv(unfinished, index=False, lineterminator="\n")
+            os.replace(unfinished, part_file)          # a stopped run never leaves half a file
             record_in_manifest(part_file, SOURCE_URL)
-        print(f"cell {cell} {year}: {len(group)} fields, {len(part)} field-dates")
+        print(f"cell {cell} {year}: {len(group)} fields, {len(part)} field-dates", flush=True)
         parts.append(part)
     return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
 
@@ -168,11 +173,16 @@ def main() -> None:
     parser.add_argument("--fields", required=True, help="GeoParquet with field_id, year, label, geometry")
     parser.add_argument("--cells", type=int, default=1,
                         help="how many cells to pull, densest in silage first; 0 means every cell")
+    parser.add_argument("--only-cells", default="",
+                        help="comma-separated cell ids to pull, written as --only-cells=ID,ID; overrides --cells")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
     fields = gpd.read_parquet(args.fields)
-    chosen = densest_cells(fields, args.cells) if args.cells > 0 else None
+    if args.only_cells:
+        chosen = args.only_cells.split(",")
+    else:
+        chosen = densest_cells(fields, args.cells) if args.cells > 0 else None
     table = series_for_fields(fields, Path(args.fields).stem, cells=chosen, force=args.force)
     print(f"{len(table)} field-dates for {table['field_id'].nunique() if len(table) else 0} fields")
 

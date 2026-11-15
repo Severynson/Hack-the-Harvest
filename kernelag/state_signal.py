@@ -15,6 +15,8 @@ The share's LEVEL is biased, because the field model calls some grain fields sil
 CHANGE between years on the same areas (``kernelag.state_model``); a constant bias cancels there.
 
 ``share_se`` is a jackknife standard error: the spread of the share when each area is left out in turn.
+Only areas whose series are complete for all their years are used (``areas`` column), so the step
+can be run on an unfinished pull.
 
 Output: ``data/panel/state_satellite.csv``
     state, state_fips, year, areas, fields, assessable_share, sat_share, sat_share_calls, share_se,
@@ -111,6 +113,17 @@ def state_table(totals: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def complete_areas(sample: pd.DataFrame, series_dir: Path) -> list[str]:
+    """Areas whose series are on disk for every one of their corn years.
+
+    Only these are used, so every year of a state rests on the same areas while a pull is unfinished.
+    """
+    pairs = sample[["cell", "year"]].drop_duplicates()
+    on_disk = pairs.apply(lambda row: (series_dir / f"{row['cell']}_{row['year']}.csv").exists(), axis=1)
+    done = on_disk.groupby(pairs["cell"]).all()
+    return done[done].index.tolist()
+
+
 def score_state(sample_file: str, model) -> pd.DataFrame:
     """Everything for one state file; returns its per-year rows (empty if no series were pulled)."""
     import geopandas as gpd
@@ -121,6 +134,9 @@ def score_state(sample_file: str, model) -> pd.DataFrame:
         return pd.DataFrame()
     sample = pd.DataFrame(gpd.read_parquet(path).drop(columns="geometry"))
     sample["field_id"] = sample["field_id"].astype(str)
+    sample = sample[sample["cell"].isin(complete_areas(sample, series_dir))]
+    if sample.empty:
+        return pd.DataFrame()
     totals = area_totals(sample, load_series(series_dir), model)
     totals.to_csv(data_dir() / "samples" / f"{path.stem}_area_totals.csv", index=False, lineterminator="\n")
     table = state_table(totals)
