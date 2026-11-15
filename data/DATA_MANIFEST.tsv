@@ -235,3 +235,5 @@ data/models/state_forecast_2026.csv	6175	48f4a0b535b4eae6d9d8ec89ef66566a0b7c1a5
 data/geography/md_counties.geojson	1808069	966ac6730b223bf7e0b441a9a24b8c738f838e223d5dd3d1aa99a16664384154	https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE%3D%2724%27&outFields=GEOID%2CNAME&outSR=4326&f=geojson&geometryPrecision=5	unknown	2026-11-15T03:36Z
 data/models/metrics.json	5200	e65688bc1235c25f27a8e6b5d0a07f2822e7ef150ab727cf22e7a6261b699195	derived: kernelag.report	codex-manraj	2026-11-15T03:39Z
 data/models/field_explorer.json	387985	aaf0bc0100375b145769428dad96976ce93f174cc78fadc171e810c9b4b54007	derived: kernelag.explorer; BARC public research sample	codex-manraj	2026-11-15T03:41Z
+data/nass/reports/crop0926.txt	187566	9a549c8d8a9379510064c4cd1b8054ecad67badf2cc9a5bc941b4d0774a58cb2	https://release.nass.usda.gov/reports/crop0926.txt	codex-manraj	2026-11-15T03:43Z
+data/nass/reports/crop1126.txt	161866	a4f1108bdbf19c4ab3d5ec499fb725dd397e6e231f25a5f5c28f61c765de572b	https://release.nass.usda.gov/reports/crop1126.txt	codex-manraj	2026-11-15T03:43Z

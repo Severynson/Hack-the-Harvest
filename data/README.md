@@ -36,12 +36,11 @@ The organizers' starter kit is tracked separately at `jupyter/workspace/`.
 
 ## Known gaps (checked 2026-11-15)
 
-- The hay production, hay stocks, hay price, milk price and cattle-on-feed series named in the table are not in `Quickstats Data/`.
-- `drought/county_weekly/` has no file for Texas, Virginia, West Virginia, Wisconsin or Wyoming; the state file covers all states.
 - State silage acres for 2021, grain acres for 2018 and county planted acres for 2021 are missing from the `*_2015_2025.csv`
   files; `kernelag.nass` takes those years from the organizers' file.
-- No file holds 2026 planted acres or NASS's 2026 grain forecasts.
-- `scripts/pull_data.py` is not in the repository.
+- 2026 planted and grain forecasts are available in `nass/reports/` and the tidy acreage table. Long-history Quick Stats files are also present.
+- State satellite aggregates and state sample series are not yet in this checkout; the report leaves their comparisons uncomputed.
+- County boundaries for the field explorer are cached in `geography/md_counties.geojson`; county weather is contextual and does not enter field classification. Soil and radar are not integrated.
 
 ## Built by `kernelag` (rebuild with the commands in each module's docstring)
 
