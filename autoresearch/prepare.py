@@ -1,389 +1,325 @@
 """
-One-time data preparation for autoresearch experiments.
-Downloads data shards and trains a BPE tokenizer.
+Fixed data preparation and evaluation harness for the silage-vs-grain autoresearch loop.
+
+What it does (run once, cached):
+  1. Loads the organizer BARC field polygons + yearly Grain/Silage labels.
+  2. Pulls Sentinel-2 L2A scenes (Microsoft Planetary Computer, no account needed)
+     over the BARC fields, 1 Mar - 20 Dec, 2021-2023.
+  3. For every field and scene: keeps only pixels fully inside the field (polygon
+     shrunk inward by EROSION_M), drops cloud/shadow/snow pixels using the SCL band,
+     and stores the per-field median of several spectral indices.
 
 Usage:
-    python prepare.py                  # full prep (download + tokenizer)
-    python prepare.py --num-shards 8   # download only 8 shards (for testing)
+    uv run prepare.py            # build the cache (~10-20 min, network)
+    uv run prepare.py --force    # rebuild
 
-Data and tokenizer are stored in ~/.cache/autoresearch/.
+Cache: ~/.cache/autoresearch-silage/
+
+The evaluation (`evaluate`) is the ground-truth metric. Do not modify this file;
+experiments edit train.py only.
 """
 
+import argparse
 import os
 import sys
-import time
-import math
-import argparse
-import pickle
-from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 
-import requests
-import pyarrow.parquet as pq
-import rustbpe
-import tiktoken
-import torch
+import geopandas as gpd
+import numpy as np
+import pandas as pd
 
 # ---------------------------------------------------------------------------
 # Constants (fixed, do not modify)
 # ---------------------------------------------------------------------------
 
-MAX_SEQ_LEN = 2048       # context length
-TIME_BUDGET = 300        # training time budget in seconds (5 minutes)
-EVAL_TOKENS = 40 * 524288  # number of tokens for val eval
+YEARS = (2021, 2022, 2023)
+SEASON_START = "03-01"           # MM-DD
+SEASON_END = "12-20"
+EROSION_M = 10.0                 # shrink each field inward so edge pixels (road, hedge, neighbour) are dropped
+MAX_SCENE_CLOUD = 90.0           # skip scenes that are almost fully cloudy at tile level
+UTM_CRS = "EPSG:32618"           # Sentinel-2 grid for tile 18SUJ (BARC, Maryland)
+STAC_URL = "https://planetarycomputer.microsoft.com/api/stac/v1"
+BANDS = ("B02", "B04", "B08", "B11", "B12", "SCL")
+VALID_SCL = (4, 5)               # 4 vegetation, 5 bare soil. Everything else (cloud, shadow, water, snow...) is masked.
+POSITIVE = "Silage"
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+LABELS_PATH = REPO_ROOT / "jupyter" / "workspace" / "04_Evaluation" / "BARC_Corn.2021-2023.gpkg"
+LABELS_LAYER = "barc_silage_grain_corn20212023"
+
+CACHE_DIR = Path(os.path.expanduser("~")) / ".cache" / "autoresearch-silage"
+TS_PATH = CACHE_DIR / "s2_field_timeseries.parquet"
+SCENE_DIR = CACHE_DIR / "scenes"         # one small parquet per scene, so a killed build resumes
+LABELS_CACHE = CACHE_DIR / "labels.parquet"
+FIELDS_CACHE = CACHE_DIR / "fields.parquet"
 
 # ---------------------------------------------------------------------------
-# Configuration
+# Labels
 # ---------------------------------------------------------------------------
 
-CACHE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "autoresearch")
-DATA_DIR = os.path.join(CACHE_DIR, "data")
-TOKENIZER_DIR = os.path.join(CACHE_DIR, "tokenizer")
-BASE_URL = "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/main"
-MAX_SHARD = 6542 # the last datashard is shard_06542.parquet
-VAL_SHARD = MAX_SHARD  # pinned validation shard (shard_06542)
-VAL_FILENAME = f"shard_{VAL_SHARD:05d}.parquet"
-VOCAB_SIZE = 8192
 
-# BPE split pattern (GPT-4 style, with \p{N}{1,2} instead of {1,3})
-SPLIT_PATTERN = r"""'(?i:[sdmt]|ll|ve|re)|[^\r\n\p{L}\p{N}]?+\p{L}+|\p{N}{1,2}| ?[^\s\p{L}\p{N}]++[\r\n]*|\s*[\r\n]|\s+(?!\S)|\s+"""
+def load_fields() -> gpd.GeoDataFrame:
+    fields = gpd.read_file(LABELS_PATH, layer=LABELS_LAYER)
+    return fields.to_crs(UTM_CRS)
 
-SPECIAL_TOKENS = [f"<|reserved_{i}|>" for i in range(4)]
-BOS_TOKEN = "<|reserved_0|>"
+
+def build_labels(fields: gpd.GeoDataFrame) -> pd.DataFrame:
+    cols = {f"Corn_{y}": y for y in YEARS}
+    lab = fields.melt(id_vars=["OBJECTID", "ACRES"], value_vars=list(cols), var_name="col", value_name="harvest_type")
+    lab = lab[lab["harvest_type"].isin(["Grain", "Silage"])].copy()
+    lab["year"] = lab["col"].map(cols)
+    lab["y"] = (lab["harvest_type"] == POSITIVE).astype(int)
+    return lab[["OBJECTID", "year", "harvest_type", "y", "ACRES"]].sort_values(["year", "OBJECTID"]).reset_index(drop=True)
+
 
 # ---------------------------------------------------------------------------
-# Data download
+# Sentinel-2 extraction
 # ---------------------------------------------------------------------------
 
-def download_single_shard(index):
-    """Download one parquet shard with retries. Returns True on success."""
-    filename = f"shard_{index:05d}.parquet"
-    filepath = os.path.join(DATA_DIR, filename)
-    if os.path.exists(filepath):
-        return True
 
-    url = f"{BASE_URL}/{filename}"
-    max_attempts = 5
-    for attempt in range(1, max_attempts + 1):
-        try:
-            response = requests.get(url, stream=True, timeout=30)
-            response.raise_for_status()
-            temp_path = filepath + ".tmp"
-            with open(temp_path, "wb") as f:
-                for chunk in response.iter_content(chunk_size=1024 * 1024):
-                    if chunk:
-                        f.write(chunk)
-            os.rename(temp_path, filepath)
-            print(f"  Downloaded {filename}")
-            return True
-        except (requests.RequestException, IOError) as e:
-            print(f"  Attempt {attempt}/{max_attempts} failed for {filename}: {e}")
-            for path in [filepath + ".tmp", filepath]:
-                if os.path.exists(path):
-                    try:
-                        os.remove(path)
-                    except OSError:
-                        pass
-            if attempt < max_attempts:
-                time.sleep(2 ** attempt)
-    return False
+def _search_items(bbox_lonlat, year):
+    import planetary_computer as pc
+    import pystac_client
+
+    cat = pystac_client.Client.open(STAC_URL, modifier=pc.sign_inplace)
+    items = cat.search(
+        collections=["sentinel-2-l2a"],
+        bbox=list(bbox_lonlat),
+        datetime=f"{year}-{SEASON_START}/{year}-{SEASON_END}",
+        query={"eo:cloud_cover": {"lt": MAX_SCENE_CLOUD}},
+    ).item_collection()
+    # One scene per acquisition: Planetary Computer can hold several processing versions; keep the newest.
+    best = {}
+    for it in items:
+        key = (it.datetime.date(), it.properties["s2:mgrs_tile"], it.properties.get("sat:relative_orbit"))
+        pb = float(it.properties.get("s2:processing_baseline", "0"))
+        if key not in best or pb > best[key][0]:
+            best[key] = (pb, it)
+    return [v[1] for v in best.values()]
 
 
-def download_data(num_shards, download_workers=8):
-    """Download training shards + pinned validation shard."""
-    os.makedirs(DATA_DIR, exist_ok=True)
-    num_train = min(num_shards, MAX_SHARD)
-    ids = list(range(num_train))
-    if VAL_SHARD not in ids:
-        ids.append(VAL_SHARD)
+def _field_masks(fields_utm, transform, shape):
+    """Per-field boolean masks of pixels whose centre lies inside the eroded polygon."""
+    from rasterio.features import rasterize
 
-    # Count what's already downloaded
-    existing = sum(1 for i in ids if os.path.exists(os.path.join(DATA_DIR, f"shard_{i:05d}.parquet")))
-    if existing == len(ids):
-        print(f"Data: all {len(ids)} shards already downloaded at {DATA_DIR}")
-        return
+    masks = {}
+    for oid, geom in zip(fields_utm["OBJECTID"], fields_utm.geometry):
+        g = geom.buffer(-EROSION_M)
+        if g.is_empty:
+            continue
+        m = rasterize([(g, 1)], out_shape=shape, transform=transform, fill=0, all_touched=False, dtype="uint8").astype(bool)
+        if m.any():
+            masks[int(oid)] = m
+    return masks
 
-    needed = len(ids) - existing
-    print(f"Data: downloading {needed} shards ({existing} already exist)...")
 
-    workers = max(1, min(download_workers, needed))
-    with Pool(processes=workers) as pool:
-        results = pool.map(download_single_shard, ids)
+def _read_scene(item, bounds_utm):
+    """Read all BANDS for the window covering the fields, resampled onto the 10 m grid."""
+    import rasterio
+    from rasterio.enums import Resampling
+    from rasterio.windows import from_bounds
 
-    ok = sum(1 for r in results if r)
-    print(f"Data: {ok}/{len(ids)} shards ready at {DATA_DIR}")
+    out, ref = {}, None
+    with rasterio.Env(
+        GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR",
+        GDAL_HTTP_MAX_RETRY="4",
+        GDAL_HTTP_RETRY_DELAY="2",
+        GDAL_HTTP_TIMEOUT="60",
+        GDAL_HTTP_CONNECTTIMEOUT="15",
+        CPL_VSIL_CURL_ALLOWED_EXTENSIONS=".tif",
+    ):
+        for band in ("B04",) + tuple(b for b in BANDS if b != "B04"):
+            with rasterio.open(item.assets[band].href) as src:
+                win = from_bounds(*bounds_utm, transform=src.transform).round_offsets().round_lengths()
+                if ref is None:
+                    ref = (src.window_transform(win), (int(win.height), int(win.width)))
+                arr = src.read(
+                    1,
+                    window=win,
+                    out_shape=ref[1],
+                    resampling=Resampling.nearest,
+                    boundless=True,
+                    fill_value=0,
+                )
+                out[band] = arr
+    return out, ref
+
+
+def _scene_stats(item, bounds_utm, fields_utm, mask_cache):
+    bands, (transform, shape) = _read_scene(item, bounds_utm)
+    key = (tuple(np.round(transform)[:6]), shape)
+    if key not in mask_cache:
+        mask_cache[key] = _field_masks(fields_utm, transform, shape)
+    masks = mask_cache[key]
+
+    pb = float(item.properties.get("s2:processing_baseline", "0"))
+    offset = 1000.0 if pb >= 4.0 else 0.0  # baseline 04.00+ adds +1000 to L2A reflectance DNs
+    refl = {b: (bands[b].astype("float32") - offset) / 10000.0 for b in BANDS if b != "SCL"}
+    scl = bands["SCL"]
+    nodata = bands["B04"] == 0
+
+    def nd(a, b):
+        with np.errstate(divide="ignore", invalid="ignore"):
+            return (a - b) / (a + b)
+
+    idx = {
+        "ndvi": nd(refl["B08"], refl["B04"]),
+        "ndmi": nd(refl["B08"], refl["B11"]),       # canopy water
+        "ndti": nd(refl["B11"], refl["B12"]),       # crop residue / tillage
+        "bsi": nd(refl["B11"] + refl["B04"], refl["B08"] + refl["B02"]),  # bare soil
+        "red": refl["B04"],
+        "nir": refl["B08"],
+        "swir1": refl["B11"],
+        "swir2": refl["B12"],
+    }
+    valid = np.isin(scl, VALID_SCL) & ~nodata
+    rows = []
+    date = item.datetime.date()
+    for oid, m in masks.items():
+        n = int(m.sum())
+        v = m & valid
+        nv = int(v.sum())
+        row = {"OBJECTID": oid, "date": date, "n_pixels": n, "valid_frac": nv / n, "scene": item.id}
+        for name, arr in idx.items():
+            vals = arr[v]
+            vals = vals[np.isfinite(vals)]
+            row[name] = float(np.median(vals)) if vals.size else np.nan
+            if name == "ndvi":
+                row["ndvi_p25"] = float(np.percentile(vals, 25)) if vals.size else np.nan
+                row["ndvi_p75"] = float(np.percentile(vals, 75)) if vals.size else np.nan
+        rows.append(row)
+    return rows
+
+
+def _scene_job(item, bounds_utm, fields_utm, mask_cache):
+    out = SCENE_DIR / f"{item.id}.parquet"
+    if out.exists():
+        return "cached"
+    rows = _scene_stats(item, bounds_utm, fields_utm, mask_cache)
+    tmp = out.with_suffix(".tmp")
+    pd.DataFrame(rows).to_parquet(tmp)
+    tmp.rename(out)
+    return "new"
+
+
+def build_timeseries(fields_utm: gpd.GeoDataFrame) -> pd.DataFrame:
+    SCENE_DIR.mkdir(parents=True, exist_ok=True)
+    bounds_utm = tuple(fields_utm.total_bounds + np.array([-50, -50, 50, 50]))
+    bbox_lonlat = fields_utm.to_crs(4326).total_bounds
+    mask_cache, wanted = {}, []
+    for year in YEARS:
+        items = _search_items(bbox_lonlat, year)
+        wanted += [it.id for it in items]
+        print(f"{year}: {len(items)} scenes", flush=True)
+        done, failed = 0, 0
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            futs = {ex.submit(_scene_job, it, bounds_utm, fields_utm, mask_cache): it for it in items}
+            for fut in as_completed(futs):
+                try:
+                    fut.result()
+                except Exception as e:  # one bad scene should not kill the build; re-run to retry it
+                    failed += 1
+                    print(f"  skip {futs[fut].id}: {e}", file=sys.stderr, flush=True)
+                done += 1
+                if done % 20 == 0 or done == len(items):
+                    print(f"  {year}: {done}/{len(items)} scenes, {failed} failed", flush=True)
+    parts = [pd.read_parquet(SCENE_DIR / f"{i}.parquet") for i in wanted if (SCENE_DIR / f"{i}.parquet").exists()]
+    print(f"scenes on disk: {len(parts)}/{len(wanted)}", flush=True)
+    ts = pd.concat(parts, ignore_index=True)
+    ts["date"] = pd.to_datetime(ts["date"])
+    ts["year"] = ts["date"].dt.year
+    ts["doy"] = ts["date"].dt.dayofyear
+    # Two scenes on one day (overlapping orbits): keep the clearer one.
+    ts = ts.sort_values("valid_frac").drop_duplicates(["OBJECTID", "date"], keep="last")
+    return ts.sort_values(["OBJECTID", "date"]).reset_index(drop=True)
+
 
 # ---------------------------------------------------------------------------
-# Tokenizer training
+# Runtime API used by train.py
 # ---------------------------------------------------------------------------
 
-def list_parquet_files():
-    """Return sorted list of parquet file paths in the data directory."""
-    files = sorted(f for f in os.listdir(DATA_DIR) if f.endswith(".parquet") and not f.endswith(".tmp"))
-    return [os.path.join(DATA_DIR, f) for f in files]
 
+def load_data():
+    """Returns (timeseries, labels).
 
-def text_iterator(max_chars=1_000_000_000, doc_cap=10_000):
-    """Yield documents from training split (all shards except pinned val shard)."""
-    parquet_paths = [p for p in list_parquet_files() if not p.endswith(VAL_FILENAME)]
-    nchars = 0
-    for filepath in parquet_paths:
-        pf = pq.ParquetFile(filepath)
-        for rg_idx in range(pf.num_row_groups):
-            rg = pf.read_row_group(rg_idx)
-            for text in rg.column("text").to_pylist():
-                doc = text[:doc_cap] if len(text) > doc_cap else text
-                nchars += len(doc)
-                yield doc
-                if nchars >= max_chars:
-                    return
-
-
-def train_tokenizer():
-    """Train BPE tokenizer using rustbpe, save as tiktoken pickle."""
-    tokenizer_pkl = os.path.join(TOKENIZER_DIR, "tokenizer.pkl")
-    token_bytes_path = os.path.join(TOKENIZER_DIR, "token_bytes.pt")
-
-    if os.path.exists(tokenizer_pkl) and os.path.exists(token_bytes_path):
-        print(f"Tokenizer: already trained at {TOKENIZER_DIR}")
-        return
-
-    os.makedirs(TOKENIZER_DIR, exist_ok=True)
-
-    parquet_files = list_parquet_files()
-    if len(parquet_files) < 2:
-        print("Tokenizer: need at least 2 data shards (1 train + 1 val). Download more data first.")
-        sys.exit(1)
-
-    # --- Train with rustbpe ---
-    print("Tokenizer: training BPE tokenizer...")
-    t0 = time.time()
-
-    tokenizer = rustbpe.Tokenizer()
-    vocab_size_no_special = VOCAB_SIZE - len(SPECIAL_TOKENS)
-    tokenizer.train_from_iterator(text_iterator(), vocab_size_no_special, pattern=SPLIT_PATTERN)
-
-    # Build tiktoken encoding from trained merges
-    pattern = tokenizer.get_pattern()
-    mergeable_ranks = {bytes(k): v for k, v in tokenizer.get_mergeable_ranks()}
-    tokens_offset = len(mergeable_ranks)
-    special_tokens = {name: tokens_offset + i for i, name in enumerate(SPECIAL_TOKENS)}
-    enc = tiktoken.Encoding(
-        name="rustbpe",
-        pat_str=pattern,
-        mergeable_ranks=mergeable_ranks,
-        special_tokens=special_tokens,
-    )
-
-    # Save tokenizer
-    with open(tokenizer_pkl, "wb") as f:
-        pickle.dump(enc, f)
-
-    t1 = time.time()
-    print(f"Tokenizer: trained in {t1 - t0:.1f}s, saved to {tokenizer_pkl}")
-
-    # --- Build token_bytes lookup for BPB evaluation ---
-    print("Tokenizer: building token_bytes lookup...")
-    special_set = set(SPECIAL_TOKENS)
-    token_bytes_list = []
-    for token_id in range(enc.n_vocab):
-        token_str = enc.decode([token_id])
-        if token_str in special_set:
-            token_bytes_list.append(0)
-        else:
-            token_bytes_list.append(len(token_str.encode("utf-8")))
-    token_bytes_tensor = torch.tensor(token_bytes_list, dtype=torch.int32)
-    torch.save(token_bytes_tensor, token_bytes_path)
-    print(f"Tokenizer: saved token_bytes to {token_bytes_path}")
-
-    # Sanity check
-    test = "Hello world! Numbers: 123. Unicode: 你好"
-    encoded = enc.encode_ordinary(test)
-    decoded = enc.decode(encoded)
-    assert decoded == test, f"Tokenizer roundtrip failed: {test!r} -> {decoded!r}"
-    print(f"Tokenizer: sanity check passed (vocab_size={enc.n_vocab})")
-
-# ---------------------------------------------------------------------------
-# Runtime utilities (imported by train.py)
-# ---------------------------------------------------------------------------
-
-class Tokenizer:
-    """Minimal tokenizer wrapper. Training is handled above."""
-
-    def __init__(self, enc):
-        self.enc = enc
-        self.bos_token_id = enc.encode_single_token(BOS_TOKEN)
-
-    @classmethod
-    def from_directory(cls, tokenizer_dir=TOKENIZER_DIR):
-        with open(os.path.join(tokenizer_dir, "tokenizer.pkl"), "rb") as f:
-            enc = pickle.load(f)
-        return cls(enc)
-
-    def get_vocab_size(self):
-        return self.enc.n_vocab
-
-    def get_bos_token_id(self):
-        return self.bos_token_id
-
-    def encode(self, text, prepend=None, num_threads=8):
-        if prepend is not None:
-            prepend_id = prepend if isinstance(prepend, int) else self.enc.encode_single_token(prepend)
-        if isinstance(text, str):
-            ids = self.enc.encode_ordinary(text)
-            if prepend is not None:
-                ids.insert(0, prepend_id)
-        elif isinstance(text, list):
-            ids = self.enc.encode_ordinary_batch(text, num_threads=num_threads)
-            if prepend is not None:
-                for row in ids:
-                    row.insert(0, prepend_id)
-        else:
-            raise ValueError(f"Invalid input type: {type(text)}")
-        return ids
-
-    def decode(self, ids):
-        return self.enc.decode(ids)
-
-
-def get_token_bytes(device="cpu"):
-    path = os.path.join(TOKENIZER_DIR, "token_bytes.pt")
-    with open(path, "rb") as f:
-        return torch.load(f, map_location=device)
-
-
-def _document_batches(split, tokenizer_batch_size=128):
-    """Infinite iterator over document batches from parquet files."""
-    parquet_paths = list_parquet_files()
-    assert len(parquet_paths) > 0, "No parquet files found. Run prepare.py first."
-    val_path = os.path.join(DATA_DIR, VAL_FILENAME)
-    if split == "train":
-        parquet_paths = [p for p in parquet_paths if p != val_path]
-        assert len(parquet_paths) > 0, "No training shards found."
-    else:
-        parquet_paths = [val_path]
-    epoch = 1
-    while True:
-        for filepath in parquet_paths:
-            pf = pq.ParquetFile(filepath)
-            for rg_idx in range(pf.num_row_groups):
-                rg = pf.read_row_group(rg_idx)
-                batch = rg.column('text').to_pylist()
-                for i in range(0, len(batch), tokenizer_batch_size):
-                    yield batch[i:i+tokenizer_batch_size], epoch
-        epoch += 1
-
-
-def make_dataloader(tokenizer, B, T, split, buffer_size=1000):
+    timeseries: one row per field per scene for ALL 83 fields (unlabelled ones too):
+        OBJECTID, date, year, doy, n_pixels, valid_frac, ndvi, ndvi_p25, ndvi_p75, ndmi, ndti, bsi,
+        red, nir, swir1, swir2, scene
+    labels: one row per labelled field-year: OBJECTID, year, harvest_type, y (1 = Silage), ACRES
     """
-    BOS-aligned dataloader with best-fit packing.
-    Every row starts with BOS. Documents packed using best-fit to minimize cropping.
-    When no document fits remaining space, crops shortest doc to fill exactly.
-    100% utilization (no padding).
+    if not TS_PATH.exists() or not LABELS_CACHE.exists():
+        raise SystemExit("Cache missing. Run: uv run prepare.py")
+    return pd.read_parquet(TS_PATH), pd.read_parquet(LABELS_CACHE)
+
+
+def _scores(y_true, y_pred):
+    y_true, y_pred = np.asarray(y_true, int), np.asarray(y_pred, int)
+    tp = int(((y_true == 1) & (y_pred == 1)).sum())
+    fp = int(((y_true == 0) & (y_pred == 1)).sum())
+    fn = int(((y_true == 1) & (y_pred == 0)).sum())
+    tn = int(((y_true == 0) & (y_pred == 0)).sum())
+    prec = tp / (tp + fp) if tp + fp else 0.0
+    rec = tp / (tp + fn) if tp + fn else 0.0
+    f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
+    spec = tn / (tn + fp) if tn + fp else 0.0
+    return {
+        "silage_f1": f1,
+        "silage_precision": prec,
+        "silage_recall": rec,
+        "balanced_acc": (rec + spec) / 2,
+        "accuracy": (tp + tn) / len(y_true),
+        "tp": tp, "fp": fp, "fn": fn, "tn": tn,
+    }
+
+
+def evaluate(fit_predict):
+    """Leave-one-year-out evaluation. THE metric.
+
+    fit_predict(ts_train, labels_train, ts_test, keys_test) -> array of 0/1 (1 = Silage),
+    one per row of keys_test (OBJECTID, year).
+
+    For each held-out year Y:
+      - ts_train / labels_train: only years != Y (labels of Y are never shown).
+      - ts_test: the time series of year Y for every field (unlabelled fields included),
+        so per-year unsupervised steps (e.g. clustering harvest dates) are allowed.
+    Out-of-fold predictions for all 44 field-years are pooled and scored.
+    Primary metric: silage_f1 (higher is better).
     """
-    assert split in ["train", "val"]
-    row_capacity = T + 1
-    batches = _document_batches(split)
-    bos_token = tokenizer.get_bos_token_id()
-    doc_buffer = []
-    epoch = 1
+    ts, labels = load_data()
+    preds = []
+    for year in YEARS:
+        tr_lab = labels[labels["year"] != year]
+        te_keys = labels.loc[labels["year"] == year, ["OBJECTID", "year"]].reset_index(drop=True)
+        ts_tr = ts[ts["year"] != year]
+        ts_te = ts[ts["year"] == year]
+        p = np.asarray(fit_predict(ts_tr, tr_lab.reset_index(drop=True), ts_te, te_keys.copy()), dtype=int)
+        if p.shape != (len(te_keys),):
+            raise ValueError(f"fit_predict returned shape {p.shape}, expected ({len(te_keys)},)")
+        preds.append(te_keys.assign(pred=p))
+    oof = pd.concat(preds).merge(labels, on=["OBJECTID", "year"])
+    overall = _scores(oof["y"], oof["pred"])
+    per_year = {int(y): _scores(g["y"], g["pred"])["silage_f1"] for y, g in oof.groupby("year")}
+    return overall, per_year, oof
 
-    def refill_buffer():
-        nonlocal epoch
-        doc_batch, epoch = next(batches)
-        token_lists = tokenizer.encode(doc_batch, prepend=bos_token)
-        doc_buffer.extend(token_lists)
-
-    # Pre-allocate buffers: [inputs (B*T) | targets (B*T)]
-    row_buffer = torch.empty((B, row_capacity), dtype=torch.long)
-    cpu_buffer = torch.empty(2 * B * T, dtype=torch.long, pin_memory=True)
-    gpu_buffer = torch.empty(2 * B * T, dtype=torch.long, device="cuda")
-    cpu_inputs = cpu_buffer[:B * T].view(B, T)
-    cpu_targets = cpu_buffer[B * T:].view(B, T)
-    inputs = gpu_buffer[:B * T].view(B, T)
-    targets = gpu_buffer[B * T:].view(B, T)
-
-    while True:
-        for row_idx in range(B):
-            pos = 0
-            while pos < row_capacity:
-                while len(doc_buffer) < buffer_size:
-                    refill_buffer()
-
-                remaining = row_capacity - pos
-
-                # Find largest doc that fits entirely
-                best_idx = -1
-                best_len = 0
-                for i, doc in enumerate(doc_buffer):
-                    doc_len = len(doc)
-                    if doc_len <= remaining and doc_len > best_len:
-                        best_idx = i
-                        best_len = doc_len
-
-                if best_idx >= 0:
-                    doc = doc_buffer.pop(best_idx)
-                    row_buffer[row_idx, pos:pos + len(doc)] = torch.tensor(doc, dtype=torch.long)
-                    pos += len(doc)
-                else:
-                    # No doc fits — crop shortest to fill remaining
-                    shortest_idx = min(range(len(doc_buffer)), key=lambda i: len(doc_buffer[i]))
-                    doc = doc_buffer.pop(shortest_idx)
-                    row_buffer[row_idx, pos:pos + remaining] = torch.tensor(doc[:remaining], dtype=torch.long)
-                    pos += remaining
-
-        cpu_inputs.copy_(row_buffer[:, :-1])
-        cpu_targets.copy_(row_buffer[:, 1:])
-        gpu_buffer.copy_(cpu_buffer, non_blocking=True)
-        yield inputs, targets, epoch
-
-# ---------------------------------------------------------------------------
-# Evaluation (DO NOT CHANGE — this is the fixed metric)
-# ---------------------------------------------------------------------------
-
-@torch.no_grad()
-def evaluate_bpb(model, tokenizer, batch_size):
-    """
-    Bits per byte (BPB): vocab size-independent evaluation metric.
-    Sums per-token cross-entropy (in nats), sums target byte lengths,
-    then converts nats/byte to bits/byte. Special tokens (byte length 0)
-    are excluded from both sums.
-    Uses fixed MAX_SEQ_LEN so results are comparable across configs.
-    """
-    token_bytes = get_token_bytes(device="cuda")
-    val_loader = make_dataloader(tokenizer, batch_size, MAX_SEQ_LEN, "val")
-    steps = EVAL_TOKENS // (batch_size * MAX_SEQ_LEN)
-    total_nats = 0.0
-    total_bytes = 0
-    for _ in range(steps):
-        x, y, _ = next(val_loader)
-        loss_flat = model(x, y, reduction='none').view(-1)
-        y_flat = y.view(-1)
-        nbytes = token_bytes[y_flat]
-        mask = nbytes > 0
-        total_nats += (loss_flat * mask).sum().item()
-        total_bytes += nbytes.sum().item()
-    return total_nats / (math.log(2) * total_bytes)
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Prepare data and tokenizer for autoresearch")
-    parser.add_argument("--num-shards", type=int, default=10, help="Number of training shards to download (-1 = all). Val shard is always pinned.")
-    parser.add_argument("--download-workers", type=int, default=8, help="Number of parallel download workers")
-    args = parser.parse_args()
-
-    num_shards = MAX_SHARD if args.num_shards == -1 else args.num_shards
-
-    print(f"Cache directory: {CACHE_DIR}")
-    print()
-
-    # Step 1: Download data
-    download_data(num_shards, download_workers=args.download_workers)
-    print()
-
-    # Step 2: Train tokenizer
-    train_tokenizer()
-    print()
-    print("Done! Ready to train.")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--force", action="store_true")
+    args = ap.parse_args()
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    fields = load_fields()
+    labels = build_labels(fields)
+    labels.to_parquet(LABELS_CACHE)
+    pd.DataFrame(fields.drop(columns="geometry")).to_parquet(FIELDS_CACHE)
+    print(f"labels: {len(labels)} field-years, {labels['y'].sum()} silage")
+    if TS_PATH.exists() and not args.force:
+        print(f"time series cached at {TS_PATH}")
+    else:
+        ts = build_timeseries(fields)
+        ts.to_parquet(TS_PATH)
+        print(f"time series: {len(ts)} rows, {ts['OBJECTID'].nunique()} fields, saved {TS_PATH}")
