@@ -27,7 +27,6 @@ t0 = time.time()
 MIN_VALID_FRAC = 0.4       # scene kept for a field if >= this share of its pixels are clear
 SMOOTH_DAYS = 15           # centred rolling-mean window on the daily-interpolated NDVI
 SPRING_WINDOW = (90, 170)  # DOY range to look for the pre-corn NDVI low (after cover crop / bare soil)
-PEAK_WINDOW = (170, 260)   # corn peak is searched only in summer, so a spring cover crop peak is ignored
 LATE_WINDOW = (300, 355)   # Nov-Dec: a cover crop sown after an early silage cut is green by now
 SECOND_FEATURE = "late_ndvi_neg"  # OR-rule: silage if FEATURE < t1 or SECOND_FEATURE < t2
 DROP_HI, DROP_LO = 0.8, 0.2  # drop duration = days from (low + 0.8 amp) to (low + 0.2 amp) after the peak
@@ -54,10 +53,9 @@ def season_features(g: pd.DataFrame) -> dict:
     if len(late):
         out["late_ndvi_neg"] = -float(late.median())  # negated: rules are "silage if x < thr"
     s = daily_ndvi(g)
-    summer = s.loc[PEAK_WINDOW[0] : PEAK_WINDOW[1]]
-    if summer.empty:
+    if s.empty:
         return out
-    peak_doy = int(summer.idxmax())
+    peak_doy = int(s.idxmax())
     spring = s.loc[SPRING_WINDOW[0] : min(SPRING_WINDOW[1], peak_doy)]
     if spring.empty:
         return out
