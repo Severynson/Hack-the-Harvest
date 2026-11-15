@@ -8,4 +8,11 @@ data/labels/quebec_maize_2023.parquet	27617652	88498acc77c48829c2df74fd865000ce4
 data/s2_series/barc/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:07Z
 data/s2_series/barc/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:14Z
 data/s2_series/barc/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:17Z
-data/labels/barc_2021_2023.parquet	96297	b283f871ad79bc6a9ead15f891e47fdf1b56e849f4f5809b24f2a03258264d7b	https://doi.org/10.5281/zenodo.8087301	cc-varun	2026-11-15T01:24Z
+data/labels/barc_2021_2023.parquet	96297	b283f871ad79bc6a9ead15f891e47fdf1b56e849f4f5809b24f2a03258264d7b	https://doi.org/10.5281/zenodo.8087301	cc-varun	2026-11-15T01:35Z
+data/panel/state_year.csv	58098	b97a430ae2249f04dea19ab230058c7ce5c625e793828b431bb061bee7fb427b	https://quickstats.nass.usda.gov/api	cc-varun	2026-11-15T01:35Z
+data/models/state_model_backtest.csv	849	c2563ac52a46f81d6d7b7abac2cf57f97fe476e0c2028b2064417e06f52288b4	derived: kernelag.state_model	cc-varun	2026-11-15T01:35Z
+data/models/state_model_weights.csv	141	5ab7f70989fed9e6661c0d5e35d58711372632a194fc2ef56f9f895f3e10458f	derived: kernelag.state_model	cc-varun	2026-11-15T01:35Z
+data/s2_series/barc_2021_2023/33_431_2023.csv	12698	3eecf55dbbb176a4625761049ac734e2546db4a7f077fc7e4f7687b776566e07	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
+data/s2_series/barc_2021_2023/33_432_2023.csv	113686	3c64e966741ba437e597af240c15b8a5390f242e2f03bb3ca8cd13b9981a6f38	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
+data/s2_series/barc_2021_2023/34_431_2023.csv	7477	b9ee0676890824cb1bb632ac12a00d19c0dcadb78ae727061414bc26e1a4395f	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z
+data/s2_series/barc_2021_2023/34_432_2023.csv	27157	7bfdbe341609d2957f12afda0656982080d433e10b937807691026b2ce09b466	https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a	cc-varun	2026-11-15T01:35Z

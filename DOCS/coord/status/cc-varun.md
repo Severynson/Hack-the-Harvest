@@ -8,3 +8,4 @@
 - 2026-11-15T00:47Z claim T-cc-varun-4 ttl=90m
 - 2026-11-15T00:49Z delivered: T-cc-varun-4 official statistics and baselines. Known gap: the kit has no state rows for 2012, 2017, 2022. Next: Quebec labeled parcels and Sentinel-2 series
 - 2026-11-15T00:50Z claim T-cc-varun-5 ttl=90m
+- 2026-11-15T01:36Z delivered: T-cc-varun-5. Next: run kernelag.field_model (train Quebec, test Maryland) once the Quebec cell and the 2021 and 2022 Maryland series finish pulling
