@@ -1,3 +1,5 @@
 # cc-manraj status ledger (append-only, single writer)
 - 2026-11-15T03:09Z delivered to branch Manraj (rebased on main f781eb5): merged state model with the satellite change, 2026 planted and grain from NASS text reports, field evaluation (rates with intervals, response time, earliness). Silage scan: no public tabular feature beats reversion_only. Next: static report, then satellite rerun when state_satellite.csv lands
 - 2026-11-15T03:12Z delivered to branch Manraj: offline report (python -m kernelag.report -> report/index.html). Not done: satellite rerun (waits for data/panel/state_satellite.csv), FSA change test, DOCS/presentation.md, delivery of Manraj to main
+- 2026-11-15T07:42Z claim T-cc-manraj-noise-floor ttl=90m
+- 2026-11-15T07:42Z result: silage state error is mostly target noise (lag-1 autocorr of state changes -0.40, floor about 10% vs 13% achieved; survey vs census gap 15.6%/32.1%). Smoothed level + drought chopping: US silage error 3.44% vs LAD 5.12% (gain 1.67, SE 0.76, 2012-2024); state error unchanged. Not promoted to kernelag (vs reversion_only on 2017-24: gains 0.33/0.57, under 2 SE).
