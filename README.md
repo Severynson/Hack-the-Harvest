@@ -28,6 +28,10 @@ The organizers asked for:
 Only public data was allowed. The organizers provided field labels for one USDA research farm in Maryland, and scored
 acreage against NASS's 2025 final numbers.
 
+The original hackathon material is in `DOCS/`:
+- `Hack the Harvest Saturday Deck.pdf`: the organizers' kickoff slides, with the challenge and the judging criteria.
+- `Kernel_USDA_Briefing.pdf`: our notes from the USDA NASS briefing on Saturday morning.
+
 ## Results
 
 | Model | Question | Test | Result |
@@ -101,6 +105,12 @@ it is survey noise that no public input explains. The US total is much better: t
 weather shock into acres.
 
 ## Model 3: the caveman rule, one field at a time
+
+![Silage drops off a cliff, grain fades](images/ndvi_cliff_vs_fade.png)
+
+*Two USDA Maryland fields in 2021, seen by Sentinel-2. The silage field goes from green to bare between 7 and 12
+September; the grain field browns over most of September. The bottom panel shows what the model measures: the days
+greenness takes to fall from 80% to 20% of the field's own range (circles, shaded span). Under 17.5 days → silage.*
 
 **Rule 1: how fast the field loses its green.**
 
