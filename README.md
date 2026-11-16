@@ -7,6 +7,10 @@ Everything runs from one notebook, [`grain-or-silage.ipynb`](grain-or-silage.ipy
 This README covers the context, the data and how each model works. The notebook covers how to run the models and
 read their output.
 
+**▶ [Live model board](https://huggingface.co/spaces/rakd23/kernel-board)**: every model's 2026 forecast on a US map, a
+drought what-if, dairy and feed-stress maps, a silage-or-grain checker for USDA's test fields and a short briefing mode.
+Its code is on branch [`board`](../../tree/board/board).
+
 ## The problem
 
 US corn is harvested in one of two ways:
@@ -207,4 +211,5 @@ or key is needed.
 This branch is a cleaned-up portfolio version. The full hackathon repository is on branch
 [`hackathon-2026-submission`](../../tree/hackathon-2026-submission), unchanged: every experiment, the team's other
 models, the agents' coordination files and the submitted notebook. The acreage models were built by teammates on team
-Kernel; the caveman rule and its tests come from the `autoresearch/` experiments there.
+Kernel; the caveman rule and its tests come from the `autoresearch/` experiments there. The
+[live model board](https://huggingface.co/spaces/rakd23/kernel-board) reads its data from that branch.
