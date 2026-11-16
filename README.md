@@ -109,7 +109,8 @@ weather shock into acres.
 ![Silage drops off a cliff, grain fades](images/ndvi_cliff_vs_fade.png)
 
 *Two USDA Maryland fields in 2021, seen by Sentinel-2. The silage field goes from green to bare between 7 and 12
-September; the grain field browns over most of September. The bottom panel shows what the model measures: the days
+September; the grain field browns over most of September. Yellow boxes frame the pictures taken during each drop. The
+bottom panel shows what the model measures: the days
 greenness takes to fall from 80% to 20% of the field's own range (circles, shaded span). Under 17.5 days → silage.*
 
 **Rule 1: how fast the field loses its green.**
