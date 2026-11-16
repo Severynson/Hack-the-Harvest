@@ -506,7 +506,7 @@ async function load(){$("#summary").textContent="Reading model folders…";
  [["#y0","y0"],["#y1","y1"]].forEach(([s,k])=>{$(s).replaceChildren(...years.map(y=>el("option",{value:y,textContent:y,selected:y==S[k]})));$(s).onchange=e=>{S[k]=+e.target.value;draw()}});
  const srcs=[...new Set(D.models.map(m=>m.source))].sort();$("#src").replaceChildren(el("option",{value:"",textContent:"All folders"}),...srcs.map(s=>el("option",{value:s,textContent:(D.models.find(m=>m.source==s)||{}).source_label||s,selected:s==S.src})));
  const owners=new Set(D.models.map(m=>m.owner).filter(Boolean));
- $("#summary").textContent=`${D.models.length} models from ${srcs.length} folders, ${owners.size} people · ${D.field.length} field-model runs · ${window.__SNAP?"snapshot of":"read"} ${D.read_at}`;
+ $("#summary").textContent=`${D.models.length} models · ${D.field.length} field-model runs · built by Team Kernel · ${window.__SNAP?"snapshot of":"updated"} ${D.read_at}`;
  $("#problems").replaceChildren(...D.problems.map(p=>el("div",{className:"callout",textContent:"Could not read: "+p})));draw()}
 $("#src").onchange=e=>{S.src=e.target.value;draw()};$("#q").oninput=e=>{S.q=e.target.value;draw()};
 $("#feval").onchange=e=>{S.feval=e.target.value;draw()};$("#clear").onclick=()=>{S.sel.clear();draw()};
