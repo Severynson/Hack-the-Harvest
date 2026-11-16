@@ -14,10 +14,19 @@ Press **Refresh** on the page after a model finishes a run.
 
 ## Tabs
 
-- **Map** (opens first): a US map you can drag, zoom (scroll, double-click, + / −) and click.
-  Pick a layer in "Show me"; a box under the map explains it in plain words. Layers: each model's
+- **Map** (opens first): a US map you can drag, zoom (scroll, pinch, double-click, the slider,
+  + / −, or Shift-drag a box) and click. Zoom into a county map to read county names and values.
+  Pick a layer in "Show me" (a searchable list with a one-line description of each map); a box under
+  the map explains it in plain words. "? How to use" replays a short guided tour.
+  **Find your area**: type a town, ZIP or county (or press 📍) to drop a pin; the side panel shows milk
+  cows and silage in that county and within 25 / 50 / 100 miles, the biggest dairy counties nearby,
+  the season's weather, the state's 2026 forecast and the next satellite pictures of that spot
+  (town and ZIP lookups use OpenStreetMap's geocoder from the browser; county names work offline).
+  **Satellites** overlay: every strip Sentinel-2A/2B/2C and Landsat 8/9 photograph over the lower 48
+  on a day (yesterday / today / tomorrow), drawn at its real swath width, with a pass list and a
+  timeline you can replay. Computed in the browser from `board/tle.json`; refresh that file now and then. Layers: each model's
   2026 forecast, change vs last year, where the models disagree, NASS history (with Play), dairy
-  cows and silage acres by county (USDA census 2017/2022), county rain, heat and first frost by year,
+  cows and silage acres by county (USDA Census 2017/2022; counties USDA withholds are estimated and marked ≈), county rain, heat and first frost by year,
   state drought / crop condition / insurance losses, when silage gets chopped (2026 pace vs usual),
   corn crop value and price, where the satellite looks, and backtest error by state. Clicking a state zooms in and
   opens its history, every model's 2026 forecast and which models have called it best. KPI tiles

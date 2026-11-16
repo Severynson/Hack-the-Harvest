@@ -9,7 +9,9 @@ const NODATA = "#1b2029";
 const NAMES = {};
 const VB = {x: -10, y: -14, w: 995, h: 640};   // a little room around the outlines
 let GEO = null, MAP = null, EXT = null, CTY = null, M = {layer: "forecast", crop: "silage", fcModel: {}, errModel: {}, year: 2025, signal: "drought", wx: "rain", cyear: null, wyear: null, myear: null,
-  sel: null, k: 1, tx: 0, ty: 0, playing: null, built: false};
+  sel: null, k: 1, tx: 0, ty: 0, playing: null, built: false, loc: null, nearMi: 50, satDay: 0, satT: null, satOpen: false, satOff: new Set()};
+const MAXK = 40;                               // deep enough to read single counties
+const GROUP_ICON = {"Our forecast": "\u{1F4C8}", "What happened before": "\u{1F4DC}", "Why acres change": "\u{1F33D}", "Satellite": "\u{1F6F0}️", "How good are the models": "\u{1F3AF}"};
 
 // Layers, grouped by the question they answer. "explain" is shown under the map in plain words.
 const LAYER_GROUPS = [
@@ -20,8 +22,8 @@ const LAYER_GROUPS = [
   ["What happened before", [
     ["history", "Acres harvested each year", "The official USDA (NASS) count of acres harvested, year by year. Press Play to watch it change."]]],
   ["Why acres change", [
-    ["dairy", "Where the dairy cows are (counties)", "Milk cows per county from the USDA census. Silage is cow feed, so it is grown close to dairies: compare with the next layer."],
-    ["silage_county", "Where silage is grown (counties)", "Acres of corn chopped for silage per county from the USDA census. Notice how it follows the dairy map."],
+    ["dairy", "Where the dairy cows are (counties)", "Milk cows per county from the USDA Census of Agriculture. Silage is cow feed, so it is grown close to dairies: compare with the next layer. Many counties really do have only a handful of milk cows: a few small farms."],
+    ["silage_county", "Where silage is grown (counties)", "Acres of corn chopped for silage per county from the USDA Census of Agriculture. Notice how it follows the dairy map."],
     ["weather", "This season's rain and heat (counties)", "Rain or heat from May to September compared with that county's normal. A dry, hot year can push farmers to chop failing grain corn for silage."],
     ["frost", "First fall frost (counties)", "The date of the first fall frost in each county. An early frost ends the season and can change what farmers harvest."],
     ["context", "Drought, crop condition and losses (states)", "Season signals by state: drought, corn rated poor, insurance weather losses, rain, heat and milk cows."],
@@ -110,7 +112,9 @@ function layerValues() {
     const key = M.layer == "dairy" ? "milk_cows" : "silage", yrs = EXT.county.census_years; if (!yrs.includes(M.cyear)) M.cyear = yrs.at(-1);
     title = (M.layer == "dairy" ? "Milk cows per county, USDA census " : "Silage acres per county, USDA census ") + M.cyear; ramp = M.layer == "dairy" ? SEQ2 : SEQ;
     fmt = M.layer == "dairy" ? v => kfmt(v) + " cows" : v => kfmt(v) + " acres"; Object.assign(vals, EXT.county[key][M.cyear] || {});
-    note = "Counties the census did not publish (to protect individual farms) show as no data.";
+    var est = new Set(EXT.county.estimated?.[key]?.[M.cyear] || []);
+    note = est.size ? `USDA withholds ${est.size.toLocaleString("en-US")} counties to protect individual farms. Those are estimated (marked ≈) from ${M.layer == "dairy" ? "how many farms of each herd size the county has" : "their dairy herds"}, scaled to the state's Census total.`
+      : "Counties the census did not publish (to protect individual farms) show as no data.";
   } else if (M.layer == "weather") {
     const yrs = Object.keys(EXT.county.weather).map(Number); if (!yrs.includes(M.wyear)) M.wyear = Math.max(...yrs.filter(y => y < 2026));
     const i = M.wx == "rain" ? 0 : 1; div = true; var flip = M.wx == "rain"; fmt = v => (v >= 0 ? "+" : "") + (100 * v).toFixed(M.wx == "rain" ? 0 : 1) + "%";
@@ -142,7 +146,7 @@ function layerValues() {
     note = EXT.satellite.note;
   }
   return {vals, fmt, ramp, div, title, note, county: COUNTY_LAYERS.has(M.layer), flip: typeof flip != "undefined" && flip,
-    explain: (LAYERS.find(l => l[0] == M.layer) || [])[2] || ""};
+    est: typeof est != "undefined" ? est : new Set(), explain: (LAYERS.find(l => l[0] == M.layer) || [])[2] || ""};
 }
 function classify(vals, ramp, div, flip) {
   const DV = flip ? [...DIV].reverse() : DIV;
@@ -164,23 +168,49 @@ function classify(vals, ramp, div, flip) {
 function topoPaths(topo, objName) {
   const [sx, sy] = topo.transform ? topo.transform.scale : [1, 1], [tx, ty] = topo.transform ? topo.transform.translate : [0, 0];
   const arcs = topo.arcs.map(a => { let x = 0, y = 0; return a.map(([dx, dy]) => { x += dx; y += dy; return [x * sx + tx, y * sy + ty]; }); });
-  const ring = idx => { const pts = []; idx.forEach(i => { const a = i < 0 ? arcs[~i].slice().reverse() : arcs[i]; a.forEach((p, j) => { if (j || !pts.length) pts.push(p); }); });
-    return "M" + pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") + "Z"; };
-  return topo.objects[objName].geometries.map(g => ({id: g.id, name: g.properties?.name,
-    d: g.type == "Polygon" ? g.arcs.map(ring).join("") : g.type == "MultiPolygon" ? g.arcs.map(p => p.map(ring).join("")).join("") : ""}));
+  const ringPts = idx => { const pts = []; idx.forEach(i => { const a = i < 0 ? arcs[~i].slice().reverse() : arcs[i]; a.forEach((p, j) => { if (j || !pts.length) pts.push(p); }); }); return pts; };
+  const dOf = pts => "M" + pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") + "Z";
+  return topo.objects[objName].geometries.map(g => {
+    const rings = g.type == "Polygon" ? g.arcs.map(ringPts) : g.type == "MultiPolygon" ? g.arcs.flatMap(p => p.map(ringPts)) : [];
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity, best = null, bestA = 0;
+    rings.forEach(r => { let a = 0, cx = 0, cy = 0;
+      r.forEach((p, i) => { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]);
+        const q = r[(i + 1) % r.length], c = p[0] * q[1] - q[0] * p[1]; a += c; cx += (p[0] + q[0]) * c; cy += (p[1] + q[1]) * c; });
+      if (Math.abs(a) > bestA) { bestA = Math.abs(a); best = [cx / (3 * a), cy / (3 * a)]; } });
+    return {id: g.id, name: g.properties?.name, d: rings.map(dOf).join(""), rings, b: [x0, y0, x1, y1], c: best || [(x0 + x1) / 2, (y0 + y1) / 2]};
+  });
 }
+function inRings(rings, x, y) {          // even-odd rule over every ring: handles islands and holes
+  let inside = false;
+  for (const r of rings) for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+    const [xi, yi] = r[i], [xj, yj] = r[j];
+    if ((yi > y) != (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside; }
+  return inside;
+}
+function countyAt(x, y) { return (CTY || []).find(c => x >= c.b[0] && x <= c.b[2] && y >= c.b[1] && y <= c.b[3] && inRings(c.rings, x, y)) || null; }
+async function loadCounties() {
+  if (!CTY) { CTY = topoPaths(await fetch("/api/counties").then(r => r.json()), "counties"); CTY.forEach(c => CTYBY[c.id] = c); }
+  if (!$("#counties")) buildCounties();
+}
+const CTYBY = {};
 function buildCounties() {
   const g = svgEl("g", {id: "counties"}); $("#states").after(g);
   CTY.forEach(c => { const p = svgEl("path", {d: c.d, class: "cty", "data-fips": c.id});
     p.addEventListener("pointermove", e => hoverCounty(e, c.id)); p.addEventListener("pointerleave", () => { $("#tip").hidden = true; });
     p.addEventListener("click", () => { if (dragged) return; const st = stateOfFips(c.id); if (st) select(st); }); g.append(p); });
+  g.after(svgEl("g", {id: "ctylabels"}));
 }
+function countyName(f) { return EXT.county.names[f] || (CTYBY[f]?.name ? CTYBY[f].name + ", " + stateOfFips(f) : f); }
 const FIPS = {"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY","72":"PR"};
 const stateOfFips = f => FIPS[String(f).slice(0, 2)];
 function hoverCounty(e, f) {
-  const v = CUR?.vals[f], t = $("#tip"), name = EXT.county.names[f] || CTY.find(c => c.id == f)?.name || f;
-  t.replaceChildren(el("b", {textContent: name}), el("div", {textContent: v == null ? "No data" : CUR.fmt(v)}), el("div", {className: "muted", textContent: "Click to open the state"}));
-  t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 260) + "px"; t.style.top = e.clientY + 14 + "px";
+  const v = CUR?.vals[f], t = $("#tip"), name = countyName(f), est = CUR?.est?.has(f);
+  const farms = M.layer == "dairy" ? EXT.county.farms?.[M.cyear]?.[f] : null;
+  t.replaceChildren(el("b", {textContent: name}), el("div", {textContent: v == null ? "No data" : (est ? "≈ " : "") + CUR.fmt(v)}),
+    farms != null ? el("div", {textContent: `${farms.toLocaleString("en-US")} dairy farm${farms == 1 ? "" : "s"}` + (v != null && farms ? ` · about ${kfmt(v / farms)} cows each` : "")}) : null,
+    est ? el("div", {className: "muted", textContent: "Estimated: USDA withheld the exact number to protect individual farms."}) : null,
+    el("div", {className: "muted", textContent: "Click to open the state"}));
+  t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 300) + "px"; t.style.top = e.clientY + 14 + "px";
 }
 // Albers USA (lower 48), identical to d3.geoAlbersUsa().scale(1300).translate([487.5, 305]) used for the outlines
 const ALB = (() => { const r = Math.PI / 180, y0 = 29.5 * r, y1 = 45.5 * r, n = (Math.sin(y0) + Math.sin(y1)) / 2, c = 1 + Math.sin(y0) * (2 * n - Math.sin(y0)), r0 = Math.sqrt(c) / n;
@@ -194,6 +224,8 @@ function svgEl(t, a = {}) { const n = document.createElementNS(NS, t); for (cons
 function buildMap() {
   const svg = $("#usmap"); svg.setAttribute("viewBox", `${VB.x} ${VB.y} ${VB.w} ${VB.h}`);
   const g = svgEl("g", {id: "zoomg"}); svg.replaceChildren(g);
+  const defs = svgEl("defs"), cp = svgEl("clipPath", {id: "usclip"});     // lower 48 only: Alaska and Hawaii are insets
+  cp.append(svgEl("path", {d: GEO.states.filter(s => !["02", "15", "72"].includes(String(s.fips).padStart(2, "0"))).map(s => s.d).join("")})); defs.append(cp); g.append(defs);
   g.append(svgEl("path", {d: GEO.nation, class: "nation"}));
   const states = svgEl("g", {id: "states"}); g.append(states);
   GEO.states.forEach(s => {
@@ -207,60 +239,110 @@ function buildMap() {
   g.append(svgEl("g", {id: "overlays"}));
   const sel = svgEl("path", {id: "selpath", class: "selpath"}); g.append(sel);
   g.append(svgEl("g", {id: "markers"}));
+  g.append(svgEl("g", {id: "locg"}));
   const labels = svgEl("g", {id: "labels"}); g.append(labels);
   GEO.states.forEach(s => { const t = svgEl("text", {x: s.c[0], y: s.c[1], "data-code": s.code, class: "lbl"}); t.textContent = s.code; labels.append(t); });
-  wirePanZoom(svg); M.built = true;
+  wirePanZoom(svg); M.built = true; STP = null;
 }
 let dragged = false;
+function svgPt(svg, e) { const q = svg.createSVGPoint(); q.x = e.clientX; q.y = e.clientY; const m = q.matrixTransform(svg.getScreenCTM().inverse()); return [m.x, m.y]; }
 function wirePanZoom(svg) {
-  let start = null;
-  const pt = e => { const q = svg.createSVGPoint(); q.x = e.clientX; q.y = e.clientY; const m = q.matrixTransform(svg.getScreenCTM().inverse()); return [m.x, m.y]; };
-  svg.addEventListener("pointerdown", e => { start = {p: pt(e), tx: M.tx, ty: M.ty}; dragged = false; });
-  addEventListener("pointermove", e => { if (!start) return; const p = pt(e), dx = p[0] - start.p[0], dy = p[1] - start.p[1];
+  // One finger / mouse drags, two fingers pinch, shift-drag draws a box to zoom into, wheel or trackpad pinch zooms at the pointer.
+  const ptrs = new Map(); let start = null, pinch = null, box = null;
+  const pt = e => svgPt(svg, e);
+  svg.addEventListener("pointerdown", e => {
+    if (e.button > 0) return;
+    ptrs.set(e.pointerId, pt(e));
+    if (ptrs.size == 2) { const [a, b] = [...ptrs.values()]; pinch = {d: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1, k: M.k, tx: M.tx, ty: M.ty, c: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]}; start = null; dragged = true; return; }
+    if (e.shiftKey) { const p = pt(e); box = {p0: p, r: svgEl("rect", {class: "zbox", x: p[0], y: p[1], width: 0, height: 0})}; svg.append(box.r); dragged = true; return; }
+    start = {p: pt(e), tx: M.tx, ty: M.ty}; dragged = false;
+  });
+  addEventListener("pointermove", e => {
+    if (!ptrs.has(e.pointerId)) return; const p = pt(e); ptrs.set(e.pointerId, p);
+    if (pinch && ptrs.size >= 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]), c = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      const k = Math.min(MAXK, Math.max(1, pinch.k * d / pinch.d)), cx = (pinch.c[0] - pinch.tx) / pinch.k, cy = (pinch.c[1] - pinch.ty) / pinch.k;
+      Object.assign(M, clampT({k, tx: c[0] - cx * k, ty: c[1] - cy * k})); applyT(); return; }
+    if (box) { const x = Math.min(p[0], box.p0[0]), y = Math.min(p[1], box.p0[1]); box.r.setAttribute("x", x); box.r.setAttribute("y", y);
+      box.r.setAttribute("width", Math.abs(p[0] - box.p0[0])); box.r.setAttribute("height", Math.abs(p[1] - box.p0[1])); return; }
+    if (!start) return; const dx = p[0] - start.p[0], dy = p[1] - start.p[1];
     if (Math.abs(dx) + Math.abs(dy) > 3) { dragged = true; svg.classList.add("grabbing"); }
-    if (dragged) { M.tx = start.tx + dx; M.ty = start.ty + dy; applyT(); } });
-  addEventListener("pointerup", () => { start = null; svg.classList.remove("grabbing"); setTimeout(() => dragged = false, 0); });
-  svg.addEventListener("wheel", e => { e.preventDefault(); zoomAt(pt(e), Math.exp(-e.deltaY * 0.0015)); }, {passive: false});
-  svg.addEventListener("dblclick", e => { e.preventDefault(); zoomAt(pt(e), 2, true); });
+    if (dragged) { Object.assign(M, clampT({k: M.k, tx: start.tx + dx, ty: start.ty + dy})); applyT(); } });
+  const up = e => {
+    ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null;
+    if (box) { const w = +box.r.getAttribute("width"), h = +box.r.getAttribute("height");
+      if (w > 8 && h > 8) { const x = +box.r.getAttribute("x"), y = +box.r.getAttribute("y");
+        zoomToRect([(x - M.tx) / M.k, (y - M.ty) / M.k, (x + w - M.tx) / M.k, (y + h - M.ty) / M.k], 1); }
+      box.r.remove(); box = null; }
+    start = null; svg.classList.remove("grabbing"); setTimeout(() => dragged = false, 0); };
+  addEventListener("pointerup", up); addEventListener("pointercancel", up);
+  svg.addEventListener("wheel", e => { e.preventDefault();
+    const dy = e.deltaY * (e.deltaMode == 1 ? 16 : e.deltaMode == 2 ? 400 : 1);
+    zoomAt(pt(e), Math.exp(-dy * (e.ctrlKey ? 0.012 : 0.0022))); }, {passive: false});   // ctrlKey = trackpad pinch
+  svg.addEventListener("dblclick", e => { e.preventDefault(); zoomAt(pt(e), e.shiftKey ? 0.5 : 2.2, true); });
+}
+function clampT(t) {        // keep at least a fifth of the map on screen so it can't get lost off the edge
+  const k = t.k, ax = VB.x + VB.w * 0.2, bx = VB.x + VB.w * 0.8, ay = VB.y + VB.h * 0.2, by = VB.y + VB.h * 0.8;
+  t.tx = Math.min(bx - k * VB.x, Math.max(ax - k * (VB.x + VB.w), t.tx));
+  t.ty = Math.min(by - k * VB.y, Math.max(ay - k * (VB.y + VB.h), t.ty)); return t;
 }
 function zoomAt([x, y], f, animate) {
-  const k = Math.min(12, Math.max(1, M.k * f)), r = k / M.k;
-  const target = {k, tx: x - (x - M.tx) * r, ty: y - (y - M.ty) * r};
+  const k = Math.min(MAXK, Math.max(1, M.k * f)), r = k / M.k;
+  const target = clampT({k, tx: x - (x - M.tx) * r, ty: y - (y - M.ty) * r});
   animate ? tween(target) : (Object.assign(M, target), applyT());
 }
+function zoomToRect([x0, y0, x1, y1], fill = 0.8, maxk = MAXK) {
+  const k = Math.min(maxk, Math.max(1, fill * Math.min(VB.w / Math.max(1, x1 - x0), VB.h / Math.max(1, y1 - y0))));
+  tween(clampT({k, tx: VB.x + VB.w / 2 - k * (x0 + x1) / 2, ty: VB.y + VB.h / 2 - k * (y0 + y1) / 2}));
+}
+const kToSlider = k => Math.round(100 * Math.log(k) / Math.log(MAXK)), sliderToK = v => Math.exp(v / 100 * Math.log(MAXK));
 function applyT() {
   $("#zoomg").setAttribute("transform", `translate(${M.tx},${M.ty}) scale(${M.k})`);
   document.querySelectorAll("#labels text").forEach(t => {
     const s = GEO.states.find(s => s.code == t.dataset.code), w = (s.b[2] - s.b[0]) * M.k;
-    t.style.fontSize = (10 / M.k) + "px"; t.style.display = w > 26 && hasValue(t.dataset.code) ? "" : "none"; });
+    t.style.fontSize = (10 / M.k) + "px"; t.style.display = w > 26 && hasValue(t.dataset.code) && !(CUR?.county && M.k >= 5) ? "" : "none"; });
   $("#selpath").setAttribute("stroke-width", 2.2 / M.k);
+  const zs = $("#zslider"); if (zs && document.activeElement != zs) zs.value = kToSlider(M.k);
+  document.querySelectorAll("#locg .scale").forEach(n => { for (const [a, k] of [["r", "r"], ["dy", "dy"]]) if (n.dataset[k]) n.setAttribute(a, n.dataset[k] / M.k);
+    if (n.dataset.fontSize) { n.style.fontSize = n.dataset.fontSize / M.k + "px"; n.style.strokeWidth = 3 / M.k + "px"; }
+    if (n.dataset.strokeWidth) n.style.strokeWidth = n.dataset.strokeWidth / M.k + "px"; });
+  $("#usmap").classList.toggle("zoomed", M.k >= 3.5);
+  clearTimeout(applyT.lbl); applyT.lbl = setTimeout(countyLabels, 90);
   document.querySelectorAll("#markers circle").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
   document.querySelectorAll("#markers text").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dx", 9 / M.k); });
   document.querySelectorAll("#ov-roads .road").forEach(p => p.setAttribute("stroke-width", (p.classList.contains("interstate") ? 1.6 : 0.9) / M.k));
-  document.querySelectorAll("#ov-sats .track").forEach(p => p.setAttribute("stroke-width", 1.5 / M.k));
   document.querySelectorAll("#ov-trade .river").forEach(p => p.setAttribute("stroke-width", 3 / M.k));
   document.querySelectorAll("#ov-trade .flow").forEach(p => p.setAttribute("stroke-width", 2.5 / M.k));
   document.querySelectorAll("#ov-trade .port").forEach(c => { c.setAttribute("r", 7 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
   document.querySelectorAll("#ov-trade .flowl").forEach(t => t.style.fontSize = (11.5 / M.k) + "px");
   document.querySelectorAll("#ov-sats .sat").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
-  document.querySelectorAll("#ov-sats .satl").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dy", -10 / M.k); });
-  document.querySelectorAll("#states .st").forEach(p => p.setAttribute("stroke-width", 0.5 / M.k));
-  $("#zoomlvl").textContent = M.k.toFixed(1) + "×";
+  document.querySelectorAll("#ov-sats .satl, #ov-sats .passl").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.style.strokeWidth = (3 / M.k) + "px"; t.setAttribute("dy", -8 / M.k); });
+  $("#zoomlvl").textContent = (M.k < 10 ? M.k.toFixed(1) : Math.round(M.k)) + "×";
+}
+function countyLabels() {     // county names appear once you zoom in far enough to read them
+  const g = $("#ctylabels"); if (!g) return;
+  if (!CTY || M.k < (CUR?.county ? 4 : 5.5) || !$("#counties")) { g.replaceChildren(); return; }
+  const x0 = (VB.x - M.tx) / M.k, x1 = (VB.x + VB.w - M.tx) / M.k, y0 = (VB.y - M.ty) / M.k, y1 = (VB.y + VB.h - M.ty) / M.k;
+  const kids = [];
+  for (const c of CTY) { if (c.c[0] < x0 || c.c[0] > x1 || c.c[1] < y0 || c.c[1] > y1 || (c.b[2] - c.b[0]) * M.k < 34) continue;
+    const t = svgEl("text", {x: c.c[0], y: c.c[1], class: "ctyl", style: `font-size:${10 / M.k}px;stroke-width:${2.2 / M.k}px`}); t.textContent = c.name || ""; kids.push(t);
+    if (M.k >= 7 && CUR.county) { const v = CUR.vals[c.id]; if (v != null) { const t2 = svgEl("text", {x: c.c[0], y: c.c[1] + 11 / M.k, class: "ctyl sub", style: `font-size:${9 / M.k}px;stroke-width:${1.2 / M.k}px`}); t2.textContent = (CUR.est.has(c.id) ? "≈" : "") + CUR.fmt(v); kids.push(t2); } }
+    if (kids.length > 700) break; }
+  g.replaceChildren(...kids); $("#usmap").classList.toggle("ctyvals", kids.some(k => k.classList.contains("sub")));
 }
 let CUR = null;
 function hasValue(code) { return CUR && (CUR.county || CUR.vals[code] != null); }
 function tween(target, ms = 260) {
-  const from = {k: M.k, tx: M.tx, ty: M.ty}, t0 = performance.now(), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const from = {k: M.k, tx: M.tx, ty: M.ty}, t0 = performance.now(), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, id = (tween.id = (tween.id || 0) + 1);
   if (reduce) { Object.assign(M, target); return applyT(); }
-  const step = now => { const t = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - t, 3);
-    for (const k of ["k", "tx", "ty"]) M[k] = from[k] + (target[k] - from[k]) * e; applyT(); if (t < 1) requestAnimationFrame(step); };
+  const step = now => { const t = Math.max(0, Math.min(1, (now - t0) / ms)), e = 1 - Math.pow(1 - t, 3);   // rAF time can be a hair before t0
+    if (id != tween.id) return; for (const k of ["k", "tx", "ty"]) M[k] = from[k] + (target[k] - from[k]) * e; applyT(); if (t < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }
 function zoomToState(code) {
   const s = GEO.states.find(s => s.code == code); if (!s) return;
-  const [x0, y0, x1, y1] = s.b, k = Math.min(8, 0.5 * Math.min(VB.w / (x1 - x0), VB.h / (y1 - y0)));
+  const [x0, y0, x1, y1] = s.b, k = Math.min(10, 0.7 * Math.min(VB.w / (x1 - x0), VB.h / (y1 - y0)));
   const kk = Math.max(1.6, k);
-  tween({k: kk, tx: VB.x + VB.w * 0.45 - kk * (x0 + x1) / 2, ty: VB.y + VB.h * 0.52 - kk * (y0 + y1) / 2});
+  tween(clampT({k: kk, tx: VB.x + VB.w * 0.5 - kk * (x0 + x1) / 2, ty: VB.y + VB.h * 0.5 - kk * (y0 + y1) / 2}));
 }
 function resetView() { tween({k: 1, tx: 0, ty: 0}); }
 
@@ -311,7 +393,7 @@ function extraBlocks(code) {
 }
 function panel() {
   const box = $("#sp"), crop = M.crop, code = M.sel, id = M.fcModel[crop];
-  const kids = [...tradeBlock()];
+  const kids = [...locBlock(), ...satBlock(), ...tradeBlock()];
   if (!code) {
     const years = [...new Set(MAP.history.map(r => r.year))].sort((a, b) => a - b);
     const us = years.map(y => [y, MAP.history.filter(r => r.year == y).reduce((a, r) => a + (r[crop] || 0), 0)]).filter(p => p[1] > 0);
@@ -325,7 +407,7 @@ function panel() {
     const ranked = Object.entries(CUR.vals).filter(([, v]) => v != null).sort((a, b) => b[1] - a[1]).slice(0, 8);
     if (ranked.length) { kids.push(el("h3", {textContent: CUR.county ? "Top counties on this layer" : M.layer == "harvest" ? "Latest states to chop" : "Top states on this layer"}));
       const t = el("table", {className: "mini"}); ranked.forEach(([k, v]) => { const label = CUR.county ? (EXT.county.names[k] || k) : (NAMES[k] || k), st = CUR.county ? stateOfFips(k) : k;
-      const tr = el("tr", {}, el("td", {textContent: label}), el("td", {className: "n", textContent: CUR.fmt(v)})); tr.onclick = () => select(st); t.append(tr); }); kids.push(t); }
+      const tr = el("tr", {}, el("td", {textContent: label}), el("td", {className: "n", textContent: (CUR.est.has(k) ? "≈ " : "") + CUR.fmt(v)})); tr.onclick = () => select(st); t.append(tr); }); kids.push(t); }
   } else {
     const name = NAMES[code] || code; let v = CUR.vals[code];
     if (CUR.county && (M.layer == "dairy" || M.layer == "silage_county")) { v = 0; let n = 0; for (const f in CUR.vals) if (stateOfFips(f) == code) { v += CUR.vals[f]; n++; } if (!n) v = null; }
@@ -358,6 +440,7 @@ function panel() {
       const t = el("table", {className: "mini"}); Object.entries(SIGNALS).forEach(([k, sg]) => { if (h[k] != null) t.append(el("tr", {}, el("td", {textContent: sg.label}), el("td", {className: "n", textContent: sg.fmt(h[k])}))); }); kids.push(t); }
   }
   box.replaceChildren(...kids.filter(Boolean));
+  if ($("#satpanel") && OVDATA.satrecs) { const now = satClock(); $("#satpanel").replaceChildren(...satPanelKids(now, passesFor(M.satDay).filter(p => !M.satOff.has(p.sat)))); }
 }
 
 // ---------------------------------------------------------------- controls, KPIs, legend
@@ -376,39 +459,77 @@ function kpis() {
     el("div", {className: "note", textContent: best ? `${best.m.label} (${best.m.source_label}) · ${best.s.years} years · avg state miss` : ""})));
   $("#kpis").replaceChildren(...tiles);
 }
+function ctlField(label, node, hint) {   // a control with a small label above it, so every box says what it does
+  return node ? el("label", {className: "ctl", title: hint || ""}, el("span", {className: "ctl-l", textContent: label}), node) : null;
+}
+function segOf(opts, cur, set) { return el("span", {className: "seg"}, opts.map(([k, l]) => { const b = el("button", {textContent: l, type: "button"}); b.setAttribute("aria-pressed", cur == k); b.onclick = e => { e.preventDefault(); set(k); draw(); }; return b; })); }
+function yearRange(years, cur, set, extra) {
+  const r = el("input", {type: "range", min: years[0], max: years.at(-1), step: 1, value: cur, "aria-label": "Year"}); r.oninput = e => { set(+e.target.value); draw(); };
+  const prev = el("button", {className: "ghost tiny", type: "button", textContent: "\u2039", title: "Previous year", "aria-label": "Previous year"}); prev.onclick = e => { e.preventDefault(); const i = years.indexOf(cur); if (i > 0) { set(years[i - 1]); draw(); } };
+  const next = el("button", {className: "ghost tiny", type: "button", textContent: "\u203a", title: "Next year", "aria-label": "Next year"}); next.onclick = e => { e.preventDefault(); const i = years.indexOf(cur); if (i < years.length - 1) { set(years[i + 1]); draw(); } };
+  return el("span", {className: "yr"}, prev, r, next, el("b", {className: "mono", textContent: cur}), extra || null);
+}
 function controls() {
-  const crop = M.crop;
-  const cropSeg = el("span", {className: "seg"}, ["silage", "grain"].map(c => { const b = el("button", {textContent: c[0].toUpperCase() + c.slice(1)}); b.setAttribute("aria-pressed", crop == c); b.onclick = () => { M.crop = c; draw(); }; return b; }));
-  const layer = el("select", {"aria-label": "Layer", className: "layersel"}, LAYER_GROUPS.map(([g, ls]) => { const og = el("optgroup"); og.label = g;
-    ls.forEach(([k, l]) => og.append(el("option", {value: k, textContent: l, selected: k == M.layer}))); return og; }));
-  layer.onchange = e => { stopPlay(); M.layer = e.target.value; draw(); if (COUNTY_LAYERS.has(M.layer) && !M.sel) resetView(); };
+  const crop = M.crop, parts = [layerButton()];
   const cropMatters = ["forecast", "change", "disagree", "history", "error"].includes(M.layer);
-  const parts = [el("span", {className: "ask", textContent: "Show me"}), layer, cropMatters ? cropSeg : null].filter(Boolean);
-  if (M.layer == "dairy" || M.layer == "silage_county") { const yrs = EXT.county.census_years;
-    parts.push(el("span", {className: "seg"}, yrs.map(y => { const b = el("button", {textContent: "Census " + y}); b.setAttribute("aria-pressed", M.cyear == y); b.onclick = () => { M.cyear = y; draw(); }; return b; }))); }
-  if (M.layer == "weather") parts.push(el("span", {className: "seg"}, [["rain", "Rain"], ["heat", "Heat"]].map(([k, l]) => { const b = el("button", {textContent: l}); b.setAttribute("aria-pressed", M.wx == k); b.onclick = () => { M.wx = k; draw(); }; return b; })));
-  if (M.layer == "weather" || M.layer == "frost") { const yrs = Object.keys(EXT.county.weather).map(Number).filter(y => y < 2026).sort((a, b) => a - b);
-    const r = el("input", {type: "range", min: yrs[0], max: yrs.at(-1), step: 1, value: M.wyear || yrs.at(-1), "aria-label": "Year"}); r.oninput = e => { M.wyear = +e.target.value; draw(); };
-    parts.push(el("span", {className: "yr"}, r, el("b", {className: "mono", textContent: M.wyear}))); }
-  if (M.layer == "money" || M.layer == "price") { const yrs = [...new Set(Object.values(EXT.money).flatMap(o => Object.keys(o).map(Number)))].sort((a, b) => a - b);
-    const r = el("input", {type: "range", min: yrs[0], max: yrs.at(-1), step: 1, value: M.myear, "aria-label": "Year"}); r.oninput = e => { M.myear = +e.target.value; draw(); };
-    parts.push(el("span", {className: "yr"}, r, el("b", {className: "mono", textContent: M.myear}))); }
+  if (cropMatters) parts.push(ctlField("Crop", segOf([["silage", "Silage"], ["grain", "Grain"]], crop, c => M.crop = c), "Silage = whole plant chopped for cow feed. Grain = kernels only."));
   if (["forecast", "change"].includes(M.layer)) { const s = el("select", {"aria-label": "Model"}, fcModels(crop).map(m => el("option", {value: m.model_id, textContent: modelLabel(m.model_id), selected: m.model_id == M.fcModel[crop]})));
-    s.onchange = e => { M.fcModel[crop] = e.target.value; draw(); }; parts.push(s); }
+    s.onchange = e => { M.fcModel[crop] = e.target.value; draw(); }; parts.push(ctlField("Whose forecast", s, "Each of the team's models makes its own 2026 forecast. The first one is the team's headline model.")); }
   if (M.layer == "error") { const ids = errModels(crop); if (!M.errModel[crop] || !ids.includes(M.errModel[crop])) M.errModel[crop] = ids[0];
     if (ids.length) { const s = el("select", {"aria-label": "Model"}, ids.map(id => el("option", {value: id, textContent: (MODELS[id]?.label || id) + " \u00b7 " + (MODELS[id]?.source_label || ""), selected: id == M.errModel[crop]})));
-      s.onchange = e => { M.errModel[crop] = e.target.value; draw(); }; parts.push(s); } }
+      s.onchange = e => { M.errModel[crop] = e.target.value; draw(); }; parts.push(ctlField("Which model", s, "Pick a model to see how far off it was in each state.")); } }
+  if (M.layer == "dairy" || M.layer == "silage_county") parts.push(ctlField("Census year", segOf(EXT.county.census_years.map(y => [y, String(y)]), M.cyear, y => M.cyear = y), "USDA counts every farm once every five years."));
+  if (M.layer == "weather") parts.push(ctlField("Show", segOf([["rain", "Rain"], ["heat", "Heat"]], M.wx, k => M.wx = k)));
+  if (M.layer == "weather" || M.layer == "frost") { const yrs = Object.keys(EXT.county.weather).map(Number).filter(y => y < 2026).sort((a, b) => a - b);
+    parts.push(ctlField("Season", yearRange(yrs, M.wyear || yrs.at(-1), y => M.wyear = y))); }
+  if (M.layer == "money" || M.layer == "price") { const yrs = [...new Set(Object.values(EXT.money).flatMap(o => Object.keys(o).map(Number)))].sort((a, b) => a - b);
+    parts.push(ctlField("Year", yearRange(yrs, M.myear, y => M.myear = y))); }
   if (M.layer == "context") { const s = el("select", {"aria-label": "Signal"}, Object.entries(SIGNALS).map(([k, sg]) => el("option", {value: k, textContent: sg.label, selected: k == M.signal})));
-    s.onchange = e => { M.signal = e.target.value; draw(); }; parts.push(s); }
+    s.onchange = e => { M.signal = e.target.value; draw(); }; parts.push(ctlField("Signal", s)); }
   if (["history", "context"].includes(M.layer)) {
     const years = [...new Set(MAP.history.filter(r => (M.layer == "history" ? r[crop] : r[M.signal]) != null).map(r => r.year))].sort((a, b) => a - b);
     if (!years.includes(M.year)) M.year = years.at(-1);
-    const r = el("input", {type: "range", min: years[0], max: years.at(-1), step: 1, value: M.year, "aria-label": "Year"}); r.oninput = e => { M.year = +e.target.value; stopPlay(); draw(); };
-    const play = el("button", {className: "ghost", textContent: M.playing ? "Pause" : "▶ Play"}); play.onclick = () => M.playing ? stopPlay() : startPlay(years);
-    parts.push(el("span", {className: "yr"}, r, el("b", {className: "mono", textContent: M.year}), play));
+    const play = el("button", {className: "ghost tiny", type: "button", textContent: M.playing ? "\u275a\u275a Pause" : "\u25b6 Play"}); play.onclick = e => { e.preventDefault(); M.playing ? stopPlay() : startPlay(years); };
+    parts.push(ctlField("Year", yearRange(years, M.year, y => { M.year = y; stopPlay(); }, play)));
   }
-  $("#mapctl").replaceChildren(...parts);
+  $("#mapctl").replaceChildren(...parts.filter(Boolean));
 }
+
+// ---------------------------------------------------------------- "Show me" picker: every map with a one-line description
+function layerButton() {
+  const cur = LAYERS.find(l => l[0] == M.layer), grp = LAYER_GROUPS.find(g => g[1].some(l => l[0] == M.layer))[0];
+  const b = el("button", {className: "lpick", type: "button", "aria-haspopup": "listbox", "aria-expanded": "false", id: "lpick"},
+    el("span", {className: "lpick-ico", textContent: GROUP_ICON[grp] || "\u25a6"}),
+    el("span", {className: "lpick-txt"}, el("span", {className: "lpick-g", textContent: "Show me \u00b7 " + grp}), el("span", {className: "lpick-t", textContent: cur[1]})),
+    el("span", {className: "caret", textContent: "\u25be"}));
+  b.onclick = e => { e.stopPropagation(); $("#lmenu") ? closeLayerMenu() : openLayerMenu(); };
+  return b;
+}
+const firstSentence = s => (s.match(/^[^.]*\./) || [s])[0];
+function openLayerMenu() {
+  closeLayerMenu(); const btn = $("#lpick"); if (!btn) return; btn.setAttribute("aria-expanded", "true");
+  const q = el("input", {type: "search", placeholder: "Search maps: cows, rain, forecast\u2026", "aria-label": "Search maps"});
+  const list = el("div", {className: "lm-list", role: "listbox"});
+  const menu = el("div", {id: "lmenu", className: "lmenu"}, el("div", {className: "lm-head"}, el("b", {textContent: "What should the map show?"}), el("span", {className: "muted", textContent: "\u2191\u2193 to move, Enter to pick"})), q, list);
+  const render = () => { const term = q.value.trim().toLowerCase(); list.replaceChildren();
+    LAYER_GROUPS.forEach(([g, ls]) => { const hit = ls.filter(l => !term || (l[1] + " " + l[2] + " " + g).toLowerCase().includes(term)); if (!hit.length) return;
+      list.append(el("div", {className: "lm-g", textContent: (GROUP_ICON[g] || "") + "  " + g}));
+      hit.forEach(([k, l, ex]) => { const it = el("button", {className: "lm-i" + (k == M.layer ? " on" : ""), type: "button", role: "option", "aria-selected": String(k == M.layer)},
+        el("span", {className: "lm-t", textContent: l + (COUNTY_LAYERS.has(k) ? "" : "")}), el("span", {className: "lm-d", textContent: firstSentence(ex)}));
+        it.dataset.k = k; it.onclick = () => pickLayer(k); list.append(it); }); });
+    if (!list.children.length) list.append(el("div", {className: "note", style: "padding:10px", textContent: "No map matches that. Try \u201ccows\u201d, \u201crain\u201d or \u201cforecast\u201d."})); };
+  render(); q.oninput = render;
+  q.onkeydown = e => { const items = [...list.querySelectorAll(".lm-i")]; let i = items.findIndex(x => x.classList.contains("kb"));
+    if (e.key == "ArrowDown" || e.key == "ArrowUp") { e.preventDefault(); items.forEach(x => x.classList.remove("kb")); i = e.key == "ArrowDown" ? Math.min(items.length - 1, i + 1) : Math.max(0, i - 1); items[i]?.classList.add("kb"); items[i]?.scrollIntoView({block: "nearest"}); }
+    else if (e.key == "Enter") { e.preventDefault(); const it = items[Math.max(0, i)]; if (it) pickLayer(it.dataset.k); }
+    else if (e.key == "Escape") { closeLayerMenu(); $("#lpick")?.focus(); } };
+  document.body.append(menu); const r = btn.getBoundingClientRect();
+  menu.style.left = Math.max(8, Math.min(r.left, innerWidth - 470)) + "px"; menu.style.top = r.bottom + 6 + scrollY + "px";
+  setTimeout(() => q.focus(), 0);
+}
+function closeLayerMenu() { $("#lmenu")?.remove(); $("#lpick")?.setAttribute("aria-expanded", "false"); }
+function pickLayer(k) { closeLayerMenu(); stopPlay(); M.layer = k; if (k == "satellite" && !OV.sats) { OV.sats = true; M.satOpen = true; drawOverlays(); } draw(); if (COUNTY_LAYERS.has(M.layer) && !M.sel && !M.loc) resetView(); }
+addEventListener("pointerdown", e => { const m = $("#lmenu"); if (m && !m.contains(e.target) && !e.target.closest?.("#lpick")) closeLayerMenu(); });
 function startPlay(years) { let i = years[0] == M.year || M.year == years.at(-1) ? 0 : years.indexOf(M.year); M.year = years[i];
   M.playing = setInterval(() => { i++; if (i >= years.length) return stopPlay(); M.year = years[i]; draw(); }, 900); draw(); }
 function stopPlay() { if (M.playing) { clearInterval(M.playing); M.playing = null; } }
@@ -435,8 +556,7 @@ async function mapTab() {
   for (const c of ["silage", "grain"]) if (!M.fcModel[c] || !MODELS[M.fcModel[c]]) M.fcModel[c] = defaultModel(c);
   if (!M.built || !$("#zoomg")) buildMap();
   CUR = layerValues();
-  if (CUR.county && !CTY) { $("#legend-map").replaceChildren(el("span", {className: "note", textContent: "Loading 3,000 counties\u2026"}));
-    CTY = topoPaths(await fetch("/api/counties").then(r => r.json()), "counties"); buildCounties(); }
+  if (CUR.county && !$("#counties")) { $("#legend-map").replaceChildren(el("span", {className: "note", textContent: "Loading 3,000 counties\u2026"})); await loadCounties(); }
   const cls = classify(CUR.vals, CUR.ramp, CUR.div, CUR.flip);
   const LIGHT = new Set([SEQ[5], SEQ[6], SEQ2[5], SEQ2[6], DIV[2], DIV[4]]);  // labels go dark on light fills
   const stage = $("#usmap"); stage.classList.toggle("countymode", !!CUR.county);
@@ -449,22 +569,55 @@ async function mapTab() {
     const c = svgEl("circle", {cx: x, cy: y, class: "mk"}); c.addEventListener("pointermove", e => { const t = $("#tip"); t.replaceChildren(el("b", {textContent: pt.label}), el("div", {textContent: pt.detail})); t.hidden = false; t.style.left = e.clientX + 14 + "px"; t.style.top = e.clientY + 14 + "px"; });
     c.addEventListener("pointerleave", () => $("#tip").hidden = true); const t = svgEl("text", {x, y, class: "mkl", dy: 4}); t.textContent = pt.label; mk.append(c, t); });
   const s = GEO.states.find(s => s.code == M.sel); $("#selpath").setAttribute("d", s ? s.d : "");
-  kpis(); controls(); legend(cls); panel(); applyT(); helpCard();
+  kpis(); controls(); legend(cls); panel(); drawLoc(); applyT(); locControls(); guideButton();
+  if (!mapTab.guided) { mapTab.guided = true; let seen = false; try { seen = localStorage.getItem("board-guide") == "1"; } catch (e) { seen = true; }
+    if (!seen) setTimeout(() => startGuide(), 600);
+    try { const saved = JSON.parse(localStorage.getItem("board-loc") || "null"); if (saved && !M.loc) setLocation(saved, {quiet: true}); } catch (e) { /* storage off */ } }
   if (!mapTab.ovStarted) { mapTab.ovStarted = true; drawOverlays(); } else overlayControls();
 }
-function helpCard() {
-  let seen = false; try { seen = localStorage.getItem("board-help") == "1"; } catch (e) { seen = true; }
-  if (seen || $("#help")) return;
-  const ok = el("button", {className: "act", textContent: "Got it"});
-  const card = el("div", {id: "help"}, el("b", {textContent: "How to use this map"}),
-    el("ol", {}, el("li", {textContent: "Pick what to show in \u201cShow me\u201d above the map."}), el("li", {textContent: "Drag to move, scroll or use + \u2212 to zoom."}),
-      el("li", {textContent: "Click any state to see its history and every model's 2026 number."}), el("li", {textContent: "The gold line under it explains the colors in plain words."})), ok);
-  ok.onclick = () => { card.remove(); try { localStorage.setItem("board-help", "1"); } catch (e) { /* storage off */ } };
-  $(".stage").append(card);
+// ---------------------------------------------------------------- guided tour: points at each control in turn
+const GUIDE = [
+  ["#lpick", "1 · Pick a map", "Click here to choose what the colors show: our 2026 forecast, where the dairy cows are, this season's rain, frost, prices and more. Type in the search box to find one fast."],
+  ["#mapctl .ctl", "2 · Fine-tune it", "The boxes next to it change with the map you picked: silage or grain, whose forecast, which year. Each one is labeled; hover it for a hint."],
+  ["#explain", "3 · Read the colors", "This line explains the map in plain words. The legend in the bottom-left corner gives the scale."],
+  ["#locbox", "4 · Find your area", "Type a town, ZIP code or county, or press \u{1F4CD} to use your location. The map zooms there and the side panel shows the cows, silage, weather and next satellite picture around you."],
+  [".zoom", "5 · Zoom and move", "Scroll or pinch to zoom, drag to move, double-click to zoom in. Drag the slider, or hold Shift and drag a box to zoom straight into it. Zoom in on a county map to read county names."],
+  ["#ovctl", "6 · Overlays", "Lay highways, grain export routes or today's satellite pictures on top of any map. “Satellites” shows every strip Sentinel-2 and Landsat photograph today."],
+  ["#sp", "7 · Details", "Click any state (or county) to see its history, every model's 2026 number and how well each model has called it. Press 0 or ↺ to go back to the whole country."],
+];
+function startGuide(i = 0) {
+  endGuide(false);
+  let step = i; while (step < GUIDE.length && !$(GUIDE[step][0])) step++;
+  if (step >= GUIDE.length) return endGuide(true);
+  const [sel, title, body] = GUIDE[step], target = $(sel); target.scrollIntoView({block: "nearest", behavior: "smooth"});
+  const r = target.getBoundingClientRect(), pad = 6;
+  const spot = el("div", {className: "gspot"}); Object.assign(spot.style, {left: r.left - pad + "px", top: r.top - pad + scrollY + "px", width: r.width + 2 * pad + "px", height: r.height + 2 * pad + "px"});
+  const back = el("button", {className: "ghost", type: "button", textContent: "Back", disabled: step == 0}); back.onclick = () => startGuide(step - 1);
+  const next = el("button", {className: "act", type: "button", textContent: step == GUIDE.length - 1 ? "Done" : "Next"}); next.onclick = () => step == GUIDE.length - 1 ? endGuide(true) : startGuide(step + 1);
+  const skip = el("button", {className: "linkish", type: "button", textContent: "Skip the tour"}); skip.onclick = () => endGuide(true);
+  const dots = el("div", {className: "gdots"}, GUIDE.map((_, j) => el("i", {className: j == step ? "on" : ""})));
+  const bub = el("div", {className: "gbub", role: "dialog", "aria-label": title}, el("b", {textContent: title}), el("p", {textContent: body}), el("div", {className: "grow"}, dots, skip, back, next));
+  document.body.append(spot, bub);
+  const bw = Math.min(380, innerWidth - 24), below = r.bottom + 14 + 190 < innerHeight || r.top < 220;
+  bub.style.width = bw + "px"; bub.style.left = Math.max(12, Math.min(r.left, innerWidth - bw - 12)) + "px";
+  if (r.width > innerWidth * 0.5 && r.height > 300) { bub.style.left = Math.max(12, r.left - bw - 16) + "px"; bub.style.top = r.top + 20 + scrollY + "px"; }
+  else bub.style.top = (below ? r.bottom + 14 : r.top - 14 - bub.offsetHeight) + scrollY + "px";
+  next.focus();
+  startGuide.key = e => { if (e.key == "Escape") endGuide(true); else if (e.key == "ArrowRight") next.click(); else if (e.key == "ArrowLeft" && step) back.click(); };
+  addEventListener("keydown", startGuide.key);
+}
+function endGuide(done) {
+  document.querySelectorAll(".gspot,.gbub").forEach(n => n.remove()); if (startGuide.key) removeEventListener("keydown", startGuide.key);
+  if (done) try { localStorage.setItem("board-guide", "1"); } catch (e) { /* storage off */ }
+}
+function guideButton() {
+  if ($("#guidebtn")) return;
+  const b = el("button", {id: "guidebtn", className: "ghost", type: "button", title: "Show me around", textContent: "? How to use"}); b.onclick = () => startGuide(0);
+  $(".toolbar")?.append(b);
 }
 
 // ---------------------------------------------------------------- overlays: highways, export routes, live satellites
-const OV = {roads: false, trade: false, sats: true}, OVDATA = {roads: null, tle: null, satrecs: null, trade: null};
+const OV = {roads: false, trade: false, sats: false}, OVDATA = {roads: null, tle: null, satrecs: null, trade: null};
 let satTimer = null;
 const US_BOX = {lon0: -125, lon1: -66, lat0: 24, lat1: 50};
 const inUS = (lon, lat) => lon > US_BOX.lon0 && lon < US_BOX.lon1 && lat > US_BOX.lat0 && lat < US_BOX.lat1;
@@ -473,10 +626,10 @@ const SWATH = {"Sentinel-2": 290, "Landsat": 185};
 
 function overlayControls() {
   const box = $("#ovctl"); if (!box) return;
-  const items = [["roads", "Highways"], ["trade", "Export routes"], ["sats", "Satellites (live)"]];
+  const items = [["roads", "\u{1F6E3}\uFE0F Highways"], ["trade", "\u{1F6A2} Export routes"], ["sats", "\u{1F6F0}\uFE0F Satellites"]];
   box.replaceChildren(el("div", {className: "ovt", textContent: "Overlays"}), ...items.map(([k, l]) => {
     const b = el("button", {className: "chip", textContent: l}); b.setAttribute("aria-pressed", OV[k]);
-    b.onclick = () => { OV[k] = !OV[k]; drawOverlays(); }; return b; }));
+    b.onclick = () => { OV[k] = !OV[k]; if (k == "sats" && OV.sats) M.satOpen = true; drawOverlays(); }; return b; }));
 }
 async function drawOverlays() {
   overlayControls();
@@ -498,15 +651,14 @@ async function drawOverlays() {
   if (OV.trade && !tg) { tg = svgEl("g", {id: "ov-trade"}); g.prepend(tg); drawTrade(tg); }
   if (tg) tg.style.display = OV.trade ? "" : "none";
   tradeCard();
-  // satellites
+  // satellites: every strip photographed today, plus where each satellite is right now
   clearInterval(satTimer); let sg = $("#ov-sats");
   if (OV.sats) {
-    if (!OVDATA.tle) { OVDATA.tle = await fetch("/api/tle").then(r => r.json());
-      OVDATA.satrecs = (typeof satellite == "undefined") ? [] : OVDATA.tle.sats.map(s => ({...s, rec: satellite.twoline2satrec(s.l1, s.l2)})); }
+    await ensureSats();
     if (!sg) { sg = svgEl("g", {id: "ov-sats"}); g.append(sg); }
-    sg.style.display = ""; drawSats(true); satTimer = setInterval(() => drawSats(false), 2000);
+    sg.style.display = ""; drawSats(); satTimer = setInterval(() => { if (M.satT == null && S.tab == "map") drawSats(); }, 5000);
   } else { if (sg) sg.style.display = "none"; const card = $("#satcard"); if (card) card.hidden = true; }
-  applyT();
+  if (CUR) panel(); applyT();
 }
 
 function drawTrade(tg) {
@@ -528,39 +680,295 @@ function tradeBlock() {
     el("ul", {}, OVDATA.trade.facts.map(f => el("li", {}, f.text, " ", el("a", {href: f.url, target: "_blank", rel: "noopener", className: "src", textContent: "(" + f.src + ")"})))),
     el("div", {className: "note", textContent: "On the map: blue lines are the rivers barges use; green arrows are the main export gateways. Hover a port for details. The US imports very little corn, so only exports are shown."}))];
 }
+// ---------------------------------------------------------------- satellites: today's picture strips, not just one line
+const SATCOL = {"Sentinel-2A": "#7fd1ff", "Sentinel-2B": "#5fe3b4", "Sentinel-2C": "#c7a8ff", "Landsat 9": "#ffb86b", "Landsat 8": "#ff8fa3"};
+const SATSHORT = n => n.replace("Sentinel-", "S").replace("Landsat ", "L");
+const swathKm = n => n.startsWith("Landsat") ? SWATH.Landsat : SWATH["Sentinel-2"];
+const RAD = Math.PI / 180;
+const hhmm = d => d.toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"});
+const dayName = off => off == 0 ? "today" : off == -1 ? "yesterday" : off == 1 ? "tomorrow" : dayStart(off).toLocaleDateString("en-US", {weekday: "long"});
 function satPos(rec, d) {
   const pv = satellite.propagate(rec, d); if (!pv || !pv.position) return null;
   const gd = satellite.eciToGeodetic(pv.position, satellite.gstime(d));
   return [satellite.degreesLong(gd.longitude), satellite.degreesLat(gd.latitude)];
 }
-let nextPass = {};
-function drawSats(full) {
-  const sg = $("#ov-sats"); if (!sg || !OVDATA.satrecs) return; const now = new Date();
-  if (full || !drawSats.t || now - drawSats.t > 30000) { drawSats.t = now; nextPass = {};
-    OVDATA.satrecs.forEach(s => { for (let m = 0; m <= 24 * 60; m += 1) { const p = satPos(s.rec, new Date(+now + m * 6e4)); if (p && inUS(...p)) { nextPass[s.name] = m; break; } } }); }
-  const kids = [];
-  OVDATA.satrecs.forEach(s => {
-    const p = satPos(s.rec, now); if (!p) return; const sw = (s.name.startsWith("Landsat") ? SWATH.Landsat : SWATH["Sentinel-2"]) * KM_PX;
-    const track = []; for (let sec = -900; sec <= 900; sec += 20) { const q = satPos(s.rec, new Date(+now + sec * 1000)); if (q && inUS(...q)) track.push(ALB(...q)); else if (track.length && track.at(-1) !== null) track.push(null); }
-    const segs = []; let cur = []; track.forEach(pt => { if (pt) cur.push(pt); else if (cur.length) { segs.push(cur); cur = []; } }); if (cur.length) segs.push(cur);
-    segs.forEach(sgm => { if (sgm.length < 2) return; const d = "M" + sgm.map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join("L");
-      kids.push(svgEl("path", {d, class: "swath", "stroke-width": sw}), svgEl("path", {d, class: "track"})); });
-    if (inUS(...p)) { const [x, y] = ALB(...p); const c = svgEl("circle", {cx: x, cy: y, class: "sat"}); const t = svgEl("text", {x, y, class: "satl", dy: -10}); t.textContent = s.name; kids.push(c, t); }
-  });
-  sg.replaceChildren(...kids);
-  satCard(now);
-}
-function satCard(now) {
-  let card = $("#satcard"); if (!card) { card = el("div", {id: "satcard"}); $(".stage").append(card); } card.hidden = false;
-  const info = OVDATA.satrecs.map(s => { const p = satPos(s.rec, now), age = Math.round((now - epochOf(s.l1)) / 864e5), m = p && inUS(...p) ? 0 : nextPass[s.name];
-    return {s, m, age}; }).sort((a, b) => (a.m ?? 1e9) - (b.m ?? 1e9));
-  const when = m => m == null ? "not in the next 24 h" : m == 0 ? "over the US now" : `in ${m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min"}`;
-  const top = info[0], tog = el("button", {className: "ghost", textContent: OV.satOpen ? "Less" : "All 5"}); tog.onclick = () => { OV.satOpen = !OV.satOpen; satCard(new Date()); };
-  const head = el("div", {className: "sathead"}, el("span", {}, el("b", {textContent: "Next satellite over the US: "}), `${top.s.name} ${when(top.m)}`), tog);
-  const kids = [head];
-  if (OV.satOpen) kids.push(el("table", {className: "mini"}, info.map(({s, m, age}) => el("tr", {}, el("td", {}, el("b", {textContent: s.name})), el("td", {textContent: when(m)}),
-      el("td", {className: "muted", title: "Age of the orbit data. Older data means a less exact position.", textContent: age <= 3 ? "exact" : `approx. (${age} d old)`})))),
-    el("div", {className: "note", textContent: "Live from published orbit data. During a pass, the shaded band is the strip it photographs (290 km Sentinel-2, 185 km Landsat)."}));
-  card.replaceChildren(...kids);
-}
 function epochOf(l1) { const yy = +l1.slice(18, 20), doy = parseFloat(l1.slice(20, 32)); return Date.UTC(2000 + yy, 0, 1) + (doy - 1) * 864e5; }
+async function ensureSats() {
+  if (OVDATA.satrecs) return;
+  OVDATA.tle = await fetch("/api/tle").then(r => r.json());
+  OVDATA.satrecs = (typeof satellite == "undefined") ? [] : OVDATA.tle.sats.map(s => ({...s, rec: satellite.twoline2satrec(s.l1, s.l2)}));
+}
+function dayStart(off) { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + off); return d; }
+function dest(lat, lon, brg, km) {        // point km away from (lat, lon) on a bearing, on a sphere
+  const d = km / 6371, p1 = lat * RAD, l1 = lon * RAD, t = brg * RAD;
+  const p2 = Math.asin(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(t));
+  const l2 = l1 + Math.atan2(Math.sin(t) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * Math.sin(p2));
+  return [l2 / RAD, p2 / RAD];
+}
+function bearing(a, b) { const y = Math.sin((b.lon - a.lon) * RAD) * Math.cos(b.lat * RAD), x = Math.cos(a.lat * RAD) * Math.sin(b.lat * RAD) - Math.sin(a.lat * RAD) * Math.cos(b.lat * RAD) * Math.cos((b.lon - a.lon) * RAD); return Math.atan2(y, x) / RAD; }
+function swathPoly(ps) {
+  const hw = swathKm(ps.sat) / 2, L = [], R = [];
+  ps.pts.forEach((p, i) => { const a = ps.pts[Math.max(0, i - 1)], b = ps.pts[Math.min(ps.pts.length - 1, i + 1)], brg = bearing(a, b);
+    L.push(ALB(...dest(p.lat, p.lon, brg - 90, hw))); R.push(ALB(...dest(p.lat, p.lon, brg + 90, hw))); });
+  return "M" + [...L, ...R.reverse()].map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join("L") + "Z";
+}
+let STP = null;
+function stateAt(x, y) {
+  STP ??= [...document.querySelectorAll("#states .st")].map(p => [p, GEO.states.find(s => s.code == p.dataset.code)]).filter(x => x[1] && !["AK", "HI", "PR"].includes(x[1].code));  // insets are not where they are drawn
+  for (const [p, s] of STP) { if (x < s.b[0] || x > s.b[2] || y < s.b[1] || y > s.b[3]) continue;
+    try { if (p.isPointInFill(new DOMPoint(x, y))) return s.code; } catch (e) { return null; } }
+  return null;
+}
+const PASSES = {};
+function passesFor(off) {        // daytime (descending) passes over the lower 48 on one local day
+  const d0 = dayStart(off), key = d0.toDateString(); if (PASSES[key]) return PASSES[key];
+  const out = [];
+  (OVDATA.satrecs || []).forEach(s => {
+    let cur = null;
+    const fin = () => {
+      if (cur && cur.pts.length >= 3 && cur.pts.at(-1).lat < cur.pts[0].lat) {
+        cur.t0 = cur.pts[0].t; cur.t1 = cur.pts.at(-1).t; cur.xy = cur.pts.map(q => ALB(q.lon, q.lat)); cur.poly = swathPoly(cur);
+        cur.states = [...new Set(cur.xy.map(q => stateAt(...q)).filter(Boolean))];
+        const land = cur.xy.map((q, i) => [q, i]).filter(([q]) => stateAt(...q)); const mid = land.length ? land[Math.floor(land.length / 2)][1] : Math.floor(cur.xy.length / 2);
+        cur.tm = cur.pts[mid].t; cur.top = land.length ? land[0][0] : cur.xy[0];      // label at the northern edge, where strips are far apart
+        if (cur.states.length) out.push(cur); }
+      cur = null; };
+    for (let m = -15; m <= 1455; m += 0.5) { const t = new Date(+d0 + m * 6e4), q = satPos(s.rec, t);
+      if (q && q[0] > -130 && q[0] < -60 && q[1] > 20 && q[1] < 53) (cur ??= {sat: s.name, pts: []}).pts.push({t, lon: q[0], lat: q[1]}); else fin(); }
+    fin(); });
+  return PASSES[key] = out.filter(p => p.tm >= d0 && p.tm < +d0 + 864e5).sort((a, b) => a.tm - b.tm);
+}
+function satClock() { const d0 = dayStart(M.satDay); return M.satT == null ? (M.satDay == 0 ? new Date() : new Date(+d0 + 12 * 36e5)) : new Date(+d0 + M.satT * 6e4); }
+function drawSats() {
+  const sg = $("#ov-sats"); if (!sg || !OVDATA.satrecs) return;
+  const now = satClock(), passes = passesFor(M.satDay).filter(p => !M.satOff.has(p.sat));
+  const strips = svgEl("g", {"clip-path": "url(#usclip)", class: "strips"}), labels = svgEl("g"), kids = [strips, labels], placed = [];
+  passes.forEach(ps => {
+    const state = ps.t1 < now ? "done" : ps.t0 > now ? "soon" : "now", col = SATCOL[ps.sat] || "#7fd1ff";
+    const band = svgEl("path", {d: ps.poly, class: "strip " + state, fill: col, stroke: col});
+    band.addEventListener("pointermove", e => tipText(e, `${ps.sat} · ${hhmm(ps.tm)} ${dayName(M.satDay)}`,
+      `${state == "done" ? "Photographed" : state == "now" ? "Photographing now:" : "Will photograph"} this ${swathKm(ps.sat)} km strip over ${ps.states.join(", ")}. ${state == "soon" ? "" : "Fields here have a fresh picture, unless it was cloudy."}`));
+    band.addEventListener("pointerleave", () => $("#tip").hidden = true);
+    strips.append(band, svgEl("path", {d: "M" + ps.xy.map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join("L"), class: "track " + state, stroke: col}));
+    let ly = ps.top[1]; const lw = 70 / M.k, lh = 13 / M.k;
+    while (placed.some(([x, y]) => Math.abs(x - ps.top[0]) < lw && Math.abs(y - ly) < lh)) ly += lh;
+    placed.push([ps.top[0], ly]);
+    const t = svgEl("text", {x: ps.top[0], y: ly, class: "passl " + state, fill: col}); t.textContent = `${SATSHORT(ps.sat)} ${hhmm(ps.tm)}`; labels.append(t);
+  });
+  (OVDATA.satrecs || []).forEach(s => { if (M.satOff.has(s.name)) return; const p = satPos(s.rec, now); if (!p || !inUS(...p)) return;
+    const tail = []; for (let sec = -480; sec <= 0; sec += 30) { const q = satPos(s.rec, new Date(+now + sec * 1000)); if (q) tail.push(ALB(...q)); }
+    const [x, y] = ALB(...p), col = SATCOL[s.name];
+    kids.push(svgEl("path", {d: "M" + tail.map(q => q[0].toFixed(1) + "," + q[1].toFixed(1)).join("L"), class: "tail", stroke: col}),
+      svgEl("circle", {cx: x, cy: y, class: "sat", fill: col}));
+    const t = svgEl("text", {x, y, class: "satl"}); t.textContent = s.name; kids.push(t); });
+  sg.replaceChildren(...kids); applyT(); satCard(now, passes);
+}
+function passWindow(all, d0) {      // the stretch of the day when passes happen, padded, in minutes since midnight
+  if (!all.length) return [6 * 60, 14 * 60];
+  const a = Math.floor(((all[0].t0 - d0) / 6e4 - 40) / 30) * 30, b = Math.ceil(((all.at(-1).t1 - d0) / 6e4 + 40) / 30) * 30;
+  return [Math.max(0, a), Math.min(1440, b)];
+}
+function satCard(now, passes) {
+  // a slim bar on the map, the full controls in the side panel
+  let card = $("#satcard"); if (!card) { card = el("div", {id: "satcard"}); $(".stage").append(card); } card.hidden = false;
+  const next = passes.find(p => p.t1 >= now), done = passes.filter(p => p.t1 < now).length;
+  const more = el("button", {className: "ghost tiny", type: "button", textContent: M.satOpen ? "Hide details" : "Details →"});
+  more.onclick = () => { M.satOpen = !M.satOpen; panel(); drawSats(); if (M.satOpen) $("#satpanel")?.scrollIntoView({block: "nearest", behavior: "smooth"}); };
+  card.className = "mini";
+  card.replaceChildren(el("div", {className: "sathead"}, el("span", {}, el("b", {textContent: "\u{1F6F0}️ "}), `${dayName(M.satDay)[0].toUpperCase() + dayName(M.satDay).slice(1)}: ${passes.length} picture strips` +
+    (M.satDay == 0 ? ` · ${done} taken` : "") + (next && M.satDay == 0 ? ` · next ${SATSHORT(next.sat)} at ${hhmm(next.tm)} over ${next.states.slice(0, 3).join(", ")}` : M.satDay == 0 ? " · all done for today" : "")), more));
+  const box = $("#satpanel"); if (box) { const top = box.querySelector(".satscroll")?.scrollTop || 0; box.replaceChildren(...satPanelKids(now, passes)); const sc = box.querySelector(".satscroll"); if (sc) sc.scrollTop = top; }
+}
+function satPanelKids(now, passes) {
+  const all = passesFor(M.satDay), d0 = dayStart(M.satDay), [wa, wb] = passWindow(all, d0);
+  const days = segOf([[-1, "Yesterday"], [0, "Today"], [1, "Tomorrow"]], M.satDay, d => { M.satDay = d; M.satT = null; });
+  days.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setTimeout(drawSats, 0)));
+  const chips = el("div", {className: "satchips"}, (OVDATA.satrecs || []).map(s => { const b = el("button", {className: "schip", type: "button"}, el("i", {style: `background:${SATCOL[s.name]}`}), s.name);
+    b.setAttribute("aria-pressed", !M.satOff.has(s.name)); b.onclick = () => { M.satOff.has(s.name) ? M.satOff.delete(s.name) : M.satOff.add(s.name); drawSats(); }; return b; }));
+  // timeline over the hours when passes happen: one bar per pass, a line for the time shown
+  const W = 340, H = 40, X = t => 22 + (W - 44) * (((t - d0) / 6e4 - wa) / (wb - wa));
+  const tl = svgEl("svg", {viewBox: `0 0 ${W} ${H}`, width: "100%", class: "satline"});
+  for (let m = Math.ceil(wa / 60) * 60; m <= wb; m += 60) { const x = X(+d0 + m * 6e4); tl.append(svgEl("line", {x1: x, x2: x, y1: 4, y2: 26, class: "grid"}));
+    const t = svgEl("text", {x, y: 37, "text-anchor": "middle"}); t.textContent = hhmm(new Date(+d0 + m * 6e4)).replace(":00", ""); tl.append(t); }
+  passes.forEach(p => tl.append(svgEl("rect", {x: X(p.t0), y: 7, width: Math.max(3, X(p.t1) - X(p.t0)), height: 16, rx: 2, fill: SATCOL[p.sat], opacity: p.t1 < now ? 1 : 0.4})));
+  const nx = X(now); if (nx >= 0 && nx <= W) tl.append(svgEl("line", {x1: nx, x2: nx, y1: 2, y2: 28, stroke: "var(--text)", "stroke-width": 2}));
+  const mins = Math.round((now - d0) / 6e4);
+  const scrub = el("input", {type: "range", min: wa, max: wb, step: 1, value: Math.max(wa, Math.min(wb, mins)), "aria-label": "Time of day"});
+  scrub.oninput = e => { M.satT = +e.target.value; stopSatPlay(); drawSats(); };
+  const play = el("button", {className: "ghost tiny", type: "button", textContent: satPlay ? "❚❚ Pause" : "▶ Play", title: "Watch the satellites sweep across"}); play.onclick = () => satPlay ? stopSatPlay() : startSatPlay(wa, wb);
+  const live = el("button", {className: "ghost tiny", type: "button", textContent: "Now", title: "Back to the live time"}); live.disabled = M.satT == null && M.satDay == 0;
+  live.onclick = () => { stopSatPlay(); M.satDay = 0; M.satT = null; drawSats(); };
+  const clock = el("span", {className: "mono satclock", textContent: hhmm(now) + (M.satT == null && M.satDay == 0 ? " · live" : "")});
+  const list = el("table", {className: "mini satlist"}, all.filter(p => !M.satOff.has(p.sat)).map(p => {
+    const st = p.t1 < now ? "✓ taken" : p.t0 > now ? (M.satDay == 0 ? "in " + until(p.t0 - now) : "") : "now";
+    const tr = el("tr", {className: p.t1 < now ? "" : "fut"}, el("td", {className: "mono", textContent: hhmm(p.tm)}), el("td", {}, el("i", {className: "dot", style: `background:${SATCOL[p.sat]}`}), SATSHORT(p.sat)),
+      el("td", {textContent: p.states.join(" · ")}), el("td", {className: "muted n", textContent: st}));
+    tr.onclick = () => { const xs = p.xy.map(q => q[0]), ys = p.xy.map(q => q[1]); zoomToRect([Math.min(...xs) - 60, Math.min(...ys), Math.max(...xs) + 60, Math.max(...ys)], 0.95); };
+    tr.title = "Click to zoom to this strip"; return tr; }));
+  if (!all.length) list.append(el("tr", {}, el("td", {className: "muted", textContent: "No passes over the lower 48 this day."})));
+  const age = Math.max(...(OVDATA.satrecs || []).map(s => Math.round((Date.now() - epochOf(s.l1)) / 864e5)));
+  return [el("div", {className: "eyebrow", textContent: "\u{1F6F0}️ Satellite pictures"}),
+    el("div", {className: "satrow"}, days, clock), chips, tl, el("div", {className: "satrow"}, scrub), el("div", {className: "satrow"}, play, live, el("span", {className: "note", textContent: "Drag to replay the day"})),
+    el("div", {className: "satscroll"}, list),
+    el("p", {className: "note", textContent: `Each colored band on the map is the strip one satellite photographs on one pass: ${SWATH["Sentinel-2"]} km wide for Sentinel-2, ${SWATH.Landsat} km for Landsat. Solid = already photographed, dashed = still to come. They all pass in the morning, local time (about 10:30), so the light is the same in every picture. A field gets a new Sentinel-2 picture every few days; clouds can hide it. Times are in your time zone.` + (age > 10 ? ` Orbit data is ${age} days old, so times may be off by a few minutes.` : "")})];
+}
+function satBlock() {
+  if (!OV.sats || !M.satOpen) return [];
+  return [el("div", {id: "satpanel", className: "satpanel"}, el("div", {className: "note", textContent: "Working out today's passes…"}))];
+}
+const until = ms => { const m = Math.round(ms / 6e4); if (m < 60) return m + " min"; if (m < 36 * 60) return Math.floor(m / 60) + " h" + (m % 60 && m < 600 ? " " + (m % 60) + " min" : "");
+  const d = Math.round(m / 1440); return d + " day" + (d == 1 ? "" : "s"); };
+let satPlay = null;
+function startSatPlay(wa, wb) { if (M.satT == null || M.satT >= wb - 2 || M.satT < wa) M.satT = wa;
+  satPlay = setInterval(() => { M.satT += 2; if (M.satT >= wb) { M.satT = wb; stopSatPlay(); } drawSats(); }, 70); drawSats(); }
+function stopSatPlay() { if (satPlay) { clearInterval(satPlay); satPlay = null; } }
+
+// ---------------------------------------------------------------- your location: search, pin, cows and pictures around you
+function locControls() {
+  const slot = $("#locslot"); if (!slot || $("#locbox")) return syncLocBox();
+  const inp = el("input", {id: "locq", type: "search", placeholder: "Your town, ZIP or county", "aria-label": "Find a place", autocomplete: "off"});
+  const go = el("button", {className: "act", type: "submit", textContent: "Go"});
+  const me = el("button", {className: "ghost", type: "button", title: "Use my location", "aria-label": "Use my location", textContent: "\u{1F4CD}"});
+  const form = el("form", {id: "locbox", role: "search"}, el("span", {className: "ctl-l", textContent: "Find your area"}), el("div", {className: "locrow"}, inp, go, me), el("span", {id: "locmsg", className: "locmsg"}));
+  form.onsubmit = e => { e.preventDefault(); findPlace(inp.value); };
+  me.onclick = useMyLocation; slot.replaceChildren(form); syncLocBox();
+}
+function syncLocBox() { const z = $("#zme"); if (z) z.hidden = !M.loc; }
+function setMsg(t, bad) { const m = $("#locmsg"); if (m) { m.textContent = t || ""; m.classList.toggle("bad", !!bad); } }
+const normCounty = s => s.toLowerCase().replace(/\b(county|parish|borough|census area|city and borough)\b/g, "").replace(/[^a-z, ]/g, "").replace(/\s+/g, " ").trim();
+function matchCounty(q) {
+  const [name, st] = normCounty(q).split(",").map(x => x.trim());
+  const hits = Object.entries(EXT.county.names).filter(([f, n]) => { const [cn, cs] = n.split(","); return normCounty(cn) == name && (!st || cs.trim().toLowerCase() == st); });
+  return hits.length == 1 || (hits.length && st) ? hits[0][0] : null;
+}
+async function geocode(q) {
+  const tries = [
+    async () => { const j = await fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q=" + encodeURIComponent(q)).then(r => r.json());
+      return j[0] && {lat: +j[0].lat, lon: +j[0].lon, label: j[0].display_name.split(",").slice(0, 2).join(",")}; },
+    async () => { const j = await fetch("https://photon.komoot.io/api/?limit=1&q=" + encodeURIComponent(q + ", United States")).then(r => r.json()); const f = j.features?.find(f => f.properties.countrycode == "US");
+      return f && {lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], label: [f.properties.name, f.properties.state].filter(Boolean).join(", ")}; }];
+  for (const t of tries) { try { const r = await t(); if (r) return r; } catch (e) { /* try the next lookup */ } }
+  return null;
+}
+async function findPlace(q) {
+  q = (q || "").trim(); if (!q) return; setMsg("Looking it up…");
+  const ll = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
+  if (ll) return setLocation({lat: +ll[1], lon: +ll[2], label: q});
+  await loadCounties();
+  const county = () => { const f = matchCounty(q); return f && CTYBY[f] ? {x: CTYBY[f].c[0], y: CTYBY[f].c[1], label: countyName(f)} : null; };
+  const explicit = /county|parish|borough/i.test(q);
+  const hit = (explicit && county()) || await geocode(q) || county();
+  if (hit) return setLocation(hit);
+  setMsg("Couldn't find that. Try a ZIP code or a county, like “Yolo County, CA”.", true);
+}
+function useMyLocation() {
+  if (!navigator.geolocation) return setMsg("This browser can't share its location. Type a town instead.", true);
+  setMsg("Asking your browser…");
+  navigator.geolocation.getCurrentPosition(p => setLocation({lat: p.coords.latitude, lon: p.coords.longitude, label: "Your location"}),
+    () => setMsg("Location is blocked. Type a town or ZIP instead.", true), {timeout: 12000, maximumAge: 6e5});
+}
+async function setLocation(p, opt = {}) {
+  if (p.x == null) {
+    if (!(p.lat > 24 && p.lat < 50 && p.lon > -125 && p.lon < -66)) return setMsg("That's outside the lower 48 states, which is all this map covers.", true);
+    [p.x, p.y] = ALB(p.lon, p.lat); }
+  await loadCounties();
+  const c = countyAt(p.x, p.y); p.fips = c?.id || null;
+  const label = (!p.label || /^[-\d.,\s]+$/.test(p.label)) && c ? countyName(c.id) : p.label;
+  M.loc = {x: p.x, y: p.y, lat: p.lat, lon: p.lon, label, fips: p.fips}; M.sel = null;
+  try { localStorage.setItem("board-loc", JSON.stringify(M.loc)); } catch (e) { /* storage off */ }
+  setMsg(c ? "✓ " + countyName(c.id) : "✓ Found"); const q = $("#locq"); if (q && !opt.quiet) q.value = "";
+  draw(); if (!opt.quiet) zoomToMe();
+  ensureSats().then(() => setTimeout(fillLocSat, 30));
+}
+function zoomToMe() { if (!M.loc) return; const r = M.nearMi * 1.609 * KM_PX * 1.15; zoomToRect([M.loc.x - r, M.loc.y - r, M.loc.x + r, M.loc.y + r], 1, 16); }
+function clearLocation() { M.loc = null; try { localStorage.removeItem("board-loc"); } catch (e) { /* storage off */ } setMsg(""); draw(); resetView(); }
+function nearCounties(mi) {      // counties that reach within mi miles of the pin (distance to their nearest edge)
+  if (!M.loc || !CTY) return [];
+  const r = mi * 1.609 * KM_PX, {x, y} = M.loc, out = [];
+  for (const c of CTY) {
+    if (c.id == M.loc.fips) { out.push({c, d: 0, mi: 0}); continue; }
+    if (x < c.b[0] - r || x > c.b[2] + r || y < c.b[1] - r || y > c.b[3] + r) continue;
+    let d = Infinity;
+    for (const ring of c.rings) for (let i = 1; i < ring.length; i++) { const [ax, ay] = ring[i - 1], [bx, by] = ring[i], dx = bx - ax, dy = by - ay, L = dx * dx + dy * dy || 1;
+      const u = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / L)); d = Math.min(d, Math.hypot(ax + u * dx - x, ay + u * dy - y)); }
+    if (d <= r) out.push({c, d, mi: d / KM_PX / 1.609});
+  }
+  return out;
+}
+function drawLoc() {
+  const g = $("#locg"); if (!g) return; g.replaceChildren(); if (!M.loc) return;
+  const {x, y} = M.loc, yr = EXT.county.census_years.at(-1), cows = EXT.county.milk_cows[yr] || {}, est = new Set(EXT.county.estimated?.milk_cows?.[yr] || []);
+  const near = nearCounties(M.nearMi).filter(n => cows[n.c.id] > 0), R = M.nearMi * 1.609 * KM_PX;
+  g.append(svgEl("circle", {cx: x, cy: y, r: R, class: "nearring"}));
+  const mx = Math.max(1, ...near.map(n => cows[n.c.id])), rmax = Math.min(R * 0.22, 14);
+  near.sort((a, b) => cows[b.c.id] - cows[a.c.id]).forEach((n, i) => {
+    const v = cows[n.c.id], b = svgEl("circle", {cx: n.c.c[0], cy: n.c.c[1], r: Math.max(rmax * 0.12, rmax * Math.sqrt(v / mx)), class: "cowb"});
+    b.addEventListener("pointermove", e => tipText(e, "\u{1F404} " + countyName(n.c.id), `${est.has(n.c.id) ? "about " : ""}${Math.round(v).toLocaleString("en-US")} milk cows` +
+      (EXT.county.farms?.[yr]?.[n.c.id] ? ` on ${EXT.county.farms[yr][n.c.id]} farms` : "") + ` · ${n.mi < 1 ? "next door" : Math.round(n.mi) + " mi away"} (${yr} Census)`));
+    b.addEventListener("pointerleave", () => $("#tip").hidden = true); g.append(b);
+    if (i < 6) { const t = svgEl("text", {x: n.c.c[0], y: n.c.c[1], class: "cowl scale", "data-font-size": 10.5, "data-dy": 3.5}); t.textContent = "\u{1F404} " + kfmt(v); g.append(t); } });
+  const halo = svgEl("circle", {cx: x, cy: y, class: "pinhalo scale", "data-r": 14}), pin = svgEl("circle", {cx: x, cy: y, class: "pin scale", "data-r": 6.5, "data-stroke-width": 2.5});
+  const lab = svgEl("text", {x, y, class: "pinl scale", "data-font-size": 12, "data-dy": -14}); lab.textContent = M.loc.label || "You";
+  g.append(halo, pin, lab);
+}
+function locBlock() {
+  if (!M.loc || !EXT) return [];
+  const p = M.loc, f = p.fips, yr = EXT.county.census_years.at(-1), C = EXT.county, cows = C.milk_cows[yr] || {}, sil = C.silage[yr] || {}, farms = C.farms?.[yr] || {};
+  const estC = new Set(C.estimated?.milk_cows?.[yr] || []), estS = new Set(C.estimated?.silage?.[yr] || []);
+  const near = nearCounties(M.nearMi), sum = o => near.reduce((a, n) => a + (o[n.c.id] || 0), 0), st = f ? stateOfFips(f) : null;
+  const close = el("button", {className: "ghost tiny", type: "button", textContent: "✕", title: "Forget this place", "aria-label": "Forget this place"}); close.onclick = clearLocation;
+  const radius = segOf([[25, "25 mi"], [50, "50 mi"], [100, "100 mi"]], M.nearMi, v => M.nearMi = v);
+  radius.querySelectorAll("button").forEach(b => b.addEventListener("click", () => setTimeout(zoomToMe, 0)));
+  const approx = (set, id) => set.has(id) ? "≈ " : "";
+  const tile = (label, big, sub) => el("div", {className: "lt-tile"}, el("div", {className: "eyebrow", textContent: label}), el("div", {className: "lt-big", textContent: big}), sub ? el("div", {className: "note", textContent: sub}) : null);
+  const kids = [el("div", {className: "lochead"}, el("div", {}, el("div", {className: "eyebrow", textContent: "\u{1F4CD} Around you"}), el("div", {className: "locname", textContent: f ? countyName(f) : (p.label || "Your spot")}),
+    p.label && f && p.label != countyName(f) ? el("div", {className: "note", textContent: p.label}) : null), close)];
+  if (f) {
+    const top = near.filter(n => cows[n.c.id] > 0 && n.c.id != f).sort((a, b) => cows[b.c.id] - cows[a.c.id]).slice(0, 5);
+    kids.push(el("div", {className: "lt-grid"},
+      tile("Milk cows in this county", cows[f] != null ? approx(estC, f) + Math.round(cows[f]).toLocaleString("en-US") : "—", farms[f] ? `${farms[f]} dairy farm${farms[f] == 1 ? "" : "s"}` : "no dairy farms counted"),
+      tile(`Milk cows within ${M.nearMi} mi`, kfmt(sum(cows)), `${near.filter(n => cows[n.c.id] > 0).length} counties`),
+      tile("Silage acres, this county", sil[f] != null ? approx(estS, f) + kfmt(sil[f]) : "—"),
+      tile(`Silage within ${M.nearMi} mi`, kfmt(sum(sil)) + " ac")),
+      el("div", {className: "ctl inline"}, el("span", {className: "ctl-l", textContent: "Look within"}), radius),
+      el("p", {className: "note", textContent: `${yr} USDA Census of Agriculture. ≈ = estimated where USDA withheld the exact number to protect individual farms.`}));
+    if (top.length) { kids.push(el("h3", {textContent: "\u{1F404} Biggest dairy counties near you"}));
+      const t = el("table", {className: "mini"}); top.forEach(n => { const tr = el("tr", {}, el("td", {textContent: countyName(n.c.id)}), el("td", {className: "n muted", textContent: n.mi < 1 ? "next door" : Math.round(n.mi) + " mi", title: "Distance to the nearest edge of the county"}), el("td", {className: "n", textContent: approx(estC, n.c.id) + kfmt(cows[n.c.id]) + " cows"}));
+        tr.onclick = () => zoomToRect([n.c.b[0], n.c.b[1], n.c.b[2], n.c.b[3]], 0.6, 20); t.append(tr); }); kids.push(t); }
+    const wy = Math.max(...Object.keys(C.weather).map(Number).filter(y => y < 2026)), w = C.weather[wy]?.[f];
+    if (w) { kids.push(el("h3", {textContent: `Growing season ${wy} here`}), el("table", {className: "mini"},
+      el("tr", {}, el("td", {textContent: "Rain, May–Sep"}), el("td", {className: "n", textContent: w[0] == null ? "—" : `${w[0] >= 0 ? "+" : ""}${Math.round(100 * w[0])}% vs normal`})),
+      el("tr", {}, el("td", {textContent: "Heat (degree days)"}), el("td", {className: "n", textContent: w[1] == null ? "—" : `${w[1] >= 0 ? "+" : ""}${(100 * w[1]).toFixed(1)}% vs normal`})),
+      el("tr", {}, el("td", {textContent: "First fall frost"}), el("td", {className: "n", textContent: doyDate(w[2])})))); }
+  } else kids.push(el("p", {className: "note", textContent: "This spot isn't inside a county on the map (water, or outside the lower 48)."}));
+  kids.push(el("h3", {textContent: "\u{1F6F0}️ Satellite pictures of your spot"}), el("div", {id: "locsat", className: "note", textContent: "Working out the next passes…"}));
+  if (st) { const fcS = fcValue(M.fcModel.silage, st), fcG = fcValue(M.fcModel.grain, st), open = el("button", {className: "ghost tiny", type: "button", textContent: `Open ${NAMES[st] || st} →`}); open.onclick = () => select(st);
+    kids.push(el("h3", {textContent: `${NAMES[st] || st}: 2026 forecast`}), el("table", {className: "mini"},
+      el("tr", {}, el("td", {textContent: "Silage acres"}), el("td", {className: "n", textContent: fcS ? kfmt(fcS.predicted) : "—"})),
+      el("tr", {}, el("td", {textContent: "Grain acres"}), el("td", {className: "n", textContent: fcG ? kfmt(fcG.predicted) : "—"}))), open); }
+  setTimeout(fillLocSat, 0);
+  return [el("div", {className: "locbox-panel"}, ...kids)];
+}
+function picturesAt(x, y, days = 8) {       // passes whose strip covers (x, y), from yesterday to a week out
+  const out = [];
+  for (let off = -1; off < days; off++) passesFor(off).forEach(ps => {
+    const hw = swathKm(ps.sat) / 2 * KM_PX; let best = Infinity, bt = null;
+    for (let i = 1; i < ps.xy.length; i++) { const [ax, ay] = ps.xy[i - 1], [bx, by] = ps.xy[i], dx = bx - ax, dy = by - ay, L = dx * dx + dy * dy || 1;
+      const u = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / L)), d = Math.hypot(ax + u * dx - x, ay + u * dy - y);
+      if (d < best) { best = d; bt = new Date(+ps.pts[i - 1].t + u * (ps.pts[i].t - ps.pts[i - 1].t)); } }
+    if (best <= hw) out.push({sat: ps.sat, t: bt}); });
+  return out.sort((a, b) => a.t - b.t);
+}
+function fillLocSat() {
+  const box = $("#locsat"); if (!box || !M.loc || !OVDATA.satrecs) return;
+  if (fillLocSat.key == M.loc.x + "," + M.loc.y && fillLocSat.html) { box.replaceChildren(...fillLocSat.html()); return; }
+  const pics = picturesAt(M.loc.x, M.loc.y), now = new Date(), last = pics.filter(p => p.t < now).at(-1), next = pics.filter(p => p.t >= now).slice(0, 4);
+  const when = d => d.toLocaleDateString("en-US", {weekday: "short", month: "short", day: "numeric"}) + ", " + hhmm(d);
+  fillLocSat.key = M.loc.x + "," + M.loc.y;
+  fillLocSat.html = () => [
+    last ? el("div", {}, "Last picture: ", el("b", {textContent: last.sat}), ` · ${when(last.t)}`) : el("div", {textContent: "No picture since yesterday."}),
+    next.length ? el("table", {className: "mini"}, next.map(p => el("tr", {}, el("td", {}, el("i", {className: "dot", style: `background:${SATCOL[p.sat]}`}), p.sat), el("td", {className: "n", textContent: when(p.t)}), el("td", {className: "n muted", textContent: "in " + until(p.t - now)}))))
+      : el("div", {textContent: "No pass over this spot in the next week."}),
+    el("div", {className: "note", textContent: "When a strip from the satellite map covers your spot. Clouds can still hide the ground."})];
+  box.replaceChildren(...fillLocSat.html());
+}

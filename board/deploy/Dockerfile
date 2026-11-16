@@ -5,7 +5,7 @@ RUN useradd -m -u 1000 user
 USER user
 ENV HOME=/home/user PATH=/home/user/.local/bin:$PATH \
     BOARD_PORT=7860 BOARD_AUTOPULL=5 \
-    REPO_URL=https://github.com/Severynson/Hack-the-Harvest.git DATA_BRANCH=main BOARD_BRANCH=board
+    REPO_URL=https://github.com/Severynson/Hack-the-Harvest.git DATA_BRANCH=hackathon-2026-submission BOARD_BRANCH=board
 WORKDIR /home/user
 RUN pip install --no-cache-dir --user "pandas>=2.2" "numpy>=1.26" pyarrow fastapi "uvicorn>=0.30" geopandas
 COPY --chown=user start.sh /home/user/start.sh

@@ -3,7 +3,7 @@
 # Every BOARD_AUTOPULL minutes the server runs "start.sh sync" again, so new model results show up by themselves.
 set -euo pipefail
 REPO_URL="${REPO_URL:-https://github.com/Severynson/Hack-the-Harvest.git}"
-DATA_BRANCH="${DATA_BRANCH:-main}"
+DATA_BRANCH="${DATA_BRANCH:-hackathon-2026-submission}"  # main is now the trimmed portfolio version
 BOARD_BRANCH="${BOARD_BRANCH:-board}"
 DIR="${DIR:-$HOME/hth}"
 SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"

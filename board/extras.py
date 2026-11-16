@@ -22,22 +22,118 @@ def _qs(name: str) -> pd.DataFrame:
     return t
 
 
+# Milk-cow herd-size classes in the Census, and a typical herd for each when its head count is withheld.
+HERD_CLASSES = {"(1 TO 9 HEAD)": 4, "(10 TO 19 HEAD)": 14, "(20 TO 49 HEAD)": 33, "(50 TO 99 HEAD)": 72,
+                "(100 TO 199 HEAD)": 140, "(200 TO 499 HEAD)": 300, "(500 OR MORE HEAD)": 1500}
+
+
+def _fips(t: pd.DataFrame) -> pd.Series:
+    return t["state_fips_code"].str.zfill(2) + t["county_code"].str.zfill(3)
+
+
+def _census_state_totals(name: str, unit: str, extra=None) -> dict:
+    """{year: {state_fips: Census total}} from a state-level Quick Stats export."""
+    t = _qs(name)
+    t = t[(t["agg_level_desc"] == "STATE") & (t["source_desc"] == "CENSUS") & (t["domain_desc"] == "TOTAL")
+          & (t["unit_desc"] == unit)].dropna(subset=["v"])
+    if extra is not None:
+        t = t[extra(t)]
+    out: dict = {}
+    for (year, st), v in zip(zip(t["year"], t["state_fips_code"].str.zfill(2)), t["v"]):
+        out.setdefault(int(year), {})[st] = float(v)
+    return out
+
+
+def _fill_withheld(published: dict, estimate: dict, state_total: dict) -> tuple[dict, list]:
+    """Counties the Census withheld ("(D)") get a share of what their state total leaves over.
+
+    ``estimate`` is a rough size per withheld county; it is scaled so the withheld counties of each state
+    add up to (state total - published counties). Returns the filled values and the list of estimated FIPS.
+    """
+    values, estimated = dict(published), []
+    by_state: dict = {}
+    for f, w in estimate.items():
+        if f not in published:
+            by_state.setdefault(f[:2], {})[f] = max(float(w), 0.0)
+    for st, rough in by_state.items():
+        left = state_total.get(st)
+        pub = sum(v for f, v in published.items() if f[:2] == st)
+        size = sum(rough.values())
+        if left is None or size <= 0:
+            continue
+        left -= pub
+        if left <= 0:
+            continue
+        for f, w in rough.items():
+            values[f] = round(left * w / size, 0)
+            estimated.append(f)
+    return values, sorted(estimated)
+
+
+def _milk_cows(year_rows: pd.DataFrame, state_total: dict) -> tuple[dict, list]:
+    """Census milk cows (head) per county; withheld counties estimated from their farms by herd size."""
+    head = year_rows[(year_rows["domain_desc"] == "TOTAL") & (year_rows["unit_desc"] == "HEAD")]
+    published = {f: v for f, v in zip(head["fips"], head["v"]) if np.isfinite(v)}
+    # Farms per herd-size class are always published, even where the head count is withheld.
+    cls = year_rows[(year_rows["domain_desc"] == "INVENTORY OF MILK COWS")].copy()
+    cls["klass"] = cls["domaincat_desc"].str.extract(r"(\(.*\))", expand=False)
+    ops = cls[cls["unit_desc"] == "OPERATIONS"].pivot_table(index="fips", columns="klass", values="v", aggfunc="first")
+    hd = cls[cls["unit_desc"] == "HEAD"].pivot_table(index="fips", columns="klass", values="v", aggfunc="first")
+    rough = {}
+    for f, row in ops.iterrows():
+        n = 0.0
+        for k, typical in HERD_CLASSES.items():
+            farms = row.get(k)
+            if farms is None or not np.isfinite(farms) or farms <= 0:
+                continue
+            h = hd.at[f, k] if (f in hd.index and k in hd.columns) else np.nan
+            n += h if np.isfinite(h) else farms * typical
+        rough[f] = n
+    return _fill_withheld(published, rough, state_total)
+
+
 def county_layers(problems: list) -> dict:
-    """Per county (5-digit FIPS): silage acres and milk cows (Census years), and season weather by year."""
-    out = {"names": {}, "silage": {}, "milk_cows": {}, "weather": {}, "census_years": []}
+    """Per county (5-digit FIPS): silage acres and milk cows (Census years), and season weather by year.
+
+    Only Census rows are used for the census maps: the files also hold farm counts ("operations"),
+    irrigated-only acres and January survey estimates, which must not be mixed in. Counties the Census
+    withheld to protect individual farms are estimated and listed under ``estimated``.
+    """
+    out = {"names": {}, "silage": {}, "milk_cows": {}, "weather": {}, "census_years": [],
+           "estimated": {"silage": {}, "milk_cows": {}}, "farms": {}}
     try:
-        for key, name, util in [("silage", "corn_silage_harvested_acres_county_2015_2025.csv", "SILAGE"),
-                                ("milk_cows", "milk_cow_inventory_county_2015_2025.csv", None)]:
-            t = _qs(name)
-            t = t[(t["agg_level_desc"] == "COUNTY") & (t["county_code"] != "998") & (t["domain_desc"] == "TOTAL")]
-            if util:
-                t = t[t["util_practice_desc"] == util]
-            t = t.dropna(subset=["v"])
-            t["fips"] = t["state_fips_code"].str.zfill(2) + t["county_code"].str.zfill(3)
-            for year, g in t.groupby("year"):
-                if len(g) > 1000:                      # Census years: near-complete county coverage
-                    out[key][int(year)] = {f: float(v) for f, v in zip(g["fips"], g["v"])}
-            for f, c, s in zip(t["fips"], t["county_name"], t["state_alpha"]):
+        cows = _qs("milk_cow_inventory_county_2015_2025.csv")
+        cows = cows[(cows["agg_level_desc"] == "COUNTY") & (cows["county_code"] != "998") & (cows["source_desc"] == "CENSUS")]
+        cows["fips"] = _fips(cows)
+        cow_tot = _census_state_totals("milk_cow_inventory_state_2015_2025.csv", "HEAD")
+        for year, g in cows.groupby("year"):
+            vals, est = _milk_cows(g, cow_tot.get(int(year), {}))
+            out["milk_cows"][int(year)] = vals
+            out["estimated"]["milk_cows"][int(year)] = est
+            farms = g[(g["domain_desc"] == "TOTAL") & (g["unit_desc"] == "OPERATIONS")].dropna(subset=["v"])
+            out["farms"][int(year)] = {f: int(v) for f, v in zip(farms["fips"], farms["v"])}
+        for f, c, s in zip(cows["fips"], cows["county_name"], cows["state_alpha"]):
+            out["names"].setdefault(f, f"{c.title()}, {s}")
+
+        sil = _qs("corn_silage_harvested_acres_county_2015_2025.csv")
+        sil = sil[(sil["agg_level_desc"] == "COUNTY") & (sil["county_code"] != "998") & (sil["source_desc"] == "CENSUS")
+                  & (sil["domain_desc"] == "TOTAL") & (sil["util_practice_desc"] == "SILAGE")
+                  & (sil["prodn_practice_desc"] == "ALL PRODUCTION PRACTICES")]
+        sil["fips"] = _fips(sil)
+        sil_tot = _census_state_totals("corn_silage_harvested_acres_state_2015_2025.csv", "ACRES",
+                                       lambda t: (t["util_practice_desc"] == "SILAGE")
+                                       & (t["prodn_practice_desc"] == "ALL PRODUCTION PRACTICES")
+                                       & (t["statisticcat_desc"] == "AREA HARVESTED"))
+        for year, g in sil.groupby("year"):
+            published = {f: float(v) for f, v in zip(g["fips"], g["v"]) if np.isfinite(v)}
+            # Withheld counties: share the state's leftover acres in proportion to their dairy herd (silage is cow feed).
+            withheld = set(g.loc[g["v"].isna(), "fips"])
+            herd = out["milk_cows"].get(int(year), {})
+            rough = {f: max(herd.get(f, 0.0), 25.0) for f in withheld}
+            vals, est = _fill_withheld(published, rough, sil_tot.get(int(year), {}))
+            out["silage"][int(year)] = vals
+            out["estimated"]["silage"][int(year)] = est
+            for f, c, s in zip(g["fips"], g["county_name"], g["state_alpha"]):
                 out["names"].setdefault(f, f"{c.title()}, {s}")
         out["census_years"] = sorted(set(out["silage"]) & set(out["milk_cows"]))
     except Exception as error:  # noqa: BLE001
