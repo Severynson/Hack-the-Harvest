@@ -1,4 +1,0 @@
-year,n_grain,n_silage,TP,FP,FN,TN,silage_precision,silage_recall,grain_precision,grain_recall,false_positive_rate,accuracy
-2021,14,4,3,0,1,14,1.0,0.75,0.933,1.0,0.0,0.944
-2022,3,4,3,2,1,1,0.6,0.75,0.5,0.333,0.667,0.571
-2023,15,4,4,3,0,12,0.571,1.0,1.0,0.8,0.2,0.842

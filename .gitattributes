@@ -1,5 +1,4 @@
-# Concurrent appends merge cleanly in LOCAL merges and rebases. GitHub pull-request merges ignore this.
-CLAUDE.md                          merge=union
-AGENTS.md                          merge=union
-CHANGELOG.md                       merge=union
-DOCS/coord/handshake/ROLLCALL.md   merge=union
+* text=auto
+*.ipynb text eol=lf
+*.parquet binary
+*.gpkg binary

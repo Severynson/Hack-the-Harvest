@@ -1,7 +1,0 @@
-dataset,label,n,lswi_sep_median_q25,lswi_sep_median_q50,lswi_sep_median_q75,lswi_sep_min_q25,lswi_sep_min_q50,lswi_sep_min_q75,lswi_sep_late_median_q25,lswi_sep_late_median_q50,lswi_sep_late_median_q75,lswi_jul_median_q25,lswi_jul_median_q50,lswi_jul_median_q75,share_sep_median_le_015,share_c1_pass,share_c2_pass
-qc_regions_2023,grain,1681,0.228,0.334,0.392,0.094,0.227,0.332,0.151,0.28,0.358,0.229,0.398,0.473,0.132,0.615,0.838
-qc_regions_2023,silage,1129,0.255,0.364,0.421,-0.04,0.183,0.361,0.132,0.305,0.392,0.178,0.309,0.441,0.161,0.511,0.788
-quebec_all,grain,1861,0.233,0.335,0.39,0.108,0.237,0.331,0.165,0.285,0.357,0.216,0.369,0.467,0.125,0.599,0.821
-quebec_all,silage,1267,0.259,0.361,0.419,-0.021,0.221,0.361,0.15,0.31,0.391,0.165,0.294,0.428,0.152,0.489,0.767
-quebec_maize_2023,grain,180,0.274,0.34,0.371,0.221,0.286,0.324,0.251,0.312,0.354,0.127,0.221,0.286,0.056,0.456,0.667
-quebec_maize_2023,silage,138,0.289,0.351,0.404,0.239,0.303,0.364,0.26,0.338,0.379,0.114,0.192,0.305,0.072,0.319,0.609

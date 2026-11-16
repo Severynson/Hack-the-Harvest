@@ -1,4 +1,0 @@
-fit,trained_on,n_fit_rows,n,assessable,n_silage,n_grain,TP,FP,FN,TN,silage_precision,silage_recall,grain_recall,balanced_accuracy,silage_f1,accuracy,false_positive_rate,reference,reproduced,calls_differing_from_qcm_2023
-published_318,quebec_maize_2023 (cell 79_515),318,44,44,12,32,10,5,2,27,0.667,0.833,0.844,0.839,0.741,0.841,0.156,TP10 FP5 FN2 TN27,True,1
-qcm_2023,"qcm_2023 (17 cells), = S",3128,44,44,12,32,10,4,2,28,0.714,0.833,0.875,0.854,0.769,0.864,0.125,TP10 FP4 FN2 TN28,True,0
-multi_year,qcm_2019..qcm_2026 (17 cells),21975,44,44,12,32,10,1,2,31,0.909,0.833,0.969,0.901,0.87,0.932,0.031,,,3

@@ -1,8 +1,0 @@
-{
-  "sha256": "183e74c78fa2b64b9b3bee825b72cbfbc380ad6d2980aa0fd6c154f1fd809fc6",
-  "bytes": 5856,
-  "source": "README.md, between <!-- PREREGISTRATION:BEGIN --> and <!-- PREREGISTRATION:END -->",
-  "frozen_utc": "2026-11-15T09:00:00Z",
-  "evaluate_py_sha256_at_freeze": "9688c539a94565318968f0a7bbdf9b5817b9bc567514fcbd1703ce39c719e0b3",
-  "scored_outputs_present_at_freeze": []
-}

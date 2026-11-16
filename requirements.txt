@@ -1,12 +1,14 @@
-# Cached-data demo and validation; Python 3.11+. Versions used for this delivery.
-numpy==2.4.6
-pandas==3.1.1
-scipy==1.17.1
-pyarrow==26.0.1
-geopandas==1.2.0
-shapely==2.2.0
-scikit-learn==1.9.1
-requests==2.34.2
-pytest==9.2.0
-ruff==0.17.5
-xgboost-cpu==3.2.0
+# Python 3.11+. The notebook itself needs the first block; the optional "classify a new field" download needs the second.
+numpy>=2.0
+pandas>=2.2
+pyarrow>=17.0
+geopandas>=1.0
+shapely>=2.0
+pyogrio>=0.9
+matplotlib>=3.8
+jupyter>=1.0
+
+# Optional: download Sentinel-2 pictures for new fields (Microsoft Planetary Computer, no account)
+pystac-client>=0.8
+planetary-computer>=1.0
+rasterio>=1.4

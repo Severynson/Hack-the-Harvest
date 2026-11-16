@@ -1,4 +1,0 @@
-selected,stored_model,years,n_years,mean_selected_wape,mean_stored_wape,mean_diff_points,ci90_lo,ci90_hi,years_better,mean_abs_us_selected,mean_abs_us_stored
-s3_fsa_residual,all_public,2017-2024,8,12.5231,14.5300,-2.0069,-3.4634,-0.5697,6,3.9991,4.9212
-s3_fsa_residual,nass_acres,2017-2024,8,12.5231,13.0388,-0.5157,-0.7804,-0.2187,7,3.9991,3.8737
-s3_fsa_residual,stress,2017-2024,8,12.5231,13.8175,-1.2944,-2.8490,0.2494,4,3.9991,3.1175
