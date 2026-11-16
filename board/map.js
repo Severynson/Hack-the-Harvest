@@ -9,7 +9,8 @@ const NODATA = "#1b2029";
 const NAMES = {};
 const VB = {x: -10, y: -14, w: 995, h: 640};   // a little room around the outlines
 let GEO = null, MAP = null, EXT = null, CTY = null, M = {layer: "forecast", crop: "silage", fcModel: {}, errModel: {}, year: 2025, signal: "drought", wx: "rain", cyear: null, wyear: null, myear: null,
-  sel: null, k: 1, tx: 0, ty: 0, playing: null, built: false, loc: null, nearMi: 50, satDay: 0, satT: null, satOpen: false, satOff: new Set()};
+  sel: null, k: 1, tx: 0, ty: 0, playing: null, built: false, loc: null, nearMi: 50, satDay: 0, satT: null, satOpen: false, satOff: new Set(),
+  wi: {mode: "custom", pct: 25, where: "ALL"}, fyear: null};
 const MAXK = 40;                               // deep enough to read single counties
 const GROUP_ICON = {"Our forecast": "\u{1F4C8}", "What happened before": "\u{1F4DC}", "Why acres change": "\u{1F33D}", "Satellite": "\u{1F6F0}️", "How good are the models": "\u{1F3AF}"};
 
@@ -18,12 +19,14 @@ const LAYER_GROUPS = [
   ["Our forecast", [
     ["forecast", "Acres we expect in 2026", "Each state is colored by how many acres one of our models expects to be harvested in 2026. Lighter means more acres. Pick a different model in the next box."],
     ["change", "2026 compared with last year", "Red states are expected to harvest more acres than last year, blue states fewer. Gray means about the same."],
+    ["whatif", "What if a drought hits?", "Drag the slider or replay a real drought year: the headline silage model adds the acres farmers chop when their corn fails. Red states gain the most silage, and those acres come out of the grain harvest."],
     ["disagree", "Where our models disagree", "How far apart our models' 2026 numbers are in each state. Lighter means the models disagree more, so the number there is less certain."]]],
   ["What happened before", [
     ["history", "Acres harvested each year", "The official USDA (NASS) count of acres harvested, year by year. Press Play to watch it change."]]],
   ["Why acres change", [
     ["dairy", "Where the dairy cows are (counties)", "Milk cows per county from the USDA Census of Agriculture. Silage is cow feed, so it is grown close to dairies: compare with the next layer. Many counties really do have only a handful of milk cows: a few small farms."],
     ["silage_county", "Where silage is grown (counties)", "Acres of corn chopped for silage per county from the USDA Census of Agriculture. Notice how it follows the dairy map."],
+    ["feed", "Feed stress watch (counties)", "Milk cows in counties that had a dry growing season. When pasture and corn suffer, dairies run short of feed and more grain corn gets chopped for silage: these are the places to watch. Gray counties had a normal season."],
     ["weather", "This season's rain and heat (counties)", "Rain or heat from May to September compared with that county's normal. A dry, hot year can push farmers to chop failing grain corn for silage."],
     ["frost", "First fall frost (counties)", "The date of the first fall frost in each county. An early frost ends the season and can change what farmers harvest."],
     ["context", "Drought, crop condition and losses (states)", "Season signals by state: drought, corn rated poor, insurance weather losses, rain, heat and milk cows."],
@@ -37,7 +40,7 @@ const LAYER_GROUPS = [
     ["error", "How far off each model was, by state", "For each state, how far a model's past forecasts were from the official count, on average. Darker means closer, so darker is better."]]],
 ];
 const LAYERS = LAYER_GROUPS.flatMap(g => g[1]);
-const COUNTY_LAYERS = new Set(["dairy", "silage_county", "weather", "frost"]);
+const COUNTY_LAYERS = new Set(["dairy", "silage_county", "weather", "frost", "feed"]);
 const doyDate = d => d == null ? "\u2014" : new Date(2026, 0, d).toLocaleDateString("en-US", {month: "short", day: "numeric"});
 const money = v => v == null ? "\u2014" : v >= 1e9 ? "$" + (v / 1e9).toFixed(2) + "B" : v >= 1e6 ? "$" + Math.round(v / 1e6) + "M" : "$" + Math.round(v).toLocaleString("en-US");
 const SIGNALS = {
@@ -140,13 +143,28 @@ function layerValues() {
     title = `Milk price received, ${latest ? new Date(latest + "-15").toLocaleDateString("en-US", {month: "long", year: "numeric"}) : ""}`;
     for (const st in EXT.milk) { const r = EXT.milk[st].find(x => x[0] == latest); if (r) vals[st] = r[1]; }
     note = "USDA publishes monthly milk prices for the main dairy states only; the rest show as no data.";
+  } else if (M.layer == "whatif") {
+    const w = whatIf(); ramp = SEQ2; fmt = v => "+" + (v < 10 ? v.toFixed(1) : Math.round(v)) + "%";
+    title = "Extra silage acres vs our 2026 forecast, by state";
+    if (w) for (const st in w.states) if (w.states[st].pct > 0.05) vals[st] = w.states[st].pct;
+    var stateFill = (cls, code) => vals[code] != null ? cls.color(vals[code]) : w?.states[code] ? "#383835" : NODATA;
+    note = DR ? "" : "Drought data not loaded.";
+  } else if (M.layer == "feed") {
+    const yrs = feedYears(); if (!yrs.includes(M.fyear)) M.fyear = yrs.at(-1);
+    const st = feedStats(M.fyear), cows = EXT.county.milk_cows[st.cy] || {}, w = EXT.county.weather[M.fyear] || {};
+    for (const f in st.lvl) if (cows[f] > 0) vals[f] = cows[f];
+    ramp = SEQ2; fmt = v => kfmt(v) + " cows"; title = `Milk cows in dry counties, ${M.fyear} season (cows: ${st.cy} Census)`;
+    var est = new Set(EXT.county.estimated?.milk_cows?.[st.cy] || []);
+    var fillFor = (cls, f) => vals[f] != null ? cls.color(vals[f]) : st.lvl[f] ? "#3a2418" : w[f] ? "#232b35" : NODATA;
+    var feed = st;
+    note = `${(st.watch / 1e6).toFixed(2)} million milk cows (${Math.round(100 * st.watch / Math.max(1, st.total))}% of the herd) are in dry counties; ${(st.severe / 1e6).toFixed(2)} million in very dry ones. Dry = May\u2013Sep rain at least 20% below normal, or 10% below in a hot summer; very dry = 30% below, or 20% below and hot. Mostly irrigated counties, where summer rain is normally under ${FEED_MIN_RAIN_MM} mm (much of the West), are not judged on rain.`;
   } else if (M.layer == "satellite") {
     title = "Where the satellite looks"; fmt = v => v ? "in the satellite sample" : ""; ramp = SEQ;
     (EXT.satellite.sample_states || []).forEach(st => vals[st] = 1);
     note = EXT.satellite.note;
   }
   return {vals, fmt, ramp, div, title, note, county: COUNTY_LAYERS.has(M.layer), flip: typeof flip != "undefined" && flip,
-    est: typeof est != "undefined" ? est : new Set(), explain: (LAYERS.find(l => l[0] == M.layer) || [])[2] || ""};
+    est: typeof est != "undefined" ? est : new Set(), stateFill: typeof stateFill != "undefined" ? stateFill : null, fillFor: typeof fillFor != "undefined" ? fillFor : null, feed: typeof feed != "undefined" ? feed : null, explain: (LAYERS.find(l => l[0] == M.layer) || [])[2] || ""};
 }
 function classify(vals, ramp, div, flip) {
   const DV = flip ? [...DIV].reverse() : DIV;
@@ -206,10 +224,10 @@ const stateOfFips = f => FIPS[String(f).slice(0, 2)];
 function hoverCounty(e, f) {
   const v = CUR?.vals[f], t = $("#tip"), name = countyName(f), est = CUR?.est?.has(f);
   const farms = M.layer == "dairy" ? EXT.county.farms?.[M.cyear]?.[f] : null;
-  t.replaceChildren(el("b", {textContent: name}), el("div", {textContent: v == null ? "No data" : (est ? "≈ " : "") + CUR.fmt(v)}),
+  t.replaceChildren(...[el("b", {textContent: name}), el("div", {textContent: v == null ? "No data" : (est ? "≈ " : "") + CUR.fmt(v)}),
     farms != null ? el("div", {textContent: `${farms.toLocaleString("en-US")} dairy farm${farms == 1 ? "" : "s"}` + (v != null && farms ? ` · about ${kfmt(v / farms)} cows each` : "")}) : null,
     est ? el("div", {className: "muted", textContent: "Estimated: USDA withheld the exact number to protect individual farms."}) : null,
-    el("div", {className: "muted", textContent: "Click to open the state"}));
+    el("div", {className: "muted", textContent: "Click to open the state"})].filter(Boolean));
   t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 300) + "px"; t.style.top = e.clientY + 14 + "px";
 }
 // Albers USA (lower 48), identical to d3.geoAlbersUsa().scale(1300).translate([487.5, 305]) used for the outlines
@@ -243,6 +261,7 @@ function buildMap() {
   const labels = svgEl("g", {id: "labels"}); g.append(labels);
   GEO.states.forEach(s => { const t = svgEl("text", {x: s.c[0], y: s.c[1], "data-code": s.code, class: "lbl"}); t.textContent = s.code; labels.append(t); });
   wirePanZoom(svg); M.built = true; STP = null;
+  svg.addEventListener("click", e => { if (typeof fieldMapClick == "function") fieldMapClick(e); }, true);
 }
 let dragged = false;
 function svgPt(svg, e) { const q = svg.createSVGPoint(); q.x = e.clientX; q.y = e.clientY; const m = q.matrixTransform(svg.getScreenCTM().inverse()); return [m.x, m.y]; }
@@ -349,9 +368,9 @@ function resetView() { tween({k: 1, tx: 0, ty: 0}); }
 function hover(e, code) {
   const v = CUR?.vals[code], name = NAMES[code] || code, t = $("#tip");
   const fc = M.fcModel[M.crop] ? fcValue(M.fcModel[M.crop], code) : null;
-  t.replaceChildren(el("b", {textContent: name}), el("div", {textContent: v == null ? "No data for this layer" : CUR.fmt(v)}),
+  t.replaceChildren(...[el("b", {textContent: name}), el("div", {textContent: v == null ? (M.layer == "whatif" && whatIf()?.states[code] ? "No extra chopping: yield still within 10% of normal" : "No data for this layer") : M.layer == "whatif" ? `${CUR.fmt(v)} silage (+${kfmt(whatIf().states[code].extra)} acres)` : CUR.fmt(v)}),
     M.layer != "forecast" && fc ? el("div", {className: "muted", textContent: `2026 forecast ${kfmt(fc.predicted)} acres`}) : null,
-    el("div", {className: "muted", textContent: "Click for details"}));
+    el("div", {className: "muted", textContent: "Click for details"})].filter(Boolean));
   t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 260) + "px"; t.style.top = e.clientY + 14 + "px";
 }
 
@@ -394,6 +413,10 @@ function extraBlocks(code) {
 function panel() {
   const box = $("#sp"), crop = M.crop, code = M.sel, id = M.fcModel[crop];
   const kids = [...locBlock(), ...satBlock(), ...tradeBlock()];
+  if (!code && M.layer == "whatif") kids.push(...whatIfBlock());
+  if (!code && M.layer == "feed" && CUR.feed) { const st = CUR.feed;
+    kids.push(el("div", {className: "wibox"}, el("div", {className: "eyebrow", textContent: `Feed stress watch \u00b7 ${M.fyear} season`}), el("div", {className: "hero", textContent: (st.watch / 1e6).toFixed(2) + "M"}),
+      el("div", {className: "note", textContent: `milk cows in dry counties, ${Math.round(100 * st.watch / Math.max(1, st.total))}% of the US herd \u00b7 ${(st.severe / 1e6).toFixed(2)}M in very dry counties`}))); }
   if (!code) {
     const years = [...new Set(MAP.history.map(r => r.year))].sort((a, b) => a - b);
     const us = years.map(y => [y, MAP.history.filter(r => r.year == y).reduce((a, r) => a + (r[crop] || 0), 0)]).filter(p => p[1] > 0);
@@ -412,9 +435,10 @@ function panel() {
     const name = NAMES[code] || code; let v = CUR.vals[code];
     if (CUR.county && (M.layer == "dairy" || M.layer == "silage_county")) { v = 0; let n = 0; for (const f in CUR.vals) if (stateOfFips(f) == code) { v += CUR.vals[f]; n++; } if (!n) v = null; }
     const close = el("button", {className: "ghost", textContent: "← United States"}); close.onclick = () => { M.sel = null; draw(); resetView(); };
+    const brief = stateBriefButton(code);
     const rows = MAP.history.filter(r => r.state == code && r[crop] != null).map(r => [r.year, r[crop]]);
     const fcs = fcModels(crop).map(m => ({m, r: fcValue(m.model_id, code)})).filter(x => x.r);
-    kids.push(close, el("div", {className: "eyebrow", style: "margin-top:12px", textContent: `${name} · ${crop}`}),
+    kids.push(el("div", {className: "satrow", style: "justify-content:space-between;margin-top:0"}, close, brief), el("div", {className: "eyebrow", style: "margin-top:12px", textContent: `${name} · ${crop}`}),
       el("div", {className: "hero", textContent: v == null ? "—" : CUR.fmt(v)}), el("div", {className: "note", textContent: CUR.title}));
     const extrasFirst = ["harvest", "money", "price", "milk", "satellite"].includes(M.layer);
     if (extrasFirst) kids.push(...extraBlocks(code));
@@ -434,6 +458,9 @@ function panel() {
       errs.slice(0, 8).forEach(x => t.append(el("tr", {}, el("td", {textContent: MODELS[x.mid]?.label || x.mid}),
         el("td", {className: "barcell"}, el("i", {style: `width:${100 * x.e.v / mx}%`})), el("td", {className: "n", textContent: x.e.v.toFixed(1) + "%"}))));
       kids.push(t, el("p", {className: "note", textContent: "Average miss per year in this state. Only folders that keep state-level predictions appear."})); }
+    if (M.layer == "whatif" && whatIf()?.states[code]) { const w = whatIf().states[code];
+      kids.unshift(el("div", {className: "wibox"}, el("div", {className: "eyebrow", textContent: `What if \u00b7 ${name}`}), el("div", {className: "hero", textContent: "+" + kfmt(Math.max(0, w.extra))}),
+        el("div", {className: "note", textContent: `extra silage acres with corn yield ${Math.round(100 * w.sf)}% below normal (our 2026 forecast: ${kfmt(w.base)}). ${DR.worst[code] ? `Worst year here: ${DR.worst[code].year}, ${Math.round(100 * DR.worst[code].shortfall)}% below.` : ""}`}))); }
     if (!extrasFirst) kids.push(...extraBlocks(code));
     const h = hist(code, lastActualYear(crop));
     if (h) { kids.push(el("h3", {textContent: `Season signals, ${h.year}`}));
@@ -478,6 +505,8 @@ function controls() {
   if (M.layer == "error") { const ids = errModels(crop); if (!M.errModel[crop] || !ids.includes(M.errModel[crop])) M.errModel[crop] = ids[0];
     if (ids.length) { const s = el("select", {"aria-label": "Model"}, ids.map(id => el("option", {value: id, textContent: (MODELS[id]?.label || id) + " \u00b7 " + (MODELS[id]?.source_label || ""), selected: id == M.errModel[crop]})));
       s.onchange = e => { M.errModel[crop] = e.target.value; draw(); }; parts.push(ctlField("Which model", s, "Pick a model to see how far off it was in each state.")); } }
+  if (M.layer == "whatif") whatIfControls(parts);
+  if (M.layer == "feed") { const yrs = feedYears(); parts.push(ctlField("Growing season", yearRange(yrs, M.fyear || yrs.at(-1), y => M.fyear = y), "May to September of that year, against the county's 2016\u20132025 normal.")); }
   if (M.layer == "dairy" || M.layer == "silage_county") parts.push(ctlField("Census year", segOf(EXT.county.census_years.map(y => [y, String(y)]), M.cyear, y => M.cyear = y), "USDA counts every farm once every five years."));
   if (M.layer == "weather") parts.push(ctlField("Show", segOf([["rain", "Rain"], ["heat", "Heat"]], M.wx, k => M.wx = k)));
   if (M.layer == "weather" || M.layer == "frost") { const yrs = Object.keys(EXT.county.weather).map(Number).filter(y => y < 2026).sort((a, b) => a - b);
@@ -537,20 +566,23 @@ function legend(cls) {
   const box = $("#legend-map"), ex = $("#explain");
   ex.replaceChildren(...[el("b", {textContent: "What am I looking at? "}), CUR.explain, CUR.note ? el("span", {className: "note", textContent: CUR.note}) : null].filter(Boolean));
   if (!cls.bins.length) { box.replaceChildren(el("span", {className: "note", textContent: "No data for this layer yet"})); return; }
-  const ends = CUR.div ? (M.layer == "weather" ? (M.wx == "rain" ? ["drier", "normal", "wetter"] : ["cooler", "normal", "hotter"]) : ["less", "same", "more"]) : M.layer == "error" ? ["closer", "", "further off"]
+  const ends = M.layer == "whatif" ? ["less", "", "more"] : CUR.div ? (M.layer == "weather" ? (M.wx == "rain" ? ["drier", "normal", "wetter"] : ["cooler", "normal", "hotter"]) : ["less", "same", "more"]) : M.layer == "error" ? ["closer", "", "further off"]
     : ["harvest", "frost"].includes(M.layer) ? ["earlier", "", "later"] : ["less", "", "more"];
   if (M.layer == "satellite") { box.replaceChildren(el("div", {className: "lt", textContent: "Blue states: in the satellite sample"}), el("div", {className: "nd"}, el("i", {style: "background:var(--accent);border-radius:50%"}), "test fields with known answers")); return; }
-  box.replaceChildren(el("div", {className: "lt", textContent: CUR.title}), el("div", {className: "ramp"}, cls.bins.map(b => el("i", {style: `background:${b.c}`, title: `${CUR.fmt(b.lo)} to ${CUR.fmt(b.hi)}`}))),
+  box.replaceChildren(...[el("div", {className: "lt", textContent: CUR.title}), el("div", {className: "ramp"}, cls.bins.map(b => el("i", {style: `background:${b.c}`, title: `${CUR.fmt(b.lo)} to ${CUR.fmt(b.hi)}`}))),
     el("div", {className: "rl"}, el("span", {textContent: `${CUR.fmt(cls.bins[0].lo)} (${ends[0]})`}), el("span", {textContent: ends[1]}), el("span", {textContent: `${CUR.fmt(cls.bins.at(-1).hi)} (${ends[2]})`})),
-    el("div", {className: "nd"}, el("i", {style: `background:${NODATA}`}), "no data"));
+    M.layer == "feed" ? el("div", {className: "nd"}, el("i", {style: "background:#232b35"}), "normal season", el("i", {style: "background:#3a2418;margin-left:8px"}), "dry, no dairy") : null,
+    M.layer == "whatif" ? el("div", {className: "nd"}, el("i", {style: "background:#383835"}), "no extra chopping") : null,
+    el("div", {className: "nd"}, el("i", {style: `background:${NODATA}`}), "no data")].filter(Boolean));
 }
 function select(code) { M.sel = code; draw(); zoomToState(code); }
 
 // ---------------------------------------------------------------- entry
 async function mapTab() {
   if (!GEO) { const q = FRESH ? "?fresh=1" : "";
-    const [g, m, x] = await Promise.all([fetch("/api/geo").then(r => r.json()), fetch("/api/map" + q).then(r => r.json()), fetch("/api/extras" + q).then(r => r.json())]);
-    GEO = g; MAP = m; EXT = x;
+    const opt = u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
+    const [g, m, x, dr, tm] = await Promise.all([fetch("/api/geo").then(r => r.json()), fetch("/api/map" + q).then(r => r.json()), fetch("/api/extras" + q).then(r => r.json()), opt("/api/drought" + q), opt("/api/team")]);
+    GEO = g; MAP = m; EXT = x; DR = dr; TEAM = tm;
     GEO.states.forEach(s => { s.code = FIPS[s.fips] || s.fips; NAMES[s.code] = s.name; });
     M.year = lastActualYear("silage"); }
   for (const c of ["silage", "grain"]) if (!M.fcModel[c] || !MODELS[M.fcModel[c]]) M.fcModel[c] = defaultModel(c);
@@ -560,16 +592,16 @@ async function mapTab() {
   const cls = classify(CUR.vals, CUR.ramp, CUR.div, CUR.flip);
   const LIGHT = new Set([SEQ[5], SEQ[6], SEQ2[5], SEQ2[6], DIV[2], DIV[4]]);  // labels go dark on light fills
   const stage = $("#usmap"); stage.classList.toggle("countymode", !!CUR.county);
-  if (CUR.county) document.querySelectorAll("#counties .cty").forEach(p => { const v = CUR.vals[p.dataset.fips]; p.style.fill = cls.color(v); });
-  document.querySelectorAll("#states .st").forEach(p => { const v = CUR.county ? null : CUR.vals[p.dataset.code], c = CUR.county ? "transparent" : M.layer == "satellite" ? (v ? "#2a78d6" : NODATA) : cls.color(v);
-    p.style.fill = c; p.classList.toggle("nodata", !CUR.county && v == null);
+  if (CUR.county) document.querySelectorAll("#counties .cty").forEach(p => { const f = p.dataset.fips; p.style.fill = CUR.fillFor ? CUR.fillFor(cls, f) : cls.color(CUR.vals[f]); });
+  document.querySelectorAll("#states .st").forEach(p => { const v = CUR.county ? null : CUR.vals[p.dataset.code], c = CUR.county ? "transparent" : M.layer == "satellite" ? (v ? "#2a78d6" : NODATA) : CUR.stateFill ? CUR.stateFill(cls, p.dataset.code) : cls.color(v);
+    p.style.fill = c; p.classList.toggle("nodata", !CUR.county && v == null && !CUR.stateFill);
     const lbl = document.querySelector(`#labels text[data-code="${p.dataset.code}"]`); if (lbl) lbl.classList.toggle("dark", LIGHT.has(c)); });
   const mk = $("#markers"); mk.replaceChildren();
   if (M.layer == "satellite") (EXT.satellite.points || []).forEach(pt => { const [x, y] = ALB(pt.lon, pt.lat);
     const c = svgEl("circle", {cx: x, cy: y, class: "mk"}); c.addEventListener("pointermove", e => { const t = $("#tip"); t.replaceChildren(el("b", {textContent: pt.label}), el("div", {textContent: pt.detail})); t.hidden = false; t.style.left = e.clientX + 14 + "px"; t.style.top = e.clientY + 14 + "px"; });
     c.addEventListener("pointerleave", () => $("#tip").hidden = true); const t = svgEl("text", {x, y, class: "mkl", dy: 4}); t.textContent = pt.label; mk.append(c, t); });
   const s = GEO.states.find(s => s.code == M.sel); $("#selpath").setAttribute("d", s ? s.d : "");
-  kpis(); controls(); legend(cls); panel(); drawLoc(); applyT(); locControls(); guideButton();
+  kpis(); controls(); legend(cls); panel(); drawLoc(); applyT(); locControls(); guideButton(); fieldButton(); teamFooter();
   if (!mapTab.guided) { mapTab.guided = true; let seen = false; try { seen = localStorage.getItem("board-guide") == "1"; } catch (e) { seen = true; }
     if (!seen) setTimeout(() => startGuide(), 600);
     try { const saved = JSON.parse(localStorage.getItem("board-loc") || "null"); if (saved && !M.loc) setLocation(saved, {quiet: true}); } catch (e) { /* storage off */ } }

@@ -22,6 +22,16 @@ Press **Refresh** on the page after a model finishes a run.
   cows and silage in that county and within 25 / 50 / 100 miles, the biggest dairy counties nearby,
   the season's weather, the state's 2026 forecast and the next satellite pictures of that spot
   (town and ZIP lookups use OpenStreetMap's geocoder from the browser; county names work offline).
+  **Briefing mode** (header button): an 8-step full-screen story on the live map for a short meeting
+  (arrow keys or Next; Esc to leave). Team names come from `board/team.json`.
+  **What if a drought hits?** (layer): replay 2012/2020/2023 or pick a yield loss; the headline silage
+  model's drought term (`board/drought.py`, same gamma as B-S6) adds the acres farmers would chop.
+  **Feed stress watch** (layer): milk cows in counties with a dry May-Sep (rain vs the county's normal,
+  only where summer rain normally tops 150 mm).
+  **Silage or grain?** (button): USDA's 44 labeled Maryland field-years with their Sentinel-2 greenness
+  and the caveman call (`board/fields_md.json`, built by `board/build_fields.py`), and a live lookup for
+  any spot (`/api/field`, needs pystac-client, planetary-computer, rasterio and network; 20-60 s).
+  **One-page brief**: button in a state's panel; opens a printable page.
   **Satellites** overlay: every strip Sentinel-2A/2B/2C and Landsat 8/9 photograph over the lower 48
   on a day (yesterday / today / tomorrow), drawn at its real swath width, with a pass list and a
   timeline you can replay. Computed in the browser from `board/tle.json`; refresh that file now and then. Layers: each model's

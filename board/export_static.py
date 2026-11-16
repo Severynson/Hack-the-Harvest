@@ -30,6 +30,9 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
         "/api/roads": json.loads((HERE / "roads.json").read_text()),
         "/api/tle": json.loads((HERE / "tle.json").read_text()),
         "/api/trade": json.loads((HERE / "trade.json").read_text()),
+        "/api/drought": app.drought_data(fresh=1),
+        "/api/fields_md": json.loads((HERE / "fields_md.json").read_text()),
+        "/api/team": json.loads((HERE / "team.json").read_text()),
     }
     taken = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     shim = ("<script>window.__SNAP=" + json.dumps(snap, separators=(",", ":")).replace("</", "<\\/") + ";"
@@ -41,7 +44,9 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
     map_js = (HERE / "map.js").read_text().replace("</script", "<\\/script")
     sat_js = (HERE / "satellite.min.js").read_text().replace("</script", "<\\/script")
     page = page.replace('<script src="/satellite.min.js"></script>', "<script>" + sat_js + "</script>")
+    story_js = (HERE / "story.js").read_text().replace("</script", "<\\/script")
     page = page.replace('<script src="/map.js"></script>', shim + "<script>" + map_js + "</script>")
+    page = page.replace('<script src="/story.js"></script>', "<script>" + story_js + "</script>")
     out.write_text(page)
     print(f"wrote {out} ({out.stat().st_size // 1024} KB), data as of {taken}")
     return out

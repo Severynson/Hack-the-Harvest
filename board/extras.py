@@ -146,6 +146,7 @@ def county_layers(problems: list) -> dict:
         w["fips"] = w["fips"].str.zfill(5)
         base = w[w["year"] <= 2025].groupby("fips")[["prcp_may_sep_mm", "gdd_may_sep_c"]].mean()
         w = w.merge(base.add_suffix("_normal"), left_on="fips", right_index=True, how="left")
+        out["rain_normal"] = {f: int(round(v)) for f, v in base["prcp_may_sep_mm"].items() if np.isfinite(v)}   # mm, May-Sep
         w["rain_vs_normal"] = w["prcp_may_sep_mm"] / w["prcp_may_sep_mm_normal"] - 1
         w["heat_vs_normal"] = w["gdd_may_sep_c"] / w["gdd_may_sep_c_normal"] - 1
         w = w[w["year"] >= 2016]

@@ -93,6 +93,42 @@ def extras_data(fresh: int = 0):
     return cached("extras", lambda: build(state_history()), bool(fresh))
 
 
+@app.get("/api/drought")
+def drought_data(fresh: int = 0):
+    """Per-state drought term of the headline silage model, for the what-if slider (board/drought.py)."""
+    from board.drought import build
+    return cached("drought", build, bool(fresh))
+
+
+@app.get("/api/fields_md")
+def fields_md():
+    """USDA's labeled Maryland test fields with their greenness series and the caveman call (board/build_fields.py)."""
+    return Response(Path(__file__).with_name("fields_md.json").read_bytes(), media_type="application/json")
+
+
+@app.get("/api/team")
+def team():
+    return Response(Path(__file__).with_name("team.json").read_bytes(), media_type="application/json")
+
+
+@app.get("/api/field")
+def field_check(lon: float, lat: float, year: int, fips: str = ""):
+    """Live: pull every Sentinel-2 picture of a small disc around (lon, lat) for one season and apply the caveman rule."""
+    from fastapi.responses import JSONResponse
+    if not (-125 < lon < -66 and 24 < lat < 50 and 2017 <= year <= datetime.now(UTC).year):
+        return JSONResponse({"error": "Pick a spot in the lower 48 and a year from 2017 on."}, status_code=400)
+    try:
+        from board.fieldrule import classify_point
+    except Exception as error:  # noqa: BLE001
+        return JSONResponse({"error": f"Live lookup isn't installed on this server ({error})."}, status_code=503)
+    try:
+        return classify_point(lon, lat, year, fips or None)
+    except ImportError as error:
+        return JSONResponse({"error": f"Live lookup isn't installed on this server ({error.name or error})."}, status_code=503)
+    except Exception as error:  # noqa: BLE001
+        return JSONResponse({"error": f"Couldn't reach the satellite archive: {type(error).__name__}"}, status_code=502)
+
+
 @app.get("/api/counties")
 def counties():
     return Response(Path(__file__).with_name("us_counties.topo.json").read_bytes(), media_type="application/json")
@@ -126,6 +162,11 @@ def satellite_js():
     return Response(Path(__file__).with_name("satellite.min.js").read_bytes(), media_type="text/javascript")
 
 
+@app.get("/story.js")
+def story_js():
+    return Response(Path(__file__).with_name("story.js").read_bytes(), media_type="text/javascript")
+
+
 @app.get("/map.js")
 def map_js():
     return Response(Path(__file__).with_name("map.js").read_bytes(), media_type="text/javascript")
@@ -143,6 +184,10 @@ def rebuild():
     cached("board", build_board, True)
     map_data(fresh=1)
     extras_data(fresh=1)
+    try:
+        drought_data(fresh=1)
+    except Exception as error:  # noqa: BLE001 - the what-if slider is optional
+        print(f"drought what-if unavailable: {error}", flush=True)
 
 
 def auto_refresh(minutes: float, command: str) -> None:
@@ -183,7 +228,22 @@ def status():
     return {"read_at": (_CACHE.get("board") or {}).get("read_at")}
 
 
+def refresh_orbits_soon() -> None:
+    """Fresh satellite orbits in the background, so the pass times on the map are exact."""
+    import threading
+
+    def run() -> None:
+        try:
+            from board.update_tle import main
+            main()
+            print("satellite orbits refreshed", flush=True)
+        except Exception as error:  # noqa: BLE001
+            print(f"satellite orbits not refreshed ({error}); using board/tle.json as is", flush=True)
+    threading.Thread(target=run, daemon=True).start()
+
+
 if __name__ == "__main__":
+    refresh_orbits_soon()
     print("Reading model folders...", flush=True)
     rebuild()
     if os.environ.get("BOARD_AUTOPULL"):
