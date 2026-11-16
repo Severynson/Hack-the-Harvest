@@ -33,6 +33,7 @@ def main(out: Path = HERE / "kernel_board_snapshot.html") -> Path:
         "/api/drought": app.drought_data(fresh=1),
         "/api/fields_md": json.loads((HERE / "fields_md.json").read_text()),
         "/api/team": json.loads((HERE / "team.json").read_text()),
+        "/api/cities": json.loads((HERE / "cities.json").read_text()),
     }
     taken = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     shim = ("<script>window.__SNAP=" + json.dumps(snap, separators=(",", ":")).replace("</", "<\\/") + ";"

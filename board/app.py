@@ -106,6 +106,11 @@ def fields_md():
     return Response(Path(__file__).with_name("fields_md.json").read_bytes(), media_type="application/json")
 
 
+@app.get("/api/cities")
+def cities():
+    return Response(Path(__file__).with_name("cities.json").read_bytes(), media_type="application/json")
+
+
 @app.get("/api/team")
 def team():
     return Response(Path(__file__).with_name("team.json").read_bytes(), media_type="application/json")

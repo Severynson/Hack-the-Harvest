@@ -328,7 +328,8 @@ function applyT() {
   clearTimeout(applyT.lbl); applyT.lbl = setTimeout(countyLabels, 90);
   document.querySelectorAll("#markers circle").forEach(c => { c.setAttribute("r", 6 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
   document.querySelectorAll("#markers text").forEach(t => { t.style.fontSize = (11 / M.k) + "px"; t.setAttribute("dx", 9 / M.k); });
-  document.querySelectorAll("#ov-roads .road").forEach(p => p.setAttribute("stroke-width", (p.classList.contains("interstate") ? 1.6 : 0.9) / M.k));
+  $("#usmap").classList.toggle("z2", M.k >= 2.5);
+  if (typeof scheduleLOD == "function") scheduleLOD();
   document.querySelectorAll("#ov-trade .river").forEach(p => p.setAttribute("stroke-width", 3 / M.k));
   document.querySelectorAll("#ov-trade .flow").forEach(p => p.setAttribute("stroke-width", 2.5 / M.k));
   document.querySelectorAll("#ov-trade .port").forEach(c => { c.setAttribute("r", 7 / M.k); c.setAttribute("stroke-width", 2 / M.k); });
@@ -339,7 +340,7 @@ function applyT() {
 }
 function countyLabels() {     // county names appear once you zoom in far enough to read them
   const g = $("#ctylabels"); if (!g) return;
-  if (!CTY || M.k < (CUR?.county ? 4 : 5.5) || !$("#counties")) { g.replaceChildren(); return; }
+  if (!CTY || M.k < (CUR?.county ? 4 : 9) || !$("#counties")) { g.replaceChildren(); return; }
   const x0 = (VB.x - M.tx) / M.k, x1 = (VB.x + VB.w - M.tx) / M.k, y0 = (VB.y - M.ty) / M.k, y1 = (VB.y + VB.h - M.ty) / M.k;
   const kids = [];
   for (const c of CTY) { if (c.c[0] < x0 || c.c[0] > x1 || c.c[1] < y0 || c.c[1] > y1 || (c.b[2] - c.b[0]) * M.k < 34) continue;
@@ -586,7 +587,7 @@ async function mapTab() {
     GEO.states.forEach(s => { s.code = FIPS[s.fips] || s.fips; NAMES[s.code] = s.name; });
     M.year = lastActualYear("silage"); }
   for (const c of ["silage", "grain"]) if (!M.fcModel[c] || !MODELS[M.fcModel[c]]) M.fcModel[c] = defaultModel(c);
-  if (!M.built || !$("#zoomg")) buildMap();
+  const rebuilt = !M.built || !$("#zoomg"); if (rebuilt) buildMap();
   CUR = layerValues();
   if (CUR.county && !$("#counties")) { $("#legend-map").replaceChildren(el("span", {className: "note", textContent: "Loading 3,000 counties\u2026"})); await loadCounties(); }
   const cls = classify(CUR.vals, CUR.ramp, CUR.div, CUR.flip);
@@ -605,7 +606,7 @@ async function mapTab() {
   if (!mapTab.guided) { mapTab.guided = true; let seen = false; try { seen = localStorage.getItem("board-guide") == "1"; } catch (e) { seen = true; }
     if (!seen) setTimeout(() => startGuide(), 600);
     try { const saved = JSON.parse(localStorage.getItem("board-loc") || "null"); if (saved && !M.loc) setLocation(saved, {quiet: true}); } catch (e) { /* storage off */ } }
-  if (!mapTab.ovStarted) { mapTab.ovStarted = true; drawOverlays(); } else overlayControls();
+  if (!mapTab.ovStarted || rebuilt) { mapTab.ovStarted = true; drawOverlays(); } else overlayControls();
 }
 // ---------------------------------------------------------------- guided tour: points at each control in turn
 const GUIDE = [
@@ -649,7 +650,7 @@ function guideButton() {
 }
 
 // ---------------------------------------------------------------- overlays: highways, export routes, live satellites
-const OV = {roads: false, trade: false, sats: false}, OVDATA = {roads: null, tle: null, satrecs: null, trade: null};
+const OV = {farms: false, cities: true, roads: false, trade: false, sats: false}, OVDATA = {roads: null, tle: null, satrecs: null, trade: null};
 let satTimer = null;
 const US_BOX = {lon0: -125, lon1: -66, lat0: 24, lat1: 50};
 const inUS = (lon, lat) => lon > US_BOX.lon0 && lon < US_BOX.lon1 && lat > US_BOX.lat0 && lat < US_BOX.lat1;
@@ -658,7 +659,7 @@ const SWATH = {"Sentinel-2": 290, "Landsat": 185};
 
 function overlayControls() {
   const box = $("#ovctl"); if (!box) return;
-  const items = [["roads", "\u{1F6E3}\uFE0F Highways"], ["trade", "\u{1F6A2} Export routes"], ["sats", "\u{1F6F0}\uFE0F Satellites"]];
+  const items = [["farms", "\u{1F69C} Farms"], ["cities", "\u{1F3D9}\uFE0F Cities"], ["roads", "\u{1F6E3}\uFE0F Highways"], ["trade", "\u{1F6A2} Export routes"], ["sats", "\u{1F6F0}\uFE0F Satellites"]];
   box.replaceChildren(el("div", {className: "ovt", textContent: "Overlays"}), ...items.map(([k, l]) => {
     const b = el("button", {className: "chip", textContent: l}); b.setAttribute("aria-pressed", OV[k]);
     b.onclick = () => { OV[k] = !OV[k]; if (k == "sats" && OV.sats) M.satOpen = true; drawOverlays(); }; return b; }));
@@ -675,8 +676,9 @@ async function drawOverlays() {
       p.addEventListener("pointermove", e => { const t = $("#tip"); t.replaceChildren(el("b", {textContent: r.n}), el("div", {className: "muted", textContent: r.c == "interstate" ? "Interstate: the main truck corridors" : "US highway"}));
         t.hidden = false; t.style.left = e.clientX + 14 + "px"; t.style.top = e.clientY + 14 + "px"; });
       p.addEventListener("pointerleave", () => $("#tip").hidden = true); rg.append(p); }); }
+  if (OV.roads && rg && !rg.dataset.decor) { rg.dataset.decor = 1; decorateRoads(rg); }
   if (rg) rg.style.display = OV.roads ? "" : "none";
-  $("#states").classList.toggle("dim", OV.trade || OV.roads);
+  $("#states").classList.toggle("dim", OV.trade || OV.farms);
   // export routes: barge rivers, export ports, where the corn goes
   if (OV.trade && !OVDATA.trade) OVDATA.trade = await fetch("/api/trade").then(r => r.json());
   let tg = $("#ov-trade");
@@ -690,6 +692,7 @@ async function drawOverlays() {
     if (!sg) { sg = svgEl("g", {id: "ov-sats"}); g.append(sg); }
     sg.style.display = ""; drawSats(); satTimer = setInterval(() => { if (M.satT == null && S.tab == "map") drawSats(); }, 5000);
   } else { if (sg) sg.style.display = "none"; const card = $("#satcard"); if (card) card.hidden = true; }
+  await drawLiveOverlays();
   if (CUR) panel(); applyT();
 }
 
@@ -705,7 +708,7 @@ function drawTrade(tg) {
       const t = svgEl("text", {x: lx, y: ly, class: "flowl", "text-anchor": pt.anchor || "middle"}); t.textContent = pt.label; tg.append(t); } });
 }
 function tipText(e, title, body) { const t = $("#tip"); t.replaceChildren(el("b", {textContent: title}), el("div", {textContent: body})); t.hidden = false; t.style.left = Math.min(e.clientX + 14, innerWidth - 300) + "px"; t.style.top = e.clientY + 14 + "px"; }
-function tradeCard() { $("#states").classList.toggle("dim", OV.trade || OV.roads); if (CUR) panel(); }
+function tradeCard() { $("#states").classList.toggle("dim", OV.trade || OV.farms); if (CUR) panel(); }
 function tradeBlock() {
   if (!OV.trade || !OVDATA.trade) return [];
   return [el("div", {className: "tradebox"}, el("div", {className: "eyebrow", textContent: "Export routes · where US corn goes"}),

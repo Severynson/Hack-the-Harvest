@@ -135,6 +135,11 @@ def county_layers(problems: list) -> dict:
             out["estimated"]["silage"][int(year)] = est
             for f, c, s in zip(g["fips"], g["county_name"], g["state_alpha"]):
                 out["names"].setdefault(f, f"{c.title()}, {s}")
+        grain = _qs("corn_grain_harvested_acres_county_2015_2025.csv")
+        grain = grain[(grain["agg_level_desc"] == "COUNTY") & (grain["county_code"] != "998") & (grain["source_desc"] == "CENSUS")
+                      & (grain["domain_desc"] == "TOTAL") & (grain["prodn_practice_desc"] == "ALL PRODUCTION PRACTICES")].dropna(subset=["v"])
+        grain["fips"] = _fips(grain)
+        out["corn_grain"] = {int(y): {f: float(v) for f, v in zip(g["fips"], g["v"])} for y, g in grain.groupby("year")}
         out["census_years"] = sorted(set(out["silage"]) & set(out["milk_cows"]))
     except Exception as error:  # noqa: BLE001
         problems.append(f"county acres/cows: {error}")

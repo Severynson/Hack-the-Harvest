@@ -32,6 +32,9 @@ Press **Refresh** on the page after a model finishes a run.
   and the caveman call (`board/fields_md.json`, built by `board/build_fields.py`), and a live lookup for
   any spot (`/api/field`, needs pystac-client, planetary-computer, rasterio and network; 20-60 s).
   **One-page brief**: button in a state's panel; opens a printable page.
+  **Overlays**: Farms (dot density from the 2022 Census: gold = corn acres, white = milk cows; denser as you
+  zoom in), Cities (more names as you zoom; click one to make it your area), Highways (interstate shields,
+  US highways once zoomed in, hover highlights a whole route).
   **Satellites** overlay: every strip Sentinel-2A/2B/2C and Landsat 8/9 photograph over the lower 48
   on a day (yesterday / today / tomorrow), drawn at its real swath width, with a pass list and a
   timeline you can replay. Computed in the browser from `board/tle.json`; refresh that file now and then. Layers: each model's

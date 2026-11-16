@@ -67,7 +67,7 @@ tr.bench td{color:var(--muted);background:#12161d}tr.bench td b{color:var(--text
 #ovctl .chip{padding:6px 10px;font-size:12px}.ovt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
 #satcard{position:absolute;right:12px;bottom:34px;background:rgba(14,17,22,.92);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:430px}
 #satcard td{padding:3px 6px;font-size:12px}#satcard[hidden]{display:none}
-#usmap .road{fill:none;stroke-linecap:round;stroke-linejoin:round}#usmap .road.interstate{stroke:#f2c14e;stroke-opacity:.9}#usmap .road.us{stroke:#c9ced6;stroke-opacity:.55}
+
 #usmap .river{fill:none;stroke:#5fd0ff;stroke-opacity:1;stroke-linecap:round;stroke-linejoin:round}
 #usmap .flow{fill:none;stroke:#8fd19e;stroke-linecap:round}#usmap .port{fill:#8fd19e;stroke:#0b0e13;cursor:help}
 #usmap .flowl{fill:#e6f6ea;font-family:var(--sans);font-weight:600;paint-order:stroke;stroke:#0b0e13;stroke-width:.5}
@@ -220,6 +220,24 @@ a.brlink{color:var(--focus);text-decoration:none;font-size:12.5px}a.brlink:hover
 .srcs{margin:0;padding-left:18px}.srcs li{margin:5px 0;color:var(--muted)}.srcs a{color:var(--focus)}.srcs b{color:var(--text);font-weight:600}
 .teamlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px 16px;margin-bottom:10px}
 @media(max-width:1100px){.abouthero,.aboutgrid{grid-template-columns:1fr}}
+
+/* --- highways, cities, farms --- */
+#usmap .road{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#usmap .road.interstate{stroke:#f3e3b5;stroke-opacity:.75;stroke-width:1.4px}
+#usmap .road.us{stroke:#c9ced6;stroke-opacity:.45;stroke-width:.9px;display:none}#usmap.z2 .road.us{display:inline}
+#usmap .road.hl{stroke:#ffd166;stroke-opacity:1;stroke-width:3.2px}
+#usmap .shield rect{fill:#1d4ea8;stroke:#fff;stroke-width:1.2px}#usmap .shield text{fill:#fff;font:700 10px var(--sans);text-anchor:middle;pointer-events:none}
+#usmap .shield{pointer-events:none}
+#usmap .city circle{fill:#fff;stroke:#0b0e13;stroke-width:1px;vector-effect:non-scaling-stroke;cursor:pointer}
+#usmap .city text{fill:#f4f6f9;font-family:var(--sans);font-weight:600;paint-order:stroke;stroke:#0b0e13;stroke-opacity:.9;cursor:pointer}
+#usmap .city.t3 text{fill:#d9dee6;font-weight:500}#usmap .city:hover text{fill:var(--accent)}
+#usmap .dots{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none}
+#usmap .dots.halo{stroke:#0b0e13;stroke-width:4.4px;stroke-opacity:.55}#usmap.farmsdim.countymode .cty{fill-opacity:.55}
+#usmap .dots.corn{stroke:#f2c94c;stroke-width:2.6px;stroke-opacity:.85}#usmap .dots.cows{stroke:#ffffff;stroke-width:2.8px;stroke-opacity:.9}
+#farmkey{position:absolute;right:62px;top:12px;background:rgba(14,17,22,.9);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;max-width:260px}
+#farmkey div{display:flex;align-items:center;gap:6px;margin-top:3px}#farmkey .fk{width:9px;height:9px;border-radius:50%;display:inline-block}
+#farmkey .fk.corn{background:#f2c94c}#farmkey .fk.cows{background:#fff}
+body.briefing #farmkey{top:auto;bottom:16px;right:16px}
 </style></head><body>
 <header><h1>Kernel · model board</h1><span class="muted" id="summary">Loading…</span><span style="flex:1"></span>
 <a class="ghost ghlink" id="ghlink" href="https://github.com/Severynson/Hack-the-Harvest" target="_blank" rel="noopener" title="All the code and data on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>

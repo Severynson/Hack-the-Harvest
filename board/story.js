@@ -364,3 +364,92 @@ async function aboutTab() {
         el("div", {className: "teamlist"}, (TEAM?.members || []).map(m => el("div", {}, el("b", {textContent: m.name}), m.role ? el("div", {className: "note", textContent: m.role}) : null))),
         el("p", {className: "note", textContent: "Questions or ideas: open an issue on GitHub."}), a(R + "/issues", "Open an issue →", "brlink"))));
 }
+
+// ---------------------------------------------------------------- overlays: highway shields, cities, farms (dot density)
+let CITIES = null;
+const LODG = () => $("#ov-lod") || (() => { const g = svgEl("g", {id: "ov-lod"}); $("#overlays").after(g); return g; })();
+function decorateRoads(rg) {        // whole-route highlight on hover, and anchor points for route shields
+  const byName = {};
+  rg.querySelectorAll(".road").forEach(p => { const n = OVDATA.roads.roads.find(r => r.d == p.getAttribute("d"))?.n; if (!n) return;
+    p.dataset.n = n; (byName[n] ??= []).push(p);
+    p.addEventListener("pointerenter", () => byName[n].forEach(q => q.classList.add("hl")));
+    p.addEventListener("pointerleave", () => byName[n].forEach(q => q.classList.remove("hl"))); });
+  ROADPTS = OVDATA.roads.roads.filter(r => r.c == "interstate").flatMap(r => {
+    const pts = (r.d.match(/-?\d+(\.\d+)?,-?\d+(\.\d+)?/g) || []).map(q => q.split(",").map(Number));
+    return pts.filter((_, i) => i % 6 == 3).map(([x, y]) => ({x, y, n: r.n}));
+  });
+}
+let ROADPTS = [];
+let lodTimer = null;
+function scheduleLOD() { clearTimeout(lodTimer); lodTimer = setTimeout(drawLOD, 80); }
+function viewBox() { return [(VB.x - M.tx) / M.k, (VB.y - M.ty) / M.k, (VB.x + VB.w - M.tx) / M.k, (VB.y + VB.h - M.ty) / M.k]; }
+async function drawLiveOverlays() {
+  if (OV.cities && !CITIES) CITIES = await fetch("/api/cities").then(r => r.ok ? r.json() : {cities: []}).then(j => j.cities.map(c => ({...c, xy: ALB(c.lon, c.lat)}))).catch(() => []);
+  if (OV.farms) await loadCounties();
+  $("#states")?.classList.toggle("dim", OV.trade || OV.farms); $("#usmap")?.classList.toggle("farmsdim", OV.farms);
+  drawLOD();
+}
+function drawLOD() {
+  const g = $("#overlays") ? LODG() : null; if (!g || !GEO) return;
+  const [x0, y0, x1, y1] = viewBox(), k = M.k, inView = (x, y, pad = 0) => x >= x0 - pad && x <= x1 + pad && y >= y0 - pad && y <= y1 + pad;
+  const kids = [], boxes = [];       // screen-space label boxes, to keep labels from piling up
+  const free = (x, y, w, h) => { const sx = x * k, sy = y * k; if (boxes.some(b => sx < b[0] + b[2] && sx + w > b[0] && sy < b[1] + b[3] && sy + h > b[1])) return false; boxes.push([sx, sy, w, h]); return true; };
+  // farms: dot density, denser as you zoom in
+  if (OV.farms && CTY && EXT) {
+    const cy = EXT.county.census_years.at(-1), corn = {}, cows = EXT.county.milk_cows[cy] || {};
+    for (const [f, v] of Object.entries(EXT.county.corn_grain?.[cy] || {})) corn[f] = (corn[f] || 0) + v;
+    for (const [f, v] of Object.entries(EXT.county.silage[cy] || {})) corn[f] = (corn[f] || 0) + v;
+    const tier = k < 2.5 ? 0 : k < 6 ? 1 : 2, unitCorn = [25000, 8000, 2000][tier], unitCow = [5000, 1500, 400][tier];
+    let dc = "", dw = "", n = 0;
+    for (const c of CTY) {
+      if (tier && !(c.b[2] >= x0 && c.b[0] <= x1 && c.b[3] >= y0 && c.b[1] <= y1)) continue;
+      const pc = dotsFor(c, corn[c.id] || 0, unitCorn, 1), pw = dotsFor(c, cows[c.id] || 0, unitCow, 2);
+      for (const [x, y] of pc) dc += `M${x.toFixed(1)},${y.toFixed(1)}h0`; for (const [x, y] of pw) dw += `M${x.toFixed(1)},${y.toFixed(1)}h0`;
+      n += pc.length + pw.length; if (n > 40000) break;
+    }
+    kids.push(svgEl("path", {d: dc + dw, class: "dots halo"}), svgEl("path", {d: dc, class: "dots corn"}), svgEl("path", {d: dw, class: "dots cows"}));
+    farmKey(unitCorn, unitCow, cy);
+  } else $("#farmkey")?.remove();
+  // cities: more names as you zoom in
+  if (OV.cities && CITIES) {
+    const maxTier = k < 2 ? 1 : k < 4 ? 2 : 3;
+    for (const c of CITIES) { if (c.t > maxTier || !inView(...c.xy, 20 / k)) continue;
+      const label = c.n, w = 7 + label.length * (c.t == 1 ? 6.6 : 6), r = (c.t == 1 ? 3.4 : c.t == 2 ? 2.8 : 2.3) / k;
+      const showLabel = free(c.xy[0] + 5 / k, c.xy[1] - 7 / k, w, 14);
+      const cg = svgEl("g", {class: "city t" + c.t}); cg.append(svgEl("circle", {cx: c.xy[0], cy: c.xy[1], r}));
+      if (showLabel) { const t = svgEl("text", {x: c.xy[0] + 5 / k, y: c.xy[1] + 3.5 / k, style: `font-size:${(c.t == 1 ? 11.5 : 10.5) / k}px;stroke-width:${3 / k}px`}); t.textContent = label; cg.append(t); }
+      cg.addEventListener("pointermove", e => tipText(e, `${c.n}, ${c.s}`, "Click to see the farms, cows and weather around it"));
+      cg.addEventListener("pointerleave", () => $("#tip").hidden = true);
+      cg.addEventListener("click", e => { if (dragged) return; e.stopPropagation(); setLocation({lat: c.lat, lon: c.lon, label: `${c.n}, ${c.s}`}); });
+      kids.push(cg); }
+  }
+  // highway shields along interstates
+  if (OV.roads && ROADPTS.length) {
+    const minGap = (k < 2 ? 260 : 170) / k, placed = {}, major = /^I-(5|10|15|20|25|35|40|45|55|65|70|75|80|90|94|95)$/;
+    for (const p of ROADPTS) { if (!inView(p.x, p.y) || (k < 2 && !major.test(p.n))) continue;
+      if ((placed[p.n] || []).some(q => Math.hypot(q[0] - p.x, q[1] - p.y) < minGap)) continue;
+      const num = p.n.replace(/^I-/, ""), w = 12 + 7 * num.length;
+      if (!free(p.x - w / 2 / k, p.y - 8 / k, w, 16)) continue;
+      (placed[p.n] ??= []).push([p.x, p.y]);
+      const sg = svgEl("g", {class: "shield", transform: `translate(${p.x},${p.y}) scale(${1 / k})`});
+      sg.append(svgEl("rect", {x: -w / 2, y: -8, width: w, height: 16, rx: 4}), Object.assign(svgEl("text", {x: 0, y: 4}), {textContent: num}));
+      kids.push(sg); if (kids.length > 160) break; }
+  }
+  g.replaceChildren(...kids);
+}
+const DOTCACHE = {};
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function dotsFor(c, amount, unit, kind) {   // same random spots every time, so dots don't jump around
+  const n = Math.floor(amount / unit + rng(+c.id * 7 + kind)()); if (n <= 0) return [];
+  const key = c.id + ":" + kind, have = DOTCACHE[key] ??= [];
+  if (have.length < n) { const r = rng(+c.id * 31 + kind * 997 + have.length); let tries = 0;
+    while (have.length < n && tries++ < n * 40) { const x = c.b[0] + r() * (c.b[2] - c.b[0]), y = c.b[1] + r() * (c.b[3] - c.b[1]); if (inRings(c.rings, x, y)) have.push([x, y]); } }
+  return have.slice(0, n);
+}
+function farmKey(unitCorn, unitCow, cy) {
+  let k = $("#farmkey"); if (!k) { k = el("div", {id: "farmkey"}); $(".stage").append(k); }
+  k.replaceChildren(el("b", {textContent: "\u{1F69C} Where the farms are"}),
+    el("div", {}, el("i", {className: "fk corn"}), `corn: 1 dot ≈ ${unitCorn.toLocaleString("en-US")} acres`),
+    el("div", {}, el("i", {className: "fk cows"}), `dairy: 1 dot ≈ ${unitCow.toLocaleString("en-US")} milk cows`),
+    el("div", {className: "note", textContent: `${cy} Census of Agriculture, by county · zoom in for more detail`}));
+}
