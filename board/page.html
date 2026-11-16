@@ -205,8 +205,24 @@ body.briefing #legend-map{bottom:auto;top:16px;left:16px}body.briefing #satcard{
 #briefcard h2{font-size:26px;line-height:1.2;margin:4px 0 8px}#briefcard p{font-size:16px;line-height:1.55;margin:0 0 14px;color:#dfe3ea}.bstep{font:12px var(--mono);color:var(--accent)}
 .bcred{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 14px;font-size:13px;color:var(--muted)}
 #teamfoot{max-width:1400px;margin:8px auto 24px;padding:12px 24px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}#teamfoot b{color:var(--text)}
+
+/* --- about & code --- */
+.ghlink{display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:6px 12px;color:var(--text);border:1px solid var(--line);border-radius:6px;font-weight:600}.ghlink:hover{background:var(--line)}
+#about pre{white-space:pre-wrap;word-break:break-all}
+.abouthero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:16px}
+.abouthero h1{font-size:26px;margin:6px 0 8px;line-height:1.2}.abouthero p{font-size:14px;line-height:1.55;max-width:760px}
+.aboutbtns{display:flex;flex-direction:column;gap:8px}.aboutbtns a{text-align:center;text-decoration:none;border-radius:8px;padding:9px 12px;font-weight:600}
+.aboutbtns a.act{background:var(--accent);color:#111}.aboutbtns a.big{font-size:15px;padding:12px}.aboutbtns a.ghostl{border:1px solid var(--line);color:var(--text)}.aboutbtns a.ghostl:hover{background:var(--line)}
+.aboutgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.aboutgrid .card{margin:0}.aboutgrid .card h2{margin-bottom:12px}
+.brcard{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px}.brcard .br{color:var(--accent);font-weight:600}.brcard p{margin:4px 0 6px;color:var(--muted);font-size:12.5px}
+a.brlink{color:var(--focus);text-decoration:none;font-size:12.5px}a.brlink:hover{text-decoration:underline}
+.aboutgrid table.mini td{vertical-align:top;padding:8px 6px}.aboutgrid table.mini tr{cursor:default}
+.srcs{margin:0;padding-left:18px}.srcs li{margin:5px 0;color:var(--muted)}.srcs a{color:var(--focus)}.srcs b{color:var(--text);font-weight:600}
+.teamlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px 16px;margin-bottom:10px}
+@media(max-width:1100px){.abouthero,.aboutgrid{grid-template-columns:1fr}}
 </style></head><body>
 <header><h1>Kernel · model board</h1><span class="muted" id="summary">Loading…</span><span style="flex:1"></span>
+<a class="ghost ghlink" id="ghlink" href="https://github.com/Severynson/Hack-the-Harvest" target="_blank" rel="noopener" title="All the code and data on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
 <button class="act" id="briefbtn" title="A 2-minute story on the live map, full screen">▶ Briefing mode</button>
 <button class="ghost" id="refresh" title="Reread every model folder">Refresh</button></header>
 <nav role="tablist" id="tabs"></nav>
@@ -270,6 +286,8 @@ body.briefing #legend-map{bottom:auto;top:16px;left:16px}body.briefing #satcard{
  <div class="scroll"><table id="field-table"><thead></thead><tbody></tbody></table></div>
 </section>
 
+<section id="about" hidden></section>
+
 <section id="add" hidden>
  <h2>Put a new model on the board</h2>
  <p class="note">Any folder in the repo that holds a <span class="mono">board_backtest.csv</span> and/or <span class="mono">board_forecast.csv</span> shows up after a refresh. The easiest way to write them is one call at the end of your script:</p>
@@ -297,7 +315,7 @@ const SLOTS=["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"],SHAPES=["c
 const nf1=new Intl.NumberFormat("en-US",{maximumFractionDigits:1,minimumFractionDigits:1}),nf0=new Intl.NumberFormat("en-US",{maximumFractionDigits:0});
 const pct=v=>v==null||Number.isNaN(v)?"—":nf1.format(v),kac=v=>v==null?"—":nf0.format(v/1000),dash="—";
 let D,BT={},MODELS={},CAT={},S={tab:"map",asof:"nov",target:"silage",ftarget:"silage",y0:null,y1:null,fams:new Set(),src:"",q:"",sort:"state",dir:1,sel:new Map(),feval:"",fsort:"silage_f1",fdir:-1};
-const TABS=[["map","Map"],["tiers","Tier A / B"],["leader","Leaderboard"],["compare","Compare"],["forecast","2026 forecast"],["field","Field models (satellite)"],["add","Add a model"]];
+const TABS=[["map","Map"],["tiers","Tier A / B"],["leader","Leaderboard"],["compare","Compare"],["forecast","2026 forecast"],["field","Field models (satellite)"],["add","Add a model"],["about","About & code"]];
 TABS.forEach(([id,label])=>{const b=el("button",{textContent:label,role:"tab",id:"tab-"+id});b.onclick=()=>{S.tab=id;draw()};$("#tabs").append(b)});
 function seg(box,key,opts){box.replaceChildren(...opts.map(([v,l])=>{const b=el("button",{textContent:l});b.setAttribute("aria-pressed",S[key]==v);b.onclick=()=>{S[key]=v;draw()};return b}))}
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
@@ -476,7 +494,7 @@ function draw(){TABS.forEach(([id])=>{$("#"+id).hidden=S.tab!=id;$("#tab-"+id).s
  $("#tab-compare").textContent=`Compare (${S.sel.size})`;
  $("#global").hidden=!["tiers","leader","compare"].includes(S.tab);seg($("#asof"),"asof",(CAT.asof||[{key:"nov",label:"Nov 15"}]).map(a=>[a.key,a.label]));
  if(S.tab=="map")mapTab().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Map could not load: "+e.message})));
- if(S.tab=="tiers")tiers();if(S.tab=="leader")leader();if(S.tab=="compare")compare();if(S.tab=="forecast")forecast();if(S.tab=="field")field()}
+ if(S.tab=="about")aboutTab();if(S.tab=="tiers")tiers();if(S.tab=="leader")leader();if(S.tab=="compare")compare();if(S.tab=="forecast")forecast();if(S.tab=="field")field()}
 
 let FRESH=0;
 async function load(){$("#summary").textContent="Reading model folders…";

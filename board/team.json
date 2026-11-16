@@ -1,12 +1,29 @@
 {
  "team": "Team Kernel",
- "event": "Hack the Harvest 2026 · UC Davis Aggie Square · USDA NASS challenge",
+ "event": "Hack the Harvest 2026 \u00b7 UC Davis Aggie Square \u00b7 USDA NASS challenge",
  "award": "USDA judges' Warrior Team award",
  "members": [
-  {"name": "Severyn Kurach", "role": ""},
-  {"name": "Daniel Zagaynov", "role": ""},
-  {"name": "Manraj", "role": ""},
-  {"name": "Varun", "role": ""},
-  {"name": "Razbin Karkidoli", "role": "Model board"}
- ]
+  {
+   "name": "Severyn Kurach",
+   "role": ""
+  },
+  {
+   "name": "Daniel Zagaynov",
+   "role": ""
+  },
+  {
+   "name": "Manraj",
+   "role": ""
+  },
+  {
+   "name": "Varun",
+   "role": ""
+  },
+  {
+   "name": "Razbin Karkidoli",
+   "role": "Model board"
+  }
+ ],
+ "repo": "https://github.com/Severynson/Hack-the-Harvest",
+ "live_url": "https://huggingface.co/spaces/rakd23/kernel-board"
 }

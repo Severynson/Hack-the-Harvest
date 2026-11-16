@@ -221,7 +221,7 @@ ${hv?.typical_half_doy ? row("Half the silage usually chopped by", doyDate(hv.ty
 <div><h2>If drought hits</h2><p>${dr ? `If ${esc(name)}'s corn yield fell 20% below normal, our silage model expects about <b>${kfmt(Math.max(0, wi20))}</b> more acres chopped for silage, taken out of the grain harvest. ${DR.worst[code] ? `Worst year on record here: ${DR.worst[code].year} (${Math.round(100 * DR.worst[code].shortfall)}% below trend).` : ""}` : "No drought data for this state."}</p>
 <h2>Track record in ${esc(code)}</h2><table>${errs.map(x => row((x.mid == sid || x.mid == gid ? "★ " : "") + (MODELS[x.mid]?.label || x.mid) + " (" + (MODELS[x.mid]?.target || "") + ")", x.e.v.toFixed(1) + "% avg miss")).join("") || row("No state-level backtests", "")}</table><p style="font-size:10px;color:#6b7280;margin:4px 0 0">★ = headline model. Average miss per year in this state, backtest years.</p><table></table></div></div>
 <div class="foot">Forecasts: headline models A-G9 (grain: FSA certified acres × each state's usual NASS/FSA ratio) and B-S6 (silage: smoothed level plus drought chopping from NASS's in-season yield forecast), as of 15 November; neither uses NASS's acreage forecast.
-Data: USDA NASS Quick Stats and Census of Agriculture (counties USDA withholds are estimated), USDA FSA crop acreage, NOAA nClimGrid, US Drought Monitor. Backtest misses are averages over the board's backtest years.</div>
+Data: USDA NASS Quick Stats and Census of Agriculture (counties USDA withholds are estimated), USDA FSA crop acreage, NOAA nClimGrid, US Drought Monitor. Backtest misses are averages over the board's backtest years. Code and data: ${esc(REPO_URL().replace("https://", ""))}</div>
 </body></html>`;
   const w = open(URL.createObjectURL(new Blob([html], {type: "text/html"})), "_blank");
   if (!w) alert("Your browser blocked the new tab. Allow pop-ups for this page to open the brief.");
@@ -263,7 +263,7 @@ function briefingSteps() {
       go: () => { M.fyear = feedYears().at(-1); setLayer("feed"); resetView(); }},
     {t: "Every field, from space", b: `Sentinel-2 and Landsat photograph every US cornfield every few days. Silage fields lose their green in days; grain fades over weeks. That one rule calls ${FIELDS ? FIELDS.correct + " of " + FIELDS.n : "42 of 44"} of USDA's labeled test fields right.`,
       go: async () => { closeFieldCard(); if (!OV.sats) { OV.sats = true; await drawOverlays(); } setLayer("satellite"); resetView(); await openFieldCard("test"); }, done: () => closeFieldCard()},
-    {t: "Your county", b: "Type any town, ZIP code or county in “Find your area”: the cows, silage, weather, forecast and next satellite picture around it. Thank you.",
+    {t: "Your county", b: `Type any town, ZIP code or county in \u201cFind your area\u201d: the cows, silage, weather, forecast and next satellite picture around it. All the code and data are open: ${REPO_URL().replace("https://", "")}. Thank you.`,
       go: () => { closeFieldCard(); OV.sats = false; drawOverlays(); setLayer("dairy"); setTimeout(() => $("#locq")?.focus(), 400); }},
   ];
 }
@@ -302,6 +302,65 @@ function endBriefing() {
 }
 function teamFooter() {
   if ($("#teamfoot") || !TEAM) return;
-  document.body.append(el("footer", {id: "teamfoot"}, el("b", {textContent: TEAM.team}), " · ", (TEAM.members || []).map(m => m.name).join(", "), " · ", TEAM.event,
+  document.body.append(el("footer", {id: "teamfoot"}, el("b", {textContent: TEAM.team}), " · ", (TEAM.members || []).map(m => m.name).join(", "), " · ", TEAM.event, " \u00b7 ", el("a", {href: REPO_URL(), target: "_blank", rel: "noopener", className: "brlink", textContent: "Code on GitHub"}),
     el("div", {className: "note", textContent: "Data: USDA NASS Quick Stats and Census of Agriculture, USDA FSA crop acreage, USDA RMA, NOAA nClimGrid, US Drought Monitor, ESA Sentinel-2 (Copernicus) via Microsoft Planetary Computer, USGS Landsat. Orbits: CelesTrak. Place search: OpenStreetMap."})));
+}
+
+// ---------------------------------------------------------------- "About & code": a README for the GitHub repo
+const REPO_URL = () => TEAM?.repo || "https://github.com/Severynson/Hack-the-Harvest";
+function headline() {   // the same live numbers the briefing uses
+  const sid = bs6Id(), gid = ag9Id(), yrs = [2017, 2024];
+  const err = id => { const r = (BT[id] || []).filter(x => (x.asof == null || x.asof == "nov") && x.year >= yrs[0] && x.year <= yrs[1] && x.state_error_pct != null); return r.length ? r.reduce((a, x) => a + x.state_error_pct, 0) / r.length : null; };
+  const nass = (CAT.benchmarks || []).find(b => b.crop == "grain" && /NASS/i.test(b.label))?.model_id, last = (CAT.benchmarks || []).find(b => b.crop == "silage" && /last year/i.test(b.label))?.model_id;
+  return {yrs, eG: err(gid), eN: nass && err(nass), eS: err(sid), eL: last && err(last), sUS: usTotal(sid, "silage"), gUS: usTotal(gid, "grain")};
+}
+async function aboutTab() {
+  const box = $("#about"); if (!box) return;
+  if (!TEAM) TEAM = await fetch("/api/team").then(r => r.ok ? r.json() : null).catch(() => null);
+  await loadFields().catch(() => null);
+  const R = REPO_URL(), h = headline(), f2 = v => v == null ? "—" : v.toFixed(2) + "%", f1 = v => v == null ? "—" : v.toFixed(1) + "%";
+  const a = (href, text, cls = "") => el("a", {href, target: "_blank", rel: "noopener", className: cls, textContent: text});
+  const card = (title, ...kids) => el("div", {className: "card"}, el("h2", {textContent: title}), ...kids);
+  const branch = (name, what, path, label) => el("div", {className: "brcard"}, el("div", {className: "mono br", textContent: name}), el("p", {textContent: what}), a(R + path, label + " →", "brlink"));
+  box.replaceChildren(
+    el("div", {className: "abouthero"},
+      el("div", {}, el("div", {className: "eyebrow", textContent: `${TEAM?.team || "Team Kernel"} · ${TEAM?.event || "Hack the Harvest 2026"}`}),
+        el("h1", {textContent: "Grain or silage? Corn harvest type from public data"}),
+        el("p", {textContent: "USDA's National Agricultural Statistics Service publishes how much US corn was harvested for grain and how much was chopped for silage in January. We estimate both in November, state by state, from public data, and call single fields from satellite pictures. All the code, data and tests are open."}),
+        TEAM?.award ? el("p", {className: "callout", textContent: "\u{1F3C6} " + TEAM.award}) : null),
+      el("div", {className: "aboutbtns"}, a(R, "⭐ View the code on GitHub", "act big"), a(R + "/blob/main/grain-or-silage.ipynb", "Open the notebook", "ghostl"),
+        a(R + "/tree/hackathon-2026-submission", "Full hackathon code", "ghostl"), TEAM?.live_url ? a(TEAM.live_url, "Live board", "ghostl") : null,
+        el("div", {className: "mono note", textContent: R.replace("https://", "")}))),
+    el("div", {className: "aboutgrid"},
+      card("What's in the repository",
+        branch("main", "The clean version: one notebook (grain-or-silage.ipynb) with the three headline models, 9 MB of public data, runs start to finish offline in about 20 seconds.", "", "Browse main"),
+        branch("hackathon-2026-submission", "Everything from the two hackathon days, unchanged: every experiment, all of the team's models, the agents' coordination files and the data this board reads.", "/tree/hackathon-2026-submission", "Browse the full history"),
+        branch("board", "This website: the model board, its map layers, the briefing mode and the field checker (folder board/).", "/tree/board/board", "Browse the board code")),
+      card("The three models, and how well they do",
+        el("table", {className: "mini"},
+          el("tr", {}, el("td", {}, el("b", {textContent: "A-G9 · grain acres by state"}), el("div", {className: "note", textContent: "Farmers certify their planted acres and intended use to USDA's Farm Service Agency by mid-July. Each state's FSA count differs from NASS's final by a steady ratio: learn it from the last three years and apply it."})),
+            el("td", {className: "n", textContent: `${f2(h.eG)} state error`}), el("td", {className: "n muted", textContent: h.eN != null ? `NASS's own Nov forecast: ${f2(h.eN)}` : ""})),
+          el("tr", {}, el("td", {}, el("b", {textContent: "B-S6 · silage acres by state"}), el("div", {className: "note", textContent: "A smoothed level of each state's past silage acres (most year-to-year swings are survey noise), plus the acres farmers chop when drought ruins the grain crop, from NASS's in-season yield forecast."})),
+            el("td", {className: "n", textContent: `${f1(h.eS)} state error`}), el("td", {className: "n muted", textContent: h.eL != null ? `Same as last year: ${f1(h.eL)}` : ""})),
+          el("tr", {}, el("td", {}, el("b", {textContent: "Caveman rule · silage or grain, per field"}), el("div", {className: "note", textContent: "Silage is chopped in one pass, so a field's greenness falls off a cliff; grain fades for weeks. Silage if greenness falls from 80% to 20% of its range in under 17.5 days. Learned on 801 Quebec fields, tested on USDA's Maryland fields."})),
+            el("td", {className: "n", textContent: FIELDS ? `${FIELDS.correct}/${FIELDS.n} fields right` : "42/44 fields right"}), el("td", {className: "n muted", textContent: "Always guessing grain: 72.7%"}))),
+        el("p", {className: "note", textContent: `State error = total acres put in the wrong state ÷ true acres, averaged over forecasts made each 15 November, ${h.yrs[0]}–${h.yrs[1]}. No model uses NASS's acreage forecast for the year it predicts. 2026 forecast: ${h.sUS ? (h.sUS.v / 1e6).toFixed(2) + "M acres of silage" : "—"}, ${h.gUS ? (h.gUS.v / 1e6).toFixed(2) + "M acres of grain" : "—"}.`})),
+      card("Run it yourself",
+        el("p", {className: "note", textContent: "The notebook (main branch): no accounts or keys needed."}),
+        el("pre", {textContent: `git clone ${R}.git\ncd Hack-the-Harvest\npip install -r requirements.txt\njupyter lab grain-or-silage.ipynb      # Run All, about 20 seconds`}),
+        el("p", {className: "note", textContent: "This board (board branch, reading the full hackathon data):"}),
+        el("pre", {textContent: `git clone --branch hackathon-2026-submission ${R}.git hth\ncd hth\ngit fetch origin board && git checkout origin/board -- board\npip install pandas numpy pyarrow geopandas fastapi uvicorn\npython board/app.py                      # http://localhost:7870`})),
+      card("Data (all public)",
+        el("ul", {className: "srcs"}, [
+          ["USDA NASS Quick Stats", "acres, yields, prices, harvest progress, milk cows", "https://quickstats.nass.usda.gov/"],
+          ["USDA Census of Agriculture", "county milk cows and silage acres, 2017 and 2022", "https://www.nass.usda.gov/AgCensus/"],
+          ["USDA FSA crop acreage", "acres farmers certify, by intended use", "https://www.fsa.usda.gov/news-room/efoia/electronic-reading-room/frequently-requested-information/crop-acreage-data"],
+          ["USDA ARS Beltsville", "the organizers' labeled Maryland fields", ""],
+          ["La Financière agricole du Québec", "801 declared grain/silage parcels, 2023", ""],
+          ["ESA Copernicus Sentinel-2", "field greenness, via Microsoft Planetary Computer", "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"],
+          ["NOAA nClimGrid · US Drought Monitor · USDA RMA", "weather, drought and insurance losses", ""],
+        ].map(([n, w, u]) => el("li", {}, u ? a(u, n) : el("b", {textContent: n}), " — ", w)))),
+      card("Team",
+        el("div", {className: "teamlist"}, (TEAM?.members || []).map(m => el("div", {}, el("b", {textContent: m.name}), m.role ? el("div", {className: "note", textContent: m.role}) : null))),
+        el("p", {className: "note", textContent: "Questions or ideas: open an issue on GitHub."}), a(R + "/issues", "Open an issue →", "brlink"))));
 }
