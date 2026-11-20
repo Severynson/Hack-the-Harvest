@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import HTMLResponse, Response
 
 from board.sources import (
@@ -32,6 +33,8 @@ from board.sources import (
 )
 
 app = FastAPI(title="Kernel model board")
+# The map data is ~11 MB of JSON; gzip cuts it about 10x, which is most of the first-load wait.
+app.add_middleware(GZipMiddleware, minimum_size=2048)
 
 
 def records(frame):

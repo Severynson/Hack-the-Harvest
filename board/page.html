@@ -238,13 +238,26 @@ a.brlink{color:var(--focus);text-decoration:none;font-size:12.5px}a.brlink:hover
 #farmkey div{display:flex;align-items:center;gap:6px;margin-top:3px}#farmkey .fk{width:9px;height:9px;border-radius:50%;display:inline-block}
 #farmkey .fk.corn{background:#f2c94c}#farmkey .fk.cows{background:#fff}
 body.briefing #farmkey{top:auto;bottom:16px;right:16px}
-</style></head><body>
+#boot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:62vh;text-align:center}
+#boot h2{font-size:20px;margin:4px 0 0}#boot ol{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px;text-align:left}
+#boot li{display:flex;align-items:center;gap:8px;color:var(--muted)}#boot li .dot{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1}
+#boot li.on{color:var(--text)}#boot li.done{color:var(--muted)}#boot li.done .dot{color:var(--accent)}
+#boot .t{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
+#boot .spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:bootspin .9s linear infinite}
+#boot.fail .spin,#boot.fail .t{display:none}#boot li.bad,#boot li.bad .dot{color:var(--warn)}@keyframes bootspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#boot .spin{animation:bootpulse 1.6s ease-in-out infinite}@keyframes bootpulse{50%{opacity:.35}}}
+body.booting nav,body.booting main>:not(#boot),body.booting #briefbtn,body.booting #refresh{display:none!important}body:not(.booting) #boot{display:none}
+</style></head><body class="booting">
 <header><h1>Kernel · model board</h1><span class="muted" id="summary">Loading…</span><span style="flex:1"></span>
 <a class="ghost ghlink" id="ghlink" href="https://github.com/Severynson/Hack-the-Harvest" target="_blank" rel="noopener" title="All the code and data on GitHub"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a>
 <button class="act" id="briefbtn" title="A 2-minute story on the live map, full screen">▶ Briefing mode</button>
 <button class="ghost" id="refresh" title="Reread every model folder">Refresh</button></header>
 <nav role="tablist" id="tabs"></nav>
 <main>
+<div id="boot" role="status" aria-live="polite"><div class="spin" aria-hidden="true"></div>
+ <h2 id="boot-title">Loading the board…</h2><ol id="boot-steps"></ol>
+ <span class="t" id="boot-time">0 s</span><p class="note" id="boot-note"></p>
+ <button class="act" id="boot-retry" type="button" hidden>Try again</button></div>
 <div id="problems"></div>
 <div class="bar" id="global"><span class="muted">Forecast date</span><span class="seg" id="asof"></span>
  <label>Backtest years <select id="y0"></select> to <select id="y1"></select></label><span class="note" id="holdout-note"></span></div>
@@ -511,11 +524,25 @@ function planned(c){const d=$("#drawer"),close=el("button",{className:"ghost x",
 function draw(){TABS.forEach(([id])=>{$("#"+id).hidden=S.tab!=id;$("#tab-"+id).setAttribute("aria-selected",S.tab==id)});
  $("#tab-compare").textContent=`Compare (${S.sel.size})`;
  $("#global").hidden=!["tiers","leader","compare"].includes(S.tab);seg($("#asof"),"asof",(CAT.asof||[{key:"nov",label:"Nov 15"}]).map(a=>[a.key,a.label]));
- if(S.tab=="map")mapTab().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Map could not load: "+e.message})));
+ if(S.tab!="map")bootDone();
+ if(S.tab=="map")mapTab().then(bootDone,e=>{if(!bootFail("The map could not load: "+e.message))$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Map could not load: "+e.message}))});
  if(S.tab=="about")aboutTab();if(S.tab=="tiers")tiers();if(S.tab=="leader")leader();if(S.tab=="compare")compare();if(S.tab=="forecast")forecast();if(S.tab=="field")field()}
 
+// ------------------------------------------------ loading screen (the map data is big, so the first load takes a while)
+const BOOT={t0:performance.now(),on:null,steps:[["board","Reading every model's results"],["map","Downloading the map data"],["draw","Drawing the map"]]};
+$("#boot-steps").replaceChildren(...BOOT.steps.map(([k,t])=>el("li",{id:"boot-"+k},el("span",{className:"dot",textContent:"○"}),el("span",{textContent:t}))));
+BOOT.timer=setInterval(()=>{const s=Math.round((performance.now()-BOOT.t0)/1000);$("#boot-time").textContent=s+" s";
+ if(s==8)$("#boot-note").textContent="Still working, not stuck. The first visit downloads every model's results and the full US map, which can take up to a minute on slow Wi-Fi.";
+ if(s==60)$("#boot-note").textContent="This is taking longer than usual. If the server was asleep it may still be waking up; give it another minute, or press Try again.",$("#boot-retry").hidden=false},1000);
+function bootStep(k){if(!document.body.classList.contains("booting"))return;let past=true;
+ BOOT.steps.forEach(([s])=>{const li=$("#boot-"+s);if(s==k)past=false;li.className=past?"done":s==k?"on":"";li.firstChild.textContent=past?"✓":s==k?"•":"○"})}
+function bootDone(){if(!document.body.classList.contains("booting"))return;clearInterval(BOOT.timer);document.body.classList.remove("booting")}
+function bootFail(msg){if(!document.body.classList.contains("booting"))return false;clearInterval(BOOT.timer);$("#boot").classList.add("fail");const on=document.querySelector("#boot li.on");if(on){on.className="bad";on.firstChild.textContent="✕"}
+ $("#boot-title").textContent="The board didn't load";$("#boot-note").textContent=msg+". Check your connection, then try again.";$("#boot-retry").hidden=false;return true}
+$("#boot-retry").onclick=()=>location.reload();
+
 let FRESH=0;
-async function load(){$("#summary").textContent="Reading model folders…";
+async function load(){$("#summary").textContent="Reading model folders…";bootStep("board");
  const r=await fetch("/api/board"+(FRESH?"?fresh=1":""));D=await r.json();BT={};MODELS={};
  CAT=D.catalog||{models:[],tiers:{}};D.models.forEach(m=>MODELS[m.model_id]=m);D.backtest.forEach(r=>(BT[r.model_id]??=[]).push(r));
  const years=[...new Set(D.backtest.map(r=>r.year))].sort((a,b)=>a-b);
@@ -528,7 +555,7 @@ async function load(){$("#summary").textContent="Reading model folders…";
  $("#problems").replaceChildren(...D.problems.map(p=>el("div",{className:"callout",textContent:"Could not read: "+p})));draw()}
 $("#src").onchange=e=>{S.src=e.target.value;draw()};$("#q").oninput=e=>{S.q=e.target.value;draw()};
 $("#feval").onchange=e=>{S.feval=e.target.value;draw()};$("#clear").onclick=()=>{S.sel.clear();draw()};
-$("#refresh").onclick=()=>{FRESH=1;GEO=null;load().finally(()=>FRESH=0)};
+$("#refresh").onclick=()=>{const b=$("#refresh");b.disabled=true;b.textContent="Refreshing…";FRESH=1;GEO=null;load().finally(()=>{FRESH=0;b.disabled=false;b.textContent="Refresh"})};
 $("#zin").onclick=()=>zoomAt([VB.x+VB.w/2,VB.y+VB.h/2],1.8,true);$("#zout").onclick=()=>zoomAt([VB.x+VB.w/2,VB.y+VB.h/2],1/1.8,true);$("#zreset").onclick=()=>{M.sel=null;draw();resetView()};
 $("#zslider").oninput=e=>{const k=sliderToK(+e.target.value);zoomAt([VB.x+VB.w/2,VB.y+VB.h/2],k/M.k)};$("#zme").onclick=()=>zoomToMe();$("#guidebtn").onclick=()=>startGuide(0);$("#briefbtn").onclick=()=>startBriefing();addEventListener("keydown",e=>{if(e.key=="Escape")$("#drawer").hidden=true});
 addEventListener("resize",()=>{if(S.tab=="compare"||S.tab=="forecast")draw()});
@@ -536,5 +563,5 @@ addEventListener("keydown",e=>{if(S.tab!="map"||e.target.tagName=="INPUT"||e.tar
  const pan={ArrowLeft:[1,0],ArrowRight:[-1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[e.key];if(pan&&!e.target.closest?.("#sp")){e.preventDefault();tween(clampT({k:M.k,tx:M.tx+pan[0]*120,ty:M.ty+pan[1]*90}),160)}});
 if(window.__SNAP){$("#refresh").hidden=true;}
 else setInterval(async()=>{try{const r=await fetch("/api/status");if(!r.ok)return;const st=await r.json();if(D&&st.read_at&&st.read_at!=D.read_at){GEO=null;await load()}}catch(e){}},120000);
-load().catch(e=>$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Could not load the board: "+e.message})));
+load().catch(e=>{if(!bootFail("Could not read the model results: "+e.message))$("#problems").replaceChildren(el("div",{className:"callout",textContent:"Could not load the board: "+e.message}))});
 </script></body></html>

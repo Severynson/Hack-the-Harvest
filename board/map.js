@@ -582,10 +582,11 @@ function select(code) { M.sel = code; draw(); zoomToState(code); }
 async function mapTab() {
   if (!GEO) { const q = FRESH ? "?fresh=1" : "";
     const opt = u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
+    bootStep("map");
     const [g, m, x, dr, tm] = await Promise.all([fetch("/api/geo").then(r => r.json()), fetch("/api/map" + q).then(r => r.json()), fetch("/api/extras" + q).then(r => r.json()), opt("/api/drought" + q), opt("/api/team")]);
     GEO = g; MAP = m; EXT = x; DR = dr; TEAM = tm;
     GEO.states.forEach(s => { s.code = FIPS[s.fips] || s.fips; NAMES[s.code] = s.name; });
-    M.year = lastActualYear("silage"); }
+    M.year = lastActualYear("silage"); bootStep("draw"); }
   for (const c of ["silage", "grain"]) if (!M.fcModel[c] || !MODELS[M.fcModel[c]]) M.fcModel[c] = defaultModel(c);
   const rebuilt = !M.built || !$("#zoomg"); if (rebuilt) buildMap();
   CUR = layerValues();
